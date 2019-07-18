@@ -1,0 +1,250 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            {{ _username }} <br>
+            <span class="text10">Date: {{ current_date }}</span>
+          </ion-text>
+        </ion-text>
+    </ion-title>
+     <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+        <ion-icon name="notifications"></ion-icon>
+        <!--<ion-badge color="dark" slot="end">2</ion-badge>-->
+      </ion-button>
+    </ion-buttons> 
+  </ion-toolbar>
+  <!-- <ion-toolbar color="dark">
+    <ion-searchbar [(ngModel)]="searchKey"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="searchFilter()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-card>
+    <ion-card-content class="bg-white">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-row><img src="/assets/img/menu/detail.jpg" alt=""  /></ion-row>
+            <ion-row> 
+                <ion-title>Student Details</ion-title>
+            </ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row><img src="/assets/img/menu/detail.jpg" alt=""  /></ion-row>
+            <ion-row> Attendance </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- General Info -->
+<ion-content class="bg-white">
+  <ion-item>
+    <ion-label>General Info</ion-label>
+  </ion-item>
+  <!-- Daily Information -->
+  <ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 1, centeredSlides: false }">
+    <ion-slide>
+      <ion-card [routerLink]="'/student'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/detail.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Student Details</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [routerLink]="'/attendance'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/attendance.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Attendance</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+    
+
+  <!-- <ion-item (click)="takePicture()" lines="none"></ion-item>
+  <ion-item (click)="getGeolocation()" lines="none"></ion-item> -->
+
+<!-- Early Childhood Education -->
+<ion-item>
+  <ion-label>Early Childhood Education </ion-label>
+</ion-item>
+<!-- vertical slider -->
+<ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 1, centeredSlides: false }">
+  <ion-slide>
+    <ion-card [routerLink]="'/ecactivity'" routerDirection="forward" class="bg-white">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <img src="/assets/img/menu/ece-activity.jpg" alt=""  />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-item>
+        <ion-label>Activities</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-card [routerLink]="'/ecassessment'" routerDirection="forward" class="bg-white" >
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <img src="/assets/img/menu/ece-assessment.jpg" alt=""  />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-item>
+        <ion-label>Assessment</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
+
+  <!-- Primary Grade Education -->
+  <ion-item>
+    <ion-label>Primary Grade Education </ion-label>
+  </ion-item>
+  <!-- vertical slider -->
+  <ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 1, centeredSlides: false }">
+    <ion-slide>
+      <ion-card [routerLink]="'/pgactivity'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/pge-activity-math.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Activities</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+
+    <!-- <ion-slide>
+      <ion-card [routerLink]="'/payment'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/pge-activity-eng.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>English Activities</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide> -->
+
+    <ion-slide>
+      <ion-card [routerLink]="'/pgassessment'" routerDirection="forward" class="bg-white" >
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/pge-assessment.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Assessment</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+</ion-slides>
+
+  <!-- Teacher Training -->
+  <ion-item>
+    <ion-label>Teacher Training</ion-label>
+  </ion-item>
+  <ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 1, centeredSlides: false }">
+    <ion-slide>
+      <ion-card [routerLink]="'/issues'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/teacher-training.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Teacher Training</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [routerLink]="'/tchpayment'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/menu/payment.jpeg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Payment</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+  

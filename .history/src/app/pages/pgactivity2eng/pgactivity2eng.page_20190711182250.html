@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            ENGLISH ACTIVITY DETAILS (PGE)
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-grid>
+
+    <!-- Scrollable content -->
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Scrollable content</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item class="full_width">
+        <!-- <ion-label position="stacked">Scrollable content</ion-label> -->
+        <ion-textarea disabled readonly value="{{ content }}" class="textarea"></ion-textarea>
+      </ion-item>
+    </ion-row>
+
+    <!-- Video content -->
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Video content</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="right-align" *ngFor="let v of video; let i = index;">
+      <ion-button shape="round" fill="outline" size="medium" color="primary" (click)="play_video(i+1)" tappable class="explore-btn">
+        Play Video {{ i+1 }}
+      </ion-button>
+    </ion-row>
+
+    <!-- Work Sheets -->
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Work Sheets</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="right-align">
+      <ion-button shape="round" fill="outline" size="medium" color="primary" (click)="open_document()" tappable class="explore-btn">
+        Open Document
+      </ion-button>
+    </ion-row>
+
+    <ion-row class="right-align">
+      <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" [disabled]="!isEnabled_completeActivityButton"  float-right tappable class="explore-btn">
+        Complete Activity
+      </ion-button>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+  

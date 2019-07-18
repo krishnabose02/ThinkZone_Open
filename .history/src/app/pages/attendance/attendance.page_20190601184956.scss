@@ -1,0 +1,188 @@
+:host {
+    ion-content {
+        --background: var(--ion-color-light);
+    }
+
+    ion-item {
+        border-radius: 0;
+        border-bottom: 1px dotted var(--ion-color-medium);
+    }
+
+    ion-card {
+        &.no-radius {
+            border-radius: 0;
+        }
+    }
+    .card-content-md {
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-top: 0px; 
+        padding-bottom: 0px; 
+        font-size: 0px; 
+        line-height: 0; 
+    }
+}
+
+.text10{
+    font-size: 10px;
+    font-family: monospace;
+}
+
+.button-bg{
+    background-color: #381dd8;
+}
+
+.card_padding20{
+    padding: 20px;
+}
+.span_text{
+    font-family: inherit;
+}
+.span_text9{
+    font-size: 9px;
+}
+.span_text40{
+    font-size: 40px;
+}
+
+.center-aligned {
+    text-align: center;
+}
+
+.ion-col-style{
+    text-align: center;
+    border: 1px solid #a4a4a4;
+    background-color: #e4e7fd;
+    margin: 3px;
+    box-shadow: 0px 1px 1px 0px;
+}
+
+.color_feedback{
+    color: green;
+}
+
+.color_pic{
+    color: #c88f36;
+}
+
+.color_location{
+    color: #002080;
+}
+.color_payment{
+    color: #800069;
+}
+.color_assessment{
+    color: #007f80;
+}
+.color_comvisit{
+    color: #925901;
+}
+.color_issues{
+    color: #eb0707;
+}
+
+.btn-margin{
+    margin-left: 34%;
+}
+
+.card-margin{
+    margin: 20px;
+}
+.radio-margin{
+    margin-left: -15px;
+}
+
+.explore-div{
+    background-color: #f3f3f3;
+}
+.explore-btn{
+    margin-right: 23px;
+}
+
+.select-width{
+    max-width: 100%;
+}
+.right-align{
+    text-align: right;
+}
+.full_width{
+    width: 100%;
+}
+
+$colors: ( 'light': #fff, 'stable': #f8f8f8, 'positive': #387ef5, 'calm': #11c1f3, 'balanced':#33cd5f, 'energized':#ffc900, 'assertive':#ef473a, 'royal':#886aea, 'dark':#444);
+ul#ion-segment {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  padding:0 5px 0 5px;
+  li.full {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    padding: 0!important;
+  }
+  li {
+    background-color: transparent;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0 13px 0 13px;
+    color: #fff;
+    border: 1px solid;
+    transition: all 100ms linear;
+    -webkit-transition: all 50ms linear;
+    line-height: 23px;
+    max-height: 25px;
+    min-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: none;
+    text-align: center;
+    cursor: pointer;
+    &:first-of-type {
+      margin-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+    &:not(:first-of-type) {
+      border-left-width: 0;
+    }
+    &:last-of-type {
+      margin-left: 0;
+      border-left-width: 0;
+      border-radius: 0 4px 4px 0;
+    }
+    &:last-of-type .active {
+      background: red;
+    }
+  }
+}
+
+@each $name,
+$value in $colors {
+  ul#ion-segment[#{$name}] li.active {
+    background-color: $value;
+    color: #fff;
+  }
+  ul#ion-segment[#{$name}] li {
+    border-color: $value;
+    color: $value;
+  }
+  ul#ion-segment[#{$name}] li:hover:not(.active) {
+    background-color: rgba($value, 0.1);
+  }
+}

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="bg-white" no-margin>
+    <ion-card-content>
+      <ion-list class="item-text-wrap">
+        <ion-item *ngFor = "let res of respons; let i=index;" (click)="openMessage(res)" class="item-style">
+          <ion-icon slot="start" name="mail"></ion-icon>{{ res.title }}
+        </ion-item>
+
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

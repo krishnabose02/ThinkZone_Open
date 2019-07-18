@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Payment Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="bg-white">
+    <ion-card-content>
+      <ion-list *ngFor = "let res of respons; let i=index;" class="item-text-wrap">
+        <!--<ion-item lines="none" class="item-text-wrap">-->
+          {{i+1}}. {{ res.payment }}
+        <!--</ion-item>-->
+        <ion-item>
+
+        <!--============================================-->
+        <ion-item *ngIf="res.type=='select' && res.selection_mode=='single'">
+          <ion-select class="select_full" slot="end" placeholder="Select One" interface="popover" [value]="selectedUserEmail" (ionChange)="selectOnChange_single(res, $event.detail.value)">
+            <ion-select-option *ngFor="let opt of res.options" value="{{opt}}" >{{opt}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="res.type=='select' && res.selection_mode=='multiple'" expand="block">
+          <ion-select multiple="true" class="select_full" slot="end" placeholder="Select One" interface="popover" [value]="selectedUserEmail" (ionChange)="selectOnChange_multiple(res, $event.detail.value)">
+            <ion-select-option *ngFor="let opt of res.options" value="{{opt}}" >{{opt}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="res.type=='calendar'">
+          <ion-label>Date</ion-label>
+          <ion-datetime display-format="DD MMM, YYYY" placeholder="Select Date" (ionChange)="dateOnChange(res, $event.detail.value)" ></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="res.type=='input'">
+          <ion-input placeholder="enter value" (input)="inputOnchange(res, $event.target.value)"></ion-input>
+        </ion-item>
+        <!--============================================-->
+          
+        </ion-item>
+      </ion-list>
+
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="save()" tappable>
+        <ion-icon name="save"></ion-icon>
+        Save
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

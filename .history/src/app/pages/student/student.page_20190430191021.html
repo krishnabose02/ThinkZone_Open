@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            {{ _centername }}
+            <br>
+            <span class="text10">
+              Date: {{ _operationdate }}
+            </span>
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-item>
+    <ion-label>Daily Information</ion-label>
+  </ion-item>
+  <!-- Daily Information -->
+  <ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 5, centeredSlides: false }">
+    <ion-slide>
+      <ion-card [routerLink]="'/feedback'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/center/dailyinfo.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Feedback</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+    
+
+  <!-- <ion-item (click)="takePicture()" lines="none"></ion-item>
+  <ion-item (click)="getGeolocation()" lines="none"></ion-item> -->
+
+  <!-- Monthly Information -->
+  <ion-item>
+    <ion-label>Monthly Information</ion-label>
+  </ion-item>
+  <!-- vertical slider -->
+  <ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 0, centeredSlides: false }">
+    <ion-slide>
+      <ion-card [routerLink]="'/payment'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/center/paymentinfo.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Payment Info</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [routerLink]="'/assessment'" routerDirection="forward" class="bg-white" >
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/center/assessment.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Assessment</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card [routerLink]="'/community'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/center/community.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Comm. Visit</ion-label>
+        </ion-item>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
+    
+
+  <!-- Issues -->
+  <ion-item>
+    <ion-label>Issues</ion-label>
+  </ion-item>
+  <ion-slides [options]= "{ slidesPerView: 1.6, spaceBetween: 5, centeredSlides: false }">
+    <ion-slide>
+      <ion-card [routerLink]="'/issues'" routerDirection="forward" class="bg-white">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <img src="/assets/img/center/issues.jpg" alt=""  />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+        <ion-item>
+          <ion-label>Issues</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+  

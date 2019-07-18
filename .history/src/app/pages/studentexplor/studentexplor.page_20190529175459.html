@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Student Details
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <ion-list>
+        <ion-item *ngFor="let student of student_list">
+          <!-- Student of ECE -->
+          <ion-label *ngIf="student.program == 'ece'">
+            {{ student.studentname }} 
+            <p> {{ student.parentsname }} </p>
+            <p> {{ student.program }}: Anganwadi </p>
+            <ion-item>
+              <p *ngIf="student.ec_level != null"> {{ student.level }} </p>
+              <p *ngIf="student.ec_level == null">
+                <ion-select placeholder="Set level" (ionChange)="setlevel_ec_onchange($event.detail.value)" class="select-width">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                </ion-select>
+                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('',student)" [disabled]="" tappable>
+                  Set Level  
+                  <ion-icon name="send"></ion-icon>
+                </ion-button>
+              </p>
+            </ion-item>
+          </ion-label>
+          
+
+          <!-- Student of PGE -->
+          <ion-label *ngIf="student.program == 'pge'">
+            {{ student.studentname }} 
+            <p> {{ student.parentsname }} </p>
+            <p> {{ student.program }} : {{ student.class }}</p>
+            <ion-item>
+              <p *ngIf="student.math_level != null"> {{ student.math_level }} </p>
+              <p *ngIf="student.math_level == null">
+                <ion-select placeholder="Set level" (ionChange)="setlevel_pg_math_onchange($event.detail.value)" class="select-width">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+                  <ion-select-option value="5">5</ion-select-option>
+                </ion-select>
+                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('math',student)" [disabled]="" tappable>
+                  Set Level (Math.) 
+                  <ion-icon name="send"></ion-icon>
+                </ion-button>
+              </p>
+            </ion-item>
+            <ion-item>
+              <p *ngIf="student.eng_level != null"> {{ student.eng_level }} </p>
+              <p *ngIf="student.eng_level == null">
+                <ion-select placeholder="Set level" (ionChange)="setlevel_pg_math_onchange($event.detail.value)" class="select-width">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+                  <ion-select-option value="5">5</ion-select-option>
+                </ion-select>
+                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('english',student)" [disabled]="" tappable>
+                  Set Level (Eng.) 
+                  <ion-icon name="send"></ion-icon>
+                </ion-button>
+              </p>
+            </ion-item>
+            <ion-item>
+              <p *ngIf="student.odia_level != null"> {{ student.odia_level }} </p>
+              <p *ngIf="student.odia_level == null">
+                <ion-select placeholder="Set level" (ionChange)="setlevel_pg_math_onchange($event.detail.value)" class="select-width">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+                  <ion-select-option value="5">5</ion-select-option>
+                </ion-select>
+                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('odia',student)" [disabled]="" tappable>
+                  Set Level (Odia.) 
+                  <ion-icon name="send"></ion-icon>
+                </ion-button>
+              </p>
+            </ion-item>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-card>
+  
+</ion-content>
+  

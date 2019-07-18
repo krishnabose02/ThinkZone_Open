@@ -1,0 +1,65 @@
+
+
+<ion-content> 
+  <ion-card class="login-card">
+    <ion-card-header color="primary">
+      <ion-card-title><ion-icon name="lock"></ion-icon>Message</ion-card-title>
+      <!-- <ion-card-subtitle>Manager App</ion-card-subtitle> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+        <form [formGroup]="signinFormGroup" class="list-form">
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="mail" item-start></ion-icon>
+              Email
+            </ion-label>
+            <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="signinFormGroup.get('email').touched && signinFormGroup.get('email').hasError('required')">
+            <ion-text color="danger">
+              Invalid
+            </ion-text>
+          </p>
+    
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="apps"></ion-icon>
+              Password
+            </ion-label>
+            <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <p ion-text color="danger" class="text08" *ngIf="signinFormGroup.get('password').touched && signinFormGroup.get('password').hasError('required')">
+            <ion-text color="danger">
+              Invalid
+            </ion-text>
+          </p>
+
+          <!-- show response message from server -->
+          <ion-label color="danger" position="floating" *ngIf="!_status">
+            {{ _message}}
+          </ion-label>
+        </form>
+    </ion-card-content>
+
+    
+
+    
+
+    <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+  
+          <ion-col>
+            <ion-button color="primary" (click)="closeModal()">
+              <ion-icon slot="start" name="close"></ion-icon> OK
+            </ion-button>
+          </ion-col>
+  
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+</ion-content>

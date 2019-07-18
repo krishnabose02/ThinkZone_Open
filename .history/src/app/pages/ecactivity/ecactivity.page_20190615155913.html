@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            ACTIVITY (ECE)
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-grid>
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Month</ion-label>
+        <ion-select placeholder="Select One" (ionChange)="month_onchange($event.detail.value)">
+          <ion-select-option *ngFor="let qlist of month_list" [value]="qlist.value" [disabled]="qlist.disabled">{{ qlist.text }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+
+    <ion-card class="">
+      <ion-list>
+        <ion-item *ngFor="let slist of student_list;" class="ionitem">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label>{{ slist.studentname }} <p> {{ slist.program }}</p></ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="right-align">
+              <ion-button icon-left size="medium" color="warning" (click)="pge_fillmarks_btnclick(slist,'eng')" [disabled]="disable_fillmarks_button" float-right tappable class="explore-btn">
+                <ion-icon name="paper"></ion-icon>
+                Fill Mark(Eng.)
+              </ion-button>
+            </ion-row>
+            <ion-row class="right-align">
+              <ion-button icon-left size="medium" color="warning" (click)="pge_fillmarks_btnclick(slist,'math')" [disabled]="disable_fillmarks_button" float-right tappable class="explore-btn">
+                <ion-icon name="paper"></ion-icon>
+                Fill Mark(Math)
+              </ion-button>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+  

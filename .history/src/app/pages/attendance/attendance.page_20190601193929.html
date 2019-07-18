@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Attendance
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="explore-div">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-button icon-left size="medium" color="warning" (click)="explor()" tappable class="explore-btn">
+              Select Date
+              <ion-icon name="arrow-dropright"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button icon-left size="medium" color="warning" (click)="explor()" float-right tappable class="explore-btn">
+              Set as HOLIDAY
+              <ion-icon name="arrow-dropright"></ion-icon>
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</div>
+
+<ion-content class="bg-white">
+  <ion-card class="">
+    <ion-list>
+      <ion-item *ngFor="let slist of student_list;" class="ionitem">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label>{{ slist.studentname }} <p> {{ slist.program }}</p></ion-label>
+              </ion-col>
+              <!-- ion-toggle -->
+              <!-- <ion-col class="right-align">
+                <ion-toggle (ionChange)="toggle_onchange($event.detail.checked)"></ion-toggle>
+              </ion-col> -->
+            </ion-row>
+            <ion-row class="right-align">
+              <!-- ion-segment -->
+                <ion-segment mode='ios' (ionChange)="segmentChanged(slist, $event.detail.value)"> <!-- value="absent" -->
+                    <ion-segment-button class="segment-button" value="absent">
+                        Absent
+                    </ion-segment-button>
+                    <ion-segment-button class="segment-button" value="present">
+                        Present
+                    </ion-segment-button>
+                </ion-segment>
+            </ion-row>
+          </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  
+</ion-content>
+  

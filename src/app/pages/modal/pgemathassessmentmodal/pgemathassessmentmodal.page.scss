@@ -1,0 +1,144 @@
+:host {
+    ion-content {
+        --background: var(--ion-color-light);
+    }
+
+    ion-item {
+        border-radius: 0;
+        border-bottom: 1px dotted var(--ion-color-medium);
+    }
+
+    ion-card {
+        &.no-radius {
+            border-radius: 0;
+        }
+    }
+    .card-content-md {
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-top: 0px; 
+        padding-bottom: 0px; 
+        font-size: 0px; 
+        line-height: 0; 
+    }
+}
+
+.text10{
+    font-size: 10px;
+    font-family: monospace;
+}
+
+.button-bg{
+    background-color: #381dd8;
+}
+
+.card_padding20{
+    padding: 20px;
+}
+.span_text{
+    font-family: inherit;
+}
+.span_text9{
+    font-size: 9px;
+}
+.span_text40{
+    font-size: 40px;
+}
+
+.center-aligned {
+    text-align: center;
+}
+
+.ion-col-style{
+    text-align: center;
+    border: 1px solid #a4a4a4;
+    background-color: #e4e7fd;
+    margin: 3px;
+    box-shadow: 0px 1px 1px 0px;
+}
+
+.color_feedback{
+    color: green;
+}
+
+.color_pic{
+    color: #c88f36;
+}
+
+.color_location{
+    color: #002080;
+}
+.color_payment{
+    color: #800069;
+}
+.color_assessment{
+    color: #007f80;
+}
+.color_comvisit{
+    color: #925901;
+}
+.color_issues{
+    color: #eb0707;
+}
+
+.btn-margin{
+    margin-left: 34%;
+}
+
+.card-margin{
+    margin: 20px;
+}
+.radio-margin{
+    margin-left: -15px;
+}
+
+.explore-div{
+    background-color: #f3f3f3;
+}
+.explore-btn{
+    width: 100%;
+}
+
+.select-width{
+    max-width: 100%;
+}
+.right-align{
+    text-align: right;
+}
+.full_width{
+    width: 100%;
+}
+.segment-button{
+    text-transform: none;
+    border: 1px solid #c2c2e8;;
+    border-radius: 100px;
+}
+.ionitem{
+    /*border: 1px solid #b7b7b7;*/
+}
+.date-button{
+    background-color: #ffce00;
+    box-shadow: 1px 1px 0px 1px #afacac;
+    width:100%;
+    border-radius: 100px !important;
+}
+.row-margin-top{
+    margin-top: 60px;
+}
+.row-margin-bottom{
+    margin-bottom: 60px;
+}
+.half-modal{
+    background-color: white;
+    margin-top: 150px;
+}
+.question-row{
+    padding: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #d1cece;
+    font-weight: bold;
+}
+.taken{
+    padding: 30px;
+}
+

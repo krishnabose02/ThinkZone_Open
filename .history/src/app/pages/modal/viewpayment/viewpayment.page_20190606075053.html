@@ -1,0 +1,32 @@
+<ion-content> 
+  <ion-card >
+    <ion-card-header color="warning">
+      <ion-card-title>Payment Records</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let record of records">
+            <ion-label class="listitems">
+              {{ record.studentname }}
+              <p> Amount: {{ record.amount }}</p>
+              <p> Remark: {{ record.remark }}</p>
+              <p> Paid on: {{ record.createdon }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+    </ion-card-content>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+            <ion-button color="medium" (click)="closeModal()">
+              <ion-icon slot="start" name="close"></ion-icon> Cancel
+            </ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+</ion-content>

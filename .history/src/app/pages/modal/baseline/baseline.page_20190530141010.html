@@ -1,0 +1,51 @@
+<ion-content> 
+  <ion-card class="login-card">
+    <ion-card-header color="primary">
+      <ion-card-title>Baseline Test</ion-card-title>
+      <!-- <ion-card-subtitle>{{ message_title }}</ion-card-subtitle> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-list *ngFor = "let baseline of baseline_q; let i=index;" class="item-text-wrap">
+        <ion-label> 
+          Program: <b> {{ baseline.program }} </b>
+          <p>Class: <b> {{ baseline.class }} </b> </p>
+          <p>Subject: <b> {{ baseline.subject }} </b> </p> 
+          Level: <b> {{ baseline.level }} </b>  
+        </ion-label>
+        
+        <ion-item *ngFor = "let quest of baseline.questionset; let i=index; ">
+          {{ i+1 }} .{{ quest.question }}
+
+          <ion-item class="radio-margin">
+            <ion-label>Program</ion-label>
+            <ion-select placeholder="Select One" (ionChange)="select_program_onchange($event.detail.value)" class="select-width">
+              <ion-select-option value="yes">YES</ion-select-option>
+              <ion-select-option value="no">NO</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+
+        <ion-col>
+          <ion-button color="medium" (click)="closeModal()">
+            <ion-icon slot="start" name="close"></ion-icon> Cancel
+          </ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button icon-left color="success" (click)="setLevel()" tappable>
+            <ion-icon name="checkmark"></ion-icon>Save
+          </ion-button>
+        </ion-col>
+
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

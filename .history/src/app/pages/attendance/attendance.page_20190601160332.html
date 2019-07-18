@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Attendance
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="explore-div">
+    <ion-button icon-left size="medium" shape="round" color="warning" (click)="explor()" float-right tappable class="explore-btn">
+      Explore
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </ion-button>
+  </div>
+
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <!-- Toggles in a List -->
+      <ion-list>
+        <ion-item>
+          <ion-label>Pepperoni</ion-label>
+          <ion-toggle (ionChange)="toggle_onchange($event.detail.checked)"></ion-toggle>
+          <p>
+            <ion-text>{{ attendance_status }}</ion-text>
+          </p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-card>
+  
+</ion-content>
+  

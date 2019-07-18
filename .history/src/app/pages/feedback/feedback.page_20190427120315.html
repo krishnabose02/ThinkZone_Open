@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Daily Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Picture Share -->
+  <ion-card  color="light" (click)="takePicture()" >
+    <ion-item>
+      <ion-label>Picture Share</ion-label>
+    </ion-item>
+    <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <img src="/assets/img/center/pic.jpg" alt=""  />
+            </ion-col>
+            <ion-col>Status: {{ status_picshare }}</ion-col>
+          </ion-row>
+        </ion-grid>
+        <button ion-item class="btn-margin">            
+          Picture Share
+          <ion-icon name="arrow-forward" item-right color="primary"></ion-icon>
+        </button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Location Share -->
+  <ion-card  color="light" (click)="getGeolocation()" >
+    <ion-item>
+      <ion-label>Location Share</ion-label>
+    </ion-item>
+    <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <img src="/assets/img/center/loc.jpg" alt=""  />
+            </ion-col>
+            <ion-col>Status: {{ status_locshare }}</ion-col>
+          </ion-row>
+        </ion-grid>
+        <button ion-item class="btn-margin">            
+          Location Share
+          <ion-icon name="arrow-forward" item-right color="primary"></ion-icon>
+        </button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Feedback -->
+  <ion-card  color="light">
+    <ion-item>
+      <ion-label>Feedback</ion-label>
+    </ion-item>
+    <ion-card-content>
+        <ion-list *ngFor = "let feedback of feedbacks">
+          <ion-item lines="none" class="item-style">
+            {{ feedback.feedback }}
+          </ion-item>
+          <ion-item *ngIf="feedback.type=='select' && feedback.selection_mode=='single'">
+            <ion-select slot="end" placeholder="Select One" interface="popover" [value]="selectedUserEmail" (ionChange)="selectOnChange(feedback, $event.detail.value)">
+              <ion-select-option *ngFor="let opt of feedback.options" value="{{opt}}" >{{opt}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="feedback.type=='select' && feedback.selection_mode=='multiple'" expand="full">
+            <ion-select multiple="true" slot="end" placeholder="Select One" interface="popover" [value]="selectedUserEmail" (ionChange)="selectOnChange(feedback, $event.detail.value)">
+              <ion-select-option *ngFor="let opt of feedback.options" value="{{opt}}" >{{opt}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="feedback.type=='calendar'">
+            <ion-label>Date</ion-label>
+            <ion-datetime display-format="DD MMM, YYYY" placeholder="Select Date" ></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="feedback.type=='input'">
+            <ion-input placeholder="enter feedback"></ion-input>
+          </ion-item>
+
+        </ion-list>
+  
+        <ion-button icon-left size="medium" expand="full" color="primary" (click)="save()" tappable>
+          <ion-icon name="save"></ion-icon>
+          Save
+        </ion-button>  
+    </ion-card-content>
+  </ion-card>
+</ion-content>

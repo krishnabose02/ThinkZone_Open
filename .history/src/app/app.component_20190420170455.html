@@ -1,0 +1,64 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar color="primary">
+
+          <ion-item margin-bottom>
+            <ion-avatar slot="start" class="user-avatar">
+              <img src="assets/img/user.png">
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="medium">
+                <h2><strong>{{ _username }}</strong></h2>
+              </ion-text>
+              <ion-text color="medium">
+                <h3>
+                  Manager
+                </h3>
+              </ion-text>
+              <ion-menu-toggle class="mto" auto-hide="false">
+                <!-- <a class="text08" tappable (click)="goToEditProgile()">
+                  <ion-text color="medium">
+                    <ion-icon name="contact"></ion-icon>
+                    <strong>edit profile</strong>
+                  </ion-text>
+                </a> <ion-text color="secondary"> | </ion-text>  
+                <a class="text08" tappable (click)="logout()">
+                  <ion-text color="medium">
+                    <ion-icon name="log-out"></ion-icon>
+                    <strong>logout</strong>
+                  </ion-text>
+                </a>-->
+
+                <ion-button color="danger" (click)="logout()" no-margin>
+                  <ion-icon name="log-out"></ion-icon>
+                  Log out
+                </ion-button>
+              </ion-menu-toggle>
+            </ion-label>
+          </ion-item>
+
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <!-- <ion-list-header color="dark">
+            <ion-label>Menu</ion-label>
+          </ion-list-header> -->
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

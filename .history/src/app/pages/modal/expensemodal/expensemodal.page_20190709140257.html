@@ -1,0 +1,50 @@
+<ion-content> 
+  <ion-card class="bg-white">
+    <ion-card-header color="primary">
+      <ion-card-title>Add Expense</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <form [formGroup]="expenseModalFormGroup" class="list-form">
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label>Expense</ion-label>
+            <ion-select slot="end" placeholder="Select One" interface="popover" [value]="default_name" (ionChange)="selectOnChange($event.detail.value)">
+              <ion-select-option value="Fuel" >Fuel</ion-select-option>
+              <ion-select-option value="Food" >Food</ion-select-option>
+              <ion-select-option value="Stationary" >Stationary</ion-select-option>
+              <ion-select-option value="Other" >Other</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp" *ngIf="isOtherSelected">
+            <ion-label position="floating">Expense type</ion-label>
+            <ion-input color="secondary" type="text" (ionChange)="otherExpOnChange($event.detail.value)" [value]="default_name2" ></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input color="secondary" type="number" formControlName="amount" [value]="default_amount"></ion-input>
+          </ion-item>
+          <p ion-text color="danger" class="text08" *ngIf="expenseModalFormGroup.get('amount').touched && expenseModalFormGroup.get('amount').hasError('required')">
+            <ion-text color="danger">Invalid</ion-text>
+          </p>
+          <ion-label color="danger" position="floating" *ngIf="!_status">
+            {{ _message}}
+          </ion-label>
+        </form>
+    </ion-card-content>
+    <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+            <ion-button color="medium" (click)="closeModal()">
+              <ion-icon slot="start" name="close"></ion-icon> Cancel
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button icon-left color="primary" (click)="add_expense()" [disabled]="!expenseModalFormGroup.valid" tappable>
+              <ion-icon name="add-circle"></ion-icon>Add
+            </ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+</ion-content>

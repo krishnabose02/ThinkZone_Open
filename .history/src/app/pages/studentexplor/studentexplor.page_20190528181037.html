@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Student Details
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <ion-list>
+        <ion-item *ngFor="let student of student_list">
+          <ion-label>{{ student.studentname }} <p> {{ student.father }} </p><p> {{ student.program }} : {{ student.class }}</p>
+            <p>
+              <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()" [disabled]=""
+                tappable>
+                <ion-icon name="log-in"></ion-icon>
+                Register
+              </ion-button>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-card>
+  
+</ion-content>
+  

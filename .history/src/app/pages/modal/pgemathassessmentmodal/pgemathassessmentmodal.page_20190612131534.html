@@ -1,0 +1,52 @@
+<ion-content> 
+  <ion-card>
+    <ion-card-header color="warning">
+      <ion-card-title>Assessment(MATH-PGE)</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-card  *ngIf="isAssessmentTaken">
+        <div class="taken">
+          Assessment already Taken !!!
+        </div>
+        <div class="taken">
+            <ion-button color="medium" (click)="closeModal()">OK</ion-button>
+        </div>
+      </ion-card>
+
+      <ion-card  *ngIf="!isAssessmentTaken">
+        <ion-label text-wrap>{{ studentname }} <p>Program: {{ program }}</p><p>class: {{ class }}</p></ion-label>
+        <ion-list>
+          <ion-row *ngFor="let assessment of assessment_list; let i = index;" class="question-row" >
+            <ion-label text-wrap>{{ i+1 }} ) {{  assessment.question }}</ion-label><p>
+            <ion-segment mode='ios' (ionChange)="segmentChanged(assessment, $event.detail.value)">
+              <ion-segment-button class="segment-button" value="yes">
+                Yes
+              </ion-segment-button>
+              <ion-segment-button class="segment-button" value="no">
+                No
+              </ion-segment-button>
+            </ion-segment> </p>
+          </ion-row>
+        </ion-list>
+
+        <ion-grid>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col>
+                <ion-button color="medium" (click)="closeModal()">
+                  <ion-icon slot="start" name="close"></ion-icon> Back
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button icon-left color="success" (click)="save_assessment()" tappable>
+                  <ion-icon name="save"></ion-icon> Save
+                </ion-button>
+              </ion-col>
+              <ion-col></ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

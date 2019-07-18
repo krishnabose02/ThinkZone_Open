@@ -1,0 +1,49 @@
+<ion-content> 
+  <ion-card class="login-card">
+    <ion-card-header color="warning">
+      <ion-card-title><ion-icon name="lock"></ion-icon>Set Holiday</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+        <form [formGroup]="signinFormGroup" class="list-form">
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="holidayname" item-start></ion-icon>
+              Holiday Name
+            </ion-label>
+            <ion-input color="secondary" type="text" formControlName="holidayname"></ion-input>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="signinFormGroup.get('holidayname').touched && signinFormGroup.get('holidayname').hasError('required')">
+            <ion-text color="danger">
+              Invalid
+            </ion-text>
+          </p>
+
+          <!-- show response message from server -->
+          <ion-label color="danger" position="floating" *ngIf="!_status">
+            {{ _message}}
+          </ion-label>
+        </form>
+    </ion-card-content>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+  
+          <ion-col>
+            <ion-button color="medium" (click)="closeModal()">
+              <ion-icon slot="start" name="close"></ion-icon> Cancel
+            </ion-button>
+          </ion-col>
+  
+          <ion-col>
+            <ion-button icon-left color="success" (click)="signin()" [disabled]="!signinFormGroup.valid" tappable>
+              <ion-icon name="log-in"></ion-icon>Signin
+            </ion-button>
+          </ion-col>
+  
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,86 @@
+:host {
+    ion-content {
+        --background: var(--ion-color-light);
+    }
+
+    ion-item {
+        border-radius: 0;
+        border-bottom: 1px dotted var(--ion-color-medium);
+    }
+
+    ion-card {
+        &.no-radius {
+            border-radius: 0;
+        }
+    }
+    .card-content-md {
+        padding-left: 0px; 
+        padding-right: 0px; 
+        padding-top: 0px; 
+        padding-bottom: 0px; 
+        font-size: 0px; 
+        line-height: 0; 
+    }
+}
+
+.text10{
+    font-size: 10px;
+    font-family: monospace;
+}
+
+.button-bg{
+    background-color: #381dd8;
+}
+
+.card_padding20{
+    padding: 20px;
+}
+.span_text{
+    font-family: inherit;
+}
+.span_text9{
+    font-size: 9px;
+}
+.span_text40{
+    font-size: 40px;
+}
+
+.center-aligned {
+    text-align: center;
+}
+
+.ion-col-style{
+    text-align: center;
+    border: 1px solid #a4a4a4;
+    background-color: #e4e7fd;
+    margin: 3px;
+    box-shadow: 0px 1px 1px 0px;
+}
+
+.color_feedback{
+    color: green;
+}
+
+.color_pic{
+    color: #c88f36;
+}
+
+.color_location{
+    color: #002080;
+}
+.color_payment{
+    color: #800069;
+}
+.color_assessment{
+    color: #007f80;
+}
+.color_comvisit{
+    color: #925901;
+}
+.color_issues{
+    color: #eb0707;
+}
+
+.btn-margin{
+    margin-left: 34%;
+}

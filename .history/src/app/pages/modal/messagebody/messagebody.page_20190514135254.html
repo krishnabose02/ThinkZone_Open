@@ -1,0 +1,27 @@
+<ion-content> 
+  <ion-card class="login-card">
+    <ion-card-header color="primary">
+      <ion-card-title><ion-icon name="lock"></ion-icon>Message</ion-card-title>
+       <ion-card-subtitle>{{ message_title }}</ion-card-subtitle> 
+    </ion-card-header>
+  
+    <ion-card-content>
+        {{ message_body }}
+    </ion-card-content>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+          <ion-col>
+            <ion-button color="primary" (click)="closeModal()">
+              <ion-icon slot="start" name="checkmark"></ion-icon> OK
+            </ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+
+  </ion-card>
+</ion-content>

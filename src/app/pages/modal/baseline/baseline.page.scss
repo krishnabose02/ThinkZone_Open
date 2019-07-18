@@ -1,0 +1,16 @@
+:host {
+  ion-content {
+    --background: linear-gradient(-135deg, var(--ion-color-medium), var(--ion-color-light))
+  }
+}
+
+ion-content {
+    img {
+        object-fit: cover;
+    }
+}
+
+.login-card{
+  background-color: white;
+  margin-top: 30px;
+}

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Assessment (ECE)
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-grid>
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Quarter</ion-label>
+        <ion-select placeholder="Select One" (ionChange)="quarter_onchange($event.detail.value)">
+          <ion-select-option value="q1">Quarter 1</ion-select-option>
+          <ion-select-option value="q2">Quarter 2</ion-select-option>
+          <ion-select-option value="q3">Quarter 3</ion-select-option>
+          <ion-select-option value="q4">Quarter 4</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+
+    <ion-card *ngIf="is_attendance_taken == true" class="card-padding">
+        Attendance is taken !!!
+    </ion-card>
+  
+    <ion-card *ngIf="is_attendance_taken == false">
+      <ion-row class="row-margin-top">
+        <ion-button icon-left size="medium" color="dark" shape="round" fill="outline" (click)="setholiday_onclick()" float-right tappable class="explore-btn">
+          Set as HOLIDAY
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-row>
+      <ion-row class="row-margin-bottom">
+        <ion-button icon-left size="medium" color="dark" expand="full" shape="round" fill="outline" (click)="takeattendance_onclick()" float-right tappable class="explore-btn">
+          Take Attendance
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+  
