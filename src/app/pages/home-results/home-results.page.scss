@@ -1,7 +1,7 @@
 :host {
-    ion-content {
-        --background: var(--ion-color-light);
-    }
+    // ion-content {
+    //     --background: var(--ion-color-light);
+    // }
 
     ion-item {
         border-radius: 0;
@@ -63,4 +63,8 @@
     font-size: 11px;
     padding: 5px;
     text-align: center;
+}
+
+.shadow{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
 }

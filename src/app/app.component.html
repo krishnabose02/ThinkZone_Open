@@ -2,11 +2,11 @@
   <ion-split-pane>
     <ion-menu>
         
-      <ion-header>
+      <!-- <ion-header>
           <ion-col>
               <img src="/assets/img/menu/menu-bg.jpg" alt="" class="menu-bg" />
           </ion-col>
-        <!--<ion-toolbar color="primary">
+        <ion-toolbar color="primary">
           <ion-item margin-bottom>
             <ion-avatar slot="start" class="user-avatar">
               <img src="assets/img/user.png">
@@ -28,14 +28,14 @@
               </ion-menu-toggle>
             </ion-label>
           </ion-item> 
-        </ion-toolbar>-->
-      </ion-header>
+        </ion-toolbar>
+      </ion-header> -->
 
       <ion-content>
-        <ion-list>
-          <!-- <ion-list-header color="dark">
+        <!-- <ion-list>
+          <ion-list-header color="dark">
             <ion-label>Menu</ion-label>
-          </ion-list-header> -->
+          </ion-list-header>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerLink]="[p.url]">
@@ -49,7 +49,106 @@
             <ion-icon name="log-out"></ion-icon>
             Log out
           </ion-button>
-        </ion-list>
+        </ion-list> -->
+
+
+
+        <p style='color: #0675f4;font-size: 1.3rem;margin: 16px'>ThinkZone</p>
+        <div style='width: 100%;height: 1px;background: #d3d3d3'></div>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/student'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='person'></ion-icon>
+            <ion-label style="color: #979797">Student Details</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+       
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/attendance'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='paper'></ion-icon>
+            <ion-label style="color: #979797">Attendance</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+          <p style='margin: 16px'>ECE</p>
+          <ion-menu-toggle auto-hide="false">
+            <div routerLink='/ecactivity' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+              <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+              <ion-label>Activities</ion-label>
+            </div>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false">
+            <div routerLink='/ecassessment' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+              <ion-icon style="margin: 16px;font-size: 1.4rem" name='swap'></ion-icon>
+              <ion-label>Assessments</ion-label>
+            </div>
+          </ion-menu-toggle>
+        <div style='width: 100%;height: 1px;background: #d3d3d3'></div>
+
+        <p style='margin: 16px'>PGE</p>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgactivity' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+            <ion-label>Maths Activities</ion-label>
+          </div>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgactivity' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+            <ion-label>English Activities</ion-label>
+          </div>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgactivityodia' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+            <ion-label>Odia Activities</ion-label>
+          </div>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgassessment' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='swap'></ion-icon>
+            <ion-label>Assessments</ion-label>
+          </div>
+        </ion-menu-toggle>
+
+        <div style='width: 100%;height: 1px;background: #d3d3d3'></div>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/tchpayment'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='cash'></ion-icon>
+            <ion-label style="color: #979797">Payment</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/student'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='school'></ion-icon>
+            <ion-label style="color: #979797">Teacher Training</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/message'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='mail-unread'></ion-icon>
+            <ion-label style="color: #979797">Messages</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/about'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='at'></ion-icon>
+            <ion-label style="color: #979797">About</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item (click)='logout()'>
+            <ion-icon style="margin-right: 16px;color: red" name='log-out'></ion-icon>
+            <ion-label style="color: red">Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

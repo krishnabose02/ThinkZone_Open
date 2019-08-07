@@ -22,9 +22,9 @@ export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
 
-  //@ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+  // @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -108,7 +108,7 @@ export class AppComponent {
         direct: 'forward',
         icon: 'at'
       }
-      
+
       /*,
       {
         title: 'App Settings',
@@ -119,9 +119,9 @@ export class AppComponent {
     ];
 
     this.initializeApp();
-    this._userid = localStorage.getItem("_userid");
-    this._username = localStorage.getItem("_username");
-    this._emailid = localStorage.getItem("_emailid");
+    this._userid = localStorage.getItem('_userid');
+    this._username = localStorage.getItem('_username');
+    this._emailid = localStorage.getItem('_emailid');
   }
 
   initializeApp() {
@@ -131,17 +131,17 @@ export class AppComponent {
 
       // Push notification starts from here
       this.fcm.getToken().then(token => {
-        localStorage.setItem('fcm_token',token);
-        console.log('@@@ app.component fcm_token'+token);
+        localStorage.setItem('fcm_token', token);
+        console.log('@@@ app.component fcm_token' + token);
       });
 
       this.fcm.onTokenRefresh().subscribe(token => {
-        localStorage.setItem('fcm_rtoken',token);
-        console.log('@@@ app.component fcm_rtoken'+token);
+        localStorage.setItem('fcm_rtoken', token);
+        console.log('@@@ app.component fcm_rtoken' + token);
       });
 
       this.fcm.onNotification().subscribe(data => {
-        console.log('@@@ Push notification data: '+JSON.stringify(data));
+        console.log('@@@ Push notification data: ' + JSON.stringify(data));
         if (data.wasTapped) {
           console.log('@@@ app.component Received in background');
           this.router.navigate(['/showpushnotification', data.message]);
@@ -150,7 +150,7 @@ export class AppComponent {
           this.router.navigate(['/showpushnotification', data.message]);
         }
       });
-      
+
     }).catch(() => {});
   }
 
@@ -167,11 +167,9 @@ export class AppComponent {
     this.platform.backButton.subscribeWithPriority(0, () => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
-      }/*else if (this.router.url === '/center') {
-        this.navCtrl.navigateRoot('/home-results');
-      }*/ else {
+      } else {
         this.exitTheApp(this.router.url);
-      } 
+      }
     });
   }
 

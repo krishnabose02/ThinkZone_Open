@@ -27,6 +27,9 @@ export class HomeResultsPage {
 
   current_date: string;
   centers: any;
+  date: number;
+  month: string;
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   constructor(
     public navController: NavController,
@@ -37,11 +40,13 @@ export class HomeResultsPage {
     public toastCtrl: ToastController,
     public api: RestApiService
   ) {
+    const dt = new Date();
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()];
     this.centers = [];
     this.api.getcurrentdate()
         .subscribe(res => {
           console.log(res);
-          
           if(Object.keys(res).length > 0 ){
             this.current_date = res['current'];
           }else{

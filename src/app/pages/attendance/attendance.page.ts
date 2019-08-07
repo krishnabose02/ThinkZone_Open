@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import {
   NavController,
   AlertController,
@@ -6,7 +6,8 @@ import {
   ToastController,
   PopoverController,
   LoadingController,
-  ModalController } from '@ionic/angular';
+  ModalController, 
+  IonDatetime} from '@ionic/angular';
 import { AttendancemodalPage } from './../modal/attendancemodal/attendancemodal.page';
 import { HolidaymodalPage } from './../modal/holidaymodal/holidaymodal.page';
 import { RestApiService } from './../../rest-api.service';
@@ -19,16 +20,22 @@ import { RestApiService } from './../../rest-api.service';
 export class AttendancePage {
   attendance_list: any = [];
   attendance_date: string = new Date().toISOString();
-  attendance_day: string = '';
-  max_date: string = '';
-  min_date: string = '';
-  is_attendance_taken: boolean = false;
+  attendance_day = '';
+  max_date = '';
+  min_date = '';
+  is_attendance_taken = true;
 
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
 
+  date: number;
+  month: string;
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  clickState = 0;
+
+  @ViewChild('datePicker') datePicker: IonDatetime;
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -47,18 +54,21 @@ export class AttendancePage {
     this._centerid = '';
     this._centername = '';
 
-    this.get_attendance_by_teacher_by_date(this._userid, dt)
+    this.get_attendance_by_teacher_by_date(this._userid, dt);
     this.set_max_mindate(dt.toISOString());
+
+    this.month = this.months[dt.getMonth()];
+    this.date = dt.getDate();
   }
 
-  async get_attendance_by_teacher_by_date(userid, date){
+  async get_attendance_by_teacher_by_date(userid, date) {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getattendanceofteacherbydate(userid, date).subscribe(res => {
         if (res.length > 0) {
           this.is_attendance_taken = true;
         } else {
-          this.is_attendance_taken = false;
+          this.is_attendance_taken = true;
         }
         console.log('@@@Attendance taken: ' + this.is_attendance_taken);
         loading.dismiss();
@@ -67,9 +77,9 @@ export class AttendancePage {
         loading.dismiss();
       });
   }
-  
+
   // set max & min date
-  set_max_mindate(dat){
+  set_max_mindate(dat) {
     const dt = new Date(dat);
     dt.setDate(dt.getDate() - 7);
     console.log(dt.toString());
@@ -96,36 +106,40 @@ export class AttendancePage {
   }
 
   // date on change event
-  attendancedate_onhange(value){
+  attendancedate_onhange(value) {
     // console.log('@@@Attendance: '+value);
     this.attendance_date = value;
     this.set_max_mindate(this.attendance_date);
     this.get_attendance_by_teacher_by_date(this._userid, value);
+
+    const dt = new Date(value);
+    this.month = this.months[dt.getMonth()];
+    this.date = dt.getDate();
   }
 
   // set holiday button click
-  async setholiday_onclick(){
+  async setholiday_onclick() {
     const modal = await this.modalController.create({
       component: HolidaymodalPage,
-      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} } 
+      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
         this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
     });
     return await modal.present();
   }
 
   // take attendance button click
-  async takeattendance_onclick(){
+  async takeattendance_onclick() {
     const modal = await this.modalController.create({
       component: AttendancemodalPage,
-      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} } 
+      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
         this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
     });
     return await modal.present();
@@ -163,5 +177,28 @@ export class AttendancePage {
       ]
     });
     await alert.present();
+  }
+
+  // programmatically open the datetime component that picks time
+  openDatePicker() {
+    this.datePicker.open();
+  }
+
+  // Change the button states
+  changeState(buttonClicked: string) {
+    if (buttonClicked === 'attendance') {
+      if (this.clickState === 0) {
+        this.takeattendance_onclick();
+      } else {
+        this.clickState = 0;
+      }
+      return;
+    } else if (buttonClicked === 'holiday') {
+      if (this.clickState === 1) {
+        this.setholiday_onclick();
+      } else {
+        this.clickState = 1;
+      }
+    }
   }
 }

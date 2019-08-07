@@ -30,7 +30,8 @@ const routes: Routes = [
   { path: 'pgactivity2odia', loadChildren: './pages/pgactivity2odia/pgactivity2odia.module#Pgactivity2odiaPageModule' },
   { path: 'pgactivityeng', loadChildren: './pages/pgactivityeng/pgactivityeng.module#PgactivityengPageModule' },
   { path: 'pgactivity2eng', loadChildren: './pages/pgactivity2eng/pgactivity2eng.module#Pgactivity2engPageModule' },
-  { path: 'showpushnotification/:message', loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' }
+  { path: 'showpushnotification/:message',
+    loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' }
 ];
 
 @NgModule({
