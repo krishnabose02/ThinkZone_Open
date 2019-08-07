@@ -46,11 +46,12 @@
       <p style='padding: 8px'>Take Attendance</p>
     </div>
 
-    <div [ngClass]='(clickState==1)?"shadow":""' style='border-radius: 4px;margin-top: 30px;min-height: 150px;width: 80%;color: gray;display: flex;flex-flow: column;align-items: center'>
+    <div [ngClass]='(clickState==1)?"shadow":""' style='border-radius: 4px;margin-top: 20px;height: fit-content;width: 80%;color: gray;display: flex;flex-flow: column;align-items: center'>
       <div style='z-index: 1' [ngClass]='(clickState==1)?"reveal":"hidden"'>
-        <ion-input style="border-bottom: 1px solid rgb(199, 199, 199);margin-bottom: 10px" placeholder='Enter holiday name'></ion-input>
+        <p style='color: red'>{{error_message}}</p>
+        <ion-input (ionChange)='error_message=""' [(ngModel)]='holiday_name' style="border-bottom: 1px solid rgb(199, 199, 199);margin-bottom: 10px" placeholder='Enter holiday name'></ion-input>
       </div>
-      <div (click)='changeState("holiday")' [ngClass]='(clickState==1)?"green-bg":"white-bg shadow"'  style='z-index: 2;border-radius: 4px;text-align: center;width: 62%'>
+      <div (click)='changeState("holiday")' [ngClass]='(clickState==1)?"green-bg":"white-bg shadow"'  style='z-index: 2;border-radius: 4px;text-align: center;width: 62%;margin-bottom: 10px'>
         <p style='padding: 8px'>Mark Holiday</p>
       </div>
     </div>
