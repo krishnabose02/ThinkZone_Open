@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
+<ion-header no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <ion-toolbar>
+    <ion-buttons style="color: gray;padding-left: 16px" slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
@@ -10,11 +10,12 @@
             <span class="text10">Date: {{ current_date }}</span>
           </ion-text>
         </ion-text> -->
-        <p>ThinkZone</p>
+        <p style='text-align: center;color: gray'>ThinkZone</p>
     </ion-title>
+    
      <ion-buttons slot="end">
       <ion-button size="small" shape="round" style="color: white" (click)="notifications('hi')">
-        <ion-icon style="font-size: 1.8rem" name="notifications"></ion-icon>
+        <ion-icon style="color: gray;font-size: 1.8rem" name="notifications"></ion-icon>
         <!--<ion-badge color="dark" slot="end">2</ion-badge>-->
       </ion-button>
     </ion-buttons> 
@@ -29,7 +30,7 @@
   </ion-toolbar> -->
 </ion-header>
 
-<ion-content>
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <div [routerLink]="'/attendance'" class='shadow' style='background: white;width: 86%;margin: 7%; border-radius: 8px;flex-flow: row;display: flex;align-items: center'>
     <div style='border-radius: 8px 0 0 8px;height: 90px;width: 25%;background: #03a9f4;color: white;display: flex;flex-flow: column;justify-content: center;align-items: center'>
       <p style='font-size: 2rem;margin: 5px'>{{date}}</p>

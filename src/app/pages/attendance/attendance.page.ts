@@ -36,6 +36,7 @@ export class AttendancePage {
   clickState = 0;
   holiday_name: any;
   error_message: string;
+  toolbarshadow = true;
 
   @ViewChild('datePicker') datePicker: IonDatetime;
   constructor(
@@ -246,5 +247,15 @@ export class AttendancePage {
           console.log(err);
           loading.dismiss();
         });
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+      console.log('top');
+      this.toolbarshadow = true;
+    } else {
+      this.toolbarshadow = false;
+    }
   }
 }

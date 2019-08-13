@@ -53,7 +53,9 @@ import { FCM } from '@ionic-native/fcm/ngx';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      scrollAssist: false
+    }),
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,

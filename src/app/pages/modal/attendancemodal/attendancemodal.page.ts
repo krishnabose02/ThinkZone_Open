@@ -11,6 +11,7 @@ import {
 
 // Modals
 import { RestApiService } from './../../../rest-api.service';
+import { StudentObject } from './studentobject';
 
 
 @Component({
@@ -19,17 +20,23 @@ import { RestApiService } from './../../../rest-api.service';
   styleUrls: ['./attendancemodal.page.scss']
 })
 export class AttendancemodalPage {
-  attendance_status: string = 'Absent';
+  attendance_status = 'Absent';
   student_list: any = [];
   attendance_list: any = [];
   attendance_date: string = new Date().toISOString();
-  attendance_day: string = '';
-
+  attendance_day = '';
+  new_student_list: StudentObject[] = [];
   res: any;
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
+
+  toolbarshadow = true;
+  present = 0;
+  total = 0;
+  absent = 0;
+  unattended = 0;
 
   constructor(
     public navController: NavController,
@@ -57,13 +64,26 @@ export class AttendancemodalPage {
   }
 
   // get student list
-  async getallstudentbyteacher(){
+  async getallstudentbyteacher() {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getallstudentsbyteacherid(this._userid)
       .subscribe(res => {
         console.log('@@@all student list: ' + JSON.stringify(res));
         this.student_list = res;
+        if (this.student_list != null) {
+          this.total = this.student_list.length;
+          this.unattended = this.total;
+          this.student_list.forEach(element => {
+            this.new_student_list.push({
+              absentbutton: 'circle shadow',
+              detail: element,
+              presentbutton: 'circle shadow',
+              selectionState: 0,
+              bgclass: ''
+            });
+          });
+        }
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -72,65 +92,65 @@ export class AttendancemodalPage {
   }
 
   // present or absent choosen
-  segmentChanged(student, value){
+  segmentChanged(student, value) {
     this.add_to_attendancelist(student.studentid, student.studentname, student.program, value);
   }
 
   // add to attendance list
-  add_to_attendancelist(studentid, studentname, program, availability){
+  add_to_attendancelist(studentid, studentname, program, availability) {
     const obj = {
       isholiday : false,
       holidayname : '',
-      availability : availability, 
+      availability : availability,
       userid : this._userid,
       username : this._username,
       centerid : '',
       centername : '',
       attendancedate : this.attendance_date,
-      attendanceday : this.attendance_day, 
-      studentid : studentid, 
+      attendanceday : this.attendance_day,
+      studentid : studentid,
       studentname : studentname,
       program : program
     };
 
-    if(this.attendance_list.length > 0){
+    if (this.attendance_list.length > 0) {
       // check for record exist or not
       let i = 0, index = -1;
       this.attendance_list.forEach(element => {
-        if(element.studentid == studentid){
+        if (element.studentid === studentid) {
           index = i;
           return;
         }
         i++;
       });
-      if(index >= 0){
-        this.attendance_list.splice(index,1,obj);
-      }else{
+      if (index >= 0) {
+        this.attendance_list.splice(index, 1, obj);
+      } else {
         this.attendance_list.push(obj);
       }
-    }else{
+    } else {
       this.attendance_list.push(obj);
     }
-    console.log('@@@ attendance_list : '+JSON.stringify(this.attendance_list));
+    console.log('@@@ attendance_list : ' + JSON.stringify(this.attendance_list));
   }
-  
+
   // save attendance
   async save_attendace() {
-    if(this.student_list.length == this.attendance_list.length){
+    if (this.student_list.length === this.attendance_list.length) {
       const loading = await this.loadingController.create({});
       await loading.present();
       await this.api.saveattendance(this.attendance_list)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
-          this.showAlert('Info','','Attendance saved '+res['status']+' !!!');
+          this.showAlert('Info', '', 'Attendance saved ' + res['status'] + ' !!!');
           loading.dismiss();
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
           console.log(err);
           loading.dismiss();
         });
-    }else{
-      this.showAlert('Info','','Please enter sttendance of all students.');
+    } else {
+      this.showAlert('Info', '', 'Please enter attendance of all students.');
     }
   }
 
@@ -168,9 +188,57 @@ export class AttendancemodalPage {
     });
     await alert.present();
   }
-  
+
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+      console.log('top');
+      this.toolbarshadow = true;
+    } else {
+      this.toolbarshadow = false;
+    }
+  }
+
+  setState(s, student) {
+    if (s === student.selectionState) {
+      return;
+    }
+    if (student.selectionState === 0) {
+      if (s === 1) {
+        student.bgclass = 'w2g';
+        student.presentbutton = 'w2g circle';
+        this.present++;
+      } else {
+        this.absent++;
+        student.bgclass = 'w2r';
+        student.absentbutton = 'w2r circle';
+      }
+    } else if (s === 2) {
+      this.absent++;
+      this.present--;
+      student.bgclass = 'g2r';
+      student.presentbutton = 'g2w shadow circle';
+      student.absentbutton = 'w2r circle';
+      console.log('green to red');
+    } else {
+      this.present++;
+      this.absent--;
+      student.bgclass = 'r2g';
+      student.presentbutton = 'w2g circle';
+      student.absentbutton = 'r2w shadow circle';
+      console.log('red to green');
+    }
+    this.add_to_attendancelist( student.detail.studentid,
+                                student.detail.studentname,
+                                student.detail.program,
+                                (s === 1) ? 'present' : 'absent'
+                              );
+    student.selectionState = s;
+    this.unattended = this.total - this.present - this.absent;
   }
 }

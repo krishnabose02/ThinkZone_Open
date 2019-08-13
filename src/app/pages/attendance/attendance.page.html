@@ -1,19 +1,21 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <!-- <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            Attendance
-          </ion-text>
-        </ion-text>
+      <p style="text-align: center;color: gray">Attendance</p>
     </ion-title>
+  </ion-toolbar> -->
+  <ion-toolbar>
+    <ion-row style="position: relative">
+        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>Attendence</p></ion-title>
+        <ion-back-button style="color: gray"></ion-back-button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-white">
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)" class="bg-white">
 
   <div (click)='openDatePicker()' style='margin-top: 30px;margin-bottom: 60px;display: flex;justify-content: center;align-items: center;width: 100%'>
     <div class='shadow' style='min-height: 150px;width: 50%;border-radius: 10px'>
@@ -31,7 +33,7 @@
         </div>
         <hr>  
         <div style='width: 100%;height: 50%'>
-          <p>{{month}}</p>
+          <p style="padding: 10px">{{month}}</p>
         </div>
         <div style='color: white;font-size: 1.2rem;font-weight: bold;background: red;padding: 10px;border-radius: 0 0 10px 10px'>
             {{attendance_day}}

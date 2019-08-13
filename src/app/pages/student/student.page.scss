@@ -1,7 +1,7 @@
 :host {
-    ion-content {
-        --background: var(--ion-color-light);
-    }
+    // ion-content {
+    //     --background: var(--ion-color-light);
+    // }
 
     ion-item {
         border-radius: 0;
@@ -101,4 +101,89 @@
 
 .select-width{
     max-width: 100%;
+}
+
+.horizontal-flexbox {
+    margin-top: 15px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+@keyframes white-to-blue {
+    0% {
+        background: white;
+        color: #2196f3;
+    }
+    100% {
+        background: #2196f3;
+        color: white;
+    }
+}
+.selected-chip {
+    animation: white-to-blue 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    background: #2196f3;
+    min-width: 80px;
+    min-height: 20px;
+}
+
+@keyframes blue-to-white {
+    0% {
+        color: white;
+        background: #2196f3;
+    }
+    100% {
+        color: #2196f3;
+        background: white;
+    }
+}
+.unselected-chip {
+    animation: blue-to-white 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
+    text-align: center;
+    color: #2196f3;
+    border: 1px #2196f3 solid;
+    min-width: 80px;
+    min-height: 20px;
+}
+.shadow{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
+}
+
+.hidden {
+    transition: max-height 0.6s ease-in-out;
+    height: 0px;
+    max-height: 0px;
+    overflow: hidden;
+}
+.revealer {
+    transition: max-height 0.6s ease-in-out;
+    height: auto;
+    max-height: 500px;
+}
+.hidden div {
+    transition: opacity 0.6s;
+    transition-delay: 0.4s;
+    opacity: 0;
+}
+.revealer div {
+    transition: opacity 0.6s;
+    transition-delay: 0.4s;
+    opacity: 1;
+}
+
+.group {
+    margin-top: 20px;
+    border-radius: 4px;
+    color: gray;
+    padding: 30px
+}
+
+.animated ion-label {
+    color: gray;
 }

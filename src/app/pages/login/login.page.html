@@ -33,7 +33,7 @@
     <div style='position: absolute;display: flex;flex-flow: column;justify-content: center;align-items: center;height: 100%;width: 100%'>
       
       <div style="display: flex;flex-flow: column;align-items: center;justify-content: center">
-        <div style="border-radius: 50%;height: 40vw;width: 40vw;background: white;">
+        <div [ngClass]='(loginState==0)?"":"diminish"' style="border-radius: 50%;height: 40vw;width: 40vw;background: white;">
           <img style="height: 90%;width: 90%;margin: 5%" src='assets/img/logo-round.png'>
         </div>
       </div>
@@ -69,7 +69,7 @@
         <p style='margin-top: 10px;margin-bottom: 10px'>LOGIN</p>
       </div>  
 
-      <p style='text-align: center;font-size: 0.8rem;color: gray;margin-top: 15px'>FORGOT PASSWORD?</p>
+      <!-- <p style='text-align: center;font-size: 0.8rem;color: gray;margin-top: 15px'>FORGOT PASSWORD?</p> -->
     </div>
   </div>
 </ion-content>
