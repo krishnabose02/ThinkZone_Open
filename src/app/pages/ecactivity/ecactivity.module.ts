@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { EcactivityPage } from './ecactivity.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

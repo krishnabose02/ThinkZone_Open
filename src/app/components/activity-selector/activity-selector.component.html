@@ -1,0 +1,20 @@
+<div *ngIf='activity_list!=null && activity_list.length>0' style='padding: 30px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
+  <div style='margin: 10px'>
+    <p style='font-size: 1.4rem'>{{heading}}</p>
+      <p>Activities:</p>
+      <div  *ngFor='let activity of activity_list'
+            style='margin-top: 10px;border: 1px solid #2196f3;color: #2196f3;border-radius: 4px;overflow: auto' 
+            (click)="activity_btnclick(activity.val)">
+
+        <div class='horizontal-flexbox' style='justify-content: space-between'>
+          <div class='horizontal-flexbox' style='justify-content: flex-start'>
+            <div class='horizontal-flexbox' [style.opacity]='(activity.cls=="success")?"1":"0"' style='margin: 10px;height: 30px;width: 30px;border-radius: 15px;background: #4caf50'>
+              <ion-icon name='checkmark' style="color: white;font-size: 1.2rem"></ion-icon>
+            </div>
+            <p style='margin-left: 10px;font-size: 1.2rem'>A{{activity.val}}</p>
+          </div>
+          <ion-icon name='arrow-forward' style="margin: 10px"></ion-icon>
+        </div>
+      </div>
+  </div>
+</div>

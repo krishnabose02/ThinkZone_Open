@@ -36,8 +36,6 @@ export class EcactivityPage {
 
   toolbarshadow = true;
   active_month_list = [];
-  pending_activity_list = [];
-  completed_activity_list = [];
   loading;
   activity_loaded = false;
 
@@ -141,6 +139,10 @@ export class EcactivityPage {
     }
   }
 
+  async reloadActivityData(monthAndWeek: string) {
+    const mnw = monthAndWeek.split(' ');
+    this.getactivitydetails(mnw[0], mnw[1]);
+  }
   async getactivitydetails(month, week) {
     this.selected_month = month;
     this.selected_week = week;
@@ -173,10 +175,8 @@ export class EcactivityPage {
           let obj = {};
           if (res.includes(element)) {
             obj = { val: element, cls: 'success' };
-            this.completed_activity_list.push(obj);
           } else {
             obj = { val: element, cls: 'warning' };
-            this.pending_activity_list.push(obj);
           }
           this.activity_list.push(obj);
         });

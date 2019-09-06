@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-period-selector',
@@ -10,13 +9,15 @@ export class PeriodSelectorComponent implements OnInit {
 
   @Input() month;
 
-  @Output() selected = new EventEmitter();
+  @Output() selected;
 
   selected_month = '';
   selected_week = '';
   week_list;
 
-  constructor() { }
+  constructor() {
+    this.selected = new EventEmitter();
+   }
 
   ngOnInit() {
   }
@@ -36,12 +37,18 @@ export class PeriodSelectorComponent implements OnInit {
       this.week_list.push(obj);
     }
 
-    // set activity heading
-    // if (this.selected_month.trim().length > 0 && this.selected_week.trim().length > 0) {
+    if (this.selected_month !== '' && this.selected_week !== '') {
+      // emit an event here
+      this.selected.emit(this.selected_month + ' ' + this.selected_week);
+    }
+  }
+
+  week_onchange(value) {
+    this.selected_week = value;
 
     if (this.selected_month !== '' && this.selected_week !== '') {
-      // this.getactivitydetails(this.selected_month, this.selected_week);
-      // emit an event here
+      // emit an event here too
+      this.selected.emit(this.selected_month + ' ' + this.selected_week);
     }
   }
 }
