@@ -165,7 +165,7 @@ export class LoginPage implements OnInit {
       usertype: 'teacher'
     };
     console.log('@@@ data: ' + JSON.stringify(data));
-    const loading = await this.loadingController.create({});
+    const loading = await this.loadingController.create({spinner: 'dots'});
     await loading.present();
     await this.api.authenticateuser(data)
       .subscribe(res => {

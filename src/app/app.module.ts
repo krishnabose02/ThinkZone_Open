@@ -47,10 +47,12 @@ import { VideoPlayer } from '@ionic-native/video-player/ngx';
 
 // Push Notification FCM(Firebase Cloud Messaging)
 import { FCM } from '@ionic-native/fcm/ngx';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot({

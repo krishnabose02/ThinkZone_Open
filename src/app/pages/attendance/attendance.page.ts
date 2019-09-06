@@ -6,7 +6,7 @@ import {
   ToastController,
   PopoverController,
   LoadingController,
-  ModalController, 
+  ModalController,
   IonDatetime} from '@ionic/angular';
 import { AttendancemodalPage } from './../modal/attendancemodal/attendancemodal.page';
 import { HolidaymodalPage } from './../modal/holidaymodal/holidaymodal.page';

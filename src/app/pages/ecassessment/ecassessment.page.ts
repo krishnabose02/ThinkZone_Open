@@ -16,11 +16,11 @@ import { RestApiService } from './../../rest-api.service';
   styleUrls: ['./ecassessment.page.scss']
 })
 export class EcassessmentPage {
-  selected_quarter: string = '';
-  disable_fillmarks_button: boolean = true;
+  selected_quarter = '';
+  disable_fillmarks_button = true;
   month_diff: number;
   userobj: any = {};
-  userreg_date: string = '';
+  userreg_date = '';
   student_list: any = [];
   quarter_list: any = [];
 
@@ -28,6 +28,8 @@ export class EcassessmentPage {
   _username: string;
   _centerid: string;
   _centername: string;
+
+  toolbarshadow = true;
 
   constructor(
     public navController: NavController,
@@ -49,18 +51,18 @@ export class EcassessmentPage {
   }
 
   // get student list
-  async getallstudentbyteacher(){
+  async getallstudentbyteacher() {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getallstudentsbyteacherid(this._userid)
       .subscribe(res => {
         console.log('@@@all student list: ' + JSON.stringify(res));
         res.forEach(element => {
-          if(element.program == 'ece'){
+          if (element.program === 'ece') {
             this.student_list.push(element);
           }
         });
-        
+
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -68,18 +70,18 @@ export class EcassessmentPage {
       });
   }
 
-  async getuserbyid(userid){
+  async getuserbyid(userid) {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getuserbyuserid(userid).subscribe(res => {
         if (res.length > 0) {
           this.userobj = res[0];
           this.userreg_date = res[0].createdon;
-        } 
-        //console.log('@@@userobj: ' + JSON.stringify(this.userobj));
-        //console.log('@@@userreg_date: ' + this.userreg_date);
+        }
+        // console.log('@@@userobj: ' + JSON.stringify(this.userobj));
+        // console.log('@@@userreg_date: ' + this.userreg_date);
         this.calculateQuarter(new Date(this.userreg_date), new Date());
-        //this.calculateQuarter(new Date(2018,11,11), new Date(2019,5,7));
+        // this.calculateQuarter(new Date(2018,11,11), new Date(2019,5,7));
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -87,10 +89,10 @@ export class EcassessmentPage {
       });
   }
 
-  calculateQuarter(fromDate, toDate){
+  calculateQuarter(fromDate, toDate) {
     // month difference
     let months = (toDate.getMonth() - fromDate.getMonth()) + (12 * (toDate.getFullYear() - fromDate.getFullYear())) + 1;
-    if(toDate.getDate() < fromDate.getDate()){
+    if (toDate.getDate() < fromDate.getDate()) {
         months--;
     }
     this.month_diff = months;
@@ -100,7 +102,7 @@ export class EcassessmentPage {
     this.month_diff = (this.month_diff < 0) ? (this.month_diff * -1) : this.month_diff;
 
     // create quarter list
-    if(this.month_diff >= 1 && this.month_diff <= 3){
+    if (this.month_diff >= 1 && this.month_diff <= 3) {
       console.log('>=1 month_diff <=3');
       const q1 = { value: 'quarter1', text: 'Quarter 1', disabled: false };
       const q2 = { value: 'quarter2', text: 'Quarter 2', disabled: true };
@@ -111,7 +113,7 @@ export class EcassessmentPage {
       this.quarter_list.push(q2);
       this.quarter_list.push(q3);
       this.quarter_list.push(q4);
-    } else if(this.month_diff >= 4 && this.month_diff <= 6){
+    } else if (this.month_diff >= 4 && this.month_diff <= 6) {
       console.log('>=4 month_diff <=6');
       const q1 = { value: 'quarter1', text: 'Quarter 1', disabled: false };
       const q2 = { value: 'quarter2', text: 'Quarter 2', disabled: false };
@@ -122,7 +124,7 @@ export class EcassessmentPage {
       this.quarter_list.push(q2);
       this.quarter_list.push(q3);
       this.quarter_list.push(q4);
-    } else if(this.month_diff >= 67 && this.month_diff <= 9){
+    } else if (this.month_diff >= 67 && this.month_diff <= 9) {
       console.log('>=7 month_diff <=9');
       const q1 = { value: 'quarter1', text: 'Quarter 1', disabled: false };
       const q2 = { value: 'quarter2', text: 'Quarter 2', disabled: false };
@@ -133,7 +135,7 @@ export class EcassessmentPage {
       this.quarter_list.push(q2);
       this.quarter_list.push(q3);
       this.quarter_list.push(q4);
-    } else if(this.month_diff >= 10 && this.month_diff <= 12){
+    } else if (this.month_diff >= 10 && this.month_diff <= 12) {
       console.log('>=10 month_diff <=12');
       const q1 = { value: 'quarter1', text: 'Quarter 1', disabled: false };
       const q2 = { value: 'quarter2', text: 'Quarter 2', disabled: false };
@@ -146,13 +148,13 @@ export class EcassessmentPage {
       this.quarter_list.push(q4);
     }
   }
-  
+
   // quarter on change event
-  quarter_onchange(value){
-    console.log('@@@selected_quarter: '+value);
+  quarter_onchange(value) {
+    console.log('@@@selected_quarter: ' + value);
     this.selected_quarter = value;
 
-    if(this.selected_quarter.length > 0){
+    if (this.selected_quarter.length > 0) {
       this.disable_fillmarks_button = false;
     } else {
       this.disable_fillmarks_button = true;
@@ -160,15 +162,25 @@ export class EcassessmentPage {
   }
 
   // ece fillmarks button click
-  async ece_fillmarks_btnclick(slist){
+  async ece_fillmarks_btnclick(slist) {
     const modal = await this.modalController.create({
       component: EceassessmentmodalPage,
-      componentProps: { res: {userid: this._userid, username: this._username, studentid: slist.studentid, studentname: slist.studentname, program: slist.program, class: slist.class, stage: this.selected_quarter} } 
+      componentProps: {
+        res: {
+          userid: this._userid,
+          username: this._username,
+          studentid: slist.studentid,
+          studentname: slist.studentname,
+          program: slist.program,
+          class: slist.class,
+          stage: this.selected_quarter
+        }
+      }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
-        //this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
+        // this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
     });
     return await modal.present();
   }
@@ -205,5 +217,15 @@ export class EcassessmentPage {
       ]
     });
     await alert.present();
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+        console.log('top');
+        this.toolbarshadow = true;
+    } else {
+        this.toolbarshadow = false;
+    }
   }
 }

@@ -1,7 +1,7 @@
 :host {
-    ion-content {
-        --background: var(--ion-color-light);
-    }
+    // ion-content {
+    //     --background: var(--ion-color-light);
+    // }
 
     ion-item {
         border-radius: 0;
@@ -101,4 +101,115 @@
 
 .select-width{
     max-width: 100%;
+}
+
+.shadow{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
+}
+
+.show-data {
+    transition: max-height 1.0s;
+    max-height: 800px;
+}
+
+.hide-data {
+    transition: max-height 0.6s;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+@keyframes spin-down{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(180deg);
+    }
+}
+@keyframes spin-up{
+    0%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+.rotate-down {
+    animation: spin-down 0.4s;
+    animation-fill-mode: forwards;
+}
+
+.rotate-up {
+    animation: spin-up 0.4s;
+    animation-fill-mode: forwards;
+}
+
+.horizontal-flexbox {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.vertical-flexbox {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes white-to-blue {
+    0% {
+        background: white;
+        color: #2196f3;
+    }
+    100% {
+        background: #2196f3;
+        color: white;
+    }
+}
+.selected-chip {
+    margin: 10px;
+    animation: white-to-blue 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    background: #2196f3;
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
+}
+.selected-chip p, .unselected-chip p{
+    margin: 0px;
+    margin-bottom: 3px;
+    font-size: 1.3rem;
+}
+
+@keyframes blue-to-white {
+    0% {
+        color: white;
+        background: #2196f3;
+    }
+    100% {
+        color: #2196f3;
+        background: white;
+    }
+}
+.unselected-chip {
+    margin: 10px;
+    animation: blue-to-white 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
+    text-align: center;
+    color: #2196f3;
+    border: 1px #2196f3 solid;
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.set-level-text{
+    margin-top: 0px;
 }

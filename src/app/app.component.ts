@@ -44,7 +44,7 @@ export class AppComponent {
       },*/
       {
         title: 'Student Details',
-        url: '/student',
+        url: '/studentexplor',
         direct: 'forward',
         icon: 'contact'
       },

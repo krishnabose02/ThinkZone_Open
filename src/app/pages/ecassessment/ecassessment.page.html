@@ -1,19 +1,13 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            Assessment (ECE)
-          </ion-text>
-        </ion-text>
-    </ion-title>
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <ion-toolbar>
+    <ion-row style="position: relative">
+        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>ECE Assessments</p></ion-title>
+        <ion-back-button style="color: gray"></ion-back-button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
-
-<ion-content class="bg-white">
+      
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <ion-grid>
     <ion-row>
       <ion-item class="full_width">

@@ -1,0 +1,24 @@
+<div style='padding: 30px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
+  <div style='margin: 10px'>
+    
+    <!-- Month Selector -->
+    <p style='font-size: 1.4rem'>Select Month:</p>
+    <div style='flex-wrap: wrap' class='horizontal-flexbox'>
+      <div (click)='month_onchange(m.value)' *ngFor='let m of month' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
+        <p>{{m.name}}</p>
+      </div>
+    </div>
+
+    <div [ngClass]='(selected_month=="")?"hidden":"expanded"'>
+      <div style='min-width: 80%;background: rgb(199, 199, 199);min-height: 1px;'></div>
+      <!-- Week Selector -->
+      <p style='font-size: 1.4rem'>Select Week:</p>
+      <div style='flex-wrap: wrap' class='horizontal-flexbox'>
+        <div (click)='week_onchange(m.value)' *ngFor='let m of week_list' [ngClass]='(m.value===selected_week)?"selected-chip":"unselected-chip"'>
+          <p>{{m.text}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

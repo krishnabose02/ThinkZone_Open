@@ -139,7 +139,7 @@
 @keyframes green-to-white {
     0% {
         background: #4caf50;
-        color: #ffffff;
+        color: white;
     }
     100% {
         background: white;
@@ -154,7 +154,7 @@
     }
     100% {
         background: #4caf50;
-        color: #ffffff;
+        color: white;
     }
 }
 
@@ -162,48 +162,54 @@
 .green-bg {
     animation: white-to-green 0.6s;
     animation-fill-mode: forwards;
+    color: white;
 }
 
 .white-bg {
     animation: green-to-white 0.6s;
     animation-fill-mode: forwards;
+    color: #4caf50;
 }
 
 
 @keyframes FadeIn { 
     0% {
         opacity: 0;
-        height: 0px;
+        max-height: 0px;
+        margin: 0px;
+        padding: 0px;
     }
 
     100% {
         opacity: 1;
-        height: 50px;
+        max-height: 100px;
+        margin: 10px;
+        padding: 10px;
     }
 }
 @keyframes FadeOut {
     0% {
         opacity: 1;
-        height: 50px;
+        max-height: 100px;
+        margin: 10px;
+        padding: 10px;
     }
     100% {
         opacity: 0;
-        height: 0px;
+        max-height: 0px;
+        margin: 0px;
+        padding: 0px;
     }
 }
 
 .hidden {
     animation: FadeOut 0.6s;
-    animation-fill-mode: backwards;
+    animation-fill-mode: forwards;
     opacity: 0;
-    height: 0px;
 }
 .reveal {
     animation-delay: 0.6s;
     animation: FadeIn 0.6s;
     animation-fill-mode: forwards;
-    padding: 10px;
-    margin: 10px;
-    min-height: fit-content;
 }
 

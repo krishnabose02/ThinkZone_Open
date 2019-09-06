@@ -13,12 +13,26 @@
 ion-item {
     --ion-item-background: transparent;
 }
-
+.horizontal-flexbox{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.vertical-flexbox{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
 // backgrounds //
 .bg-white {
   background-color: #fff;
 }
   
+.shadow{
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
+}
   .bg-light {
     background-color: var(--ion-color-light);
   }

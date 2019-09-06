@@ -17,11 +17,11 @@ import { PgemathassessmentmodalPage } from './../modal/pgemathassessmentmodal/pg
   styleUrls: ['./pgassessment.page.scss']
 })
 export class PgassessmentPage {
-  selected_month: string = '';
-  disable_fillmarks_button: boolean = true;
+  selected_month = '';
+  disable_fillmarks_button = true;
   month_diff: number;
   userobj: any = {};
-  userreg_date: string = '';
+  userreg_date = '';
   student_list: any = [];
   month_list: any = [];
 
@@ -29,6 +29,8 @@ export class PgassessmentPage {
   _username: string;
   _centerid: string;
   _centername: string;
+
+  toolbarshadow = true;
 
   constructor(
     public navController: NavController,
@@ -50,18 +52,18 @@ export class PgassessmentPage {
   }
 
   // get student list
-  async getallstudentbyteacher(){
+  async getallstudentbyteacher() {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getallstudentsbyteacherid(this._userid)
       .subscribe(res => {
         console.log('@@@all student list: ' + JSON.stringify(res));
         res.forEach(element => {
-          if(element.program == 'pge'){
+          if (element.program === 'pge') {
             this.student_list.push(element);
           }
         });
-        
+
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -69,18 +71,18 @@ export class PgassessmentPage {
       });
   }
 
-  async getuserbyid(userid){
+  async getuserbyid(userid) {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getuserbyuserid(userid).subscribe(res => {
         if (res.length > 0) {
           this.userobj = res[0];
           this.userreg_date = res[0].createdon;
-        } 
-        //console.log('@@@userobj: ' + JSON.stringify(this.userobj));
-        //console.log('@@@userreg_date: ' + this.userreg_date);
+        }
+        // console.log('@@@userobj: ' + JSON.stringify(this.userobj));
+        // console.log('@@@userreg_date: ' + this.userreg_date);
         this.calculatemonth(new Date(this.userreg_date), new Date());
-        //this.calculatemonth(new Date(2018,11,11), new Date(2019,5,7));
+        // this.calculatemonth(new Date(2018,11,11), new Date(2019,5,7));
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -88,10 +90,10 @@ export class PgassessmentPage {
       });
   }
 
-  calculatemonth(fromDate, toDate){
+  calculatemonth(fromDate, toDate) {
     // month difference
     let months = (toDate.getMonth() - fromDate.getMonth()) + (12 * (toDate.getFullYear() - fromDate.getFullYear())) + 1;
-    if(toDate.getDate() < fromDate.getDate()){
+    if (toDate.getDate() < fromDate.getDate()) {
         months--;
     }
     this.month_diff = months;
@@ -102,23 +104,23 @@ export class PgassessmentPage {
     let obj = {};
     this.month_list = [];
     for (let i = 1; i <= 12; i++) {
-      if( i <= this.month_diff){
-        obj = { value: 'month'+i, text: 'Month '+i, disabled: false};
-      }else{
-        obj = { value: 'month'+i, text: 'Month '+i, disabled: true};
+      if ( i <= this.month_diff) {
+        obj = { value: 'month' + i, text: 'Month ' + i, disabled: false};
+      } else {
+        obj = { value: 'month' + i, text: 'Month ' + i, disabled: true};
       }
-     
+
       this.month_list.push(obj);
     }
     console.log('@@@month_list: ' + JSON.stringify(this.month_list));
   }
-  
+
   // month on change event
-  month_onchange(value){
-    console.log('@@@selected_month: '+value);
+  month_onchange(value) {
+    console.log('@@@selected_month: ' + value);
     this.selected_month = value;
 
-    if(this.selected_month.length > 0){
+    if (this.selected_month.length > 0) {
       this.disable_fillmarks_button = false;
     } else {
       this.disable_fillmarks_button = true;
@@ -126,30 +128,50 @@ export class PgassessmentPage {
   }
 
   // ece fillmarks button click
-  async pge_fillmarks_btnclick(slist, subject){
-    console.log('@@@Subject selected: '+subject);
-    if(subject === 'eng'){
+  async pge_fillmarks_btnclick(slist, subject) {
+    console.log('@@@Subject selected: ' + subject);
+    if (subject === 'eng') {
       // call eng assessment modal
       const modal = await this.modalController.create({
         component: PgeengassessmentmodalPage,
-        componentProps: { res: {userid: this._userid, username: this._username, studentid: slist.studentid, studentname: slist.studentname, program: slist.program, class: slist.class, stage: this.selected_month} } 
+        componentProps: {
+          res: {
+            userid: this._userid,
+            username: this._username,
+            studentid: slist.studentid,
+            studentname: slist.studentname,
+            program: slist.program,
+            class: slist.class,
+            stage: this.selected_month
+          }
+        }
       });
       modal.onDidDismiss()
         .then((data) => {
-          console.log('@@@Modal Data: '+JSON.stringify(data));
-          //this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
+          console.log('@@@Modal Data: ' + JSON.stringify(data));
+          // this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
       });
       return await modal.present();
-    }else if(subject === 'math'){
+    } else if (subject === 'math') {
       // call math assessment modal
       const modal = await this.modalController.create({
         component: PgemathassessmentmodalPage,
-        componentProps: { res: {userid: this._userid, username: this._username, studentid: slist.studentid, studentname: slist.studentname, program: slist.program, class: slist.class, stage: this.selected_month} } 
+        componentProps: {
+          res: {
+            userid: this._userid,
+            username: this._username,
+            studentid: slist.studentid,
+            studentname: slist.studentname,
+            program: slist.program,
+            class: slist.class,
+            stage: this.selected_month
+          }
+        }
       });
       modal.onDidDismiss()
         .then((data) => {
-          console.log('@@@Modal Data: '+JSON.stringify(data));
-          //this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
+          console.log('@@@Modal Data: ' + JSON.stringify(data));
+          // this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
       });
       return await modal.present();
     }
@@ -187,5 +209,15 @@ export class PgassessmentPage {
       ]
     });
     await alert.present();
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+        console.log('top');
+        this.toolbarshadow = true;
+    } else {
+        this.toolbarshadow = false;
+    }
   }
 }

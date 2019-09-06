@@ -21,16 +21,18 @@ import { RestApiService } from './../../rest-api.service';
   styleUrls: ['./tchpayment.page.scss']
 })
 export class TchpaymentPage {
-  attendance_status: string = 'Absent';
+  attendance_status = 'Absent';
   student_list: any = [];
   attendance_list: any = [];
   attendance_date: string = new Date().toISOString();
-  attendance_day: string = '';
+  attendance_day = '';
 
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
+
+  toolbarshadow = true;
 
   constructor(
     public navController: NavController,
@@ -52,7 +54,7 @@ export class TchpaymentPage {
   }
 
   // get student list
-  async getallstudentbyteacher(){
+  async getallstudentbyteacher() {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getallstudentsbyteacherid(this._userid)
@@ -66,109 +68,109 @@ export class TchpaymentPage {
       });
   }
 
-  async viewpayment(student){
-    console.log('@@@viewpayment: '+JSON.stringify(student));
+  async viewpayment(student) {
+    console.log('@@@viewpayment: ' + JSON.stringify(student));
     const modal = await this.modalController.create({
       component: ViewpaymentPage,
-      componentProps: { res: student } 
+      componentProps: { res: student }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
     });
     return await modal.present();
   }
 
-  async makepayment(student){
+  async makepayment(student) {
     const modal = await this.modalController.create({
       component: MakepaymentPage,
-      componentProps: { res: student } 
+      componentProps: { res: student }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
     });
     return await modal.present();
   }
 
   // present or absent choosen
-  async segmentChanged(student, value){
-    //this.add_to_attendancelist(student.studentid, student.studentname, student.program, value);
-    console.log('@@@ mode: '+value+'    student : '+JSON.stringify(student));
+  async segmentChanged(student, value) {
+    // this.add_to_attendancelist(student.studentid, student.studentname, student.program, value);
+    console.log('@@@ mode: ' + value + '    student : ' + JSON.stringify(student));
     let modalPage: any;
-    if(value === 'view'){
+    if (value === 'view') {
       modalPage = ViewpaymentPage;
-    }else {
+    } else {
       modalPage = MakepaymentPage;
     }
 
     // redirect to modal page
     const modal = await this.modalController.create({
       component: modalPage,
-      componentProps: { res: student } 
+      componentProps: { res: student }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
     });
     return await modal.present();
   }
 
   // add to attendance list
-  add_to_attendancelist(studentid, studentname, program, availability){
+  add_to_attendancelist(studentid, studentname, program, availability) {
     const obj = {
       isholiday : false,
       holidayname : '',
-      availability : availability, 
+      availability : availability,
       userid : this._userid,
       username : this._username,
       centerid : '',
       centername : '',
       attendancedate : this.attendance_date,
-      attendanceday : this.attendance_day, 
-      studentid : studentid, 
+      attendanceday : this.attendance_day,
+      studentid : studentid,
       studentname : studentname,
       program : program
     };
 
-    if(this.attendance_list.length > 0){
+    if (this.attendance_list.length > 0) {
       // check for record exist or not
       let i = 0, index = -1;
       this.attendance_list.forEach(element => {
-        if(element.studentid == studentid){
+        if (element.studentid === studentid) {
           index = i;
           return;
         }
         i++;
       });
-      if(index >= 0){
-        this.attendance_list.splice(index,1,obj);
-      }else{
+      if (index >= 0) {
+        this.attendance_list.splice(index, 1, obj);
+      } else {
         this.attendance_list.push(obj);
       }
-    }else{
+    } else {
       this.attendance_list.push(obj);
     }
-    console.log('@@@ attendance_list : '+JSON.stringify(this.attendance_list));
+    console.log('@@@ attendance_list : ' + JSON.stringify(this.attendance_list));
   }
-  
+
   // save attendance
   async save_attendace() {
-    if(this.student_list.length == this.attendance_list.length){
+    if (this.student_list.length === this.attendance_list.length) {
       const loading = await this.loadingController.create({});
       await loading.present();
       await this.api.saveattendance(this.attendance_list)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
-          this.showAlert('Info','','Attendance saved '+res['status']+' !!!');
+          this.showAlert('Info', '', 'Attendance saved ' + res['status'] + ' !!!');
           loading.dismiss();
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
           console.log(err);
           loading.dismiss();
         });
-    }else{
-      this.showAlert('Info','','Please enter sttendance of all students.');
+    } else {
+      this.showAlert('Info', '', 'Please enter sttendance of all students.');
     }
   }
 
@@ -206,9 +208,19 @@ export class TchpaymentPage {
     });
     await alert.present();
   }
-  
+
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+        console.log('top');
+        this.toolbarshadow = true;
+    } else {
+        this.toolbarshadow = false;
+    }
   }
 }

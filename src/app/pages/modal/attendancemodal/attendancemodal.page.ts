@@ -37,6 +37,7 @@ export class AttendancemodalPage {
   total = 0;
   absent = 0;
   unattended = 0;
+  errormessage = '';
 
   constructor(
     public navController: NavController,
@@ -87,6 +88,7 @@ export class AttendancemodalPage {
         loading.dismiss();
       }, err => {
         console.log(err);
+        this.errormessage = err;
         loading.dismiss();
       });
   }
