@@ -36,6 +36,7 @@ export class PgactivityPage {
   _centername: string;
 
   toolbarshadow = true;
+  activity_loaded = false;
 
   constructor(
     public navController: NavController,
@@ -137,6 +138,11 @@ export class PgactivityPage {
     }
   }*/
 
+  async reloadActivityData(monthAndWeek: string) {
+    const mnw = monthAndWeek.split(' ');
+    this.getactivitydetails(mnw[0], mnw[1]);
+  }
+
   async getactivitydetails(month, week) {
     this.selected_month = month;
     this.selected_week = week;
@@ -165,6 +171,7 @@ export class PgactivityPage {
                 this.selected_week
       ).subscribe(res => {
         this.activity_list = [];
+        this.activity_loaded = true;
         all_activities.forEach(element => {
           let obj = {};
           if (res.includes(element)) {
@@ -199,7 +206,8 @@ export class PgactivityPage {
       }
   };
   // this.navController.navigateForward('/pgactivity2', navigationExtras);
-  this.router.navigate(['pgactivity2'], navigationExtras);
+  // this.router.navigate(['pgactivity2'], navigationExtras);
+  this.router.navigate(['ecactivity2'], navigationExtras);
   }
 
   // alert box

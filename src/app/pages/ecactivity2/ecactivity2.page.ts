@@ -19,6 +19,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 // video player
 import { VideoPlayer, VideoOptions } from '@ionic-native/video-player/ngx';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-ecactivity2',
@@ -52,6 +53,8 @@ export class Ecactivity2Page {
   _userid: string;
   _username: string;
   toolbarshadow = true;
+  full_video_path_list: DataObject[] = [];
+  full_sheet_path_list: DataObject[] = [];
 
   constructor(
     public navController: NavController,
@@ -66,7 +69,9 @@ export class Ecactivity2Page {
     private file: File,
     private fileOpener: FileOpener,
     private diagnostic: Diagnostic,
-    private videoPlayer: VideoPlayer
+    private videoPlayer: VideoPlayer,
+    private navCtrl: NavController,
+    private dataService: DataService
   ) {
     // fetch sd-card
     this.diagnostic.requestExternalStorageAuthorization().then(val => {
@@ -119,7 +124,8 @@ export class Ecactivity2Page {
           this.content = this.activityobj.content;
           this.worksheet = this.activityobj.worksheet;
           this.video = this.activityobj.video;
-
+          this.fillVideoPathNames(this.activityobj.video);
+          this.fillSheetPathNames(this.activityobj.worksheet);
           // mark scrollable content as visited
           this.isVisited_content = true;
         }
@@ -127,47 +133,99 @@ export class Ecactivity2Page {
         console.log('@@@worksheet: ' + JSON.stringify(this.worksheet));
         console.log('@@@video: ' + JSON.stringify(this.video));
         loading.dismiss();
+
+        this.Enable_CompleteActivityButton();
       }, err => {
         console.log(err);
         loading.dismiss();
+        this.isEnabled_completeActivityButton = false;
       });
   }
 
+  fillVideoPathNames(names: string[]) {
+    this.full_video_path_list = [];
+    for (let i = 1; i <= names.length; i++) {
+      this.full_video_path_list.push({
+        path: this.sdcard_filepath
+              + '/THINKZONE/'
+              + this.selected_program.toUpperCase()
+              + ((this.selected_program.toUpperCase() !== 'ECE') ? this.selected_subject.toLocaleUpperCase() : '')
+              + '/VIDEO/M'
+              + this.selected_month
+              + '_W'
+              + this.selected_week
+              + '_A'
+              + this.selected_activity
+              + ((this.selected_program.toUpperCase() !== 'ECE') ? '_' + i : '')
+              + '.mp4',
+        played: false});
+    }
+    this.dataService.setDocumentData(this.full_video_path_list);
+  }
+
+  fillSheetPathNames(names: string[]) {
+    let p;
+    if (this.selected_program.toUpperCase() === 'ECE') {
+      p = this.sdcard_filepath + this.sdcard_filepath + '/THINKZONE/ECE/WORKSHEET';
+    } else {
+      p = this.sdcard_filepath + '/THINKZONE/PGE/' + this.selected_subject.toLocaleUpperCase() + '/WORKSHEET';
+    }
+
+    this.full_sheet_path_list = [];
+    for (let i = 1; i <= names.length; i++) {
+      this.full_sheet_path_list.push(
+        {
+          path: p,
+          file_name: 'M' + this.selected_month + '_W' + this.selected_week + '_A' + this.selected_activity + '.pdf',
+          played: false
+    });
+    }
+  }
   // -------------------------------------------
 
   // play video button click
   async play_video() {
-    this.vid_filepath_full =  this.sdcard_filepath
-                              + '/THINKZONE/ECE/VIDEO/M'
-                              + this.selected_month
-                              + '_W'
-                              + this.selected_week
-                              + '_A'
-                              + this.selected_activity
-                              + '.mp4';
+    this.dataService.setDocumentData(this.full_video_path_list);
+    this.dataService.setData('type', 'video');
+    this.dataService.setData('page_title', 'Videos');
+    this.navCtrl.navigateForward('/file-display');
+    // this.vid_filepath_full =  this.sdcard_filepath
+    //                           + '/THINKZONE/ECE/VIDEO/M'
+    //                           + this.selected_month
+    //                           + '_W'
+    //                           + this.selected_week
+    //                           + '_A'
+    //                           + this.selected_activity
+    //                           + '.mp4';
 
-    const voption: VideoOptions = {
-      volume: 0.5,
-      scalingMode: 0.5
-    };
-    // alert(this.vid_filepath_full);
-    this.videoPlayer.play(this.vid_filepath_full, voption).then(() => {
-        // alert('Video completed !!!');
-        this.isVisited_video = true;
-        this.Enable_CompleteActivityButton();
-      }).catch(e => {
-        alert(JSON.stringify(e));
-      });
+    // const voption: VideoOptions = {
+    //   volume: 0.5,
+    //   scalingMode: 0.5
+    // };
+    // // alert(this.vid_filepath_full);
+    // this.videoPlayer.play(this.vid_filepath_full, voption).then(() => {
+    //     // alert('Video completed !!!');
+    //     this.isVisited_video = true;
+    //     this.Enable_CompleteActivityButton();
+    //   }).catch(e => {
+    //     alert(JSON.stringify(e));
+    //   });
   }
 
   // open document button click
   async open_document() {
-    const filename = 'M' + this.selected_month + '_W' + this.selected_week + '_A' + this.selected_activity,
-    file_ext = 'pdf',
-    filename_new = Date.now(),
-    file_type = 'application/pdf';
+    console.log(this.full_sheet_path_list);
+    this.dataService.setDocumentData(this.full_sheet_path_list);
+    this.dataService.setData('type', 'document');
+    this.dataService.setData('page_title', 'Worksheets');
+    this.navController.navigateForward('/file-display');
 
-    this.doc_filepath_full = this.sdcard_filepath + '/THINKZONE/ECE/WORKSHEET';
+    // const filename = 'M' + this.selected_month + '_W' + this.selected_week + '_A' + this.selected_activity,
+    // file_ext = 'pdf',
+    // filename_new = Date.now(),
+    // file_type = 'application/pdf';
+
+    // this.doc_filepath_full = this.sdcard_filepath + '/THINKZONE/ECE/WORKSHEET';
     // this.showAlert('file.externalApplicationStorageDirectory','',''+this.file.externalApplicationStorageDirectory);
     // alert('source: '
     //       + this.doc_filepath_full
@@ -177,17 +235,17 @@ export class Ecactivity2Page {
     //       + '/files');
 
     // copy file and show
-    this.file.copyFile( this.doc_filepath_full,
-                        filename + '.' + file_ext,
-                        this.file.externalApplicationStorageDirectory + '/files',
-                        filename_new + '.' + file_ext).then(result => {
-      this.fileOpener.open(result.nativeURL, file_type)
-        .then(() => {
-          console.log('File is opened');
-          this.isVisited_worksheet = true;
-          this.Enable_CompleteActivityButton();
-        }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-    }).catch(e => alert('Error copying file' + JSON.stringify(e)));
+    // this.file.copyFile( this.doc_filepath_full,
+    //                     filename + '.' + file_ext,
+    //                     this.file.externalApplicationStorageDirectory + '/files',
+    //                     filename_new + '.' + file_ext).then(result => {
+    //   this.fileOpener.open(result.nativeURL, file_type)
+    //     .then(() => {
+    //       console.log('File is opened');
+    //       this.isVisited_worksheet = true;
+    //       this.Enable_CompleteActivityButton();
+    //     }).catch(e => alert('Error opening file' + JSON.stringify(e)));
+    // }).catch(e => alert('Error copying file' + JSON.stringify(e)));
   }
 
   async complete_activity() {
@@ -236,6 +294,7 @@ export class Ecactivity2Page {
         } else {
           this.isActivity_alreadySaved = false;
         }
+        this.Enable_CompleteActivityButton();
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -244,7 +303,21 @@ export class Ecactivity2Page {
   }
 
   Enable_CompleteActivityButton() {
-    this.isEnabled_completeActivityButton = (this.isVisited_content && this.isVisited_video && this.isVisited_worksheet) ? true : false ;
+    this.isEnabled_completeActivityButton = true;
+    console.log(this.full_sheet_path_list);
+    console.log(this.full_video_path_list);
+
+    this.full_sheet_path_list.forEach(element => {
+      this.isEnabled_completeActivityButton = this.isEnabled_completeActivityButton && element.played;
+    });
+    this.full_video_path_list.forEach(element => {
+      this.isEnabled_completeActivityButton = this.isEnabled_completeActivityButton && element.played;
+    });
+    if (this.isEnabled_completeActivityButton) {
+      console.log('complete button active');
+    } else {
+      console.log('complete button inactive');
+    }
   }
 
   // alert box
@@ -279,6 +352,10 @@ export class Ecactivity2Page {
       ]
     });
     await alert.present();
+  }
+
+  ionViewDidEnter() {
+    this.Enable_CompleteActivityButton();
   }
 
   logScrolling(event) {

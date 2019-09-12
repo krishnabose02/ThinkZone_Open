@@ -118,10 +118,13 @@ export class AppComponent {
       }*/
     ];
 
-    this.initializeApp();
     this._userid = localStorage.getItem('_userid');
     this._username = localStorage.getItem('_username');
     this._emailid = localStorage.getItem('_emailid');
+    if (this._userid == null) {
+      this.navCtrl.navigateRoot('/login');
+    }
+    this.initializeApp();
   }
 
   initializeApp() {
@@ -160,7 +163,7 @@ export class AppComponent {
 
   logout() {
     localStorage.clear();
-    this.navCtrl.navigateRoot('/');
+    this.navCtrl.navigateRoot('/login');
   }
 
   backButtonEvent() {

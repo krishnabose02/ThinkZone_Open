@@ -36,6 +36,7 @@ export class PgactivityodiaPage {
   _centername: string;
 
   toolbarshadow = true;
+  activity_loaded = false;
 
   constructor(
     public navController: NavController,
@@ -136,6 +137,10 @@ export class PgactivityodiaPage {
       this.getactivitydetails(this.selected_month,this.selected_week);
     }
   }*/
+  async reloadActivityData(monthAndWeek: string) {
+    const mnw = monthAndWeek.split(' ');
+    this.getactivitydetails(mnw[0], mnw[1]);
+  }
 
   async getactivitydetails(month, week) {
     this.selected_month = month;
@@ -165,6 +170,7 @@ export class PgactivityodiaPage {
           this.selected_week
       ).subscribe(res => {
         this.activity_list = [];
+        this.activity_loaded = true;
         all_activities.forEach(element => {
           let obj = {};
           if (res.includes(element)) {
@@ -199,7 +205,8 @@ export class PgactivityodiaPage {
       }
   };
   // this.navController.navigateForward('/pgactivity2', navigationExtras);
-  this.router.navigate(['pgactivity2odia'], navigationExtras);
+  // this.router.navigate(['pgactivity2odia'], navigationExtras);
+  this.router.navigate(['ecactivity2'], navigationExtras);
   }
 
   // alert box

@@ -29,7 +29,7 @@ export class HomeResultsPage {
   centers: any;
   date: number;
   month: string;
-  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   toolbarshadow = true;
   constructor(
     public navController: NavController,

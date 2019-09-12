@@ -8,9 +8,17 @@
 </ion-header>
         
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling  ($event)">
-  <ion-grid>
+   
+    <app-period-selector *ngIf='month_list.length>0' [month]='month_list' (selected)='reloadActivityData($event)'></app-period-selector>
+  
+    <div *ngIf='activity_loaded && activity_list.length==0'>
+      <p style='color: #f44336;text-align: center;margin: 10px'>No activities found for the selected week</p>
+    </div>
+  
+    <app-activity-selector [activity_list]='activity_list' (selected)='activity_btnclick($event)'></app-activity-selector>
+  
+  <!-- <ion-grid>
     <ion-card class="whitecard">
-      <!-- Select Month -->
       <ion-row>
           <ion-item class="full_width">
             <ion-label>Month</ion-label>
@@ -20,7 +28,6 @@
           </ion-item>
         </ion-row>
     
-        <!-- Select Week -->
         <ion-row>
           <ion-item class="full_width">
             <ion-label>Week</ion-label>
@@ -29,17 +36,6 @@
             </ion-select>
           </ion-item>
         </ion-row>
-
-        <!-- Select Subject -->
-        <!-- <ion-row>
-          <ion-item class="full_width">
-            <ion-label>Subject</ion-label>
-            <ion-select placeholder="Select One" (ionChange)="subject_onchange($event.detail.value)">
-              <ion-select-option value="math">Math</ion-select-option>
-              <ion-select-option value="english">English</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-row> -->
     </ion-card>
 
     <ion-card class="whitecard">
@@ -57,6 +53,6 @@
         </ion-item>
       </ion-list>
     </ion-card>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>
   

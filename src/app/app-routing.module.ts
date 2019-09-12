@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: '', redirectTo: 'home-results', pathMatch: 'full' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'pgactivityeng', loadChildren: './pages/pgactivityeng/pgactivityeng.module#PgactivityengPageModule' },
   { path: 'pgactivity2eng', loadChildren: './pages/pgactivity2eng/pgactivity2eng.module#Pgactivity2engPageModule' },
   { path: 'showpushnotification/:message',
-    loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' }
+    loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' },
+  { path: 'file-display', loadChildren: './pages/file-display/file-display.module#FileDisplayPageModule' }
 ];
 
 @NgModule({

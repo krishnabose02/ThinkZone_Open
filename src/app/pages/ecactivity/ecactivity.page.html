@@ -9,12 +9,12 @@
      
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   
-  <app-period-selector [month]='active_month_list' (selected)='reloadActivityData($event)'></app-period-selector>
+  <app-period-selector *ngIf='month_list.length>0' [month]='month_list' (selected)='reloadActivityData($event)'></app-period-selector>
   
   <div *ngIf='activity_loaded && activity_list.length==0'>
     <p style='color: #f44336;text-align: center;margin: 10px'>No activities found for the selected week</p>
   </div>
-  
+
   <app-activity-selector [activity_list]='activity_list' (selected)='activity_btnclick($event)'></app-activity-selector>
 
   <!-- <ion-grid>

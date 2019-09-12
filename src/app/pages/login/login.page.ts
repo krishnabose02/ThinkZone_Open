@@ -218,7 +218,7 @@ export class LoginPage implements OnInit {
           });
           // -------------------------------------------------
 
-          this.navController.navigateRoot('/home-results');
+          this.navController.navigateRoot('/');
           // this.closeModal();
         } else {
           this._status = false;

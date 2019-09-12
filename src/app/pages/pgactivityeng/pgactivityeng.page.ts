@@ -23,7 +23,7 @@ export class PgactivityengPage {
   activity_list: any = [];
   selected_month = '';
   selected_week = '';
-  selected_subject = 'odia';
+  selected_subject = 'english';
   activity_heading = '';
 
   month_diff: number;
@@ -36,6 +36,7 @@ export class PgactivityengPage {
   _centername: string;
 
   toolbarshadow = true;
+  activity_loaded = false;
 
   constructor(
     public navController: NavController,
@@ -137,6 +138,11 @@ export class PgactivityengPage {
     }
   }*/
 
+  async reloadActivityData(monthAndWeek: string) {
+    const mnw = monthAndWeek.split(' ');
+    this.getactivitydetails(mnw[0], mnw[1]);
+  }
+
   async getactivitydetails(month, week) {
     this.selected_month = month;
     this.selected_week = week;
@@ -164,6 +170,7 @@ export class PgactivityengPage {
             this.selected_week
           ).subscribe(res => {
         this.activity_list = [];
+        this.activity_loaded = true;
         all_activities.forEach(element => {
           let obj = {};
           if (res.includes(element)) {
@@ -198,7 +205,8 @@ export class PgactivityengPage {
       }
   };
   // this.navController.navigateForward('/pgactivity2', navigationExtras);
-  this.router.navigate(['pgactivity2eng'], navigationExtras);
+  // this.router.navigate(['pgactivity2eng'], navigationExtras);
+  this.router.navigate(['ecactivity2'], navigationExtras);
   }
 
   // alert box

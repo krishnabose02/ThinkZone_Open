@@ -211,7 +211,7 @@ export class AttendancePage {
   // Copied from Holiday modal
   async setholiday() {
     if (this.holiday_name == null || this.holiday_name.trim() === '') {
-      this.error_message = 'Please enter a holiday name to continue';
+      this.error_message = 'Enter a holiday name!';
       return;
     }
 
@@ -242,9 +242,11 @@ export class AttendancePage {
           // console.log('@@@all student list: ' + JSON.stringify(res));
           this.showAlert('Info', '', 'Attendance saved ' + res['status'] + ' !!!');
           loading.dismiss();
-          this.modalController.dismiss({data: 'Ok'});
+          // this.modalController.dismiss({data: 'Ok'});
+          this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
         }, err => {
           console.log(err);
+          this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
           loading.dismiss();
         });
   }
