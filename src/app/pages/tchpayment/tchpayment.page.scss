@@ -1,5 +1,5 @@
+$primarycolor: #2196f3;
 :host {
-
     ion-item {
         border-radius: 0;
         border-bottom: 1px dotted var(--ion-color-medium);
@@ -124,4 +124,35 @@
 }
 .row-margin-bottom{
     margin-bottom: 60px;
+}
+
+.solid-action-button{
+    overflow: auto;
+    background: $primarycolor;
+    text-align: center;
+    margin: 5px;
+    border-radius: 4px;
+    p{
+        margin: 10px 20px;
+        color: white;
+    }
+}
+.action-button{
+    overflow: auto;
+    text-align: center;
+    margin: 5px;
+    border: 1px solid $primarycolor;
+    border-radius: 4px;
+    p{
+        margin: 10px 20px;
+        color: $primarycolor;
+    }
+}
+
+.student-details{
+    color: gray;
+    margin: 10px;
+    p{
+        margin: 8px;
+    }
 }

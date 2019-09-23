@@ -33,6 +33,7 @@ export class TchpaymentPage {
   _centername: string;
 
   toolbarshadow = true;
+  errormessage = '';
 
   constructor(
     public navController: NavController,
@@ -61,6 +62,10 @@ export class TchpaymentPage {
       .subscribe(res => {
         console.log('@@@all student list: ' + JSON.stringify(res));
         this.student_list = res;
+
+        if (this.student_list === null || this.student_list.length === 0) {
+          this.errormessage = 'No student details found!';
+        }
         loading.dismiss();
       }, err => {
         console.log(err);

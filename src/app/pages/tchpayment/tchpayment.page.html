@@ -1,14 +1,26 @@
 <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
   <ion-toolbar>
     <ion-row style="position: relative">
-        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>Assessment (PGE)</p></ion-title>
+        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>Payments</p></ion-title>
         <ion-back-button style="color: gray"></ion-back-button>
     </ion-row>
   </ion-toolbar>
 </ion-header>
         
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-  <div>
+  <p style='text-align: center;color: #ef5350;font-size: 1.3rem'>{{ errormessage }}</p>
+  <div *ngFor='let s of student_list' class='shadow horizontal-flexbox' style='margin: 10px;justify-content: space-between'>
+    <div style='text-align: left' class='vertical-flexbox student-details'>
+      <p style='font-size: 1.4rem'>Name: {{ s.studentname }}</p>
+      <p>Program: {{ s.program }}</p>
+      <p>Class: {{ s.class }}</p>
+    </div>
+    <div style='margin: 10px'>
+      <div (click)="viewpayment(s)" class='action-button'><p>View</p></div>
+      <div (click)="makepayment(s)" style='color: white' class='solid-action-button shadow'><p>Pay</p></div>
+    </div>
+  </div>
+  <!-- <div>
     <ion-card class="">
       <ion-list>
         <ion-item *ngFor="let slist of student_list;" class="ionitem">
@@ -39,6 +51,6 @@
         </ion-item>
       </ion-list>
     </ion-card>
-  </div>
+  </div> -->
 </ion-content>
   

@@ -19,9 +19,10 @@ import { RestApiService } from './../../../rest-api.service';
   styleUrls: ['./viewpayment.page.scss']
 })
 export class ViewpaymentPage {
-  res : any;
-  records : any =[];
-
+  res: any;
+  records: any = [];
+  months: string[] = ['January','February','March','April','May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  errormessage = '';
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -33,12 +34,12 @@ export class ViewpaymentPage {
     private loadingController: LoadingController,
     public navParams: NavParams
   ) {
-    
+
     // modal paramiters
     this.res = this.navParams.data.res;
     console.log('###modal paramiters: ' + JSON.stringify(this.res));
 
-    let studentid = this.res.studentid;
+    const studentid = this.res.studentid;
     this.getrecords(studentid);
   }
 
@@ -48,10 +49,17 @@ export class ViewpaymentPage {
     await this.api.getalltchpaymentdetailsbystudentid(studentid)
       .subscribe(res => {
         // console.log('@@@all student list: ' + JSON.stringify(res));
-        //this.showAlert('Info','','Payment '+res['status']+' !!!');
+        // this.showAlert('Info','','Payment '+res['status']+' !!!');
         this.records = res;
+        if (this.records.length === 0) {
+          this.errormessage = 'No Payment Records Found!';
+        }
+        this.records.forEach(element => {
+          const date = new Date(element.createdon);
+          element.displaydate = date.getDate() + ' ' + this.months[date.getMonth() - 1] + ', ' + date.getFullYear();
+        });
         loading.dismiss();
-        //this.modalController.dismiss({data: 'Ok'});
+        // this.modalController.dismiss({data: 'Ok'});
       }, err => {
         console.log(err);
         loading.dismiss();
@@ -92,7 +100,7 @@ export class ViewpaymentPage {
     });
     await alert.present();
   }
-  
+
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});

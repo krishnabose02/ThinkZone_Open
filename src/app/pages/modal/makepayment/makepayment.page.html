@@ -1,5 +1,45 @@
-<ion-content> 
-  <ion-card class="half-modal">
+<ion-content>
+  <div class='data-card shadow' style='margin-top: 30px;background: gray;color: white'>
+    <p style='font-size: 1.4rem'><b>Name: {{res.studentname}}</b></p>
+    <p style='margin-bottom: 0px'>Program: {{res.program}}</p>
+    <p style='margin-top: 0px'>Class: {{res.class}}</p>
+  </div>
+  <div class='data-card shadow'>
+    <form style='margin: 10px' [formGroup]="makepaymentFormGroup" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label style="color: gray" position="floating">
+          Amount
+        </ion-label>
+        <ion-input type="number" formControlName="amount"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="makepaymentFormGroup.get('amount').touched && makepaymentFormGroup.get('amount').hasError('required')">
+        <ion-text color="danger">
+          Invalid
+        </ion-text>
+      </p>
+
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label style="color: gray" position="floating">
+          Remark
+        </ion-label>
+        <ion-input type="text" formControlName="remark"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="makepaymentFormGroup.get('remark').touched && makepaymentFormGroup.get('remark').hasError('required')">
+        <ion-text color="danger">
+          Invalid
+        </ion-text>
+      </p>
+    </form>
+    <div style='margin-top: 10px' class='horizontal-flexbox'>
+      <div (click)="closeModal()" class='button outline'>
+        <p>Cancel</p>
+      </div>
+      <div (click)="makepayment()" class='button' [ngClass]='(makepaymentFormGroup.valid)?"solid-enabled shadow":"solid-disabled"'>
+        <p>Submit</p>
+      </div>
+    </div>
+  </div>
+  <!-- <ion-card class="half-modal">
     <ion-card-header color="warning">
       <ion-card-title>Make Payment</ion-card-title>
     </ion-card-header>
@@ -50,5 +90,5 @@
           <ion-col></ion-col>
         </ion-row>
       </ion-grid>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

@@ -21,8 +21,8 @@ import { RestApiService } from './../../../rest-api.service';
 })
 export class MakepaymentPage {
   public makepaymentFormGroup: FormGroup;
-  amount: string = '';
-  remark: string = '';
+  amount = '';
+  remark = '';
 
   res: any;
   userid: string;
@@ -31,8 +31,8 @@ export class MakepaymentPage {
   centername: string;
   studentid: string;
   studentname: string;
-  program: string = '';
-  class: string = '';
+  program = '';
+  class = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,7 +50,7 @@ export class MakepaymentPage {
       amount: ['', [Validators.required]],
       remark: ['', [Validators.required]]
     });
-    
+
     // modal paramiters
     this.res = this.navParams.data.res;
     console.log('###this.res: ' + JSON.stringify(this.res));
@@ -65,9 +65,9 @@ export class MakepaymentPage {
     this.class = this.res.class;
   }
 
-  
+
   // save attendance
-  async makepayment(){
+  async makepayment() {
     this.amount = this.makepaymentFormGroup.value.amount;
     this.remark = this.makepaymentFormGroup.value.remark;
     const data = {
@@ -75,12 +75,12 @@ export class MakepaymentPage {
       username : this.username,
       centerid : this.centerid,
       centername : this.centername,
-      studentid : this.studentid, 
+      studentid : this.studentid,
       studentname : this.studentname,
       program: this.program,
       class : this.class,
       amount : this.amount,
-      remark : this.remark 
+      remark : this.remark
     };
     this.save(data);
   }
@@ -91,7 +91,7 @@ export class MakepaymentPage {
       await this.api.savetchpaymentdetails(data)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
-          this.showAlert('Info','','Payment '+res['status']+' !!!');
+          this.showAlert('Info', '', 'Payment ' + res['status'] + ' !!!');
           loading.dismiss();
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
@@ -134,7 +134,7 @@ export class MakepaymentPage {
     });
     await alert.present();
   }
-  
+
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});
