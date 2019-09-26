@@ -21,12 +21,12 @@ import { RestApiService } from './../../../rest-api.service';
 })
 export class HolidaymodalPage {
   public setholidayFormGroup: FormGroup;
-  attendance_status = '';
+  attendance_status: string = '';
   student_list: any = [];
   attendance_list: any = [];
   attendance_date: string = new Date().toISOString();
-  attendance_day = '';
-  holidayname = '';
+  attendance_day: string = '';
+  holidayname: string = '';
 
   res: any;
   _userid: string;
@@ -49,7 +49,7 @@ export class HolidaymodalPage {
     this.setholidayFormGroup = this.formBuilder.group({
       holidayname: ['', [Validators.required]]
     });
-
+    
     // modal paramiters
     this.res = this.navParams.data.res;
     console.log('###this.res: ' + JSON.stringify(this.res));
@@ -62,23 +62,23 @@ export class HolidaymodalPage {
     this._centername = '';
   }
 
-
+  
   // save attendance
-  async setholiday() {
+  async setholiday(){
     this.holidayname = this.setholidayFormGroup.value.holidayname;
     const data = {
       isholiday : true,
       holidayname : this.holidayname,
-      availability : null,
+      availability : null, 
       userid : this._userid,
       username : this._username,
       centerid : null,
       centername : null,
       attendancedate : this.attendance_date,
-      attendanceday : this.attendance_day,
-      studentid : null,
+      attendanceday : this.attendance_day, 
+      studentid : null, 
       studentname : null,
-      program: null
+      program: null 
     };
     this.save(data);
   }
@@ -91,7 +91,7 @@ export class HolidaymodalPage {
       await this.api.saveattendance(this.attendance_list)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
-          this.showAlert('Info', '', 'Attendance saved ' + res['status'] + ' !!!');
+          this.showAlert('Info','','Attendance saved '+res['status']+' !!!');
           loading.dismiss();
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
@@ -134,7 +134,7 @@ export class HolidaymodalPage {
     });
     await alert.present();
   }
-
+  
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});

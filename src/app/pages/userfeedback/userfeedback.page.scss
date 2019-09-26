@@ -1,0 +1,23 @@
+:host {
+    ion-content {
+        --background: linear-gradient(-135deg, var(--ion-color-medium), var(--ion-color-light))
+    }
+}
+
+.read-message{
+    font-weight: normal;
+}
+
+.unread-message{
+    font-weight: bold;
+}
+
+.descr{
+    font-weight: bold;
+    margin-left: 15px;
+    font-size: initial;
+}
+.txt-area{
+    background: white;
+    border: 1px solid #b2b2b2;
+}

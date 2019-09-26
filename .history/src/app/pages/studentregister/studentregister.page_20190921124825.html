@@ -1,0 +1,95 @@
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <div padding-horizontal>
+        <ion-row>
+          <ion-item><ion-text color="secondary">{{flag | titlecase}} Student Regn.</ion-text></ion-item>
+          <ion-item>
+              <ion-button shape="round" color="medium" (click)="closeModal()" float-right>
+                <ion-icon slot="start" name="close"></ion-icon>Cancel
+              </ion-button>
+          </ion-item>
+        </ion-row>
+      </div>
+      
+      <!-- Student name -->
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          Student name
+        </ion-label>
+        <ion-input value="{{_studentname}}" color="secondary" type="text" formControlName="fullName"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">
+        <ion-text color="danger">
+          This field is required
+        </ion-text>
+      </p>
+
+      <!-- Program -->
+      <ion-item class="radio-margin">
+        <ion-label>Program</ion-label>
+        <ion-select placeholder="Select One" value="{{_program}}" (ionChange)="select_program_onchange($event.detail.value)" class="select-width">
+          <ion-select-option value="ece">ECE</ion-select-option>
+          <ion-select-option value="pge">PGE</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Class -->
+      <ion-item class="radio-margin" [hidden]="hide_class_field">
+        <ion-label>Class</ion-label>
+        <ion-select placeholder="Select One" value="{{_class}}" (ionChange)="select_class_onchange($event.detail.value)" class="select-width">
+          <ion-select-option *ngFor="let cls of class_list" value="{{cls}}">{{ cls }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Phone -->
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          Phone
+        </ion-label>
+        <ion-input value="{{_phone}}" [(ngModel)]="phone" color="secondary" type="number"></ion-input>
+      </ion-item>
+
+      <!-- Gender -->
+      <ion-item class="radio-margin">
+        <ion-label>Gender</ion-label>
+        <ion-select value="{{_gender}}" placeholder="Select One" (ionChange)="gender_onchange($event.detail.value)" class="select-width">
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="male">Male</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- DOB -->
+      <ion-item class="radio-margin">
+        <ion-label>DOB</ion-label>
+        <ion-datetime value="{{_dob}}" display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="dob_onhange($event.detail.value)"></ion-datetime>
+      </ion-item>
+
+      <!-- Fathers name -->
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          Father's name
+        </ion-label>
+        <ion-input value="{{_parentsname}}" color="secondary" type="text" formControlName="father"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="onRegisterForm.get('father').touched && onRegisterForm.get('father').hasError('required')">
+        <ion-text color="danger">
+          This field is required
+        </ion-text>
+      </p>
+      
+      <!-- Registration Date -->
+      <ion-item class="radio-margin">
+        <ion-label>Registration Date</ion-label>
+        <ion-datetime value="{{_registration_date}}" display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="regdate_onhange($event.detail.value)"></ion-datetime>
+      </ion-item>
+  
+      <div margin-top>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="register_button_click()" [disabled]="!onRegisterForm.valid" tappable>
+          <ion-icon name="log-in"></ion-icon>
+          Save
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

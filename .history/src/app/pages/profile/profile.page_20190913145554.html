@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Profile
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <table>
+        <tr>
+          <td>User name</td>
+          <td>{{username | titlecase}}</td>
+        </tr>
+        <tr>
+          <td>User id</td>
+          <td>{{userid}}</td>
+        </tr>
+        <tr>
+          <td>Email ID</td>
+          <td>{{emailid}}</td>
+        </tr>
+        <tr>
+          <td>User type</td>
+          <td>{{usertype | titlecase}}</td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>{{gender | titlecase}}</td>
+        </tr>
+        <tr>
+          <td>DOB</td>
+          <td>{{dob | date: 'dd-MM-yyyy' }}</td>
+        </tr>
+        <tr>
+          <td>Contact no.</td>
+          <td>{{contactno}}</td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>{{address | titlecase}}</td>
+        </tr>
+        <tr>
+          <td>Reg. Date</td>
+          <td>{{regdate | date: 'dd-MM-yyyy' }}</td>
+        </tr>
+      </table>
+    </div>
+  </ion-card>
+</ion-content>
