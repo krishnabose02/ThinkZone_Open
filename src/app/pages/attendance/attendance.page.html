@@ -73,7 +73,7 @@
     <ion-row>
       <ion-item class="date-button">
         <ion-label>SELECT DATE</ion-label>
-        <ion-datetime #datePicker hidden='true' display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="attendancedate_onhange($event.detail.value)" [min]="min_date" [max]="max_date" [(ngModel)]="attendance_date"></ion-datetime>
+        <ion-datetime display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="attendancedate_onhange($event.detail.value)" [min]="min_date" [max]="max_date" [(ngModel)]="attendance_date"></ion-datetime>
       </ion-item>
     </ion-row>
 
@@ -95,6 +95,5 @@
         </ion-button>
       </ion-row>
     </ion-card>
-  </ion-grid> -->
+  </ion-grid>
 </ion-content>
-  

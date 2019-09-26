@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-        <!-- <ion-text color="light">
+        <ion-text color="light">
           <ion-text color="light" class="fw700">
             {{ _username }} <br>
             <span class="text10">Date: {{ current_date }}</span>
@@ -111,14 +111,14 @@
     <ion-card-content class="bg-white">
       <ion-grid>
         <ion-row>
-          <ion-col [routerLink]="'/student'" routerDirection="forward">
+          <ion-col [routerLink]="'/student'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/detail.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Student Details</ion-card-title>
             </ion-card-content>
           </ion-col>
 
-          <ion-col [routerLink]="'/attendance'" routerDirection="forward">
+          <ion-col [routerLink]="'/attendance'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/attendance.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Attendance</ion-card-title>
@@ -127,14 +127,14 @@
         </ion-row>
 
         <ion-row>
-          <ion-col [routerLink]="'/ecactivity'" routerDirection="forward">
+          <ion-col [routerLink]="'/ecactivity'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/ece-activity.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Activity(ECE)</ion-card-title>
             </ion-card-content>
           </ion-col>
           
-          <ion-col [routerLink]="'/ecassessment'" routerDirection="forward">
+          <ion-col [routerLink]="'/ecassessment'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/ece-assessment.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Assessment(ECE)</ion-card-title>
@@ -143,14 +143,14 @@
         </ion-row>
 
         <ion-row>
-          <ion-col [routerLink]="'/pgactivity'" routerDirection="forward">
+          <ion-col [routerLink]="'/pgactivity'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/pge-activity-math.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Math Activity(PGE)</ion-card-title>
             </ion-card-content>
           </ion-col>
           
-          <ion-col [routerLink]="'/pgactivityeng'" routerDirection="forward">
+          <ion-col [routerLink]="'/pgactivityeng'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/pge-activity-eng.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Eng Activity(PGE)</ion-card-title>
@@ -159,14 +159,14 @@
         </ion-row>
 
         <ion-row>
-          <ion-col [routerLink]="'/pgactivityodia'" routerDirection="forward">
+          <ion-col [routerLink]="'/pgactivityodia'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/pge-activity-odia.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Odia Activity(PGE)</ion-card-title>
             </ion-card-content>
           </ion-col>
           
-          <ion-col [routerLink]="'/pgassessment'" routerDirection="forward">
+          <ion-col [routerLink]="'/pgassessment'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/pge-assessment.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Assessment(PGE)</ion-card-title>
@@ -175,20 +175,37 @@
         </ion-row>
 
         <ion-row>
-          <ion-col [routerLink]="'/student'" routerDirection="forward">
+          <ion-col [routerLink]="'/training1'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/teacher-training.jpg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Training</ion-card-title>
             </ion-card-content>
           </ion-col>
           
-          <ion-col [routerLink]="'/tchpayment'" routerDirection="forward">
+          <ion-col [routerLink]="'/tchpayment'" routerDirection="forward" class="menucard">
             <img src="/assets/img/menu/payment.jpeg" alt="" />
             <ion-card-content>
                 <ion-card-title primary class="card-title">Payment</ion-card-title>
             </ion-card-content>
           </ion-col>
         </ion-row>
+
+        <ion-row>
+          <ion-col [routerLink]="'/userfeedback'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/userfeedback.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">User feedback</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+          
+           <ion-col [routerLink]="'/tchpayment'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/payment.jpeg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">Payment</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+        
       </ion-grid>
     </ion-card-content>
   </ion-card> -->

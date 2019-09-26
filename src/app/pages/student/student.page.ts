@@ -1,5 +1,4 @@
 import { Component, NgZone } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   NavController,
   AlertController,
@@ -9,17 +8,9 @@ import {
   LoadingController,
   ModalController } from '@ionic/angular';
 
-// Modals
-import { SearchFilterPage } from '../../pages/modal/search-filter/search-filter.page';
-import { ImagePage } from './../modal/image/image.page';
-// Call notifications test by Popover and Custom Component.
-import { NotificationsComponent } from './../../components/notifications/notifications.component';
 import { RestApiService } from './../../rest-api.service';
-
-// Camera
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-// Geolocation
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { StudentregisterPage } from './../studentregister/studentregister.page';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-student',
@@ -37,6 +28,7 @@ export class StudentPage {
   gender = '';
   dob = '';
   father = '';
+  student_list: any = [];
 
   _userid: string;
   _username: string;
@@ -44,19 +36,15 @@ export class StudentPage {
   _centername: string;
   toolbarshadow = true;
   constructor(
-    private formBuilder: FormBuilder,
     public navController: NavController,
     public menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
     public alertController: AlertController,
-    public modalCtrl: ModalController,
+    public modalController: ModalController,
     public toastCtrl: ToastController,
     public api: RestApiService,
-    private zone: NgZone,
-    // private sanitizer: DomSanitizer,
     private loadingController: LoadingController,
-    private camera: Camera,
-    private geolocation: Geolocation
+    private formBuilder: FormBuilder
   ) {
     this.onRegisterForm = this.formBuilder.group({
       fullName: ['', [Validators.required]],
@@ -69,6 +57,7 @@ export class StudentPage {
     this._centerid = '';
     this._centername = '';
     console.log('###localStorage: ' + JSON.stringify(localStorage));
+    this.getallstudents(this._userid);
   }
 
   select_program_onchange(value) {
@@ -99,6 +88,21 @@ export class StudentPage {
   dob_onhange(value) {
     console.log('@@@Selected dob: ', value);
     this.dob = value;
+  }
+
+  async getallstudents(userid){
+    let loading = await this.loadingController.create({});
+    await loading.present();
+    await this.api.getallstudentsbyteacher(userid)
+      .subscribe(res => {
+        console.log(res);
+        this.student_list = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        this.student_list = [];
+        loading.dismiss();
+      });
   }
 
   async explor() {
@@ -176,30 +180,21 @@ export class StudentPage {
       message: message,
       buttons: ['OK']
     });
-
-    await alert.present();
+    alert.present();
   }
-  // confirm box
-  async showConfirm(header: string, subHeader: string, message: string, body: any) {
-    const alert = await this.alertController.create({
-      header: header,
-      subHeader: subHeader,
-      message: message,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {}
-        }
-      ]
+  async open_register_modal(studentObj, flag){
+    /*  studentObj == null <-- new user register
+        else               <-- existing user update
+    */
+    const modal = await this.modalController.create({
+      component: StudentregisterPage,
+      componentProps: { res: {flag: flag, studentObj: studentObj} } 
     });
-    await alert.present();
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log('@@@Modal Data: '+JSON.stringify(data));
+    });
+    return await modal.present(); 
   }
 
   logScrolling(event) {

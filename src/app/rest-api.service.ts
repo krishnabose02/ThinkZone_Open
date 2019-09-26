@@ -39,6 +39,21 @@ export class RestApiService {
   }
 
   // ------------------------------------ my coding starts from here ----------------------------------
+  // set checkin time
+  setcheckintime(data): Observable<any>{
+    return this.http.post(baseUrl+'setcheckintime', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  // set setcheckout time
+  
+  setcheckouttime(id, time): Observable<any>{
+    return this.http.put(baseUrl+'setcheckouttime/'+id+'/'+time, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   // get user by userid
   getuserbyuserid(userid): Observable<any> {
     return this.http.get(baseUrl + 'getuserbyuserid/' + userid, httpOptions).pipe(
@@ -49,6 +64,13 @@ export class RestApiService {
   // student registration
   registernewstudent(data): Observable<any> {
     return this.http.post(baseUrl + 'registernewstudent', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  // update student registration /updatestudentbyid/:id
+  updatestudent(id, data): Observable<any>{
+    return this.http.put(baseUrl+'updatestudentbyid/'+id, data, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
@@ -245,6 +267,57 @@ export class RestApiService {
       catchError(this.handleError));
   }
 
+  // Teacher training
+  // get all modules
+  getalltrainingmodules(): Observable<any>{
+    return this.http.get(baseUrl+'getalltrainingmodules', httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  // get all submodules of a module
+  getalltrainingsubmodules(moduleid): Observable<any>{
+    return this.http.get(baseUrl+'getalltrainingsubmodules/'+moduleid, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  // get all training contents
+  getalltrainingcontents(moduleid, submoduleid): Observable<any>{
+    return this.http.get(baseUrl+'getalltrainingcontents/'+moduleid+'/'+submoduleid, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  // get teacher training details
+  gettchtrainingdetails(userid, moduleid, submoduleid): Observable<any>{
+    return this.http.get(baseUrl+'gettchtrainingdetails/'+userid+'/'+moduleid+'/'+submoduleid, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  // save teacher training session
+  savetchtraining(data): Observable<any>{
+    return this.http.post(baseUrl+'savetchtraining', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -394,7 +467,14 @@ export class RestApiService {
           map(this.extractData),
           catchError(this.handleError));
   }
-  // -------------------------------------------------------------------------
+
+  // user feedback or issues
+  createnewuserfeedback(data): Observable<any>{
+    return this.http.post(baseUrl+'createnewuserfeedback', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+  //-------------------------------------------------------------------------
 
 
 

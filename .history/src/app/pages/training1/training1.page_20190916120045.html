@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Teacher Training
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="explor()">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card class="">
+    <div class="card-margin">
+      <ion-item class="radio-margin">
+        <ion-label>Modules</ion-label>
+        <ion-select [value]="init_module" interface="action-sheet" mode="ios" placeholder="Select One" (ionChange)="module_select_onchange($event.detail.value)" class="select-width">
+          <ion-select-option *ngFor="let module of allmodule_list" value="{{module.moduleid}}">{{module.modulename}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="radio-margin">
+        <div class="submodulelist">
+          <ion-list>
+            <ion-item *ngFor="let submodule of allsubmodule_list" (click)="submodule_click(submodule);">
+              <ion-label><div>{{submodule.submodulename}}<ion-icon name="arrow-dropright" float-right></ion-icon></div></ion-label>
+            </ion-item>
+          </ion-list>
+          
+        </div>
+      </ion-item>
+
+
+    </div>
+  </ion-card>
+</ion-content>
+  

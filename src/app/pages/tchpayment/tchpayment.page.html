@@ -29,6 +29,7 @@
                 <ion-col>
                   <ion-label>{{ slist.studentname }} 
                     <p> Program: {{ slist.program }}</p> 
+                    <p> Registration Date: {{ slist.registration_date | date: 'dd-MM-yyyy' }}</p> 
                     <p *ngIf="slist.class > 0"> Class: {{ slist.class }}</p>
                   </ion-label>
                 </ion-col>

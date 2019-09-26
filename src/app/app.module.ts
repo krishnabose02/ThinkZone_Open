@@ -25,6 +25,9 @@ import { MakepaymentPageModule } from './pages/modal/makepayment/makepayment.mod
 import { EceassessmentmodalPageModule } from './pages/modal/eceassessmentmodal/eceassessmentmodal.module';
 import { PgeengassessmentmodalPageModule } from './pages/modal/pgeengassessmentmodal/pgeengassessmentmodal.module';
 import { PgemathassessmentmodalPageModule } from './pages/modal/pgemathassessmentmodal/pgemathassessmentmodal.module';
+import { StudentregisterPageModule } from './pages/studentregister/studentregister.module' ;
+
+import { Training2PageModule } from './pages/training2/training2.module';
 
 // Components
 import { NotificationsComponent } from './components/notifications/notifications.component';
@@ -49,6 +52,8 @@ import { VideoPlayer } from '@ionic-native/video-player/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { CommonModule } from '@angular/common';
 
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
@@ -72,7 +77,9 @@ import { CommonModule } from '@angular/common';
     MakepaymentPageModule,
     EceassessmentmodalPageModule,
     PgeengassessmentmodalPageModule,
-    PgemathassessmentmodalPageModule
+    PgemathassessmentmodalPageModule,
+    Training2PageModule,
+    StudentregisterPageModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [
@@ -86,7 +93,8 @@ import { CommonModule } from '@angular/common';
     FileOpener,
     Diagnostic,
     VideoPlayer,
-    FCM
+    FCM,
+    ScreenOrientation
   ],
   bootstrap: [AppComponent]
 })

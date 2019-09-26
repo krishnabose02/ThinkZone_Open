@@ -9,6 +9,9 @@ import {
   ModalController,
   NavParams } from '@ionic/angular';
 
+// Geolocation
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 // Modals
 import { RestApiService } from './../../../rest-api.service';
 import { StudentObject } from './studentobject';
@@ -38,6 +41,7 @@ export class AttendancemodalPage {
   absent = 0;
   unattended = 0;
   errormessage = '';
+  latlng: any = {};
 
   constructor(
     public navController: NavController,
@@ -48,7 +52,8 @@ export class AttendancemodalPage {
     public toastCtrl: ToastController,
     public api: RestApiService,
     private loadingController: LoadingController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private geolocation: Geolocation
   ) {
     // modal paramiters
     this.res = this.navParams.data.res;
@@ -61,6 +66,7 @@ export class AttendancemodalPage {
     this._centerid = '';
     this._centername = '';
     // console.log('###localStorage: ' + JSON.stringify(localStorage));
+    this.getGeolocation();
     this.getallstudentbyteacher();
   }
 
@@ -112,7 +118,8 @@ export class AttendancemodalPage {
       attendanceday : this.attendance_day,
       studentid : studentid,
       studentname : studentname,
-      program : program
+      program : program,
+      geolocation: this.latlng
     };
 
     if (this.attendance_list.length > 0) {
@@ -242,5 +249,27 @@ export class AttendancemodalPage {
                               );
     student.selectionState = s;
     this.unattended = this.total - this.present - this.absent;
+  }
+  
+  // get geolocation
+  async getGeolocation() {
+    console.log('--> getGeolocation() invoked!!!')
+    let loading = await this.loadingController.create({});
+    await loading.present();
+    try {
+      this.geolocation.getCurrentPosition().then((resp) => {
+        console.log("lat" + resp.coords.latitude + "- long" + resp.coords.longitude);
+        var obj = {lat: resp.coords.latitude, lng: resp.coords.longitude};
+        this.latlng = obj;
+
+        loading.dismiss();
+        //this.showAlert("Location", "Current location", "Latitude: "+resp.coords.latitude+"    <br>Longitude: "+resp.coords.longitude);
+        }).catch((error) => {
+        console.log('Error getting location', error);
+      });      
+    } catch(e) {
+      alert('WebView geo error');
+      console.error(e);
+    }
   }
 }

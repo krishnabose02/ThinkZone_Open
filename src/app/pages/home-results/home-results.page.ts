@@ -5,6 +5,7 @@ import {
   MenuController,
   ToastController,
   PopoverController,
+  LoadingController,
   ModalController } from '@ionic/angular';
 
 // Modals
@@ -38,11 +39,9 @@ export class HomeResultsPage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
+    public loadingController: LoadingController,
     public api: RestApiService
   ) {
-    const dt = new Date();
-    this.date = dt.getDate();
-    this.month = this.months[dt.getMonth()];
     this.centers = [];
     this.api.getcurrentdate()
         .subscribe(res => {
@@ -67,6 +66,26 @@ export class HomeResultsPage {
         }, err => {
           console.log(err);
         });
+
+    this.setCheckinTime();
+  }
+  
+  async setCheckinTime(){
+    let obj = {
+      userid : localStorage.getItem('_userid'),
+      username : localStorage.getItem('_username'),
+      checkintime : new Date()
+    };
+    const loading = await this.loadingController.create({});
+    await loading.present();
+    await this.api.setcheckintime(obj).subscribe(res => {
+        console.log('@@@Checkin: ' + res.status+'    document_id: '+res.document_id);
+        localStorage.setItem('_document_id',res.document_id);
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      });
   }
 
   centerButtonClicked(center: any) {

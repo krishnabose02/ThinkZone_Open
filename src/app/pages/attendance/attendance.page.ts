@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   NavController,
   AlertController,
@@ -57,14 +57,11 @@ export class AttendancePage {
     this._centerid = '';
     this._centername = '';
 
-    this.get_attendance_by_teacher_by_date(this._userid, dt);
+    this.get_attendance_by_teacher_by_date(this._userid, dt)
     this.set_max_mindate(dt.toISOString());
-
-    this.month = this.months[dt.getMonth()];
-    this.date = dt.getDate();
   }
 
-  async get_attendance_by_teacher_by_date(userid, date) {
+  async get_attendance_by_teacher_by_date(userid, date){
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getattendanceofteacherbydate(userid, date).subscribe(res => {
@@ -80,9 +77,9 @@ export class AttendancePage {
         loading.dismiss();
       });
   }
-
+  
   // set max & min date
-  set_max_mindate(dat) {
+  set_max_mindate(dat){
     const dt = new Date(dat);
     dt.setDate(dt.getDate() - 7);
     console.log(dt.toString());
@@ -109,40 +106,36 @@ export class AttendancePage {
   }
 
   // date on change event
-  attendancedate_onhange(value) {
+  attendancedate_onhange(value){
     // console.log('@@@Attendance: '+value);
     this.attendance_date = value;
     this.set_max_mindate(this.attendance_date);
     this.get_attendance_by_teacher_by_date(this._userid, value);
-
-    const dt = new Date(value);
-    this.month = this.months[dt.getMonth()];
-    this.date = dt.getDate();
   }
 
   // set holiday button click
-  async setholiday_onclick() {
+  async setholiday_onclick(){
     const modal = await this.modalController.create({
       component: HolidaymodalPage,
-      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} }
+      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} } 
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: ' + JSON.stringify(data));
+        console.log('@@@Modal Data: '+JSON.stringify(data));
         this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
     });
     return await modal.present();
   }
 
   // take attendance button click
-  async takeattendance_onclick() {
+  async takeattendance_onclick(){
     const modal = await this.modalController.create({
       component: AttendancemodalPage,
-      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} }
+      componentProps: { res: {userid: this._userid, username: this._username, date: this.attendance_date, day: this.attendance_day} } 
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: ' + JSON.stringify(data));
+        console.log('@@@Modal Data: '+JSON.stringify(data));
         this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
     });
     return await modal.present();

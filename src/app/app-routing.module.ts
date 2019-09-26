@@ -33,7 +33,12 @@ const routes: Routes = [
   { path: 'pgactivity2eng', loadChildren: './pages/pgactivity2eng/pgactivity2eng.module#Pgactivity2engPageModule' },
   { path: 'showpushnotification/:message',
     loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' },
-  { path: 'file-display', loadChildren: './pages/file-display/file-display.module#FileDisplayPageModule' }
+  { path: 'file-display', loadChildren: './pages/file-display/file-display.module#FileDisplayPageModule' },
+  { path: 'training1', loadChildren: './pages/training1/training1.module#Training1PageModule' },
+  { path: 'training2', loadChildren: './pages/training2/training2.module#Training2PageModule' },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
+  { path: 'studentregister', loadChildren: './pages/studentregister/studentregister.module#StudentregisterPageModule' },
+  { path: 'userfeedback', loadChildren: './pages/userfeedback/userfeedback.module#UserfeedbackPageModule' },
 ];
 
 @NgModule({

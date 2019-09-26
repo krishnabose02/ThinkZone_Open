@@ -1,7 +1,7 @@
 :host {
-    // ion-content {
-    //     --background: var(--ion-color-light);
-    // }
+    ion-content {
+        --background: var(--ion-color-light);
+    }
 
     ion-item {
         border-radius: 0;
@@ -113,9 +113,7 @@
     border: 1px solid #c2c2e8;;
     border-radius: 100px;
 }
-.ionitem{
-    /*border: 1px solid #b7b7b7;*/
-}
+
 .date-button{
     background-color: #ffce00;
     box-shadow: 1px 1px 0px 1px #afacac;
