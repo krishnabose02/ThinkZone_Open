@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Feedback & Issues</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content class="bg-white">
+    <ion-card class="">
+      <div class="card-margin">
+        <!-- Feedback or Issue -->
+        <ion-item class="radio-margin">
+          <ion-label>Feedback/ Issue</ion-label>
+          <ion-select placeholder="Select One" value="{{selected_feedback_or_issue}}" (ionChange)="select_feedback_onchange($event.detail.value)" class="select-width">
+            <ion-select-option value="userfeedback">Feedback</ion-select-option>
+            <ion-select-option value="userissue">Issue</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Textarea with custom number of rows and cols -->
+        <ion-label class="descr">Description</ion-label>
+        <ion-item>
+          <ion-textarea rows="6" cols="20" placeholder="Enter feedback or issues description here..." [(ngModel)]="descrption" class="txt-area"></ion-textarea>
+        </ion-item>
+
+        <div margin-top>
+          <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveUserfeedback()" tappable>
+            <ion-icon name="log-in"></ion-icon>
+            Submit
+          </ion-button>
+        </div>
+      </div>
+    </ion-card>
+  </ion-content>
+</ion-content>

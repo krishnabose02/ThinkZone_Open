@@ -1,0 +1,33 @@
+<ion-content> 
+  <ion-card >
+    <ion-card-header color="warning">
+      <ion-card-title>Payment Records</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let record of records; let i of index;">
+            <ion-label class="listitems">
+              {{i}}.{{ record.studentname }}
+              
+              <p> Pay mode: {{ record.payment_type }}</p>
+              <p> Paid amount: Rs. {{ record.amount }} /-</p>
+              <p> Paid on: {{ record.createdon  | date: 'dd-MM-yyyy' }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+    </ion-card-content>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col>
+            <ion-button color="medium" (click)="closeModal()">
+              <ion-icon slot="start" name="close"></ion-icon> Cancel
+            </ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+</ion-content>

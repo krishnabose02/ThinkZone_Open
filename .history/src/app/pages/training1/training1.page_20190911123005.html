@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Teacher Training
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="explore-div">
+    <ion-button icon-left size="medium" shape="round" color="warning" (click)="explor()" float-right tappable class="explore-btn">
+      Explore
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </ion-button>
+  </div>
+
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <!-- Logo -->
+      <div padding-horizontal text-center>
+        <div class="logo"></div>
+        <h3 no-margin>
+          <ion-text color="light" class="fw700">
+            <ion-text color="secondary">Student Register</ion-text>
+          </ion-text>
+        </h3>
+      </div>
+  
+      <!-- Register form -->
+      <form [formGroup]="onRegisterForm" class="list-form">
+
+        <!-- Student name -->
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            Student name
+          </ion-label>
+          <ion-input color="secondary" type="text" formControlName="fullName"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">
+          <ion-text color="danger">
+            This field is required
+          </ion-text>
+        </p>
+
+        <!-- Program -->
+        <ion-item class="radio-margin">
+          <ion-label>Program</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="select_program_onchange($event.detail.value)" class="select-width">
+            <ion-select-option value="ece">ECE</ion-select-option>
+            <ion-select-option value="pge">PGE</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Class -->
+        <ion-item class="radio-margin" [hidden]="hide_class_field">
+          <ion-label>Class</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="select_class_onchange($event.detail.value)" class="select-width">
+            <ion-select-option *ngFor="let cls of class_list" value="{{cls}}">{{ cls }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Phone -->
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            Phone
+          </ion-label>
+          <ion-input color="secondary" type="number" formControlName="phone"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('phone').touched && onRegisterForm.get('phone').hasError('required')">
+          <ion-text color="danger">
+            This field is required
+          </ion-text>
+        </p>
+
+        <!-- Gender -->
+        <ion-item class="radio-margin">
+          <ion-label>Gender</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="gender_onchange($event.detail.value)" class="select-width">
+            <ion-select-option value="female">Female</ion-select-option>
+            <ion-select-option value="male">Male</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- DOB -->
+        <ion-item class="radio-margin">
+          <ion-label>DOB</ion-label>
+          <ion-datetime display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="dob_onhange($event.detail.value)"></ion-datetime>
+        </ion-item>
+  
+        <!-- Fathers name -->
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            Father's name
+          </ion-label>
+          <ion-input color="secondary" type="text" formControlName="father"></ion-input>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="onRegisterForm.get('father').touched && onRegisterForm.get('father').hasError('required')">
+          <ion-text color="danger">
+            This field is required
+          </ion-text>
+        </p>
+        
+        <!-- Registration Date -->
+        <ion-item class="radio-margin">
+          <ion-label>Registration Date</ion-label>
+          <ion-datetime display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="regdate_onhange($event.detail.value)"></ion-datetime>
+        </ion-item>
+      </form>
+  
+      <div margin-top>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="signUp()" [disabled]="!onRegisterForm.valid"
+          tappable>
+          <ion-icon name="log-in"></ion-icon>
+          Register
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
+  
+</ion-content>
+  

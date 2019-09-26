@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            TRAINING CONTENT
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <!-- Session already saved tag -->
+  <ion-item class="full_width" [hidden]="hideSessionSavedTag">
+    <ion-label>Scrollable content</ion-label>
+  </ion-item>
+
+
+  <ion-grid>
+    <!-- Scrollable content -->
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Scrollable content</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item class="full_width">
+        <!-- <ion-label position="stacked">Scrollable content</ion-label> -->
+        <ion-textarea disabled readonly value="{{ content }}" class="textarea"></ion-textarea>
+      </ion-item>
+    </ion-row>
+
+     <!-- Images  -->
+    <ion-img *ngFor="let img of image;"  src="{{baseUrl}}{{img}}"></ion-img>
+
+    <!-- Video content -->
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Video content</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="right-align" *ngFor="let v of video; let i = index;">
+      <ion-button shape="round" fill="outline" size="medium" color="primary" (click)="play_video(v)" tappable class="explore-btn">
+        Play Video {{ i+1 }}
+      </ion-button>
+    </ion-row>
+
+    <!-- Work Sheets -->
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Work Sheets</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="right-align" *ngFor="let w of worksheet; let i = index;">
+      <ion-button shape="round" fill="outline" size="medium" color="primary" (click)="open_document(w)" tappable class="explore-btn">
+        Open Document
+      </ion-button>
+    </ion-row>
+
+    <!-- Quiz  -->
+    <ion-text>Quizes</ion-text>
+    <ion-list>
+      <ion-radio-group *ngFor="let qz of quiz; let i =index" (ionSelect) = "quiz_option_div_clicked($event, qz)">
+        <ion-list-header class="ionheader">
+          <ion-label>Q{{ i+1 }}) {{ qz.question }}</ion-label>
+        </ion-list-header>
+    
+        <ion-item>
+          <ion-label> {{ qz.A }}</ion-label>
+          <ion-radio slot="start" value="A"></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label> {{ qz.B }}</ion-label>
+          <ion-radio slot="start" value="B"></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label> {{ qz.C }}</ion-label>
+          <ion-radio slot="start" value="C"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label> {{ qz.D }}</ion-label>
+          <ion-radio slot="start" value="D"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    
+
+
+
+
+    <ion-row class="right-align">
+      <!-- <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" [disabled]="!isEnabled_completeActivityButton"  float-right tappable class="explore-btn"> -->
+      <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" float-right tappable class="explore-btn">
+          Complete Activity
+      </ion-button>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+  

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            Student Details
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="explore-div">
+  <ion-row>
+    <ion-item>
+      <ion-button icon-left size="medium" shape="round" color="warning" (click)="explor()" float-right tappable class="explore-btn">
+        Set Level
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button icon-left size="medium" shape="round" color="warning" (click)="open_register_modal(null)" float-right tappable class="explore-btn">
+        Register
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-row>
+</div>
+
+<ion-content class="bg-white">
+    <ion-card class="">
+      <div class="card-margin">
+        <ion-list>
+          <ion-item *ngFor="let student of student_list">
+            <!-- Student of ECE -->
+            <ion-label>
+              {{ student.studentname }} 
+              <p>Father: {{ student.parentsname }} </p>
+              <ion-button icon-left size="medium" expand="full" color="primary" (click)="open_register_modal(student)" float-right tappable>
+                Edit 
+                <ion-icon name="color-filter"></ion-icon>
+              </ion-button>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card>
+    
+  </ion-content>
+
+
+  

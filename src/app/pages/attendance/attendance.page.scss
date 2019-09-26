@@ -1,7 +1,7 @@
 :host {
-    // ion-content {
-    //     --background: var(--ion-color-light);
-    // }
+    ion-content {
+        --background: var(--ion-color-light);
+    }
 
     ion-item {
         border-radius: 0;
@@ -131,78 +131,3 @@
 .card-padding{
     padding: 30px;
 }
-
-.shadow{
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
-}
-
-@keyframes green-to-white {
-    0% {
-        background: #4caf50;
-        color: #ffffff;
-    }
-    100% {
-        background: white;
-        color: #4caf50;
-    }
-}
-
-@keyframes white-to-green {
-    0% {
-        background: white;
-        color: #4caf50;
-    }
-    100% {
-        background: #4caf50;
-        color: #ffffff;
-    }
-}
-
-
-.green-bg {
-    animation: white-to-green 0.6s;
-    animation-fill-mode: forwards;
-}
-
-.white-bg {
-    animation: green-to-white 0.6s;
-    animation-fill-mode: forwards;
-}
-
-
-@keyframes FadeIn { 
-    0% {
-        opacity: 0;
-        height: 0px;
-    }
-
-    100% {
-        opacity: 1;
-        height: 50px;
-    }
-}
-@keyframes FadeOut {
-    0% {
-        opacity: 1;
-        height: 50px;
-    }
-    100% {
-        opacity: 0;
-        height: 0px;
-    }
-}
-
-.hidden {
-    animation: FadeOut 0.6s;
-    animation-fill-mode: backwards;
-    opacity: 0;
-    height: 0px;
-}
-.reveal {
-    animation-delay: 0.6s;
-    animation: FadeIn 0.6s;
-    animation-fill-mode: forwards;
-    padding: 10px;
-    margin: 10px;
-}
-
