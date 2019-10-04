@@ -21,20 +21,21 @@ import { RestApiService } from './../../../rest-api.service';
 })
 export class MakepaymentPage {
   // fee structure
-  fee_ece_annually: string = '600';
-  fee_ece_semiannually: string = '350';
-  fee_ece_monthly: string = '100';
-  fee_pge_annually: string = '800';
-  fee_pge_semiannually: string = '450';
-  fee_pge_monthly: string = '120';
+  fee_ece_annually = '600';
+  fee_ece_semiannually = '350';
+  fee_ece_monthly = '100';
+  fee_pge_annually = '800';
+  fee_pge_semiannually = '450';
+  fee_pge_monthly = '120';
+  modes = [{value: 'annually', text: 'Annually'}, {value: 'semi-annually', text: 'Semi Annually'}, {value: 'monthly', text: 'Monthly'}];
 
-  total_payable_amount: number = 0;
-  total_paid_amount: number = 0;
-  total_pending_amount: number = 0;
+  total_payable_amount = 0;
+  total_paid_amount = 0;
+  total_pending_amount = 0;
 
   public makepaymentFormGroup: FormGroup;
-  amount: string = '';
-  remark: string = '';
+  amount = '';
+  remark = '';
 
   res: any;
   userid: string;
@@ -43,17 +44,17 @@ export class MakepaymentPage {
   centername: string;
   studentid: string;
   studentname: string;
-  program: string = '';
-  class: string = '';
+  program = '';
+  class = '';
 
-  payment_type: string = '';
+  payment_type = '';
   month_diff: number;
-  registration_date: string = '';
-  running_month: number = 0;
-  regdt: string = '';
+  registration_date = '';
+  running_month = 0;
+  regdt = '';
 
-  is_first_transaction: boolean = true;
-  pay_amount: string= '0';
+  is_first_transaction = true;
+  pay_amount = '0';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,9 +70,9 @@ export class MakepaymentPage {
   ) {
     this.makepaymentFormGroup = this.formBuilder.group({
       amount: ['', [Validators.required]],
-      remark: ['', [Validators.required]] 
+      remark: ['', [Validators.required]]
     });
-    
+
     // modal paramiters
     this.res = this.navParams.data.res;
     console.log('###this.res: ' + JSON.stringify(this.res));
@@ -99,30 +100,30 @@ export class MakepaymentPage {
       await this.api.getalltchpaymentdetailsbystudentid(sid)
         .subscribe(res => {
           console.log('@@@all payment transactions: ' + JSON.stringify(res));
-          if(res.length > 0){
+          if (res.length > 0) {
             res.forEach(element => {
               this.total_paid_amount += parseInt(element.amount);
             });
-            
+
             this.is_first_transaction = false;
-            let ptype = res[0]['payment_type'];
+            const ptype = res[0]['payment_type'];
             this.amount_type_onchange(ptype);
             this.payment_type = ptype;
 
-            console.log('@@@this.running_month: ' + this.running_month+'    this.pay_amount: '+this.pay_amount);
-            if(this.payment_type == 'annually' && this.running_month <= 12){
+            console.log('@@@this.running_month: ' + this.running_month + '    this.pay_amount: ' + this.pay_amount);
+            if (this.payment_type === 'annually' && this.running_month <= 12) {
               this.total_payable_amount = 1 * parseInt(this.pay_amount);
-            }else if(this.payment_type == 'semi-annually' && this.running_month <= 6){
+            } else if (this.payment_type === 'semi-annually' && this.running_month <= 6) {
               this.total_payable_amount = 1 * parseInt(this.pay_amount);
-            }else if(this.payment_type == 'semi-annually' && this.running_month > 6){
+            } else if (this.payment_type === 'semi-annually' && this.running_month > 6) {
               this.total_payable_amount = 2 * parseInt(this.pay_amount);
-            }else if(this.payment_type == 'monthly'){
+            } else if (this.payment_type === 'monthly') {
               this.total_payable_amount = (this.running_month) * parseInt(this.pay_amount);
             }
-            
+
             this.total_pending_amount = this.total_payable_amount - this.total_paid_amount;
-            console.log('@@@ paid: '+this.total_paid_amount+'    payble: '+this.total_payable_amount+'    pending: '+this.total_pending_amount);
-          }else{
+            console.log('@@@ paid: ' + this.total_paid_amount + '    payble: ' + this.total_payable_amount + '    pending: ' + this.total_pending_amount);
+          } else {
             this.is_first_transaction = true;
             this.payment_type = '';
           }
@@ -134,54 +135,46 @@ export class MakepaymentPage {
   }
 
   // month difference
-  calculatemonth(d1){     // old date 
-    var d2 = new Date();  // new date
-    var months;
+  calculatemonth(d1) {     // old date
+    const d2 = new Date();  // new date
+    let months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
     months -= d1.getMonth() + 1;
     months += d2.getMonth();
     months = (d2.getDate() >= d1.getDate()) ? months += 1 : months;
     months = months <= 0 ? 0 : months;
     this.month_diff = months;
-    console.log('@@@d2 Year: ' + d2.getFullYear()+'    d1 Year: ' + d1.getFullYear());
-    console.log('@@@d2 Month: ' + d2.getMonth()+'    d1 Month: ' + d1.getMonth());
-    console.log('@@@d2 Date: ' + d2.getDate()+'    d1 Date: ' + d1.getDate());
+    console.log('@@@d2 Year: ' + d2.getFullYear() + '    d1 Year: ' + d1.getFullYear());
+    console.log('@@@d2 Month: ' + d2.getMonth() + '    d1 Month: ' + d1.getMonth());
+    console.log('@@@d2 Date: ' + d2.getDate() + '    d1 Date: ' + d1.getDate());
 
     console.log('@@@month_diff: ' + this.month_diff);
-    this.running_month = this.month_diff+1;
+    this.running_month = this.month_diff + 1;
   }
-  
+
   // amount type on change
-  amount_type_onchange(amount_type){
-    console.log('@@@amount_type: ' + amount_type+'    program: '+this.program);
+  amount_type_onchange(amount_type) {
+    console.log('@@@amount_type: ' + amount_type + '    program: ' + this.program);
     this.payment_type = amount_type;
-    if(this.program == 'ece'){
-      if(amount_type == 'annually') this.pay_amount = this.fee_ece_annually;
-      else if(amount_type == 'semi-annually') this.pay_amount = this.fee_ece_semiannually;
-      else if(amount_type == 'monthly') this.pay_amount = this.fee_ece_monthly;
-      else this.pay_amount = '0';
-    }
-    else if(this.program == 'pge'){
-      if(amount_type == 'annually') this.pay_amount = this.fee_pge_annually;
-      else if(amount_type == 'semi-annually') this.pay_amount = this.fee_pge_semiannually;
-      else if(amount_type == 'monthly') this.pay_amount = this.fee_pge_monthly;
-      else this.pay_amount = '0';
-    }
-    else{
+    if (this.program === 'ece') {
+      if (amount_type === 'annually') { this.pay_amount = this.fee_ece_annually; } else if (amount_type === 'semi-annually') { this.pay_amount = this.fee_ece_semiannually; } else if (amount_type === 'monthly') { this.pay_amount = this.fee_ece_monthly; } else { this.pay_amount = '0'; }
+    } else if (this.program === 'pge') {
+      if (amount_type === 'annually') { this.pay_amount = this.fee_pge_annually; } else if (amount_type === 'semi-annually') { this.pay_amount = this.fee_pge_semiannually; } else if (amount_type === 'monthly') { this.pay_amount = this.fee_pge_monthly; } else { this.pay_amount = '0'; }
+    } else {
       this.pay_amount = '0';
     }
   }
-  
+
   // save attendance
-  async makepayment(){
-    if(this.total_payable_amount > 0 && this.total_paid_amount > 0 && (this.total_payable_amount - this.total_paid_amount) <= 0) {
+  async makepayment() {
+    if (this.total_payable_amount > 0 && this.total_paid_amount > 0 && (this.total_payable_amount - this.total_paid_amount) <= 0) {
       alert('All dues are cleared for this month !!!');
-    } else if(this.payment_type == undefined || this.payment_type == null || this.payment_type == '') {
+    } else if (this.payment_type === undefined || this.payment_type == null || this.payment_type === '') {
       alert('Please select the payment type !!!');
-    } else if(this.pay_amount == undefined || this.pay_amount == null || this.pay_amount == '') {
+    } else if (this.pay_amount === undefined || this.pay_amount == null || this.pay_amount === '') {
       alert('Invalid payment amount !!!');
     } else {
-      this.showConfirm('Confirmation', '', 'Do you want to proceed?')
+      this.showConfirm('Confirmation', '', 'Do you want to proceed?');
     }
   }
 
@@ -191,7 +184,7 @@ export class MakepaymentPage {
       await this.api.savetchpaymentdetails(data)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
-          this.showAlert('Info','','Payment '+res['status']+' !!!');
+          this.showAlert('Info', '', 'Payment ' + res['status'] + ' !!!');
           loading.dismiss();
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
@@ -247,7 +240,7 @@ export class MakepaymentPage {
     });
     await alert.present();
   }
-  
+
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});

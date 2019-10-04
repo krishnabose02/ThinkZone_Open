@@ -1,10 +1,11 @@
 <ion-content>
-  <div class='data-card shadow' style='margin-top: 30px;background: gray;color: white'>
+  <div class='data-card shadow' style='font-size: 1.2rem;margin-top: 30px;background: gray;color: white'>
     <p style='font-size: 1.4rem'><b>Name: {{res.studentname}}</b></p>
     <p style='margin-bottom: 0px'>Program: {{res.program}}</p>
-    <p style='margin-top: 0px'>Class: {{res.class}}</p>
+    <p style='margin: 0px'>Class: {{res.class}}</p>
+    <p style='margin-top: 0px'>Reg. Date: {{regdt}}</p>
   </div>
-  <div class='data-card shadow'>
+  <!-- <div class='data-card shadow'>
     <form style='margin: 10px' [formGroup]="makepaymentFormGroup" class="list-form">
       <ion-item no-padding class="animated fadeInUp">
         <ion-label style="color: gray" position="floating">
@@ -38,10 +39,67 @@
         <p>Submit</p>
       </div>
     </div>
+  </div> -->
+  <div *ngIf='is_first_transaction' class='data-card shadow'>
+    <p style='font-size: 1.4rem'>Select a mode of payment:</p>
+    <div class='divider'></div>
+      <div class='horizontal-flexbox'>
+        <div (click)='amount_type_onchange(m.value)' *ngFor='let m of modes' [ngClass]='(m.value==payment_type)?"selected-chip":"unselected-chip"'>
+          <p>{{m.text}}</p>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf='!is_first_transaction || payment_type!=""' class='data-card shadow'>
+    <p style='text-align: center;font-size: 1.4rem'>Payment Details</p>
+    <div class='divider'></div>
+
+    <div class='slip-item' style='justify-content: center'>
+      <p>Payment Mode:</p>
+      <p>{{payment_type}}</p>
+    </div>
+    <div class='divider'></div>
+    <div class='slip-item'>
+      <p>Month:</p>
+      <p>{{running_month}}</p>
+    </div>
+    <div class='divider'></div>
+    <div class='slip-item'>
+      <p>Payable Amount:</p>
+      <p>{{total_payable_amount}}</p>
+    </div>
+    <div class='slip-item'>
+      <p>Paid Amount:</p>
+      <p>{{total_paid_amount}}</p>
+    </div>
+    <div class='slip-item'>
+      <p>Pending Amount:</p>
+      <p>{{total_pending_amount}}</p>
+    </div>
+    <div class='divider'></div>
+    <div  style='font-size: 1.4rem' class='slip-item'>
+      <p><b>Total Fees:</b></p>
+      <p>₹<span style='font-size: 1.8rem'>{{pay_amount}}</span></p>
+    </div>
+    <!-- <div class='divider'></div>
+    <div class='slip-item' style='justify-content: flex-start;font-size: 1.1rem;color: #757575'>
+      <p>Reg. Date: </p>
+      <p>{{regdt}}</p>
+    </div> -->
+  </div>
+  <div class='data-card shadow'>
+    <div style='margin-top: 10px' class='horizontal-flexbox'>
+      <div (click)="closeModal()" class='button outline'>
+        <p>Cancel</p>
+      </div>
+      <div (click)="makepayment()" class='button' [ngClass]='(is_first_transaction && payment_type=="")?"solid-disabled":"solid-enabled shadow"'>
+        <p>Submit</p>
+      </div>
+    </div>
   </div>
 </ion-content>
 
-<ion-content> 
+<!-- <ion-content> 
   <ion-card>
     <ion-card-header color="warning">
       <ion-card-title>Make Payment</ion-card-title>
@@ -128,4 +186,4 @@
         </ion-row>
       </ion-grid>
   </ion-card>
-</ion-content>
+</ion-content> -->
