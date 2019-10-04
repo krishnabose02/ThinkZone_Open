@@ -51,7 +51,8 @@ export class AttendancePage {
   ) {
     // set min date and max date for the calendar
     const dt = new Date(this.attendance_date);
-
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()];
     this._userid = localStorage.getItem('_userid');
     this._username = localStorage.getItem('_username');
     this._centerid = '';
@@ -109,6 +110,9 @@ export class AttendancePage {
   attendancedate_onhange(value){
     // console.log('@@@Attendance: '+value);
     this.attendance_date = value;
+    const dt = new Date(value);
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()];
     this.set_max_mindate(this.attendance_date);
     this.get_attendance_by_teacher_by_date(this._userid, value);
   }

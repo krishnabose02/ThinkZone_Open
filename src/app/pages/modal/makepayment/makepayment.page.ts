@@ -33,8 +33,8 @@ export class MakepaymentPage {
   total_pending_amount: number = 0;
 
   public makepaymentFormGroup: FormGroup;
-  amount = '';
-  remark = '';
+  amount: string = '';
+  remark: string = '';
 
   res: any;
   userid: string;
@@ -43,8 +43,8 @@ export class MakepaymentPage {
   centername: string;
   studentid: string;
   studentname: string;
-  program = '';
-  class = '';
+  program: string = '';
+  class: string = '';
 
   payment_type: string = '';
   month_diff: number;
@@ -71,7 +71,7 @@ export class MakepaymentPage {
       amount: ['', [Validators.required]],
       remark: ['', [Validators.required]] 
     });
-
+    
     // modal paramiters
     this.res = this.navParams.data.res;
     console.log('###this.res: ' + JSON.stringify(this.res));
@@ -92,25 +92,6 @@ export class MakepaymentPage {
     this.getalltchpaymentdetailsbystudentid(this.studentid);
   }
 
-
-  // save attendance
-  async makepayment() {
-    this.amount = this.makepaymentFormGroup.value.amount;
-    this.remark = this.makepaymentFormGroup.value.remark;
-    const data = {
-      userid : this.userid,
-      username : this.username,
-      centerid : this.centerid,
-      centername : this.centername,
-      studentid : this.studentid,
-      studentname : this.studentname,
-      program: this.program,
-      class : this.class,
-      amount : this.amount,
-      remark : this.remark
-    };
-    this.save(data);
-  }
   // get all transactions
   async getalltchpaymentdetailsbystudentid(sid) {
     const loading = await this.loadingController.create({});
@@ -192,17 +173,17 @@ export class MakepaymentPage {
   }
   
   // save attendance
-  // async makepayment(){
-  //   if(this.total_payable_amount > 0 && this.total_paid_amount > 0 && (this.total_payable_amount - this.total_paid_amount) <= 0) {
-  //     alert('All dues are cleared for this month !!!');
-  //   } else if(this.payment_type == undefined || this.payment_type == null || this.payment_type == '') {
-  //     alert('Please select the payment type !!!');
-  //   } else if(this.pay_amount == undefined || this.pay_amount == null || this.pay_amount == '') {
-  //     alert('Invalid payment amount !!!');
-  //   } else {
-  //     this.showConfirm('Confirmation', '', 'Do you want to proceed?')
-  //   }
-  // }
+  async makepayment(){
+    if(this.total_payable_amount > 0 && this.total_paid_amount > 0 && (this.total_payable_amount - this.total_paid_amount) <= 0) {
+      alert('All dues are cleared for this month !!!');
+    } else if(this.payment_type == undefined || this.payment_type == null || this.payment_type == '') {
+      alert('Please select the payment type !!!');
+    } else if(this.pay_amount == undefined || this.pay_amount == null || this.pay_amount == '') {
+      alert('Invalid payment amount !!!');
+    } else {
+      this.showConfirm('Confirmation', '', 'Do you want to proceed?')
+    }
+  }
 
   async save(data) {
     const loading = await this.loadingController.create({});
@@ -210,7 +191,7 @@ export class MakepaymentPage {
       await this.api.savetchpaymentdetails(data)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
-          this.showAlert('Info', '', 'Payment ' + res['status'] + ' !!!');
+          this.showAlert('Info','','Payment '+res['status']+' !!!');
           loading.dismiss();
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
@@ -266,7 +247,7 @@ export class MakepaymentPage {
     });
     await alert.present();
   }
-
+  
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});

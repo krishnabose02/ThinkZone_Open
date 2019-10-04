@@ -26,13 +26,20 @@ export class ProfilePage {
   emailid: string = '';
   contactno: string = '';
   address: string = '';
-  
+  bdate;
+  bmonth;
+  byear;
+
+  rdate;
+  rmonth;
+  ryear;
+  months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
-
+  toolbarshadow = true;
   hide_class_field: boolean = false;
 
   constructor(
@@ -40,7 +47,6 @@ export class ProfilePage {
     public menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
     public alertController: AlertController,
-    public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public api: RestApiService,
     private loadingController: LoadingController
@@ -71,7 +77,7 @@ export class ProfilePage {
             this.emailid = this.profile_data[0].emailid;
             this.contactno = this.profile_data[0].contactnumber;
             this.address = this.profile_data[0].permanentaddress;
-            
+            this.resolveDOB();
           }
           loading.dismiss();
           //this.showAlert('Profile Registration', '', 'Profile registration '+res['status']+' !!!');
@@ -83,6 +89,19 @@ export class ProfilePage {
         });
   }
 
+
+  resolveDOB() {
+    let dt = new Date(this.dob);
+    this.bdate = dt.getDate();
+    this.bmonth = this.months[dt.getMonth()];
+    this.byear = dt.getFullYear();
+
+    dt = new Date(this.regdate);
+    this.rdate = dt.getDate();
+    this.rmonth = this.months[dt.getMonth()];
+    this.ryear = dt.getFullYear();
+
+  }
   async back(){
     this.navController.navigateBack('/training1');
   }
@@ -120,5 +139,15 @@ export class ProfilePage {
       ]
     });
     await alert.present();
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+      console.log('top');
+      this.toolbarshadow = true;
+    } else {
+      this.toolbarshadow = false;
+    }
   }
 }

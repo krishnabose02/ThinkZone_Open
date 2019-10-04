@@ -1,26 +1,44 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            Teacher Training
-          </ion-text>
-        </ion-text>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+    <ion-toolbar>
+      <ion-row style="position: relative">
+          <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>My Profile</p></ion-title>
+          <ion-back-button style="color: gray"></ion-back-button>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="bg-white">
+  <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="explor()">
       <ion-icon name="person"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  
+  <div style='padding: 10px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
+    <div style='margin: 10px'>
+      
+      <!--  Module Selector -->
+      <p style='font-size: 1.4rem'>Select Module:</p>
+      <div style='flex-wrap: wrap' class='horizontal-flexbox'>
+        <div class='vertical-flexbox half-width'>
+          <div (click)='module_select_onchange(m)' *ngFor='let m of allmodule_name' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
+            <p>{{m.modulename}}</p>
+          </div>
+        </div>
 
-  <ion-card class="">
+        <div class='half-width vertical-flexbox'>
+          <div class='modules' *ngFor="let submodule of allsubmodule_list" (click)="submodule_click(submodule)">
+            <p>{{submodule.submodulename}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- <ion-card class="">
     <div class="card-margin">
       <ion-item class="radio-margin">
         <ion-label>Courses</ion-label>
@@ -42,6 +60,6 @@
 
 
     </div>
-  </ion-card>
+  </ion-card> -->
 </ion-content>
   

@@ -21,6 +21,7 @@ import { stagger } from '@angular/animations';
   styleUrls: ['./eceassessmentmodal.page.scss']
 })
 export class EceassessmentmodalPage {
+  answerList: any = {};
   assessment_list: any = [];
   assessmenttest: any = [];
   public makepaymentFormGroup: FormGroup;
@@ -39,7 +40,7 @@ export class EceassessmentmodalPage {
   program: string = '';
   class: string = '';
   stage: string = '';
-
+  subject: string = '';
   constructor(
     private formBuilder: FormBuilder,
     public navController: NavController,
@@ -68,6 +69,7 @@ export class EceassessmentmodalPage {
     this.program = this.res.program;
     this.class = this.res.class;
     this.stage = this.res.stage;
+    this.subject = this.res.subject;
 
     this.gettchassessmenttest();
   }
@@ -77,7 +79,7 @@ export class EceassessmentmodalPage {
   async gettchassessmenttest() {
     const loading = await this.loadingController.create({});
       await loading.present();
-      await this.api.gettchassessmenttest(this.studentid, this.program, this.class, this.stage, "na")
+      await this.api.gettchassessmenttest(this.studentid, this.program, this.class, this.stage, this.subject)
         .subscribe(res => {
           // console.log('@@@all student list: ' + JSON.stringify(res));
           if(res.length > 0){
@@ -100,7 +102,7 @@ export class EceassessmentmodalPage {
   async gettchassessment() {
     const loading = await this.loadingController.create({});
       await loading.present();
-      await this.api.gettchassessment(this.program, this.class, this.stage,"na")
+      await this.api.gettchassessment(this.program, this.class, this.stage, this.subject)
         .subscribe(res => {
           //console.log('@@@--------all student list: ' + JSON.stringify(res));
           this.assessment_list = res;
@@ -113,6 +115,7 @@ export class EceassessmentmodalPage {
 
   // yes or no clicked
   segmentChanged(assessment, value){
+    this.answerList[assessment.id] = value;
     console.log('@@@value: '+value+'    assessment: ' + JSON.stringify(assessment));
     const assessment_id = assessment._id;
     const question_id = assessment.id;
@@ -162,7 +165,7 @@ export class EceassessmentmodalPage {
       program : this.program,
       class : this.class, 
       stage : this.stage,
-      subject: "na", 
+      subject: this.subject, 
       assessmenttest : this.assessmenttest
     };
 

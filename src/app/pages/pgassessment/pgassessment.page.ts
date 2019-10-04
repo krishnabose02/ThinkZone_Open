@@ -10,6 +10,7 @@ import {
 import { RestApiService } from './../../rest-api.service';
 import { PgeengassessmentmodalPage } from './../modal/pgeengassessmentmodal/pgeengassessmentmodal.page';
 import { PgemathassessmentmodalPage } from './../modal/pgemathassessmentmodal/pgemathassessmentmodal.page';
+import { EceassessmentmodalPage } from '../modal/eceassessmentmodal/eceassessmentmodal.page';
 
 @Component({
   selector: 'app-pgassessment',
@@ -23,7 +24,7 @@ export class PgassessmentPage {
   userobj: any = {};
   userreg_date = '';
   student_list: any = [];
-  month_list: any = [];
+  month_list: any[] = [];
 
   _userid: string;
   _username: string;
@@ -113,6 +114,15 @@ export class PgassessmentPage {
       this.month_list.push(obj);
     }
     console.log('@@@month_list: ' + JSON.stringify(this.month_list));
+
+    let temp = [];
+    this.month_list.forEach(element => {
+      if(!element.disabled){
+        temp.push(element);
+      }
+    });
+    this.month_list = temp;
+    console.log(this.month_list);
   }
 
   // month on change event
@@ -129,11 +139,15 @@ export class PgassessmentPage {
 
   // ece fillmarks button click
   async pge_fillmarks_btnclick(slist, subject) {
+    if(this.disable_fillmarks_button){
+      alert('please select a month first!');
+      return;
+    }
     console.log('@@@Subject selected: ' + subject);
     if (subject === 'eng') {
       // call eng assessment modal
       const modal = await this.modalController.create({
-        component: PgeengassessmentmodalPage,
+        component: EceassessmentmodalPage,
         componentProps: {
           res: {
             userid: this._userid,
@@ -142,7 +156,8 @@ export class PgassessmentPage {
             studentname: slist.studentname,
             program: slist.program,
             class: slist.class,
-            stage: this.selected_month
+            stage: this.selected_month,
+            subject: 'english'
           }
         }
       });
@@ -155,7 +170,7 @@ export class PgassessmentPage {
     } else if (subject === 'math') {
       // call math assessment modal
       const modal = await this.modalController.create({
-        component: PgemathassessmentmodalPage,
+        component: EceassessmentmodalPage,
         componentProps: {
           res: {
             userid: this._userid,
@@ -164,7 +179,8 @@ export class PgassessmentPage {
             studentname: slist.studentname,
             program: slist.program,
             class: slist.class,
-            stage: this.selected_month
+            stage: this.selected_month,
+            subject: 'math'
           }
         }
       });

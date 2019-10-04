@@ -18,8 +18,9 @@ import { Training2Page } from '../training2/training2.page';
 })
 export class Training1Page {
   public allmodule_list: any = [];
+  public allmodule_name: any[];
   public allsubmodule_list: any = [];
-
+  toolbarshadow = true;
   init_module: string = '';
   
 
@@ -57,9 +58,17 @@ export class Training1Page {
         loading.dismiss();
 
         // load on page load time
+        this.allmodule_name = [];
         if(this.allmodule_list.length > 0){
           this.init_module = this.allmodule_list[0].moduleid;
           this.getAllSubmodules(this.init_module);
+          let count = true;
+          this.allmodule_list.forEach(element => {
+            element.selected = count;
+            count = false;
+            this.allmodule_name.push(element);
+          });
+          console.log(this.allmodule_name);
         }
       }, err => {
         console.log(err);
@@ -68,6 +77,9 @@ export class Training1Page {
       });
   }
 
+  reloadData($event){
+    console.log(event);
+  }
   async getAllSubmodules(moduleid){
     let loading = await this.loadingController.create({});
     await loading.present();
@@ -84,8 +96,12 @@ export class Training1Page {
   }
 
   module_select_onchange(value){
-    console.log('@@@Selected Module: ', value);
-    this.getAllSubmodules(value);
+    this.allmodule_name.forEach(element => {
+      element.selected = false;
+    });
+    value.selected = true;
+    console.log('@@@Selected Module: ', value.moduleid);
+    this.getAllSubmodules(value.moduleid);
   }
 
   async submodule_click(submodule){
@@ -140,5 +156,15 @@ export class Training1Page {
       ]
     });
     await alert.present();
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+      console.log('top');
+      this.toolbarshadow = true;
+    } else {
+      this.toolbarshadow = false;
+    }
   }
 }

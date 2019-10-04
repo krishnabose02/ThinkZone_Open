@@ -22,7 +22,7 @@ export class EcassessmentPage {
   userobj: any = {};
   userreg_date = '';
   student_list: any = [];
-  quarter_list: any = [];
+  quarter_list: any[] = [];
 
   _userid: string;
   _username: string;
@@ -147,6 +147,14 @@ export class EcassessmentPage {
       this.quarter_list.push(q3);
       this.quarter_list.push(q4);
     }
+    let temp = [];
+    this.quarter_list.forEach(element => {
+      if(!element.disabled){
+        temp.push(element);
+      }
+    });
+    this.quarter_list = temp;
+    console.log(this.quarter_list);
   }
 
   // quarter on change event
@@ -163,6 +171,10 @@ export class EcassessmentPage {
 
   // ece fillmarks button click
   async ece_fillmarks_btnclick(slist) {
+    if(this.disable_fillmarks_button){
+      alert('please select a quarter first!');
+      return;
+    }
     const modal = await this.modalController.create({
       component: EceassessmentmodalPage,
       componentProps: {
@@ -173,7 +185,8 @@ export class EcassessmentPage {
           studentname: slist.studentname,
           program: slist.program,
           class: slist.class,
-          stage: this.selected_quarter
+          stage: this.selected_quarter,
+          subject: 'na'
         }
       }
     });

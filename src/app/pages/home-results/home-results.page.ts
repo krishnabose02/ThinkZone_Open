@@ -67,6 +67,9 @@ export class HomeResultsPage {
           console.log(err);
         });
 
+    const dt = new Date();
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()+1];
     this.setCheckinTime();
   }
   

@@ -8,16 +8,35 @@
 </ion-header>
       
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-  <ion-grid>
-    <ion-row>
-      <ion-item class="full_width">
-        <ion-label>Quarter</ion-label>
-        <ion-select placeholder="Select One" (ionChange)="quarter_onchange($event.detail.value)">
-          <ion-select-option *ngFor="let qlist of quarter_list" [value]="qlist.value" [disabled]="qlist.disabled">{{ qlist.text }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-row>
+  <div style='padding: 30px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
+    <div style='margin: 10px'>
+      
+      <!--  Module Selector -->
+      <p style='font-size: 1.4rem'>Select Quarter:</p>
+      <div style='flex-wrap: wrap' class='horizontal-flexbox'>
+        <div (click)='quarter_onchange(q.value)' *ngFor='let q of quarter_list' [ngClass]='(selected_quarter==q.value)?"selected-chip":"unselected-chip"'>
+          <p>{{q.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class='card shadow'>
+    <p style='font-size: 1.6rem'>Program: ECE</p>
+    <p>{{student_list.length}} students found.</p>
+  </div>
+
+  <div class='shadow card' *ngFor='let s of student_list'>
+    <p style='font-size: 1.4rem'>{{s.studentname}}</p>
+    <div (click)="ece_fillmarks_btnclick(s)" class='marks-button' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
+      <div class='horizontal-flexbox'>
+          <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon>
+          <p>Fill Marks</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <ion-grid>
     <ion-card class="">
       <ion-list>
         {{student_list.length}} students found in ECE program
@@ -38,6 +57,6 @@
         </ion-item>
       </ion-list>
     </ion-card>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>
   

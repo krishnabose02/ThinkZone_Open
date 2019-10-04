@@ -55,8 +55,7 @@ export class ViewpaymentPage {
           this.errormessage = 'No Payment Records Found!';
         }
         this.records.forEach(element => {
-          const date = new Date(element.createdon);
-          element.displaydate = date.getDate() + ' ' + this.months[date.getMonth() - 1] + ', ' + date.getFullYear();
+          element.displaydate = this.getReadableDate(element.createdon);
         });
         loading.dismiss();
         // this.modalController.dismiss({data: 'Ok'});
@@ -66,6 +65,10 @@ export class ViewpaymentPage {
       });
   }
 
+  getReadableDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.getDate() + ' ' + this.months[date.getMonth() - 1] + ', ' + date.getFullYear();
+  }
   // alert box
   async showAlert(header: string, subHeader: string, message: string) {
     const alert = await this.alertController.create({
