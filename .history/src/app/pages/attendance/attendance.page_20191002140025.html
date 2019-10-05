@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            {{ 'ATTENDANCE.title' | translate }}
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-grid>
+    <ion-row>
+      <ion-item class="date-button">
+        <ion-label>{{ 'ATTENDANCE.date' | translate }}</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="attendancedate_onhange($event.detail.value)" [min]="min_date" [max]="max_date" [(ngModel)]="attendance_date"></ion-datetime>
+      </ion-item>
+    </ion-row>
+
+    <ion-card *ngIf="is_attendance_taken == true" class="card-padding">
+      {{ 'ATTENDANCE.complete' | translate }}
+    </ion-card>
+  
+    <ion-card *ngIf="is_attendance_taken == false">
+      <ion-row class="row-margin-top">
+        <ion-button icon-left size="medium" color="dark" shape="round" fill="outline" (click)="setholiday_onclick()" float-right tappable class="explore-btn">
+          {{ 'ATTENDANCE.btn_holiday' | translate }}
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-row>
+      <ion-row class="row-margin-bottom">
+        <ion-button icon-left size="medium" color="dark" expand="full" shape="round" fill="outline" (click)="takeattendance_onclick()" float-right tappable class="explore-btn">
+          {{ 'ATTENDANCE.btn_attendance' | translate }}
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+  

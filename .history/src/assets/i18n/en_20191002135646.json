@@ -1,0 +1,76 @@
+{
+    "APP": {
+        "home": "HOME",
+        "message": "MESSAGES",
+        "user_feedback": "FEEDBACK",
+        "about": "ABOUT",
+        "privacy_policy": "PRIVACY POLICY",
+        "logout": "LOG OUT"
+    },
+    "HOME": {
+        "student_details": "STUDENT DETAILS",
+        "attendance": "ATTENDANCE",
+        "activity_ece": "ACTIVITY(ECE)",
+        "assessment_ece": "ASSESSMENT(ECE)",
+        "activity_pge_math": "MATH ACTIVITY(PGE)",
+        "activity_pge_eng": "ENG ACTIVITY(PGE)",
+        "activity_pge_odia": "ODIA ACTIVITY(PGE)",
+        "assessment_pge": "ASSESSMENT(PGE)",
+        "training": "TRAINING",
+        "payment": "PAYMENT",
+        "user_feedback": "FEEDBACK"
+    },
+    "STUDENT": {
+        "student_details": "STUDENT DETAILS",
+        "baseline": "BASELINE",
+        "register": "REGISTER",
+        "edit": "EDIT",
+        "delete":"DELETE"
+    },
+    "REGISTER": {
+        "student_register": "STUDENT REGN.",
+        "student_name": "NAME",
+        "program": "PROGRAM",
+        "class": "CLASS",
+        "phone": "PHONE",
+        "gender": "GENDER",
+        "dob": "DOB",
+        "guardian": "GUARDIAN",
+        "reg_date": "REG. DATE",
+        "btn_cancel": "CANCEL",
+        "btn_save": "SAVE"
+    },
+    "EXPLORE": {
+        "title": "SET LEVEL",
+        "student_name": "NAME",
+        "guardian": "GUARDIAN",
+        "program": "PROGRAM",
+        "level_ece": "LEVEL(ECE)",
+        "level_math": "LEVEL(MATH)",
+        "level_eng": "LEVEL(ENG)",
+        "level_odia": "LEVEL(ODIA)"
+    },
+    "BASELINE":{
+        "title1": "BASELINE TEST",
+        "program": "PROGRAM",
+        "class": "CLASS",
+        "subject": "SUBJECT",
+        "level": "LEVEL",
+        "title2": "ANSWER ALL",
+        "btn_yes": "YES",
+        "btn_no": "NO",
+        "btn_cancel": "CANCEL",
+        "btn_save": "SAVE"
+    },
+    "ATTENDANCE":{
+        "title": "ATTENDANCE",
+        "date": "DATE",
+        "": "",
+        "": "",
+        "": "",
+        "": "",
+        "": "",
+        "": "",
+        
+    }
+}

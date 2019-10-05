@@ -1,0 +1,23 @@
+{
+    "APP": {
+        "home": "HOME",
+        "message": "MESSAGES",
+        "userfeedback": "FEEDBACK",
+        "about": "ABOUT",
+        "privacypolicy": "PRIVACY POLICY",
+        "logout": "LOG OUT"
+    },
+    "HOME": {
+        "student_details": "STUDENT DETAILS",
+        "attendance": "ATTENDANCE",
+        "activity_ece": "ACTIVITY(ECE)",
+        "assessment_ece": "ASSESSMENT(ECE)",
+        "activity_pge_math": "MATH ACTIVITY(PGE)",
+        "activity_pge_eng": "ENG ACTIVITY(PGE)",
+        "activity_pge_odia": "ODIA ACTIVITY(PGE)",
+        "assessment_pge": "ASSESSMENT(PGE)",
+        "training": "TRAINING",
+        "payment": "PAYMENT",
+        "userfeedback": "FEEDBACK"
+    }
+}

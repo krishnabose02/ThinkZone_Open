@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            {{ _username }} <br>
+            <span class="text10">{{ current_date }}</span>
+          </ion-text>
+        </ion-text>
+    </ion-title>
+     <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications('hi')">
+        <ion-icon name="notifications"></ion-icon>
+        <!--<ion-badge color="dark" slot="end">2</ion-badge>-->
+      </ion-button>
+    </ion-buttons> 
+  </ion-toolbar>
+  <!-- <ion-toolbar color="dark">
+    <ion-searchbar [(ngModel)]="searchKey"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="searchFilter()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-card>
+    <ion-card-content class="bg-white">
+      <ion-grid>
+        <ion-row>
+          <ion-col [routerLink]="'/student'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/detail.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.student_details' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+
+          <ion-col [routerLink]="'/attendance'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/attendance.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.attendance' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col [routerLink]="'/ecactivity'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/ece-activity.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.activity_ece' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col [routerLink]="'/ecassessment'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/ece-assessment.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.assessment_ece' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col [routerLink]="'/pgactivity'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/pge-activity-math.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.activity_pge_math' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+          
+          <ion-col [routerLink]="'/pgactivityeng'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/pge-activity-eng.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.activity_pge_eng' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col [routerLink]="'/pgactivityodia'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/pge-activity-odia.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.activity_pge_odia' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col [routerLink]="'/pgassessment'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/pge-assessment.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.assessment_pge' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col [routerLink]="'/training1'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/teacher-training.jpg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.training' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+          
+          <ion-col [routerLink]="'/tchpayment'" routerDirection="forward" class="menucard">
+            <img src="/assets/img/menu/payment.jpeg" alt="" />
+            <ion-card-content>
+                <ion-card-title primary class="card-title">{{ 'HOME.payment' | translate }}</ion-card-title>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+        
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+  

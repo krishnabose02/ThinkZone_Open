@@ -1,0 +1,29 @@
+{
+    "APP": {
+        "home": "ମୁକ୍ଷ ସୂଚୀ",
+        "message": "ସୂଚନା",
+        "user_feedback": "ମତାମତ",
+        "about": "ବିବରଣୀ",
+        "privacy_policy": "ଗୋପନୀୟତା",
+        "logout": "ଲଗ ଆଉଟ"
+    },
+    "HOME": {
+        "student_details": "ଛାତ୍ର ବିବରଣୀ",
+        "attendance": "ଉପସ୍ଥାନ",
+        "activity_ece": "ଗତିବିଧି(ECE)",
+        "assessment_ece": "ମୂଲ୍ୟାଙ୍କନ(ECE)",
+        "activity_pge_math": "ଅଙ୍କ ଗତିବିଧି(PGE)",
+        "activity_pge_eng": "ଇଂରାଜୀ ଗତିବିଧି(PGE)",
+        "activity_pge_odia": "ଓଡିଆ ଗତିବିଧି(PGE)",
+        "assessment_pge": "ମୂଲ୍ୟାଙ୍କନ(PGE)",
+        "training": "ପ୍ରଶିକ୍ଷଣ",
+        "payment": "ଦେୟ",
+        "user_feedback": "ମତାମତ"
+    },
+    "STUDENT": {
+        "student_details": "ଛାତ୍ର ବିବରଣୀ",
+        "baseline": "ବେସଲାଇନ",
+        "register": "ପଞ୍ଜୀକରଣ",
+        "edit": "ସମ୍ପାଦନ"
+    }
+}
