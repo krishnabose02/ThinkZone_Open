@@ -3,7 +3,7 @@
     <div style='margin: 10px'>
       
       <!--   Selector -->
-      <p style='font-size: 1.4rem'>Select Month:</p>
+      <p style='font-size: 1.4rem'>{{ 'ECEACTIVITY.month' | translate}}</p>
       <div style='flex-wrap: wrap' class='horizontal-flexbox'>
         <div (click)='month_onchange(m.value)' *ngFor='let m of active_month_list' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
           <p>{{m.name}}</p>
@@ -13,7 +13,7 @@
       <div [ngClass]='(selected_month=="")?"hidden":"expanded"'>
         <div style='min-width: 80%;background: rgb(199, 199, 199);min-height: 1px;'></div>
         <!-- Week Selector -->
-        <p style='font-size: 1.4rem'>Select Week:</p>
+        <p style='font-size: 1.4rem'>{{ 'ECEACTIVITY.week' | translate}}</p>
         <div style='flex-wrap: wrap' class='horizontal-flexbox'>
           <div (click)='week_onchange(m.value)' *ngFor='let m of week_list' [ngClass]='(m.value===selected_week)?"selected-chip":"unselected-chip"'>
             <p>{{m.text}}</p>
