@@ -54,10 +54,23 @@ import { CommonModule } from '@angular/common';
 
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
+
+import { FormsModule } from '@angular/forms';
+// Translate
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateConfigService } from './translate-config.service';
+ 
+export function LanguageLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
     CommonModule,
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot({
@@ -79,7 +92,14 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     PgeengassessmentmodalPageModule,
     PgemathassessmentmodalPageModule,
     Training2PageModule,
-    StudentregisterPageModule
+    StudentregisterPageModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (LanguageLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   entryComponents: [NotificationsComponent],
   providers: [

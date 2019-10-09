@@ -42,6 +42,7 @@ export class StudentExplorPage {
   selected_ec_level = '';
   selected_math_level = '';
   selected_eng_level = '';
+  selected_odia_level = '';
 
   _userid: string;
   _username: string;
@@ -120,6 +121,10 @@ export class StudentExplorPage {
     this.selected_eng_level = value;
   }
 
+  setlevel_pg_odia_onchange(value) {
+    this.selected_odia_level = value;
+  }
+
   async openModal2(subject, student) {
     if (subject === '') {
       this.selected_level = student.ece.val;
@@ -154,6 +159,8 @@ export class StudentExplorPage {
       this.selected_level = this.selected_math_level;
     } else if ( subject === 'english') {
       this.selected_level = this.selected_eng_level;
+    } else if ( subject === 'odia') {
+      this.selected_level = this.selected_odia_level;
     } else {
       this.selected_level = '';
     }

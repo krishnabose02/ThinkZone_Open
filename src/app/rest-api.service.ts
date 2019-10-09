@@ -83,6 +83,16 @@ export class RestApiService {
       map(this.extractData),
       catchError(this.handleError));
   }
+
+  // delete student
+  deletestudentbyid(_id):Observable<any>{
+    this.url = baseUrl+'deletestudentbyid/'+_id;
+    this.show(this.url);
+    return this.http.delete(this.url, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   // get baselinetest
   getbaselinetestquestionset(data): Observable<any> {
     this.url = baseUrl + 'getbaselinetestquestionset';

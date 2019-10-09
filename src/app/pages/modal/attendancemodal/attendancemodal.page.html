@@ -6,7 +6,7 @@
     <ion-title>
         <ion-text color="light">
           <ion-text color="light" class="fw700">
-            Take Attendance
+            {{ 'TAKEATTENDANCE.title' | translate}}
           </ion-text>
         </ion-text>
     </ion-title>
@@ -36,13 +36,18 @@
 <div class="explore-div">
   <ion-grid>
     <ion-row>
+      <ion-col>
+          <ion-text class="fw700 text25">
+            {{ 'TAKEATTENDANCE.title' | translate}}
+          </ion-text>
+      </ion-col>
       <ion-col></ion-col>
       <ion-col>
         <ion-button color="medium" (click)="closeModal()">
-          <ion-icon slot="start" name="close"></ion-icon> Cancel
+          <ion-icon slot="start" name="close"></ion-icon> 
+          {{ 'TAKEATTENDANCE.btn_cancel' | translate}}
         </ion-button>
       </ion-col>
-      <ion-col></ion-col>
     </ion-row>
   </ion-grid>
 </div> -->
@@ -82,10 +87,10 @@
               <ion-row class="right-align">
                 <ion-segment mode='ios' (ionChange)="segmentChanged(slist, $event.detail.value)">
                   <ion-segment-button class="segment-button" value="absent">
-                    Absent
+                    {{ 'TAKEATTENDANCE.absent' | translate}}
                   </ion-segment-button>
                   <ion-segment-button class="segment-button" value="present">
-                    Present
+                    {{ 'TAKEATTENDANCE.present' | translate}}
                   </ion-segment-button>
               </ion-segment>
             </ion-row>
@@ -93,8 +98,8 @@
       </ion-item>
       
       <ion-button icon-left size="medium" color="dark" (click)="save_attendace()" float-right tappable class="explore-btn">
-        SAVE ATTENDANCE
         <ion-icon name="save"></ion-icon>
+        {{ 'TAKEATTENDANCE.btn_save' | translate}}
       </ion-button>
     </ion-list>
   </ion-card>

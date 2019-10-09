@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation  } from '@angular/core';
 import {
   NavController,
   AlertController,
@@ -20,16 +20,18 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 // video player
 import { VideoPlayer, VideoOptions } from '@ionic-native/video-player/ngx';
 import { DataService } from 'src/app/services/data.service';
-
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DataObject } from 'src/app/services/DataObject';
 @Component({
   selector: 'app-ecactivity2',
   templateUrl: './ecactivity2.page.html',
-  styleUrls: ['./ecactivity2.page.scss']
+  styleUrls: ['./ecactivity2.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class Ecactivity2Page {
   qryParams: any;
   activityobj: any = {};
-  content = '';
+  content: SafeHtml = '';
   worksheet = '';
   video = '';
 
@@ -71,7 +73,8 @@ export class Ecactivity2Page {
     private diagnostic: Diagnostic,
     private videoPlayer: VideoPlayer,
     private navCtrl: NavController,
-    private dataService: DataService
+    private dataService: DataService,
+    private domSanitizer: DomSanitizer
   ) {
     // fetch sd-card
     this.diagnostic.requestExternalStorageAuthorization().then(val => {
@@ -119,9 +122,7 @@ export class Ecactivity2Page {
     await this.api.getmasteractivitiydetails(program, subject, month, week, activity).subscribe(res => {
         if (res.length > 0) {
           this.activityobj = res[0];
-          this.content = this.activityobj.content;
-          // Remove the following line
-          this.content = this.activityobj.content;
+          this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content);
           this.worksheet = this.activityobj.worksheet;
           this.video = this.activityobj.video;
           this.fillVideoPathNames(this.activityobj.video);

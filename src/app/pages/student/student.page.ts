@@ -90,8 +90,8 @@ export class StudentPage {
     this.dob = value;
   }
 
-  async getallstudents(userid){
-    let loading = await this.loadingController.create({});
+  async getallstudents(userid) {
+    const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getallstudentsbyteacher(userid)
       .subscribe(res => {
@@ -182,19 +182,19 @@ export class StudentPage {
     });
     alert.present();
   }
-  async open_register_modal(studentObj, flag){
+  async open_register_modal(studentObj, flag) {
     /*  studentObj == null <-- new user register
         else               <-- existing user update
     */
     const modal = await this.modalController.create({
       component: StudentregisterPage,
-      componentProps: { res: {flag: flag, studentObj: studentObj} } 
+      componentProps: { res: {flag: flag, studentObj: studentObj} }
     });
     modal.onDidDismiss()
       .then((data) => {
-        console.log('@@@Modal Data: '+JSON.stringify(data));
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
     });
-    return await modal.present(); 
+    return await modal.present();
   }
 
   logScrolling(event) {
@@ -205,5 +205,52 @@ export class StudentPage {
     } else {
       this.toolbarshadow = false;
     }
+  }
+
+  delete_button_click(student) {
+    const id = student._id;
+    const studentname = student.studentname;
+    this.showConfirm('Confirmation !!!', '', 'Are you sure to delete this records of ' + studentname + '?', id);
+  }
+
+  // confirm box
+  async showConfirm(header: string, subHeader: string, message: string, id: any) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.delete_student(id);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async delete_student(id) {
+    const loading = await this.loadingController.create({});
+    await loading.present();
+    await this.api.deletestudentbyid(id)
+      .subscribe(res => {
+        console.log(res);
+        this.getallstudents(this._userid);
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        this.getallstudents(this._userid);
+        loading.dismiss();
+      });
   }
 }

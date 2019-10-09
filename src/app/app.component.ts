@@ -8,14 +8,16 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { environment } from 'src/environments/environment.prod';
 import { RestApiService } from './rest-api.service';
 
+// Transalte
+import { TranslateConfigService } from './translate-config.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  public appPages: Array<Pages>;
+  selectedLanguage: string;
   _userid: string;
   _username: string;
   _emailid: string;
@@ -23,9 +25,9 @@ export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
 
-  //@ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+  // @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -35,103 +37,22 @@ export class AppComponent {
     private loadingController: LoadingController,
     private router: Router,
     private fcm: FCM,
-    private api: RestApiService
+    private api: RestApiService,
+    private translateConfigService: TranslateConfigService
   ) {
     this.backButtonEvent();
-    this.appPages = [
-      /*{
-        title: 'Home',
-        url: '/home-results',
-        direct: 'root',
-        icon: 'home'
-      },*/
-      {
-        title: 'Student Details',
-        url: '/studentexplor',
-        direct: 'forward',
-        icon: 'contact'
-      },
-      {
-        title: 'Attendance',
-        url: '/attendance',
-        direct: 'forward',
-        icon: 'paper'
-      },
-      {
-        title: 'Payment',
-        url: '/tchpayment',
-        direct: 'forward',
-        icon: 'cash'
-      },
-      {
-        title: 'Activities(ECE)',
-        url: '/ecactivity',
-        direct: 'forward',
-        icon: 'stats'
-      },
-      {
-        title: 'Assessment(ECE)',
-        url: '/ecassessment',
-        direct: 'forward',
-        icon: 'swap'
-      },
-      {
-        title: 'Maths Activities(PGE)',
-        url: '/pgactivity',
-        direct: 'forward',
-        icon: 'stats'
-      },
-      {
-        title: 'Eng. Activities(PGE)',
-        url: '/pgactivityeng',
-        direct: 'forward',
-        icon: 'stats'
-      },
-      {
-        title: 'Odia Activities(PGE)',
-        url: '/pgactivityodia',
-        direct: 'forward',
-        icon: 'stats'
-      },
-      {
-        title: 'Assessment(PGE)',
-        url: '/pgassessment',
-        direct: 'forward',
-        icon: 'swap'
-      },
-      {
-        title: 'Teacher Training',
-        url: '/training1',
-        direct: 'forward',
-        icon: 'school'
-      },
-      {
-        title: 'Messages',
-        url: '/message',
-        direct: 'forward',
-        icon: 'mail-unread'
-      },
-      {
-        title: 'User feedback',
-        url: '/userfeedback',
-        direct: 'forward',
-        icon: 'pricetags'
-      },
-      {
-        title: 'About',
-        url: '/about',
-        direct: 'forward',
-        icon: 'at'
-      }
-      
-      /*,
-      {
-        title: 'App Settings',
-        url: '/settings',
-        direct: 'forward',
-        icon: 'cog'
-      }*/
-    ];
+
+
+    console.log('@@@ inside app component LOCAL STORAGE: ' + JSON.stringify(localStorage));
+    // translate get language
+    if (localStorage.getItem('_language') === undefined
+          || localStorage.getItem('_language') == null
+          || localStorage.getItem('_language') === '') {
+      this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
+    } else {
+      this.selectedLanguage = localStorage.getItem('_language');
+      this.languageChanged(this.selectedLanguage);
+    }
 
     this._userid = localStorage.getItem('_userid');
     this._username = localStorage.getItem('_username');
@@ -142,6 +63,14 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  // translate set language
+  languageChanged(value) {
+    console.log('@@@ selected language: ' + this.selectedLanguage + '    value: ' + value);
+    this.selectedLanguage = value;
+    this.translateConfigService.setLanguage(this.selectedLanguage);
+    localStorage.setItem('_language', this.selectedLanguage);
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -149,17 +78,17 @@ export class AppComponent {
 
       // Push notification starts from here
       this.fcm.getToken().then(token => {
-        localStorage.setItem('fcm_token',token);
-        console.log('@@@ app.component fcm_token'+token);
+        localStorage.setItem('fcm_token', token);
+        console.log('@@@ app.component fcm_token' + token);
       });
 
       this.fcm.onTokenRefresh().subscribe(token => {
-        localStorage.setItem('fcm_rtoken',token);
-        console.log('@@@ app.component fcm_rtoken'+token);
+        localStorage.setItem('fcm_rtoken', token);
+        console.log('@@@ app.component fcm_rtoken' + token);
       });
 
       this.fcm.onNotification().subscribe(data => {
-        console.log('@@@ Push notification data: '+JSON.stringify(data));
+        console.log('@@@ Push notification data: ' + JSON.stringify(data));
         if (data.wasTapped) {
           console.log('@@@ app.component Received in background');
           this.router.navigate(['/showpushnotification', data.message]);
@@ -168,7 +97,7 @@ export class AppComponent {
           this.router.navigate(['/showpushnotification', data.message]);
         }
       });
-      
+
     }).catch(() => {});
   }
 
@@ -186,12 +115,10 @@ export class AppComponent {
     this.platform.backButton.subscribeWithPriority(0, () => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
-      }/*else if (this.router.url === '/center') {
-        this.navCtrl.navigateRoot('/home-results');
-      }*/ else {
+      } else {
         this.setCheckoutTime();
         this.exitTheApp(this.router.url);
-      } 
+      }
     });
   }
 
@@ -219,10 +146,10 @@ export class AppComponent {
     });
     await alert.present();
   }
-  
-  async setCheckoutTime(){
-    let id = localStorage.getItem('_document_id');
-    let time = new Date();
+
+  async setCheckoutTime() {
+    const id = localStorage.getItem('_document_id');
+    const time = new Date();
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.setcheckouttime(id, time).subscribe(res => {

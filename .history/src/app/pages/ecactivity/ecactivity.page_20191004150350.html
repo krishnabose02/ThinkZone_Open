@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            {{ 'ECEACTIVITY.title' | translate}}
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white">
+  <ion-grid>
+    <ion-card class="whitecard">
+      <!-- Select Month -->
+      <ion-row>
+        <ion-item class="full_width dropdown1">
+          <ion-label>{{ 'ECEACTIVITY.month' | translate}}</ion-label>
+          <ion-select mode="ios" interface="popover" placeholder="Select One" (ionChange)="month_onchange($event.detail.value)">
+            <ion-select-option *ngFor="let qlist of month_list" [value]="qlist.value" [disabled]="qlist.disabled">{{ qlist.text }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+    
+      <!-- Select Week -->
+      <ion-row>
+        <ion-item class="full_width dropdown2">
+          <ion-label>{{ 'ECEACTIVITY.week' | translate}}</ion-label>
+          <ion-select mode="ios" interface="popover" placeholder="Select One" (ionChange)="week_onchange($event.detail.value)">
+            <ion-select-option *ngFor="let wlist of week_list" [value]="wlist.value">{{ wlist.text }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+    </ion-card>
+
+    <ion-card class="whitecard">
+      {{ activity_heading }}
+
+      <ion-list>
+        <ion-item *ngFor="let activity of activity_list;" class="ionitem">
+          <ion-grid>
+            <ion-row class="right-align">
+              <ion-button icon-left size="medium" color="{{ activity.cls }}" (click)="activity_btnclick(activity.val)"  float-right tappable class="explore-btn">
+                A{{ activity.val }}
+              </ion-button>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+  

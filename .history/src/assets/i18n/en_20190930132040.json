@@ -1,0 +1,14 @@
+{
+    "APP": {
+        "home": "HOME",
+        "message": "MESSAGES",
+        "userfeedback": "FEEDBACK",
+        "about": "ABOUT",
+        "privacypolicy": "PRIVACY POLICY",
+        "logout": "LOG OUT"
+    },
+    "HOME": {
+        "title": "Ionic 4 Multi Language Translation",
+        "text": "This is random text to show translation in application"
+    }
+}

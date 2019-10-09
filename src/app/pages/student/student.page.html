@@ -6,7 +6,7 @@
     <ion-title>
         <ion-text color="light">
           <ion-text color="light" class="fw700">
-            Student Details
+            {{ 'STUDENT.student_details' | translate }}
           </ion-text>
         </ion-text>
     </ion-title>
@@ -30,6 +30,15 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <!-- <ion-card> -->
+    <ion-button icon-left size="medium" expand="full" color="danger" (click)="delete_button_click(student)" float-right tappable>
+        {{ 'STUDENT.delete' | translate }} 
+        <ion-icon slot="start" name="close"></ion-icon>
+    </ion-button>
+    <ion-button icon-left size="medium" expand="full" color="primary" (click)="open_register_modal(student, 'edit')" float-right tappable>
+        {{ 'STUDENT.edit' | translate }} 
+        <ion-icon slot="start" name="color-filter"></ion-icon>
+    </ion-button>
+    
     <div class="card-margin">
       <!-- Logo -->
       <!-- <div padding-horizontal text-center>
@@ -80,6 +89,29 @@
 
   
         </div>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button icon-left size="medium" color="secondary" (click)="explor()" tappable>
+                    {{ 'STUDENT.baseline' | translate }}
+                  <ion-icon name="arrow-dropright"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button icon-left size="medium" color="secondary" (click)="open_register_modal(null, 'new')" tappable>
+                    {{ 'STUDENT.register' | translate }}
+                  <ion-icon name="arrow-dropright"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
 
 
         <div class='shadow group'>

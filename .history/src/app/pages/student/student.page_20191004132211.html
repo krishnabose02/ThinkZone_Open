@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">
+            {{ 'STUDENT.student_details' | translate }}
+          </ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="explore-div">
+  <ion-row>
+    <ion-item>
+      <ion-button icon-left size="medium" color="secondary" (click)="explor()" float-right tappable class="explore-btn">
+          {{ 'STUDENT.baseline' | translate }}
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button icon-left size="medium" color="secondary" (click)="open_register_modal(null, 'new')" float-right tappable class="explore-btn">
+          {{ 'STUDENT.register' | translate }}
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-row>
+</div>
+
+<ion-content class="bg-white">
+    <ion-card class="">
+      <div class="card-margin">
+        <ion-list>
+          <ion-item *ngFor="let student of student_list">
+            <!-- Student of ECE -->
+            <ion-label>
+              {{ student.studentname }} 
+              <p>Father: {{ student.parentsname }} </p>
+              <ion-button icon-left size="medium" expand="full" color="danger" (click)="delete_button_click(student)" float-right tappable>
+                	{{ 'STUDENT.delete' | translate }} 
+                  <ion-icon slot="start" name="close"></ion-icon>
+            	</ion-button>
+              <ion-button icon-left size="medium" expand="full" color="primary" (click)="open_register_modal(student, 'edit')" float-right tappable>
+                  {{ 'STUDENT.edit' | translate }} 
+                  <ion-icon slot="start" name="color-filter"></ion-icon>
+              </ion-button>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title>Footer</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+
+
+  

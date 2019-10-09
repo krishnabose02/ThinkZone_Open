@@ -6,7 +6,7 @@
     <ion-title>
         <ion-text color="light">
           <ion-text color="light" class="fw700">
-            Student: Set level
+            {{ 'EXPLORE.title' | translate }}
           </ion-text>
         </ion-text>
     </ion-title>
@@ -31,10 +31,11 @@
         <div class='vertical-flexbox' style='align-items: flex-start;color: gray;font-size: 1.2rem;justify-content: center'>
           <div class='horizontal-flexbox'>
             <ion-icon name='person' style="color: gray;font-size: 1.4rem;margin: 10px"></ion-icon>
-            <p style='color: gray;font-size: 1.4rem'>{{student.studentname}} plus big surname</p>
+            <!-- <p>{{ 'EXPLORE.student_name' | translate }}</p> -->
+            <p style='color: gray;font-size: 1.4rem'>{{student.studentname}}</p>
           </div>
-          <p style='text-align: start;margin-bottom: 0px;margin-top: 0px;margin-left: 10px'>Parent: {{student.parentsname}}</p>
-          <p style='text-align: start;margin-bottom: 0px;margin-bottom: 10px;margin-top: 10px;margin-left: 10px'>{{student.program=='ece'?'ECE Anganwadi':'PGE '+student.class}}</p>
+          <p style='text-align: start;margin-bottom: 0px;margin-top: 0px;margin-left: 10px'>{{ 'EXPLORE.guardian' | translate }}: {{student.parentsname}}</p>
+          <p style='text-align: start;margin-bottom: 0px;margin-bottom: 10px;margin-top: 10px;margin-left: 10px'>{{student.program=='ece'?'ECE Anganwadi': ( 'EXPLORE.program' | translate ) +student.class}}</p>
         
         </div>
         <ion-icon (click)='flipStudentDisplay(student)' [ngClass]='(!student.hidden)?"rotate-down":"rotate-up"' name='ios-arrow-down' style="color: gray;padding: 10px;font-size: 1.6rem"></ion-icon>
@@ -48,7 +49,7 @@
             <!-- This is the English level display area -->
             <div class='horizontal-flexbox' style='justify-content: space-between'>
               <div class='horizontal-flexbox'>
-                <p style='font-size: 1.3rem'>English:</p>
+                <p style='font-size: 1.3rem'>{{ 'EXPLORE.level_eng' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
                   <p>{{student.english.val==null ? "?" : student.english.val}}</p>
                 </div>
@@ -75,7 +76,7 @@
             <!-- This is the Math level display area -->
             <div class='horizontal-flexbox' style='justify-content: space-between'>
               <div class='horizontal-flexbox'>
-                <p style='font-size: 1.3rem'>Maths:</p>
+                <p style='font-size: 1.3rem'>{{ 'EXPLORE.level_math' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
                   <p>{{student.math.val==null ? "?" : student.math.val}}</p>
                 </div>
@@ -102,7 +103,7 @@
             <!-- This is the Odia level display area -->
             <div class='horizontal-flexbox' style='justify-content: space-between'>
               <div class='horizontal-flexbox'>
-                <p style='font-size: 1.3rem'>Odia:</p>
+                <p style='font-size: 1.3rem'>{{ 'EXPLORE.level_odia' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
                   <p>{{student.odia.val==null ? "?" : student.odia.val}}</p>
                 </div>
@@ -138,7 +139,7 @@
             <!-- This is the ECE level display area -->
             <div class='horizontal-flexbox' style='justify-content: space-between'>
               <div class='horizontal-flexbox'>
-                <p style='font-size: 1.3rem'>ECE:</p>
+                <p style='font-size: 1.3rem'>{{ 'EXPLORE.level_ece' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
                   <p>{{student.ece.val==null ? "?" : student.ece.val}}</p>
                 </div>
@@ -171,20 +172,19 @@
         <ion-item *ngFor="let student of student_list">
           Student of ECE
           <ion-label *ngIf="student.program == 'ece'">
-            Student: {{ student.studentname }} 
-            <p>Father: {{ student.parentsname }} </p>
-            <p>Standard: {{ student.program }}: Anganwadi </p>
+            {{ 'EXPLORE.student_name' | translate }}: {{ student.studentname }} 
+            <p>{{ 'EXPLORE.guardian' | translate }}: {{ student.parentsname }} </p>
+            <p>{{ 'EXPLORE.program' | translate }}: {{ student.program }}: Anganwadi </p>
             <ion-item  no-lines>
-              <p *ngIf="student.ec_level != null"> ECE Level: {{ student.ec_level }} </p>
+              <p *ngIf="student.ec_level != null"> {{ 'EXPLORE.level_ece' | translate }}: {{ student.ec_level }} </p>
               <p *ngIf="student.ec_level == null">
                 <ion-select placeholder="Set level" (ionChange)="setlevel_ec_onchange($event.detail.value)" class="select-width">
                   <ion-select-option value="1">1</ion-select-option>
                   <ion-select-option value="2">2</ion-select-option>
                   <ion-select-option value="3">3</ion-select-option>
                 </ion-select>
-                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('',student)" [disabled]="" tappable>
-                  Set Level  
-                  <ion-icon name="send"></ion-icon>
+                <ion-button icon-left size="medium" expand="full" color="primary" (click)="openModal('',student)" [disabled]="" tappable>
+                  {{ 'EXPLORE.level_ece' | translate }} 
                 </ion-button>
               </p>
             </ion-item>
@@ -193,11 +193,11 @@
 
           Student of PGE
           <ion-label *ngIf="student.program == 'pge'">
-            Student: {{ student.studentname }} 
-            <p>Father:  {{ student.parentsname }} </p>
-            <p>Standard: {{ student.program }} : {{ student.class }}</p>
+            {{ 'EXPLORE.student_name' | translate }}: {{ student.studentname }} 
+            <p>{{ 'EXPLORE.guardian' | translate }}:  {{ student.parentsname }} </p>
+            <p>{{ 'EXPLORE.program' | translate }}: {{ student.program }} : {{ student.class }}</p>
             <ion-item  no-lines>
-              <p *ngIf="student.math_level != null"> Math Level: {{ student.math_level }} </p>
+              <p *ngIf="student.math_level != null">  {{ 'EXPLORE.level_math' | translate }}: {{ student.math_level }} </p>
               <p *ngIf="student.math_level == null">
                 <ion-select placeholder="Set level" (ionChange)="setlevel_pg_math_onchange($event.detail.value)" class="select-width">
                   <ion-select-option value="1">1</ion-select-option>
@@ -206,14 +206,13 @@
                   <ion-select-option value="4">4</ion-select-option>
                   <ion-select-option value="5">5</ion-select-option>
                 </ion-select>
-                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('math',student)" [disabled]="" tappable>
-                  Set Level (Math.) 
-                  <ion-icon name="send"></ion-icon>
+                <ion-button icon-left size="medium" expand="full" color="primary" (click)="openModal('math',student)" [disabled]="" tappable>
+                  {{ 'EXPLORE.level_math' | translate }}
                 </ion-button>
               </p>
             </ion-item>
             <ion-item  no-lines>
-              <p *ngIf="student.eng_level != null"> Eng. Level: {{ student.eng_level }} </p>
+              <p *ngIf="student.eng_level != null"> {{ 'EXPLORE.level_eng' | translate }}: {{ student.eng_level }} </p>
               <p *ngIf="student.eng_level == null"> 
                 <ion-select placeholder="Set level" (ionChange)="setlevel_pg_eng_onchange($event.detail.value)" class="select-width">
                   <ion-select-option value="1">1</ion-select-option>
@@ -222,17 +221,14 @@
                   <ion-select-option value="4">4</ion-select-option>
                   <ion-select-option value="5">5</ion-select-option>
                 </ion-select>
-                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('english',student)" [disabled]="" tappable>
-                  Set Level (Eng.) 
-                  <ion-icon name="send"></ion-icon>
+                <ion-button icon-left size="medium" expand="full" color="primary" (click)="openModal('english',student)" [disabled]="" tappable>
+                  {{ 'EXPLORE.level_eng' | translate }} 
                 </ion-button>
               </p>
             </ion-item>
-
-
             Odia
             <ion-item  no-lines>
-              <p *ngIf="student.odia_level != null"> Odia Level: {{ student.odia_level }} </p>
+              <p *ngIf="student.odia_level != null"> {{ 'EXPLORE.level_odia' | translate }}: {{ student.odia_level }} </p>
               <p *ngIf="student.odia_level == null">
                 <ion-select placeholder="Set level" (ionChange)="setlevel_pg_odia_onchange($event.detail.value)" class="select-width">
                   <ion-select-option value="1">1</ion-select-option>
@@ -241,12 +237,13 @@
                   <ion-select-option value="4">4</ion-select-option>
                   <ion-select-option value="5">5</ion-select-option>
                 </ion-select>
-                <ion-button icon-left size="medium" expand="full" color="warning" (click)="openModal('odia',student)" [disabled]="" tappable>
-                  Set Level (Odia.) 
+                <ion-button icon-left size="medium" expand="full" color="primary" (click)="openModal('odia',student)" [disabled]="" tappable>
+                  {{ 'EXPLORE.level_odia' | translate }}
                   <ion-icon name="send"></ion-icon>
                 </ion-button>
               </p>
-            </ion-item>
+            </ion-item> 
+
           </ion-label>
         </ion-item>
       </ion-list>

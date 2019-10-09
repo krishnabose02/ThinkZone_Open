@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EcactivityPage } from './ecactivity.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
   declarations: [

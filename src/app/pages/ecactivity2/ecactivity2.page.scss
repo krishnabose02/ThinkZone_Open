@@ -15,10 +15,10 @@
     }
 }
 .textarea{
-    background-color: white;
-    font-weight: bold;
+    background-color: white;   
+    overflow-y: auto;
+    overflow-x: hidden;
     height: 400px;
-    padding: 20px;
     line-height: 30px;
 }
 

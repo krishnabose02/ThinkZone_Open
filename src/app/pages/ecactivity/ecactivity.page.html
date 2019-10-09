@@ -1,7 +1,7 @@
 <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
   <ion-toolbar>
     <ion-row style="position: relative">
-        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>ECE Activities</p></ion-title>
+        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>{{ 'ECEACTIVITY.title' | translate}}</p></ion-title>
         <ion-back-button style="color: gray"></ion-back-button>
     </ion-row>
   </ion-toolbar>
@@ -14,7 +14,6 @@
   <div *ngIf='activity_loaded && activity_list.length==0'>
     <p style='color: #f44336;text-align: center;margin: 10px'>No activities found for the selected week</p>
   </div>
-
   <app-activity-selector [activity_list]='activity_list' (selected)='activity_btnclick($event)'></app-activity-selector>
 </ion-content>
   

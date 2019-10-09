@@ -14,6 +14,7 @@ import { ImagePage } from './../modal/image/image.page';
 // Call notifications test by Popover and Custom Component.
 import { NotificationsComponent } from './../../components/notifications/notifications.component';
 import { RestApiService } from './../../rest-api.service';
+import { TranslateConfigService } from './../../translate-config.service';
 
 @Component({
   selector: 'app-home-results',
@@ -40,7 +41,8 @@ export class HomeResultsPage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public loadingController: LoadingController,
-    public api: RestApiService
+    public api: RestApiService,
+    private translateConfigService: TranslateConfigService
   ) {
     this.centers = [];
     this.api.getcurrentdate()
