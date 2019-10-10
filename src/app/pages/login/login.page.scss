@@ -1,47 +1,47 @@
-:host {
-    ion-content {
-        --background: url("/assets/img/bg-blur.jpg") no-repeat center center fixed; 
-        --background-size: cover;  
-    }
-}
+// :host {
+//     ion-content {
+//         --background: url("/assets/img/bg-blur.jpg") no-repeat center center fixed; 
+//         --background-size: cover;  
+//     }
+// }
 
 
-.bg{
-    background-repeat:  repeat ;
-    background-position: center; 
-    background-size: cover; 
-}
+// .bg{
+//     background-repeat:  repeat ;
+//     background-position: center; 
+//     background-size: cover; 
+// }
 
-.text_{
-    color: blue;
-}
+// .text_{
+//     color: blue;
+// }
 
-.paz {
-    position: relative;
-    z-index: 10;
-}
+// .paz {
+//     position: relative;
+//     z-index: 10;
+// }
 
-.box{
-    background-color: #000000b0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid white;
-}
-.login-button{
-    background-color: #1d6948 ;
-}
-.app-title{
-    width: 130px;
-    height: 60px;
-    margin: 20px auto 8px;
-    border-radius: 10%;
-    background: url("/assets/img/app-title.png") no-repeat;
-    background-size: 100%;
-}
+// .box{
+//     background-color: #000000b0;
+//     padding: 10px;
+//     border-radius: 5px;
+//     border: 1px solid white;
+// }
+// .login-button{
+//     background-color: #1d6948 ;
+// }
+// .app-title{
+//     width: 130px;
+//     height: 60px;
+//     margin: 20px auto 8px;
+//     border-radius: 10%;
+//     background: url("/assets/img/app-title.png") no-repeat;
+//     background-size: 100%;
+// }
 
-.margin50{
-    margin-top: 50%;
-}
+// .margin50{
+//     margin-top: 50%;
+// }
 
 
 @keyframes card-show {
