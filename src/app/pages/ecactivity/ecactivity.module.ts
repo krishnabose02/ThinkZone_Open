@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-//import { PopmenuComponent } from './../../components/popmenu/popmenu.component';
-
 import { EcactivityPage } from './ecactivity.page';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
@@ -18,6 +18,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -27,7 +28,8 @@ const routes: Routes = [
   ],
   declarations: [
     EcactivityPage
-    //, PopmenuComponent
-  ]
+    // PopmenuComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EcactivityPageModule {}

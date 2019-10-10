@@ -1,51 +1,63 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            {{ 'ATTENDANCE.title' | translate }}
-          </ion-text>
-        </ion-text>
-    </ion-title>
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <ion-toolbar>
+    <ion-row style="position: relative">
+        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>{{ 'ATTENDANCE.title' | translate }}</p></ion-title>
+        <ion-back-button style="color: gray"></ion-back-button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-white">
-  <ion-grid>
-    <ion-card class="whitecard">
-        <ion-row>
-        <ion-item class="date-button white_font">
-          <ion-icon name="calendar" class="white_font"></ion-icon>
-          <ion-label>{{ 'ATTENDANCE.date' | translate }}</ion-label>
-          <ion-datetime display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="attendancedate_onhange($event.detail.value)" [min]="min_date" [max]="max_date" [(ngModel)]="attendance_date"></ion-datetime>
-        </ion-item>
-      </ion-row>
-  
-      <div *ngIf="is_attendance_taken == true" class="card-padding">
-        {{ 'ATTENDANCE.complete' | translate }}
-      </div>
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)" class="bg-white">
 
-      <div class="whitecard" *ngIf="is_attendance_taken == false">
-          <ion-row class="row-margin-top">
-            <ion-button icon-left (click)="setholiday_onclick()" color="warning" float-right tappable class="explore-btn">
-              <ion-icon name="bonfire"></ion-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {{ 'ATTENDANCE.btn_holiday' | translate }}
-            </ion-button>
-          </ion-row>
-          <ion-row class="row-margin-bottom">
-            <ion-button icon-left (click)="takeattendance_onclick()" color="secondary" float-right tappable class="explore-btn">
-              <ion-icon name="checkbox-outline"></ion-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {{ 'ATTENDANCE.btn_attendance' | translate }}
-            </ion-button>
-          </ion-row>
+  <p>Do something with {{ 'ATTENDANCE.date' | translate }}</p>
+  <div (click)='openDatePicker()' style='margin-top: 30px;margin-bottom: 60px;display: flex;justify-content: center;align-items: center;width: 100%'>
+    <div class='shadow' style='min-height: 150px;width: 50%;border-radius: 10px'>
+      <div style='min-height: 35px;display: flex;flex-flow: row;justify-content: space-evenly;align-items: center;height: 25%;width: 100%;border-radius: 10px 10px 0 0;background: red'>
+        <div style='border-radius: 50%;background: darkred;min-height: 25px;min-width: 25px;display: flex;flex-flow: row;align-items: center;justify-content: center'>
+          <div style='border-radius: 50%;background: white;min-height: 15px;min-width: 15px'></div>
         </div>
+        <div style='border-radius: 50%;background: darkred;min-height: 25px;min-width: 25px;display: flex;flex-flow: row;align-items: center;justify-content: center'>
+          <div style='border-radius: 50%;background: white;min-height: 15px;min-width: 15px'></div>
+        </div>
+      </div>
+      <div style='border-radius: 0 0 10px 10px;width: 100%;height: 100%;color: black;text-align: center;background: rgb(255, 255, 240)'>
+        <div>
+          <b style='font-size: 3rem;margin-top: 20px'>{{date}}</b>
+        </div>
+        <hr>  
+        <div style='width: 100%;height: 50%'>
+          <p style="padding: 10px">{{month}}</p>
+        </div>
+        <div style='color: white;font-size: 1.2rem;font-weight: bold;background: red;padding: 10px;border-radius: 0 0 10px 10px'>
+            {{attendance_day}}
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div *ngIf='!is_attendance_taken' style='display: flex;flex-flow: column;align-items: center'>
+    
+    <div (click)='changeState("attendance")' [ngClass]='(clickState==1)?"white-bg":"green-bg shadow"' style='border-radius: 4px;margin-top: 30px;text-align: center;color: white;width: 50%;background: #4caf50'>
+      <p style='padding: 8px'>{{ 'ATTENDANCE.btn_attendance' | translate }}</p>
+    </div>
 
-      
-
-    </ion-card>
-  </ion-grid>
+    <div [ngClass]='(clickState==1)?"shadow":""' style='border-radius: 4px;margin-top: 20px;width: 80%;color: gray;display: flex;flex-flow: column;align-items: center'>
+      <div style='z-index: 1' [ngClass]='(clickState==1)?"reveal":"hidden"'>
+        <p style='color: red'>{{error_message}}</p>
+        <ion-input (ionChange)='error_message=""' [(ngModel)]='holiday_name' style="border-bottom: 1px solid rgb(199, 199, 199);margin-bottom: 10px" placeholder='Enter holiday name'></ion-input>
+      </div>
+      <div (click)='changeState("holiday")' [ngClass]='(clickState==1)?"green-bg":"white-bg shadow"'  style='z-index: 2;border-radius: 4px;text-align: center;width: 62%;margin-bottom: 10px'>
+        <p style='padding: 8px'>{{ 'ATTENDANCE.btn_holiday' | translate }}</p>
+      </div>
+    </div>
+    
+  </div>
+  <div *ngIf='is_attendance_taken'>
+    <div class='shadow' style='width: 80%;margin: 10%;height: fit-content;display: flex;flex-flow: column;align-items: center'>
+      <ion-icon style="margin: 10px;color: rgb(77, 199, 77);font-size: 2rem" name='checkmark'></ion-icon>
+      <div style='min-width: 80%;min-height: 1px;background: rgb(199, 199, 199)'></div>
+      <p style='margin: 20px;font-size: 1.4rem;color: gray;text-align: center'>{{ 'ATTENDANCE.complete' | translate }}</p>
+    </div>
+  </div>
+  <ion-datetime #datePicker hidden='true' display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="attendancedate_onhange($event.detail.value)" [min]="min_date" [max]="max_date" [(ngModel)]="attendance_date"></ion-datetime>
 </ion-content>
-  

@@ -17,10 +17,11 @@ import { MessagebodyPage } from './../modal/messagebody/messagebody.page';
   styleUrls: ['./message.page.scss'],
 })
 export class MessagePage implements OnInit {
-    isUnread: boolean= false;
+    isUnread = false;
 
   userid: string = localStorage.getItem('_userid');
   respons: any;
+  toolbarshadow = true;
 
   constructor(public navCtrl: NavController,
               public menuCtrl: MenuController,
@@ -36,14 +37,14 @@ export class MessagePage implements OnInit {
     }
 
     async getResponse() {
-        let loading = await this.loadingController.create({});
+        const loading = await this.loadingController.create({});
         await loading.present();
         await this.api.getmessagesbyuserid(this.userid)
             .subscribe(res => {
-                //console.log('@@@Feedback from db: '+JSON.stringify(res));
+                // console.log('@@@Feedback from db: '+JSON.stringify(res));
                 loading.dismiss();
                 this.respons = res;
-                //this.showAlert('Location Sharing', 'Center location', 'Location sharing '+res['status']+' !!!');
+                // this.showAlert('Location Sharing', 'Center location', 'Location sharing '+res['status']+' !!!');
             }, err => {
                 console.log(err);
                 loading.dismiss();
@@ -51,23 +52,23 @@ export class MessagePage implements OnInit {
     }
 
     async openMessage(res) {
-        //console.log('#$#$res: '+JSON.stringify(res))
+        // console.log('#$#$res: '+JSON.stringify(res))
         const modal = await this.modalController.create({
             component: MessagebodyPage,
-            componentProps: {res: res} //<-- this is used to pass data from  this page to the modal page that will open on click
+            componentProps: {res: res} // <-- this is used to pass data from  this page to the modal page that will open on click
         });
         this.updateMessageStatus(res);
         return await modal.present();
     }
-    async updateMessageStatus(res){
-        if(res['status'] == 'unread'){
-            let _id = res['_id'];
-            let id = res['id'];
-            let userid = res['userid'];
-            let title = res['title'];
-            let message = res['message'];
-            let status = 'read';
-            let readon = new Date;
+    async updateMessageStatus(res) {
+        if (res['status'] === 'unread') {
+            const _id = res['_id'];
+            const id = res['id'];
+            const userid = res['userid'];
+            const title = res['title'];
+            const message = res['message'];
+            const status = 'read';
+            const readon = new Date;
 
             const body = {
                 id: id,
@@ -77,19 +78,28 @@ export class MessagePage implements OnInit {
                 status: status,
                 readon: readon
             };
-            
-            let loading = await this.loadingController.create({});
+
+            const loading = await this.loadingController.create({});
             await loading.present();
             await this.api.updatemessagebyid(_id, body)
                 .subscribe(res => {
-                    //console.log('@@@Feedback from db: '+JSON.stringify(res));
+                    // console.log('@@@Feedback from db: '+JSON.stringify(res));
                     loading.dismiss();
-                    //this.getResponse();
+                    // this.getResponse();
                 }, err => {
                     console.log(err);
                     loading.dismiss();
                 });
                 this.getResponse();
+        }
+    }
+    logScrolling(event) {
+        // console.log(event);
+        if (event.detail.currentY === 0) {
+            console.log('top');
+            this.toolbarshadow = true;
+        } else {
+            this.toolbarshadow = false;
         }
     }
 }

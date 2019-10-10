@@ -50,6 +50,7 @@ import { VideoPlayer } from '@ionic-native/video-player/ngx';
 
 // Push Notification FCM(Firebase Cloud Messaging)
 import { FCM } from '@ionic-native/fcm/ngx';
+import { CommonModule } from '@angular/common';
 
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
@@ -68,10 +69,13 @@ export function LanguageLoader(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
+    CommonModule,
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      scrollAssist: false
+    }),
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,

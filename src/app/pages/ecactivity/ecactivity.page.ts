@@ -16,23 +16,28 @@ import { RestApiService } from './../../rest-api.service';
   styleUrls: ['./ecactivity.page.scss']
 })
 export class EcactivityPage {
-  program: string = 'ece';
-  subject: string = 'na';
+  program = 'ece';
+  subject = 'na';
   month_list: any = [];
   week_list: any = [];
   activity_list: any = [];
-  selected_month: string = '';
-  selected_week: string = '';
-  activity_heading: string ='';
+  selected_month = '';
+  selected_week = '';
+  activity_heading = '';
 
   month_diff: number;
   userobj: any = {};
-  userreg_date: string = '';
-  
+  userreg_date = '';
+
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
+
+  toolbarshadow = true;
+  active_month_list = [];
+  loading;
+  activity_loaded = false;
 
   constructor(
     public navController: NavController,
@@ -53,18 +58,18 @@ export class EcactivityPage {
     this.getuserbyid(this._userid);
   }
 
-  async getuserbyid(userid){
-    const loading = await this.loadingController.create({});
+  async getuserbyid(userid) {
+    const loading = await this.loadingController.create({spinner: 'dots'});
     await loading.present();
     await this.api.getuserbyuserid(userid).subscribe(res => {
         if (res.length > 0) {
           this.userobj = res[0];
           this.userreg_date = res[0].createdon;
-        } 
-        //console.log('@@@userobj: ' + JSON.stringify(this.userobj));
-        //console.log('@@@userreg_date: ' + this.userreg_date);
+        }
+        // console.log('@@@userobj: ' + JSON.stringify(this.userobj));
+        // console.log('@@@userreg_date: ' + this.userreg_date);
         this.calculatemonth(new Date(this.userreg_date), new Date());
-        //this.calculatemonth(new Date(2018,11,11), new Date(2019,5,7));
+        // this.calculatemonth(new Date(2018,11,11), new Date(2019,5,7));
         loading.dismiss();
       }, err => {
         console.log(err);
@@ -72,113 +77,134 @@ export class EcactivityPage {
       });
   }
 
-  calculatemonth(fromDate, toDate){
+  calculatemonth(fromDate, toDate) {
     // month difference
     let months = (toDate.getMonth() - fromDate.getMonth()) + (12 * (toDate.getFullYear() - fromDate.getFullYear())) + 1;
-    if(toDate.getDate() < fromDate.getDate()){
+    if (toDate.getDate() < fromDate.getDate()) {
         months--;
     }
     this.month_diff = months;
-    //console.log('@@@month_diff: ' + this.month_diff);
+    // console.log('@@@month_diff: ' + this.month_diff);
 
     // make mont_diff a +ve number
     this.month_diff = (this.month_diff < 0) ? (this.month_diff * -1) : this.month_diff;
     let obj = {};
     this.month_list = [];
     for (let i = 1; i <= 12; i++) {
-      if( i <= this.month_diff){
-        obj = { value: ''+i, text: 'Month '+i, disabled: false};
-      }else{
-        obj = { value: ''+i, text: 'Month '+i, disabled: true};
+      if ( i <= this.month_diff) {
+        obj = { value: '' + i, text: 'Month ' + i, disabled: false};
+        this.active_month_list.push({name: 'Month ' + i, value: i, selected: false});
+      } else {
+        obj = { value: '' + i, text: 'Month ' + i, disabled: true};
       }
-     
+
       this.month_list.push(obj);
     }
-    //console.log('@@@month_list: ' + JSON.stringify(this.month_list));
+    // console.log('@@@month_list: ' + JSON.stringify(this.month_list));
   }
-  
+
   // month on change event
-  month_onchange(value){
-    //console.log('@@@selected_month: '+value);
+  month_onchange(value) {
+    this.active_month_list.forEach(element => {
+      element.selected = false;
+    });
+    this.active_month_list[value - 1].selected = true;
+
+    // console.log('@@@selected_month: '+value);
     this.selected_month = value;
     let obj = {};
     this.week_list = [];
     for (let i = 1; i <= 4; i++) {
-      obj = { value: ''+i, text: 'Week '+i};
+      obj = { value: '' + i, text: 'Week ' + i};
       this.week_list.push(obj);
     }
 
     // set activity heading
-    if(this.selected_month.trim().length > 0 && this.selected_week.trim().length > 0){
-      this.getactivitydetails(this.selected_month,this.selected_week);
+    // if (this.selected_month.trim().length > 0 && this.selected_week.trim().length > 0) {
+
+    if (this.selected_month !== '' && this.selected_week !== '') {
+      this.getactivitydetails(this.selected_month, this.selected_week);
     }
   }
 
-  week_onchange(value){
-    //console.log('@@@selected_week: '+value);
+  week_onchange(value) {
+    // console.log('@@@selected_week: '+value);
     this.selected_week = value;
 
     // set activity heading
-    if(this.selected_month.trim().length > 0 && this.selected_week.trim().length > 0){
-      this.getactivitydetails(this.selected_month,this.selected_week);
+    // if (this.selected_month.trim().length > 0 && this.selected_week.trim().length > 0) {
+
+    if (this.selected_month !== '' && this.selected_week !== '') {
+      this.getactivitydetails(this.selected_month, this.selected_week);
     }
   }
 
-  async getactivitydetails(month, week){
+  async reloadActivityData(monthAndWeek: string) {
+    const mnw = monthAndWeek.split(' ');
+    this.getactivitydetails(mnw[0], mnw[1]);
+  }
+  async getactivitydetails(month, week) {
     this.selected_month = month;
     this.selected_week = week;
-    this.activity_heading = 'Month('+this.selected_month+') - Week('+this.selected_week+')';
+    this.activity_heading = 'Month(' + this.selected_month + ') - Week(' + this.selected_week + ')';
 
-    const loading = await this.loadingController.create({});
-    await loading.present();
+    this.loading = await this.loadingController.create({spinner: 'dots'});
+    await this.loading.present();
     await this.api.getmasteractivities(this.program, this.subject, this.selected_month, this.selected_week).subscribe(res => {
-        loading.dismiss();
+        // loading.dismiss();
         this.setActivityStatus(res);
       }, err => {
         console.log(err);
-        loading.dismiss();
+        this.loading.dismiss();
       });
   }
 
-  async setActivityStatus(all_activities){
-    const loading = await this.loadingController.create({});
-    await loading.present();
-    await this.api.gettchactivitybyuser(this._userid, this.program, this.subject, this.selected_month, this.selected_week).subscribe(res => {
+  async setActivityStatus(all_activities) {
+    // const loading = await this.loadingController.create({});
+    // await loading.present();
+    await this.api.gettchactivitybyuser(
+                                        this._userid,
+                                        this.program,
+                                        this.subject,
+                                        this.selected_month,
+                                        this.selected_week
+                    ).subscribe(res => {
         this.activity_list = [];
+        this.activity_loaded = true;
         all_activities.forEach(element => {
           let obj = {};
-          if(res.includes(element)){
+          if (res.includes(element)) {
             obj = { val: element, cls: 'success' };
-          }else{
+          } else {
             obj = { val: element, cls: 'warning' };
           }
           this.activity_list.push(obj);
         });
-        loading.dismiss();
-        // console.log('@@@activity_list: '+JSON.stringify(this.activity_list));
-        // console.log('@@@all_activities: '+JSON.stringify(all_activities));
+        this.loading.dismiss();
+        console.log('@@@activity_list: ' + JSON.stringify(this.activity_list));
+        console.log('@@@all_activities: ' + JSON.stringify(all_activities));
       }, err => {
         console.log(err);
-        loading.dismiss();
+        this.loading.dismiss();
       });
   }
 
   // ece fillmarks button click
-  async activity_btnclick(activity){
+  async activity_btnclick(activity) {
     // navigate forward with params
-    let paramiters= {
-      program: this.program, 
-      subject: this.subject, 
-      month: this.selected_month, 
-      week: this.selected_week, 
+    const paramiters = {
+      program: this.program,
+      subject: this.subject,
+      month: this.selected_month,
+      week: this.selected_week,
       activity: activity
     };
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: {
         paramiters: JSON.stringify(paramiters)
       }
   };
-  //this.navController.navigateForward('/ecactivity2', navigationExtras);
+  // this.navController.navigateForward('/ecactivity2', navigationExtras);
   this.router.navigate(['ecactivity2'], navigationExtras);
   }
 
@@ -214,5 +240,15 @@ export class EcactivityPage {
       ]
     });
     await alert.present();
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+        console.log('top');
+        this.toolbarshadow = true;
+    } else {
+        this.toolbarshadow = false;
+    }
   }
 }

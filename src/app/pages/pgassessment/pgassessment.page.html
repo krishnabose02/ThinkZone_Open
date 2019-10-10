@@ -1,20 +1,56 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            Assessment (PGE)
-          </ion-text>
-        </ion-text>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+    <ion-toolbar>
+      <ion-row style="position: relative">
+          <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>PGE Assessments</p></ion-title>
+          <ion-back-button style="color: gray"></ion-back-button>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+        
+  <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+    <div style='padding: 30px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
+      <div style='margin: 10px'>
+        
+        <!--  Module Selector -->
+        <p style='font-size: 1.4rem'>Select Month:</p>
+        <div style='flex-wrap: wrap' class='horizontal-flexbox'>
+          <div (click)='month_onchange(q.value)' *ngFor='let q of month_list' [ngClass]='(selected_month==q.value)?"selected-chip":"unselected-chip"'>
+            <p>{{q.text}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<ion-content class="bg-white">
-  <ion-grid>
+    <div class='card shadow'>
+      <p style='font-size: 1.6rem'>Program: ECE</p>
+      <p>{{student_list.length}} students found.</p>
+    </div>
+
+    <div class='shadow card' *ngFor='let s of student_list'>
+      <p style='font-size: 1.4rem'>{{s.studentname}}</p>
+      <div style='min-height: 1px;background: gray;width: 100%'></div>
+      <div class='horizontal-flexbox' style='color: gray;justify-content: flex-start'>
+        <ion-icon style="margin-right: 10px;font-size: 1.6rem" name='paper'></ion-icon>
+        <p>Fill Marks</p>
+      </div>
+      <div class='horizontal-flexbox' style='justify-content: space-evenly'>
+        <div (click)="pge_fillmarks_btnclick(s,'eng')" class='marks-button green shadow' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
+          <div>
+              <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
+              <p>English</p>
+          </div>
+        </div>
+        <div (click)="pge_fillmarks_btnclick(s,'math')" class='marks-button orange shadow' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
+          <div>
+              <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
+              <p>Math</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <ion-grid>
     <ion-row>
       <ion-item class="full_width">
         <ion-label>Month</ion-label>
@@ -50,6 +86,6 @@
         </ion-item>
       </ion-list>
     </ion-card>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>
   

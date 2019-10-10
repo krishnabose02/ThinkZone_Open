@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: '', redirectTo: 'home-results', pathMatch: 'full' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
@@ -30,7 +31,9 @@ const routes: Routes = [
   { path: 'pgactivity2odia', loadChildren: './pages/pgactivity2odia/pgactivity2odia.module#Pgactivity2odiaPageModule' },
   { path: 'pgactivityeng', loadChildren: './pages/pgactivityeng/pgactivityeng.module#PgactivityengPageModule' },
   { path: 'pgactivity2eng', loadChildren: './pages/pgactivity2eng/pgactivity2eng.module#Pgactivity2engPageModule' },
-  { path: 'showpushnotification/:message', loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' },
+  { path: 'showpushnotification/:message',
+    loadChildren: './pages/showpushnotification/showpushnotification.module#ShowpushnotificationPageModule' },
+  { path: 'file-display', loadChildren: './pages/file-display/file-display.module#FileDisplayPageModule' },
   { path: 'training1', loadChildren: './pages/training1/training1.module#Training1PageModule' },
   { path: 'training2', loadChildren: './pages/training2/training2.module#Training2PageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },

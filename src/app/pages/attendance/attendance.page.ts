@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   NavController,
   AlertController,
@@ -6,7 +6,8 @@ import {
   ToastController,
   PopoverController,
   LoadingController,
-  ModalController } from '@ionic/angular';
+  ModalController,
+  IonDatetime} from '@ionic/angular';
 import { AttendancemodalPage } from './../modal/attendancemodal/attendancemodal.page';
 import { HolidaymodalPage } from './../modal/holidaymodal/holidaymodal.page';
 import { RestApiService } from './../../rest-api.service';
@@ -19,16 +20,25 @@ import { RestApiService } from './../../rest-api.service';
 export class AttendancePage {
   attendance_list: any = [];
   attendance_date: string = new Date().toISOString();
-  attendance_day: string = '';
-  max_date: string = '';
-  min_date: string = '';
-  is_attendance_taken: boolean = false;
+  attendance_day = '';
+  max_date = '';
+  min_date = '';
+  is_attendance_taken = false;
 
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
 
+  date: number;
+  month: string;
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  clickState = 0;
+  holiday_name: any;
+  error_message: string;
+  toolbarshadow = true;
+
+  @ViewChild('datePicker') datePicker: IonDatetime;
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -41,7 +51,8 @@ export class AttendancePage {
   ) {
     // set min date and max date for the calendar
     const dt = new Date(this.attendance_date);
-
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()];
     this._userid = localStorage.getItem('_userid');
     this._username = localStorage.getItem('_username');
     this._centerid = '';
@@ -99,6 +110,9 @@ export class AttendancePage {
   attendancedate_onhange(value){
     // console.log('@@@Attendance: '+value);
     this.attendance_date = value;
+    const dt = new Date(value);
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()];
     this.set_max_mindate(this.attendance_date);
     this.get_attendance_by_teacher_by_date(this._userid, value);
   }
@@ -163,5 +177,84 @@ export class AttendancePage {
       ]
     });
     await alert.present();
+  }
+
+  // programmatically open the datetime component that picks time
+  openDatePicker() {
+    this.datePicker.open();
+  }
+
+  // Change the button states
+  changeState(buttonClicked: string) {
+    if (buttonClicked === 'attendance') {
+      if (this.clickState === 0) {
+        this.takeattendance_onclick();
+      } else {
+        this.clickState = 0;
+        this.holiday_name = '';
+        this.error_message = '';
+      }
+      return;
+    } else if (buttonClicked === 'holiday') {
+      if (this.clickState === 1) {
+        // this.setholiday_onclick();
+        this.setholiday();
+      } else {
+        this.clickState = 1;
+      }
+    }
+  }
+
+  // Copied from Holiday modal
+  async setholiday() {
+    if (this.holiday_name == null || this.holiday_name.trim() === '') {
+      this.error_message = 'Enter a holiday name!';
+      return;
+    }
+
+    const data = {
+      isholiday : true,
+      holidayname : this.holiday_name,
+      availability : null,
+      userid : this._userid,
+      username : this._username,
+      centerid : null,
+      centername : null,
+      attendancedate : this.attendance_date,
+      attendanceday : this.attendance_day,
+      studentid : null,
+      studentname : null,
+      program: null
+    };
+    this.save(data);
+  }
+
+  async save(data) {
+    this.attendance_list = [];
+    this.attendance_list.push(data);
+    const loading = await this.loadingController.create({});
+      await loading.present();
+      await this.api.saveattendance(this.attendance_list)
+        .subscribe(res => {
+          // console.log('@@@all student list: ' + JSON.stringify(res));
+          this.showAlert('Info', '', 'Attendance saved ' + res['status'] + ' !!!');
+          loading.dismiss();
+          // this.modalController.dismiss({data: 'Ok'});
+          this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
+        }, err => {
+          console.log(err);
+          this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
+          loading.dismiss();
+        });
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+      console.log('top');
+      this.toolbarshadow = true;
+    } else {
+      this.toolbarshadow = false;
+    }
   }
 }

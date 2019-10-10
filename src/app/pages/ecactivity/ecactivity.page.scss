@@ -1,7 +1,4 @@
 :host {
-    ion-content {
-        --background: var(--ion-color-light);
-    }
 
     ion-item {
         border-radius: 0;
@@ -141,13 +138,94 @@ a[disabled], button[disabled], html input[disabled] {
     padding: 15px;
     font-weight: bold;
 }
-.dropdown1{
-    background: mediumseagreen;
-    border: 1px solid gray;
-    margin-bottom: 20px;
+.horizontal-flexbox {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
-.dropdown2{
-    background: coral;
-    border: 1px solid gray;
-    margin-bottom: 20px;
+
+@keyframes white-to-blue {
+    0% {
+        background: white;
+        color: #2196f3;
+    }
+    100% {
+        background: #2196f3;
+        color: white;
+    }
 }
+.selected-chip {
+    animation: white-to-blue 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    background: #2196f3;
+    min-width: 80px;
+    min-height: 20px;
+    margin: 10px;
+}
+
+@keyframes blue-to-white {
+    0% {
+        color: white;
+        background: #2196f3;
+    }
+    100% {
+        color: #2196f3;
+        background: white;
+    }
+}
+.unselected-chip {
+    animation: blue-to-white 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
+    text-align: center;
+    color: #2196f3;
+    border: 1px #2196f3 solid;
+    min-width: 80px;
+    min-height: 20px;
+    margin: 10px;
+}
+
+.selected-chip p, .unselected-chip p{
+    margin: 10px 0px;
+}
+
+@keyframes fadeOut{
+    0%{
+        max-height: 200px;
+        opacity: 1.0;
+    }
+    100%{
+        max-height: 0px;
+        opacity: 0.0;
+    }
+}
+.hidden {
+    animation: fadeOut 0.6s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn{
+    0%{
+        max-height: 0px;
+        opacity: 0.0;
+    }
+    100%{
+        max-height: 200px;
+        opacity: 1.0;
+    }
+}
+.expanded {
+    animation: fadeIn 0.6s;
+    animation-fill-mode: forwards;
+}
+
+.horizontal-flexbox{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+} 

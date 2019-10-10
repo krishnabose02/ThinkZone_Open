@@ -1,5 +1,47 @@
 <ion-content> 
-  <ion-card>
+  <div class='card-dark'>
+  <p style='font-size: 1.6rem'>Assessment Test {{(subject!='na')?'('+subject+')':''}}</p>
+  <div style='min-width: 100%;background: white;height: 1px;'></div>
+  <p style='font-size: 1.4rem'>Name: {{studentname}}</p>
+  <p>Program: {{program}}</p>
+  <p>Class: {{class}}</p>
+  </div>
+
+  <div  *ngIf='isAssessmentTaken' >
+    <div class='card shadow' style='text-align: center'>
+      <ion-icon style="font-size: 2rem;color: #4caf50" name='checkmark-circle'></ion-icon>
+      <div style='min-width: 100%;background: gray;height: 1px;'></div>
+      <p>This Assessment is already taken!</p>
+    </div>
+    <div (click)='closeModal()' class='card shadow' style='background: #4caf50;color: white;text-align: center'>
+      <p style='margin: 0'>Ok</p>
+    </div>
+  </div>
+
+  <div *ngIf='!isAssessmentTaken'>
+    <div class='card shadow' *ngFor='let q of assessment_list;let i=index'>
+      <p>{{i+1}}. {{q.question}}</p>
+      <div style='min-width: 100%;background: gray;height: 1px;'></div>
+      <div class='horizontal-flexbox'>
+          <div (click)='segmentChanged(q, "yes")' [ngClass]='(answerList[q.id]=="yes")?"selected-yes":"yes"'><p>Yes</p></div>
+          <div (click)='segmentChanged(q, "no")' [ngClass]='(answerList[q.id]=="no")?"selected-no":"no"'><p>No</p></div>
+      </div>
+    </div>
+
+    <div class='horizontal-flexbox' style='margin-bottom: 20px'>
+      <div style='border: 1px gray solid;border-radius: 4px;border: 1px gray solid;width: 40%'>
+        <div (click)="closeModal()" class='horizontal-flexbox' style='justify-content: center;margin-top: 0px'>
+          <ion-icon style="font-size: 1.6rem;margin-right: 10px" name='arrow-back'></ion-icon>
+          <p style='text-align: center'>Back</p>
+        </div>
+        
+      </div>
+      <div (click)="save_assessment()" class='shadow' style='background: #4caf50;color: white;border-radius: 4px;width: 40%'>
+        <p style='text-align: center'>Save</p>
+      </div>
+    </div>
+  </div>
+  <!-- <ion-card>
     <ion-card-header color="warning">
       <ion-card-title>Assessment Test(ECE)</ion-card-title>
     </ion-card-header>
@@ -48,5 +90,5 @@
           </ion-grid>
       </ion-card>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

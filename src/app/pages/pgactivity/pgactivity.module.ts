@@ -4,9 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-//import { PopmenuComponent } from './../../components/popmenu/popmenu.component';
-
 import { PgactivityPage } from './pgactivity.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
   {
@@ -17,6 +16,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -25,7 +25,6 @@ const routes: Routes = [
   ],
   declarations: [
     PgactivityPage
-    //, PopmenuComponent
   ]
 })
 export class PgactivityPageModule {}

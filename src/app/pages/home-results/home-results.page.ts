@@ -29,7 +29,10 @@ export class HomeResultsPage {
 
   current_date: string;
   centers: any;
-
+  date: number;
+  month: string;
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  toolbarshadow = true;
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -45,28 +48,30 @@ export class HomeResultsPage {
     this.api.getcurrentdate()
         .subscribe(res => {
           console.log(res);
-          
-          if(Object.keys(res).length > 0 ){
+          if (Object.keys(res).length > 0 ) {
             this.current_date = res['current'];
-          }else{
+          } else {
             this.current_date = '';
-          }            
+          }
         }, err => {
           console.log(err);
         });
 
         this.api.getallcentersallocatedbyuserid(localStorage.getItem('_userid'))
         .subscribe(res => {
-          
-          if(Object.keys(res).length > 0 ){
+
+          if (Object.keys(res).length > 0 ) {
             this.centers = res[0]['centers'];
-          }else{
+          } else {
             this.centers = [];
-          }            
+          }
         }, err => {
           console.log(err);
         });
 
+    const dt = new Date();
+    this.date = dt.getDate();
+    this.month = this.months[dt.getMonth()+1];
     this.setCheckinTime();
   }
   
@@ -88,11 +93,11 @@ export class HomeResultsPage {
       });
   }
 
-  centerButtonClicked(center: any){
-    if(Object.keys(center).length > 0){
-      localStorage.setItem("_operationdate", this.current_date);
-      localStorage.setItem("_centerid", center.centerid);
-      localStorage.setItem("_centername", center.centername);
+  centerButtonClicked(center: any) {
+    if (Object.keys(center).length > 0) {
+      localStorage.setItem('_operationdate', this.current_date);
+      localStorage.setItem('_centerid', center.centerid);
+      localStorage.setItem('_centername', center.centername);
       this.navController.navigateForward('/center');
     }
   }
@@ -169,5 +174,15 @@ export class HomeResultsPage {
     return await popover.present();
     */
     this.navController.navigateForward('/message');
+  }
+
+  logScrolling(event) {
+    // console.log(event);
+    if (event.detail.currentY === 0) {
+      console.log('top');
+      this.toolbarshadow = true;
+    } else {
+      this.toolbarshadow = false;
+    }
   }
 }

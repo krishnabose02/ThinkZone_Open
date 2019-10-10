@@ -1,62 +1,60 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            Profile
-          </ion-text>
-        </ion-text>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+    <ion-toolbar>
+      <ion-row style="position: relative">
+          <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>My Profile</p></ion-title>
+          <ion-back-button style="color: gray"></ion-back-button>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="bg-white">
-  <ion-card class="">
-    <div class="card-margin">
-      <table>
-        <tr>
-          <td>User name</td>
-          <td>{{username | titlecase}}</td>
-        </tr>
-        <tr>
-          <td>User id</td>
-          <td>{{userid}}</td>
-        </tr>
-        <tr>
-          <td>Email ID</td>
-          <td>{{emailid}}</td>
-        </tr>
-        <tr>
-          <td>User type</td>
-          <td>{{usertype | titlecase}}</td>
-        </tr>
-        <tr>
-          <td>Gender</td>
-          <td>{{gender | titlecase}}</td>
-        </tr>
-        <tr>
-          <td>DOB</td>
-          <td>{{dob | date: 'dd-MM-yyyy' }}</td>
-        </tr>
-        <tr>
-          <td>Contact no.</td>
-          <td>{{contactno}}</td>
-        </tr>
-        <tr>
-          <td>Address</td>
-          <td>{{address | titlecase}}</td>
-        </tr>
-        <tr>
-          <td>Reg. Date</td>
-          <td>{{regdate | date: 'dd-MM-yyyy' }}</td>
-        </tr>
-      </table>
-      <div class="explore-div">
-        <ion-button size="medium" shape="round" color="primary" (click)="back()" tappable class="explore-btn">OK</ion-button>
+  <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+    <div class='shadow card'>
+      <p style='color: #424242;font-size: 2rem;margin: 10px'>{{username}}</p>
+      <div style='margin: 10px 0px;min-width: 80%;background: #9e9e9e;min-height: 1px'></div>
+      <div class='chip solid' style='margin-bottom: 10px'>
+        <p>{{usertype}}</p>
       </div>
     </div>
-  </ion-card>
-</ion-content>
+    <div class='shadow card'>
+      <p style='font-size: 1.4rem;margin: 5px'>Personal Details:</p>
+      <div style='margin: 10px 0px;min-width: 80%;background: #9e9e9e;min-height: 1px'></div>
+      <div class='horizontal-flex' style='margin-top: 10px;justify-content: space-evenly'>
+        <div class='horizontal-flexbox chip outline'>
+          <ion-icon [name]='gender' style='margin: 5px'></ion-icon>
+          <p>{{gender}}</p>
+        </div>
+        <div style='margin: 0px 10px' class='horizontal-flexbox chip outline'>
+          <ion-icon name='snow' style='margin: 5px'></ion-icon>
+          <p>{{bdate}} {{bmonth}}, {{byear}}</p>
+        </div>
+      </div>
+      <div class='horizontal-flexbox' style='font-size: 1.4rem'>
+        <ion-icon style="color: #4caf50;font-size: 1.6rem" name='call'></ion-icon>
+        <p>{{contactno}}</p>
+      </div>
+      <div class='horizontal-flexbox' style='margin-bottom: 15px;font-size: 1.4rem'>
+        <ion-icon style="color: #f44336;font-size: 1.6rem" name='pin'></ion-icon>
+        <p style='margin: 0px'>{{address}}</p>
+      </div>
+    </div>
+
+    <div class='shadow card'>
+        <p style='font-size: 1.4rem;margin: 5px'>Additional Details:</p>
+        <div style='margin: 10px 0px;min-width: 80%;background: #9e9e9e;min-height: 1px'></div>
+        <div class='horizontal-flexbox' style='font-size: 1.4rem'>
+          <ion-icon style="color: #f44336;font-size: 1.6rem" name='mail'></ion-icon>
+          <p>Email: {{emailid}}</p>
+        </div>
+        <div class='horizontal-flexbox' style='margin-bottom: 15px;font-size: 1.4rem'>
+          <ion-icon style="color: #2196f3;font-size: 1.6rem" name='person'></ion-icon>
+          <p style='margin: 0px'>Username: {{userid}}</p>
+        </div>
+        <div class='horizontal-flexbox' style='margin-bottom: 15px;font-size: 1.4rem'>
+          <ion-icon style="color: #ff9800;font-size: 1.6rem" name='calendar'></ion-icon>
+          <p style='margin: 0px'>Date of reg: {{rdate}} {{rmonth}},{{ryear}}</p>
+        </div>
+      </div>
+    <!-- <div (click)='back()' class='card solid shadow'>
+      <p>Back</p>
+    </div> -->
+  </ion-content>

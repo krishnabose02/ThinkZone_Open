@@ -17,7 +17,7 @@ import { TranslateConfigService } from './translate-config.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedLanguage:string;
+  selectedLanguage: string;
   _userid: string;
   _username: string;
   _emailid: string;
@@ -25,9 +25,9 @@ export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
 
-  //@ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+  // @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -41,29 +41,34 @@ export class AppComponent {
     private translateConfigService: TranslateConfigService
   ) {
     this.backButtonEvent();
-    
-    
-    console.log('@@@ inside app component LOCAL STORAGE: '+JSON.stringify(localStorage));
+
+
+    console.log('@@@ inside app component LOCAL STORAGE: ' + JSON.stringify(localStorage));
     // translate get language
-    if(localStorage.getItem("_language") == undefined || localStorage.getItem("_language") == null || localStorage.getItem("_language") == ''){
+    if (localStorage.getItem('_language') === undefined
+          || localStorage.getItem('_language') == null
+          || localStorage.getItem('_language') === '') {
       this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
-    }else{
-      this.selectedLanguage = localStorage.getItem("_language");
+    } else {
+      this.selectedLanguage = localStorage.getItem('_language');
       this.languageChanged(this.selectedLanguage);
     }
 
+    this._userid = localStorage.getItem('_userid');
+    this._username = localStorage.getItem('_username');
+    this._emailid = localStorage.getItem('_emailid');
+    if (this._userid == null) {
+      this.navCtrl.navigateRoot('/login');
+    }
     this.initializeApp();
-    this._userid = localStorage.getItem("_userid");
-    this._username = localStorage.getItem("_username");
-    this._emailid = localStorage.getItem("_emailid");
   }
 
   // translate set language
-  languageChanged(value){
-    console.log('@@@ selected language: '+this.selectedLanguage+'    value: '+value);
+  languageChanged(value) {
+    console.log('@@@ selected language: ' + this.selectedLanguage + '    value: ' + value);
     this.selectedLanguage = value;
     this.translateConfigService.setLanguage(this.selectedLanguage);
-    localStorage.setItem('_language',this.selectedLanguage);
+    localStorage.setItem('_language', this.selectedLanguage);
   }
 
   initializeApp() {
@@ -73,17 +78,17 @@ export class AppComponent {
 
       // Push notification starts from here
       this.fcm.getToken().then(token => {
-        localStorage.setItem('fcm_token',token);
-        console.log('@@@ app.component fcm_token'+token);
+        localStorage.setItem('fcm_token', token);
+        console.log('@@@ app.component fcm_token' + token);
       });
 
       this.fcm.onTokenRefresh().subscribe(token => {
-        localStorage.setItem('fcm_rtoken',token);
-        console.log('@@@ app.component fcm_rtoken'+token);
+        localStorage.setItem('fcm_rtoken', token);
+        console.log('@@@ app.component fcm_rtoken' + token);
       });
 
       this.fcm.onNotification().subscribe(data => {
-        console.log('@@@ Push notification data: '+JSON.stringify(data));
+        console.log('@@@ Push notification data: ' + JSON.stringify(data));
         if (data.wasTapped) {
           console.log('@@@ app.component Received in background');
           this.router.navigate(['/showpushnotification', data.message]);
@@ -92,7 +97,7 @@ export class AppComponent {
           this.router.navigate(['/showpushnotification', data.message]);
         }
       });
-      
+
     }).catch(() => {});
   }
 
@@ -103,19 +108,17 @@ export class AppComponent {
   logout() {
     this.setCheckoutTime();
     localStorage.clear();
-    this.navCtrl.navigateRoot('/');
+    this.navCtrl.navigateRoot('/login');
   }
 
   backButtonEvent() {
     this.platform.backButton.subscribeWithPriority(0, () => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
-      }/*else if (this.router.url === '/center') {
-        this.navCtrl.navigateRoot('/home-results');
-      }*/ else {
+      } else {
         this.setCheckoutTime();
         this.exitTheApp(this.router.url);
-      } 
+      }
     });
   }
 
@@ -143,10 +146,10 @@ export class AppComponent {
     });
     await alert.present();
   }
-  
-  async setCheckoutTime(){
-    let id = localStorage.getItem('_document_id');
-    let time = new Date();
+
+  async setCheckoutTime() {
+    const id = localStorage.getItem('_document_id');
+    const time = new Date();
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.setcheckouttime(id, time).subscribe(res => {

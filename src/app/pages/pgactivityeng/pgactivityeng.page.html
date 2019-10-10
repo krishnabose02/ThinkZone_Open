@@ -1,22 +1,24 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            ENGLISH ACTIVITY (PGE)
-          </ion-text>
-        </ion-text>
-    </ion-title>
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <ion-toolbar>
+    <ion-row style="position: relative">
+        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>English Activities (PGE)</p></ion-title>
+        <ion-back-button style="color: gray"></ion-back-button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
-
-<ion-content class="bg-white">
-  <ion-grid>
+        
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling  ($event)">
+   
+    <app-period-selector *ngIf='month_list.length>0' [month]='month_list' (selected)='reloadActivityData($event)'></app-period-selector>
+  
+    <div *ngIf='activity_loaded && activity_list.length==0'>
+      <p style='color: #f44336;text-align: center;margin: 10px'>No activities found for the selected week</p>
+    </div>
+  
+    <app-activity-selector [activity_list]='activity_list' (selected)='activity_btnclick($event)'></app-activity-selector>
+  
+  <!-- <ion-grid>
     <ion-card class="whitecard">
-      <!-- Select Month -->
       <ion-row>
           <ion-item class="full_width">
             <ion-label>Month</ion-label>
@@ -26,7 +28,6 @@
           </ion-item>
         </ion-row>
     
-        <!-- Select Week -->
         <ion-row>
           <ion-item class="full_width">
             <ion-label>Week</ion-label>
@@ -35,17 +36,6 @@
             </ion-select>
           </ion-item>
         </ion-row>
-
-        <!-- Select Subject -->
-        <!-- <ion-row>
-          <ion-item class="full_width">
-            <ion-label>Subject</ion-label>
-            <ion-select placeholder="Select One" (ionChange)="subject_onchange($event.detail.value)">
-              <ion-select-option value="math">Math</ion-select-option>
-              <ion-select-option value="english">English</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-row> -->
     </ion-card>
 
     <ion-card class="whitecard">
@@ -63,6 +53,6 @@
         </ion-item>
       </ion-list>
     </ion-card>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>
   
