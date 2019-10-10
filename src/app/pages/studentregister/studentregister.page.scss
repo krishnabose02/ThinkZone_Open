@@ -1,110 +1,92 @@
-:host {
-    ion-content {
-        --background: var(--ion-color-light);
-    }
 
-    ion-item {
-        border-radius: 0;
-        border-bottom: 1px dotted var(--ion-color-medium);
+.horizontal-flexbox {
+    margin-top: 15px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+@keyframes white-to-blue {
+    0% {
+        background: white;
+        color: #2196f3;
     }
-
-    ion-card {
-        &.no-radius {
-            border-radius: 0;
-        }
-    }
-    .card-content-md {
-        padding-left: 0px; 
-        padding-right: 0px; 
-        padding-top: 0px; 
-        padding-bottom: 0px; 
-        font-size: 0px; 
-        line-height: 0; 
+    100% {
+        background: #2196f3;
+        color: white;
     }
 }
-
-.text10{
-    font-size: 10px;
-    font-family: monospace;
-}
-
-.button-bg{
-    background-color: #381dd8;
-}
-
-.card_padding20{
-    padding: 20px;
-}
-.span_text{
-    font-family: inherit;
-}
-.span_text9{
-    font-size: 9px;
-}
-.span_text40{
-    font-size: 40px;
-}
-
-.center-aligned {
+.selected-chip {
+    animation: white-to-blue 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
     text-align: center;
+    color: white;
+    background: #2196f3;
+    min-width: 80px;
+    min-height: 20px;
 }
 
-.ion-col-style{
+@keyframes blue-to-white {
+    0% {
+        color: white;
+        background: #2196f3;
+    }
+    100% {
+        color: #2196f3;
+        background: white;
+    }
+}
+.unselected-chip {
+    animation: blue-to-white 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 20px;
     text-align: center;
-    border: 1px solid #a4a4a4;
-    background-color: #e4e7fd;
-    margin: 3px;
-    box-shadow: 0px 1px 1px 0px;
+    color: #2196f3;
+    border: 1px #2196f3 solid;
+    min-width: 80px;
+    min-height: 20px;
+}
+.shadow{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
 }
 
-.color_feedback{
-    color: green;
+.hidden {
+    transition: max-height 0.6s ease-in-out;
+    height: 0px;
+    max-height: 0px;
+    overflow: hidden;
+}
+.revealer {
+    transition: max-height 0.6s ease-in-out;
+    height: auto;
+    max-height: 500px;
+}
+.hidden div {
+    transition: opacity 0.6s;
+    transition-delay: 0.4s;
+    opacity: 0;
+}
+.revealer div {
+    transition: opacity 0.6s;
+    transition-delay: 0.4s;
+    opacity: 1;
 }
 
-.color_pic{
-    color: #c88f36;
+.group {
+    margin-top: 20px;
+    border-radius: 4px;
+    color: gray;
+    padding: 30px
 }
 
-.color_location{
-    color: #002080;
-}
-.color_payment{
-    color: #800069;
-}
-.color_assessment{
-    color: #007f80;
-}
-.color_comvisit{
-    color: #925901;
-}
-.color_issues{
-    color: #eb0707;
-}
-
-.btn-margin{
-    margin-left: 34%;
-}
-
-.card-margin{
+.card{
     margin: 20px;
-}
-.radio-margin{
-    margin-left: -15px;
-}
-
-.explore-div{
-    background-color: #f3f3f3;
-}
-.explore-btn{
-    margin-right: 23px;
+    border-radius: 4px;
+    padding: 30px;
+    color: gray;
 }
 
-.select-width{
-    max-width: 100%;
-}
-.heading{
-    text-align: center;
-    font-weight: bold;
-    color: #20b016;
-    text-transform: uppercase;
+.animated ion-label {
+    color: gray;
 }

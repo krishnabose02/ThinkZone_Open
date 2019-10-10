@@ -22,6 +22,7 @@ import { RestApiService } from './../../rest-api.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 // Geolocation
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { StudentregisterPage } from '../studentregister/studentregister.page';
 
 @Component({
   selector: 'app-studentexplor',
@@ -234,6 +235,21 @@ export class StudentExplorPage {
     }
   }
 
+  async open_register_modal(studentObj, flag) {
+    /*  studentObj == null <-- new user register
+        else               <-- existing user update
+    */
+    const modal = await this.modalController.create({
+      component: StudentregisterPage,
+      componentProps: { res: {flag: flag, studentObj: studentObj} }
+    });
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log('@@@Modal Data: ' + JSON.stringify(data));
+    });
+    return await modal.present();
+  }
+
   // alert box
   async showAlert(header: string, subHeader: string, message: string) {
     const alert = await this.alertController.create({
@@ -245,8 +261,15 @@ export class StudentExplorPage {
 
     await alert.present();
   }
+
+  delete_button_click(student) {
+    const id = student._id;
+    const studentname = student.studentname;
+    this.showConfirm('Confirmation !!!', '', 'Are you sure to delete this records of ' + studentname + '?', id);
+  }
+
   // confirm box
-  async showConfirm(header: string, subHeader: string, message: string, body: any) {
+  async showConfirm(header: string, subHeader: string, message: string, id: any) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subHeader,
@@ -263,11 +286,27 @@ export class StudentExplorPage {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Okay');
+            this.delete_student(id);
           }
         }
       ]
     });
     await alert.present();
+  }
+
+  async delete_student(id) {
+    const loading = await this.loadingController.create({});
+    await loading.present();
+    await this.api.deletestudentbyid(id)
+      .subscribe(res => {
+        console.log(res);
+        this.getallstudents(this._userid);
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        this.getallstudents(this._userid);
+        loading.dismiss();
+      });
   }
 
   logScrolling(event) {

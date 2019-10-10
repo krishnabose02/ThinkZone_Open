@@ -18,15 +18,19 @@
         <ion-back-button style="color: gray;padding: 16px 0 16px 0"></ion-back-button>
           <ion-title style="color: gray;text-align: center;width: 100%;height: 100%"><p>Student Details</p></ion-title>
           <!-- <ion-back-button style="color: gray"></ion-back-button> -->
-          <ion-icon (click)='addNewStudent()' name='add' style="color: gray;padding: 16px;opacity: 0.8;font-size: 1.8rem"></ion-icon>
+          <ion-icon style="color: white;padding: 16px;opacity: 0;font-size: 1.8rem"></ion-icon>
       </ion-row>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)" class="bg-white">
+  <div (click)="open_register_modal(null, 'new')" class='card shadow horizontal-flexbox' style='background: #2196f3;color: white;justify-content: center'>
+    <ion-icon name='person-add' style="font-size: 2rem;margin-right: 20px"></ion-icon>
+    <p>{{ 'STUDENT.register' | translate }}</p>
+  </div> 
   <p *ngIf='errormessage!=""' style='color: #f44336;font-size: 1.4rem;text-align: center;margin: 20px'>{{errormessage}}</p>
   <div *ngFor='let student of student_list'>
-    <div style="padding: 10px" class='shadow card-margin'>
+    <div style="padding: 10px" class='shadow card'>
       <div style='display: flex;justify-content: space-between;align-items: center'>
         <div class='vertical-flexbox' style='align-items: flex-start;color: gray;font-size: 1.2rem;justify-content: center'>
           <div class='horizontal-flexbox'>
@@ -38,13 +42,26 @@
           <p style='text-align: start;margin-bottom: 0px;margin-bottom: 10px;margin-top: 10px;margin-left: 10px'>{{student.program=='ece'?'ECE Anganwadi': ( 'EXPLORE.program' | translate ) +student.class}}</p>
         
         </div>
-        <ion-icon (click)='flipStudentDisplay(student)' [ngClass]='(!student.hidden)?"rotate-down":"rotate-up"' name='ios-arrow-down' style="color: gray;padding: 10px;font-size: 1.6rem"></ion-icon>
+        <!-- <ion-icon (click)='flipStudentDisplay(student)' [ngClass]='(!student.hidden)?"rotate-down":"rotate-up"' name='ios-arrow-down' style="color: gray;padding: 10px;font-size: 1.6rem"></ion-icon> -->
+      </div>
+
+      <!-- Delete and Edit section -->
+      <div style='justify-content: space-evenly' class='horizontal-flexbox'>
+        <div class='hflex' style='width: 35%;border-radius: 4px;justify-content: center;background: #f44336;color: white' (click)="delete_button_click(student)">
+          <ion-icon style="font-size: 1.8rem" name='trash'></ion-icon>
+          <p style='margin-right: 10px;margin-left: 10px'>{{ 'STUDENT.delete' | translate }}</p>
+        </div>
+        <div class='hflex' style='width: 35%;border-radius: 4px;justify-content: center;background: white;color: #4caf50;border: 1px #4caf50 solid' (click)="open_register_modal(student, 'edit')">
+          <ion-icon style="font-size: 1.8rem" name='create'></ion-icon>
+          <p style='margin-right: 10px;margin-left: 10px'>{{ 'STUDENT.edit' | translate }}</p>
+        </div>
+        <ion-icon (click)='flipStudentDisplay(student)' [ngClass]='(!student.hidden)?"rotate-down":"rotate-up"' name='ios-arrow-down' style="color: gray;font-size: 1.6rem"></ion-icon>
       </div>
       <div *ngIf='student.program=="pge"'>
-        <div style="color: gray" [ngClass]='(!student.hidden)?"show-data":"hide-data"'>
+        <div style="margin-top: 20px;color: gray" [ngClass]='(!student.hidden)?"show-data":"hide-data"'>
           <div style='min-height: 1px;min-width: 80%;background: #E0E0E0'></div>
           <div style='padding: 10px'>
-            <p style='font-size: 1.4rem'>Student Levels:</p>
+            <p style='font-size: 1.4rem'>{{ 'STUDENT.baseline' | translate }}</p>
   
             <!-- This is the English level display area -->
             <div class='horizontal-flexbox' style='justify-content: space-between'>
@@ -134,7 +151,7 @@
         <div style="color: gray" [ngClass]='(!student.hidden)?"show-data":"hide-data"'>
           <div style='min-height: 1px;min-width: 80%;background: #E0E0E0'></div>
           <div style='padding: 10px'>
-            <p style='font-size: 1.4rem'>Student Level:</p>
+            <p style='font-size: 1.4rem'>{{ 'STUDENT.baseline' | translate }}</p>
   
             <!-- This is the ECE level display area -->
             <div class='horizontal-flexbox' style='justify-content: space-between'>

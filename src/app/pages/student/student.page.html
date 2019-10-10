@@ -30,15 +30,6 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <!-- <ion-card> -->
-    <ion-button icon-left size="medium" expand="full" color="danger" (click)="delete_button_click(student)" float-right tappable>
-        {{ 'STUDENT.delete' | translate }} 
-        <ion-icon slot="start" name="close"></ion-icon>
-    </ion-button>
-    <ion-button icon-left size="medium" expand="full" color="primary" (click)="open_register_modal(student, 'edit')" float-right tappable>
-        {{ 'STUDENT.edit' | translate }} 
-        <ion-icon slot="start" name="color-filter"></ion-icon>
-    </ion-button>
-    
     <div class="card-margin">
       <!-- Logo -->
       <!-- <div padding-horizontal text-center>
