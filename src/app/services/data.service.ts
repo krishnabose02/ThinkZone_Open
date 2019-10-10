@@ -31,3 +31,9 @@ export class DataService {
     return this.document_list;
   }
 }
+
+export interface DataObject {
+  path: string;
+  played: boolean;
+  file_name?: string;
+}

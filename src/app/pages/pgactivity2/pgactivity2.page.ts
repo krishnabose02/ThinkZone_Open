@@ -18,8 +18,8 @@ import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 // video player
-import { VideoPlayer, VideoOptions } from '@ionic-native/video-player/ngx';
-import { DataService } from 'src/app/services/data.service';
+import { VideoPlayer } from '@ionic-native/video-player/ngx';
+import { DataService, DataObject } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-pgactivity2',

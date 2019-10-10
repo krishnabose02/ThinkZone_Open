@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VideoOptions, VideoPlayer } from '@ionic-native/video-player/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { DataService } from 'src/app/services/data.service';
+import { DataService, DataObject } from 'src/app/services/data.service';
+
 
 @Component({
   selector: 'app-file-display',
