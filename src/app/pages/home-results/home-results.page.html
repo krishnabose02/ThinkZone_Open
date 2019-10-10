@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-  <p>Add student details here {{ 'HOME.student_details' | translate }}</p>
+  <!-- <p>Add student details here {{ 'HOME.student_details' | translate }}</p> -->
   <div [routerLink]="'/attendance'" class='shadow' style='background: white;width: 86%;margin: 7%; border-radius: 8px;flex-flow: row;display: flex;align-items: center'>
     <div style='border-radius: 8px 0 0 8px;height: 90px;width: 25%;background: #2196f3;color: white;display: flex;flex-flow: column;justify-content: center;align-items: center'>
       <p style='font-size: 2rem;margin: 5px'>{{date}}</p>
