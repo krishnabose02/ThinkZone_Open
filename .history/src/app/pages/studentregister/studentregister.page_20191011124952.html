@@ -38,7 +38,7 @@
         <ion-label position="floating">
           {{ 'REGISTER.phone' | translate}}
         </ion-label>
-        <ion-input [(ngModel)]="phone" color="secondary" type="number"></ion-input> <!--value="{{_phone}}"-->
+        <ion-input value="" min="5000000000" max="10000000000" [(ngModel)]="phone" color="secondary" type="number"></ion-input> <!--value="{{_phone}}"-->
       </ion-item>
 
       <!-- Gender -->
