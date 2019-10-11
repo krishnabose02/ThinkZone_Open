@@ -17,38 +17,39 @@ import { RestApiService } from './../../rest-api.service';
   styleUrls: ['./studentregister.page.scss']
 })
 export class StudentregisterPage {
+  buttonclass = 'hidden';
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
 
   // information from modal res side
-  _id: string = '';
-  _studentid: string ='';
-  _studentname: string ='';
-  _program: string ='';
-  _class: string ='';
-  _phone: number ;
-  _gender: string ='';
-  _dob: string ='';
-  _parentsname: string ='';
-  _registration_date: string ='';
-  
-  studentname: string = '';
-  program: string = '';
-  class: string = '';
-  phone: number ;
-  gender: string = '';
-  dob: string = '';
-  parentsname: string = '';
-  registration_date: string = '';
+  _id = '';
+  _studentid = '';
+  _studentname = '';
+  // _program = '';
+  _class = '';
+  _phone = 0;
+  // _gender = '';
+  _dob = '';
+  _parentsname = '';
+  _registration_date = '';
+
+  studentname = '';
+  program = '';
+  class = '';
+  phone = 0;
+  gender = '';
+  dob = '';
+  parentsname = '';
+  registration_date = '';
 
   res: any;
-  flag: string = '';
+  flag = '';
   studentObj: any = {};
   class_list: any = [];
 
-  hide_class_field: boolean = false;
+  hide_class_field = false;
 
   constructor(
     public navController: NavController,
@@ -61,11 +62,11 @@ export class StudentregisterPage {
     private loadingController: LoadingController,
     private navParams: NavParams
   ) {
-    this._userid = localStorage.getItem("_userid");
-    this._username = localStorage.getItem("_username");
+    this._userid = localStorage.getItem('_userid');
+    this._username = localStorage.getItem('_username');
     this._centerid = '';
     this._centername = '';
-    
+
     // modal paramiters
     this.res = this.navParams.data.res;
     console.log('###this.res: ' + JSON.stringify(this.res));
@@ -74,84 +75,87 @@ export class StudentregisterPage {
     this.initialize_fields(this.flag);
   }
 
-  initialize_fields(flag){
-    if(flag == 'edit'){
+  initialize_fields(flag) {
+    if (flag === 'edit') {
       this._id = this.res.studentObj._id;
       this._studentid = this.res.studentObj.studentid;
       this._studentname = this.res.studentObj.studentname;
-      this._program = this.res.studentObj.program;
+      this.program = this.res.studentObj.program;
       this._class = this.res.studentObj.class;
       this._phone = this.res.studentObj.phone;
-      this._gender = this.res.studentObj.gender;
+      this.gender = this.res.studentObj.gender;
       this._dob = this.res.studentObj.dob;
       this._parentsname = this.res.studentObj.parentsname;
       this._registration_date = this.res.studentObj.registration_date;
-      this.select_program_onchange(this._program);
-    }else{
-      this._id ='';
+      this.select_program_onchange(this.program);
+    } else {
+      this._id = '';
       this._studentid = '';
       this._studentname = '';
-      this._program = '';
+      this.program = '';
       this._class = '';
-      //this._phone = 0;
-      this._gender = '';
+      this._phone = 0;
+      this.gender = '';
       this._dob = '';
       this._parentsname = '';
       this._registration_date = '';
     }
     this.studentname = this._studentname;
-    this.program = this._program;
+    this.program = this.program;
     this.class = this._class;
     this.phone = this._phone;
-    this.gender = this._gender;
+    this.gender = this.gender;
     this.dob = this._dob;
     this.parentsname = this._parentsname;
     this.registration_date = this._registration_date;
   }
 
-  select_program_onchange(value){
+  select_program_onchange(value) {
     console.log('@@@Selected program: ', value);
     this.program = value;
-    if(value == 'ece'){
+    if (value === 'ece') {
       this.class_list = ['0']; // 0 = Anganwadi
       this.class = '0';
       this.hide_class_field = true;
-    } else if(value == 'pge'){
+    } else if (value === 'pge') {
       this.class_list = ['1', '2', '3', '4', '5', '6', '7'];
       this.hide_class_field = false;
     } else {
       this.class_list = [];
       this.hide_class_field = false;
     }
+
+    // this reveals the class list
+    this.buttonclass = 'revealer';
   }
 
-  select_class_onchange(value){
+  select_class_onchange(value) {
     console.log('@@@Selected class: ', value);
     this.class = value;
   }
 
-  gender_onchange(value){
+  gender_onchange(value) {
     console.log('@@@Selected gender: ', value);
     this.gender = value;
   }
 
-  dob_onhange(value){
+  dob_onhange(value) {
     console.log('@@@Selected dob: ', value);
     this.dob = value;
   }
 
-  regdate_onhange(value){
+  regdate_onhange(value) {
     console.log('@@@Selected regdate: ', value);
     this.registration_date = value;
   }
-  
-  reset(){
+
+  reset() {
     this.studentname = '';
     this.phone = 0;
     this.parentsname = '';
   }
 
-  async new_registration(){
+  async new_registration() {
     const details = {
       userid : this._userid,
       username : this._username,
@@ -166,10 +170,10 @@ export class StudentregisterPage {
       dob : this.dob,
       parentsname : this.parentsname,
       registration_date: this.registration_date
-    }
-    console.log('--> details: '+JSON.stringify(details));
+    };
+    console.log('--> details: ' + JSON.stringify(details));
 
-    let loading = await this.loadingController.create({});
+    const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.registernewstudent(details)
       .subscribe(res => {
@@ -177,7 +181,7 @@ export class StudentregisterPage {
         loading.dismiss();
         this.reset();
         this.closeModal();
-        this.showAlert('Studentregister Registration', '', 'Studentregister registration '+res['status']+' !!!');
+        this.showAlert('Studentregister Registration', '', 'Studentregister registration ' + res['status'] + ' !!!');
         this.navController.navigateBack('/home-results');
       }, err => {
         console.log(err);
@@ -186,7 +190,7 @@ export class StudentregisterPage {
       });
   }
 
-  async update_registration(){
+  async update_registration() {
     const details = {
       userid : this._userid,
       username : this._username,
@@ -201,10 +205,10 @@ export class StudentregisterPage {
       dob : this.dob,
       parentsname : this.parentsname,
       registration_date: this.registration_date
-    }
-    console.log('--> _id: '+this._id+'    details: '+JSON.stringify(details));
+    };
+    console.log('--> _id: ' + this._id + '    details: ' + JSON.stringify(details));
 
-    let loading = await this.loadingController.create({});
+    const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.updatestudent(this._id, details)
       .subscribe(res => {
@@ -212,7 +216,7 @@ export class StudentregisterPage {
         loading.dismiss();
         this.reset();
         this.closeModal();
-        this.showAlert('Studentregister Registration', '', 'Studentregister registration '+res['status']+' !!!');
+        this.showAlert('Studentregister Registration', '', 'Studentregister registration ' + res['status'] + ' !!!');
         this.navController.navigateBack('/home-results');
       }, err => {
         console.log(err);
@@ -221,28 +225,28 @@ export class StudentregisterPage {
       });
   }
 
-  register_button_click(){
-    if(this.studentname == undefined || this.studentname == null || this.studentname == ''){
+  register_button_click() {
+    if (this.studentname === undefined || this.studentname == null || this.studentname === '') {
       this.showAlert('Verify', '', 'Please check Studentregister full name !!!');
-    } else if(this.program == undefined || this.program == null || this.program == ''){
+    } else if (this.program === undefined || this.program == null || this.program === '') {
       this.showAlert('Verify', '', 'Please select Program !!!');
-    } else if(this.class == undefined || this.class == null || this.class == ''){
+    } else if (this.class === undefined || this.class == null || this.class === '') {
       this.showAlert('Verify', '', 'Please select Class !!!');
-    } else if(this.gender == undefined || this.gender == null || this.gender == ''){
+    } else if (this.gender === undefined || this.gender == null || this.gender === '') {
       this.showAlert('Verify', '', 'Please select Gender !!!');
-    } else if(this.parentsname == undefined || this.parentsname == null || this.parentsname == ''){
+    } else if (this.parentsname === undefined || this.parentsname == null || this.parentsname === '') {
       this.showAlert('Verify', '', 'Please check Father name !!!');
-    }else {
-      console.log('###flag: '+this.flag);
-      if(this.flag == 'new'){
+    } else {
+      console.log('###flag: ' + this.flag);
+      if (this.flag === 'new') {
         this.new_registration();
-      }else if(this.flag == 'edit'){
+      } else if (this.flag === 'edit') {
         this.update_registration();
       }
     }
   }
 
-  
+
   // close modal
   closeModal() {
     this.modalController.dismiss({data: 'Cancel'});
