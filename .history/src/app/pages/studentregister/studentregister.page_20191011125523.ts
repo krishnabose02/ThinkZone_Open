@@ -24,12 +24,33 @@ export class StudentregisterPage {
   _centername: string;
 
   // information from modal res side
+<<<<<<< HEAD
+  _id: string = '';
+  _studentid: string ='';
+  _studentname: string ='';
+  _program: string ='';
+  _class: string ='';
+  _phone: number ;
+  _gender: string ='';
+  _dob: string ='';
+  _parentsname: string ='';
+  _registration_date: string ='';
+  
+  studentname: string = '';
+  program: string = '';
+  class: string = '';
+  phone: number ;
+  gender: string = '';
+  dob: string = '';
+  parentsname: string = '';
+  registration_date: string = '';
+=======
   _id = '';
   _studentid = '';
   _studentname = '';
   // _program = '';
   _class = '';
-  _phone: number;
+  _phone = 0;
   // _gender = '';
   _dob = '';
   _parentsname = '';
@@ -43,6 +64,7 @@ export class StudentregisterPage {
   dob = '';
   parentsname = '';
   registration_date = '';
+>>>>>>> 9c2088e60b5d8f5e43e386c3930076ac2371667a
 
   res: any;
   flag = '';
@@ -94,7 +116,7 @@ export class StudentregisterPage {
       this._studentname = '';
       this.program = '';
       this._class = '';
-      //this._phone = 0;
+      this._phone = 0;
       this.gender = '';
       this._dob = '';
       this._parentsname = '';
