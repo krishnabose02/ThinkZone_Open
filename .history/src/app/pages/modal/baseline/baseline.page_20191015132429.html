@@ -1,0 +1,48 @@
+<ion-content> 
+  <ion-card class="login-card">
+    <ion-card-header color="primary">
+      <ion-card-title> {{ 'BASELINE.title1' | translate }} </ion-card-title>
+      <!-- <ion-card-subtitle>{{ message_title }}</ion-card-subtitle> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div id="info_div" class="" [hidden]=""> No Baseline questions found !!! </div>
+      <div id="cont_div" class="" [hidden]="">
+
+      </div>
+      <ion-list *ngFor = "let baseline of baseline_q; let i=index;" class="item-text-wrap">
+        <ion-label> 
+          {{ 'BASELINE.program' | translate }}: <b> {{ baseline.program }} </b>
+          <p> {{ 'BASELINE.class' | translate }}: <b> {{ baseline.class }} </b> </p>
+          <p> {{ 'BASELINE.subject' | translate }}: <b> {{ baseline.subject }} </b> </p> 
+          {{ 'BASELINE.level' | translate }}: <b> {{ baseline.level }} </b>  
+        </ion-label>
+        <p><b><u>  {{ 'BASELINE.title2' | translate }} </u></b></p>
+        <ion-list *ngFor = "let quest of baseline.questionset; let i=index; ">
+          {{ i+1 }} .{{ quest.question }}
+          <ion-select placeholder="Select answer" (ionChange)="select_answer_onchange($event.detail.value, quest)" class="select-width">
+            <ion-select-option value="yes"> {{ 'BASELINE.btn_yes' | translate }}</ion-select-option>
+            <ion-select-option value="no"> {{ 'BASELINE.btn_no' | translate }}</ion-select-option>
+          </ion-select>
+        </ion-list>
+      </ion-list>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button color="medium" (click)="closeModal()">
+              <ion-icon slot="start" name="close"></ion-icon>  {{ 'BASELINE.btn_cancel' | translate }}
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button icon-left color="success" (click)="setLevel()" tappable>
+              <ion-icon name="checkmark"></ion-icon> {{ 'BASELINE.btn_save' | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    
+  </ion-card>
+</ion-content>

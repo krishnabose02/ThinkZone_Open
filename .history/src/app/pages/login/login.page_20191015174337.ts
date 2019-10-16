@@ -215,7 +215,7 @@ export class LoginPage implements OnInit {
             }
           }, err => {
             this._status = false;
-            this._message = 'Connection error !!!';
+              this._message = 'Connection error !!!';
             console.log('###error: ' + err);
             loading.dismiss();
           });

@@ -36,19 +36,22 @@ export class BaselinePage implements OnInit {
   score: number = 0;
   totalmark: number = 0;
 
-  preferedlanguage: string = localStorage.getItem("_language");
+  preferedlanguage: string = localStorage.getItem("_laguage");
   hide_info_div: boolean = true;
   hide_cont_div: boolean = false;
 
   @Input() value: any;
   constructor(
+    private formBuilder: FormBuilder,
+    private navController: NavController,
     private modalController: ModalController,
+    private sanitizer: DomSanitizer,
     public alertController: AlertController,
     public loadingController: LoadingController,
     public api: RestApiService,
     public navParams: NavParams
   ) {
-    //console.log('@@@Local Storage: '+JSON.stringify(localStorage));
+    console.log('@@@Local Storage: '+JSON.stringify(localStorage));
     this.hide_info_div = true;
     this.hide_cont_div = true;
   }
@@ -102,13 +105,15 @@ export class BaselinePage implements OnInit {
   }
 
   select_answer_onchange(value, selected_question){
-    let qid = selected_question.id;
+    let qid = selected_question.qid;
     let question = selected_question.question;
+    let real_answer = selected_question.answer;
     let user_answer = value;
 
     const qset = {
       qid : qid,
       question : question,
+      answer : real_answer,
       useranswer : user_answer
     };
 
@@ -158,30 +163,26 @@ export class BaselinePage implements OnInit {
   }
 
   async setLevel(){
-    if(this._questionset.length <= 0){
-      this.showAlert('Info', '', 'Please enter all baseline tests.')
-    }else{
-      this.calculate_totalscore();
-      const data = {
-        detailsid: this._id,
-        level: this.lvl,
-        baselinetest: this._questionset,
-        baselinetestresult: this.score
-      };
-      const loading = await this.loadingController.create({});
-      await loading.present();
-      await this.api.setlevelbyid(data)
-        .subscribe(res => {
-          console.log('@@@Baseline from db: '+JSON.stringify(res));
-          this.updateLevelInStudentDetail();
-          loading.dismiss();
-          this.showAlert('Set Level', '', 'Student level set '+res['status']+' !!!');
-          this.modalController.dismiss({data: 'Ok'});
-        }, err => {
-          console.log(err);
-          loading.dismiss();
-        });
-    }
+    this.calculate_totalscore();
+    const data = {
+      detailsid: this._id,
+      level: this.lvl,
+      baselinetest: this._questionset,
+      baselinetestresult: this.score
+    };
+    const loading = await this.loadingController.create({});
+    await loading.present();
+    await this.api.setlevelbyid(data)
+      .subscribe(res => {
+        console.log('@@@Baseline from db: '+JSON.stringify(res));
+        this.updateLevelInStudentDetail();
+        loading.dismiss();
+        this.showAlert('Set Level', '', 'Student level set '+res['status']+' !!!');
+        this.modalController.dismiss({data: 'Ok'});
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      });
   }
 
   async updateLevelInStudentDetail(){

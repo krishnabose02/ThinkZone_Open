@@ -158,30 +158,26 @@ export class BaselinePage implements OnInit {
   }
 
   async setLevel(){
-    if(this._questionset.length <= 0){
-      this.showAlert('Info', '', 'Please enter all baseline tests.')
-    }else{
-      this.calculate_totalscore();
-      const data = {
-        detailsid: this._id,
-        level: this.lvl,
-        baselinetest: this._questionset,
-        baselinetestresult: this.score
-      };
-      const loading = await this.loadingController.create({});
-      await loading.present();
-      await this.api.setlevelbyid(data)
-        .subscribe(res => {
-          console.log('@@@Baseline from db: '+JSON.stringify(res));
-          this.updateLevelInStudentDetail();
-          loading.dismiss();
-          this.showAlert('Set Level', '', 'Student level set '+res['status']+' !!!');
-          this.modalController.dismiss({data: 'Ok'});
-        }, err => {
-          console.log(err);
-          loading.dismiss();
-        });
-    }
+    this.calculate_totalscore();
+    const data = {
+      detailsid: this._id,
+      level: this.lvl,
+      baselinetest: this._questionset,
+      baselinetestresult: this.score
+    };
+    const loading = await this.loadingController.create({});
+    await loading.present();
+    await this.api.setlevelbyid(data)
+      .subscribe(res => {
+        console.log('@@@Baseline from db: '+JSON.stringify(res));
+        this.updateLevelInStudentDetail();
+        loading.dismiss();
+        this.showAlert('Set Level', '', 'Student level set '+res['status']+' !!!');
+        this.modalController.dismiss({data: 'Ok'});
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      });
   }
 
   async updateLevelInStudentDetail(){
