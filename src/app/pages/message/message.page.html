@@ -1,12 +1,12 @@
 <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
-  <ion-toolbar>
-    <ion-row style="position: relative">
-        <ion-title style="color: gray; position: absolute;text-align: center;width: 100%;height: 100%"><p>My Messages</p></ion-title>
-        <ion-back-button style="color: gray"></ion-back-button>
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'><p>My Messages</p></ion-title>
+        <ion-back-button></ion-back-button>
     </ion-row>
   </ion-toolbar>
 </ion-header>
-  
+
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <ion-card class="bg-white" no-margin>
     <ion-card-content>

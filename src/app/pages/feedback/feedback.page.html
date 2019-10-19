@@ -1,13 +1,13 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Daily Information</ion-title>
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'><p>Feedback & Issues</p></ion-title>
+        <ion-back-button></ion-back-button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <!-- Picture Share -->
   <ion-card  color="light" (click)="takePicture()" >
     <ion-item>

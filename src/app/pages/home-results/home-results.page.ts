@@ -71,7 +71,7 @@ export class HomeResultsPage {
 
     const dt = new Date();
     this.date = dt.getDate();
-    this.month = this.months[dt.getMonth()+1];
+    this.month = this.months[dt.getMonth()];
     this.setCheckinTime();
   }
   

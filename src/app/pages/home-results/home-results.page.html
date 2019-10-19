@@ -1,106 +1,105 @@
 <ion-header no-border [ngClass]="(toolbarshadow)?'':'shadow'">
-  <ion-toolbar>
-    <ion-buttons style="color: gray;padding-left: 16px" slot="start">
+  <ion-toolbar class="material-toolbar">
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-        <p style='text-align: center;color: gray'>ThinkZone</p>
+        <p class='page-title'>ThinkZone</p>
     </ion-title>
     
      <ion-buttons slot="end">
-      <ion-button size="small" shape="round" style="color: white" (click)="notifications('hi')">
-        <ion-icon style="color: gray;font-size: 1.8rem" name="notifications"></ion-icon>
+      <ion-button size="small" shape="round" (click)="notifications('hi')">
+        <ion-icon class='data-large' name="notifications"></ion-icon>
       </ion-button>
     </ion-buttons> 
   </ion-toolbar>
 </ion-header>
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <!-- <p>Add student details here {{ 'HOME.student_details' | translate }}</p> -->
-  <div [routerLink]="'/attendance'" class='shadow' style='background: white;width: 86%;margin: 7%; border-radius: 8px;flex-flow: row;display: flex;align-items: center'>
-    <div style='border-radius: 8px 0 0 8px;height: 90px;width: 25%;background: #2196f3;color: white;display: flex;flex-flow: column;justify-content: center;align-items: center'>
-      <p style='font-size: 2rem;margin: 5px'>{{date}}</p>
-      <p style='margin: 5px 8px 5px 8px'>{{month}}</p>
+  <div [routerLink]="'/attendance'" class='shadow home-card'>
+    <div class='card-left-block attendance-bg'>
+      <p style='color: white;font-size: 2rem;margin: 5px'>{{date}}</p>
+      <p style='color: white;margin: 5px 8px 5px 8px'>{{month}}</p>
     </div>
-    <div style='text-align: center;width: 75%'>
-      <p style='color: gray'>{{ 'HOME.attendance' | translate }}</p>
+    <div class='centered-text-for-card'>
+      <p class='data'>{{ 'HOME.attendance' | translate }}</p>
     </div>
-    <div style='background: #2196f3;height: 50px;width: 5px'>
-    </div>
-  </div>
-
-  <div [routerLink]="'/studentexplor'" class='shadow' style='background: white;width: 86%;margin: 7%; border-radius: 8px;flex-flow: row;display: flex;align-items: center'>
-    <div style='border-radius: 8px 0 0 8px;height: 90px;width: 25%;background: #ef5350;color: white;display: flex;flex-flow: column;justify-content: center;align-items: center'>
-      <ion-icon name='person' style="font-size: 3rem;color: white"></ion-icon>
-    </div>
-    <div style='text-align: center;width: 75%'>
-      <p style='color: gray'>{{ 'HOME.student_details' | translate }}</p>
-    </div>
-    <div style='background: #ef5350;height: 50px;width: 5px'>
+    <div class='decorative-side-panel-small attendance-bg'>
     </div>
   </div>
 
-  <div class='shadow' style='width: 86%;margin: 7%;border-radius: 8px;display: flex;flex-flow: row;align-items: center'>
-    <div style='text-align: center;width: 25%;min-width: 25%;'>
-      <p style='color: #4caf50;font-size: 1.4rem'>ECE</p>
+  <div [routerLink]="'/studentexplor'"  class='shadow home-card'>
+    <div class='card-left-block student-bg'>
+      <ion-icon name='person' style="font-size: 3rem"></ion-icon>
     </div>
-    <div style='width: 1px;height: 100px;border-right: 1px rgb(173, 173, 173) solid'>
+    <div class='centered-text-for-card'>
+      <p class='data'>{{ 'HOME.student_details' | translate }}</p>
     </div>
-    <div style='width: 75%;margin: 20px;display: flex;flex-flow: column'>
-        <div [routerLink]="'/ecactivity'" class='shadow' style='text-align: center;color: white;margin:10px;border-radius: 8px;width: 90%;background: #4caf50'>
-          <p>{{ 'HOME.activity_ece' | translate }}</p>
-        </div>
-
-        <div [routerLink]="'/ecassessment'" style='text-align: center;color: #4caf50;margin: 10px;border-radius: 8px;width: 90%;border: 1px solid #4caf50'>
-          <p>{{ 'HOME.assessment_ece' | translate }}</p>
-        </div>
-    </div>
-    <div style='background: #4caf50;height: 100px;width: 5px'>
+    <div class='decorative-side-panel-small student-bg'>
     </div>
   </div>
 
-  <div class='shadow' style='width: 86%;margin: 7%;border-radius: 8px;display: flex;flex-flow: row;align-items: center'>
-    <div style='text-align: center;width: 25%;min-width: 25%;'>
-      <p style='color: #f57c00;font-size: 1.4rem'>PGE</p>
+  <div class='shadow home-card'>
+    <div class='student-level-name'>
+      <p class='data-large ece-color'>ECE</p>
     </div>
-    <div style='width: 1px;height: 120px;border-right: 1px rgb(173, 173, 173) solid'>
+    <div class='vertical-bar'>
     </div>
-    <div style='width: 75%;margin: 10px;display: flex;flex-flow: row;flex-wrap: wrap;justify-content: space-evenly'>
-        <div [routerLink]="'/pgactivity'" class='shadow' style='text-align: center;color: white;margin:5px;border-radius: 8px;width: 90%;background: #f57c00'>
-          <p>{{ 'HOME.activity_pge_math' | translate }}</p>
+    <div class='button-section-inside-card'>
+        <div [routerLink]="'/ecactivity'" class='shadow button ece-solid'>
+          <p class='data'>{{ 'HOME.activity_ece' | translate }}</p>
         </div>
 
-        <div [routerLink]="'/pgactivityeng'" class='shadow' style='text-align: center;color: white;margin:5px;border-radius: 8px;width: 90%;background: #f57c00'>
-          <p>{{ 'HOME.activity_pge_eng' | translate }}</p>
-        </div>
-
-        <div [routerLink]="'/pgactivityodia'" class='shadow' style='text-align: center;color: white;margin:5px;border-radius: 8px;width: 90%;background: #f57c00'>
-          <p>{{ 'HOME.activity_pge_odia' | translate }}</p>
-        </div>
-
-        <div style='width: 40%;margin: 5px'></div>
-        <div [routerLink]="'/pgassessment'" style='text-align: center;color: #f57c00;margin: 5px;border-radius: 8px;width: calc(80% + 20px);border: 1px solid #f57c00'>
-          <p>{{ 'HOME.assessment_pge' | translate }}</p>  
+        <div [routerLink]="'/ecassessment'" class='button ece-bordered'>
+          <p class='data'>{{ 'HOME.assessment_ece' | translate }}</p>
         </div>
     </div>
-    <div style='background: #f57c00;height: 120px;width: 5px'>
+    <div class='decorative-side-panel ece-bg'>
+    </div>
+  </div>
+
+  <div class='shadow home-card'>
+    <div class='student-level-name'>
+      <p class='data-large pge-color'>PGE</p>
+    </div>
+    <div class='vertical-bar'>
+    </div>
+    <div  class='button-section-inside-card'>
+        <div [routerLink]="'/pgactivity'" class='shadow button pge-solid'>
+          <p class='data'>{{ 'HOME.activity_pge_math' | translate }}</p>
+        </div>
+
+        <div [routerLink]="'/pgactivityeng'" class='shadow button pge-solid'>
+          <p class='data'>{{ 'HOME.activity_pge_eng' | translate }}</p>
+        </div>
+
+        <div [routerLink]="'/pgactivityodia'" class='shadow button pge-solid'>
+          <p class='data'>{{ 'HOME.activity_pge_odia' | translate }}</p>
+        </div>
+
+        <div [routerLink]="'/pgassessment'" class='button pge-bordered'>
+          <p class='data'>{{ 'HOME.assessment_pge' | translate }}</p>  
+        </div>
+    </div>
+    <div class='decorative-side-panel pge-bg'>
     </div>
   </div>
 
 
-  <div class='shadow' style='color: gray;text-align: center;width: 86%;margin: 7%;border-radius: 8px;display: flex;flex-flow: row;align-items: center;justify-content: space-evenly'>
+  <div class='shadow home-card spread-evenly'>
     <div [routerLink]="'/tchpayment'">
-      <div style='margin: 10px;height: 60px;width: 60px;color: white;border-radius: 25px;display: flex;justify-content: center;align-items: center;background: #1de9b6'>
-        <ion-icon style="font-size: 1.6rem" name='cash'></ion-icon>
+      <div class='solid-icon cyan-bg'>
+        <ion-icon class="data-large white" name='cash'></ion-icon>
       </div>
-      <p>{{ 'HOME.payment' | translate }}</p>
+      <p class='data'>{{ 'HOME.payment' | translate }}</p>
     </div>
-    <div style='width: 1px;height: 40px;border-right: 1px rgb(173, 173, 173) solid'>
+    <div class='vertical-bar'>
     </div>
     <div [routerLink]="'/training1'">
-      <div style='margin: 10px;height: 60px;width: 60px;color: white;border-radius: 25px;display: flex;justify-content: center;align-items: center;background: #d4e157'>
-        <ion-icon style="font-size: 1.6rem" name='trending-up'></ion-icon>
+      <div class='solid-icon lemon-bg'>
+        <ion-icon class='data-large white' name='trending-up'></ion-icon>
       </div>
-      <p>{{ 'HOME.training' | translate }}</p>
+      <p class='data'>{{ 'HOME.training' | translate }}</p>
     </div>
   </div>
 </ion-content>

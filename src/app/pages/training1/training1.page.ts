@@ -21,15 +21,15 @@ export class Training1Page {
   public allmodule_name: any[];
   public allsubmodule_list: any = [];
   toolbarshadow = true;
-  init_module: string = '';
-  
+  init_module = '';
+
 
   _userid: string;
   _username: string;
   _centerid: string;
   _centername: string;
 
-  hide_class_field: boolean = false;
+  hide_class_field = false;
 
   constructor(
     public navController: NavController,
@@ -41,25 +41,25 @@ export class Training1Page {
     public api: RestApiService,
     private loadingController: LoadingController
   ) {
-    this._userid = localStorage.getItem("_userid");
-    this._username = localStorage.getItem("_username");
+    this._userid = localStorage.getItem('_userid');
+    this._username = localStorage.getItem('_username');
     this._centerid = '';
     this._centername = '';
     this.getAllModules();
   }
 
-  async getAllModules(){
-    let loading = await this.loadingController.create({});
+  async getAllModules() {
+    const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getalltrainingmodules()
       .subscribe(res => {
-        console.log('@@@Module list: '+JSON.stringify(res));
+        console.log('@@@Module list: ' + JSON.stringify(res));
         this.allmodule_list = res;
         loading.dismiss();
 
         // load on page load time
         this.allmodule_name = [];
-        if(this.allmodule_list.length > 0){
+        if (this.allmodule_list.length > 0) {
           this.init_module = this.allmodule_list[0].moduleid;
           this.getAllSubmodules(this.init_module);
           let count = true;
@@ -77,15 +77,15 @@ export class Training1Page {
       });
   }
 
-  reloadData($event){
+  reloadData($event) {
     console.log(event);
   }
-  async getAllSubmodules(moduleid){
-    let loading = await this.loadingController.create({});
+  async getAllSubmodules(moduleid) {
+    const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getalltrainingsubmodules(moduleid)
       .subscribe(res => {
-        console.log('@@@Module list: '+JSON.stringify(res));
+        console.log('@@@Module list: ' + JSON.stringify(res));
         this.allsubmodule_list = res;
         loading.dismiss();
       }, err => {
@@ -95,7 +95,7 @@ export class Training1Page {
       });
   }
 
-  module_select_onchange(value){
+  module_select_onchange(value) {
     this.allmodule_name.forEach(element => {
       element.selected = false;
     });
@@ -104,23 +104,23 @@ export class Training1Page {
     this.getAllSubmodules(value.moduleid);
   }
 
-  async submodule_click(submodule){
+  async submodule_click(submodule) {
     console.log('@@@Selected Submodule: ', JSON.stringify(submodule));
-    
+
       // call eng assessment modal
       const modal = await this.modalController.create({
         component: Training2Page,
-        componentProps: { res: {submodule: submodule} } 
+        componentProps: { res: {submodule: submodule} }
       });
       modal.onDidDismiss()
         .then((data) => {
-          console.log('@@@Modal Data: '+JSON.stringify(data));
-          //this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
+          console.log('@@@Modal Data: ' + JSON.stringify(data));
+          // this.get_attendance_by_teacher_by_date(this._userid, this.attendance_date);
       });
-      return await modal.present(); 
+      return await modal.present();
   }
 
-  async explor(){
+  async explor() {
     this.navController.navigateForward('/profile');
   }
 
