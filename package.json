@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
     "@capacitor/android": "^1.0.0-beta.19",
-    "@capacitor/cli": "^1.0.0-beta.19",
+    "@capacitor/cli": "^1.2.1",
     "@capacitor/core": "^1.0.0-beta.19",
     "@ionic-native/camera": "^5.4.0",
     "@ionic-native/core": "5.0.0-beta.14",
@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.12.3",
-    "@angular-devkit/build-angular": "~0.12.3",
+    "@angular-devkit/build-angular": "^0.13.9",
     "@angular-devkit/core": "~7.2.3",
     "@angular-devkit/schematics": "~7.2.3",
     "@angular/cli": "~7.2.3",
