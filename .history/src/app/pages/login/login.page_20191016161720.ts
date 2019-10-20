@@ -170,7 +170,8 @@ export class LoginPage implements OnInit {
     console.log('@@@ data: ' + JSON.stringify(data));
     const loading = await this.loadingController.create({spinner: 'dots'});
     await loading.present();
-    await this.api.authenticateuser(data).subscribe(res => {
+    await this.api.authenticateuser(data)
+      .subscribe(res => {
         console.log('###res: ' + res);
         loading.dismiss();
         if (res['success'] === 'success') {

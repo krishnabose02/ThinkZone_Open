@@ -7,11 +7,10 @@
   
     <ion-card-content>
       <div id="info_div" class="info_div" [hidden]="hide_info_div"> 
-        <img src="../../../../assets/img/info.png"><br />
         No Baseline questions found !!! <br />
         <ion-button icon-left color="primary" (click)="closeModal()" tappable> {{ 'BASELINE.btn_ok' | translate }} </ion-button>
       </div>
-
+      
       <div id="cont_div" class="" [hidden]="hide_cont_div">
           <ion-list *ngFor = "let baseline of baseline_q; let i=index;" class="item-text-wrap">
             <ion-label> 
@@ -23,7 +22,7 @@
             <p><b><u>  {{ 'BASELINE.title2' | translate }} </u></b></p>
             <ion-list *ngFor = "let quest of baseline.questionset; let i=index; ">
               {{ i+1 }} .{{ quest.question }}
-              <ion-select interface="popover" mode="ios" placeholder="Select answer" (ionChange)="select_answer_onchange($event.detail.value, quest)" class="select-width">
+              <ion-select placeholder="Select answer" (ionChange)="select_answer_onchange($event.detail.value, quest)" class="select-width">
                 <ion-select-option value="yes"> {{ 'BASELINE.btn_yes' | translate }}</ion-select-option>
                 <ion-select-option value="no"> {{ 'BASELINE.btn_no' | translate }}</ion-select-option>
               </ion-select>

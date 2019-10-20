@@ -23,7 +23,7 @@
             <p><b><u>  {{ 'BASELINE.title2' | translate }} </u></b></p>
             <ion-list *ngFor = "let quest of baseline.questionset; let i=index; ">
               {{ i+1 }} .{{ quest.question }}
-              <ion-select interface="popover" mode="ios" placeholder="Select answer" (ionChange)="select_answer_onchange($event.detail.value, quest)" class="select-width">
+              <ion-select placeholder="Select answer" (ionChange)="select_answer_onchange($event.detail.value, quest)" class="select-width">
                 <ion-select-option value="yes"> {{ 'BASELINE.btn_yes' | translate }}</ion-select-option>
                 <ion-select-option value="no"> {{ 'BASELINE.btn_no' | translate }}</ion-select-option>
               </ion-select>

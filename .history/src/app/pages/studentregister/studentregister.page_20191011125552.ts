@@ -29,7 +29,7 @@ export class StudentregisterPage {
   _studentname = '';
   // _program = '';
   _class = '';
-  _phone: number;
+  _phone = 0;
   // _gender = '';
   _dob = '';
   _parentsname = '';
@@ -94,7 +94,7 @@ export class StudentregisterPage {
       this._studentname = '';
       this.program = '';
       this._class = '';
-      //this._phone = 0;
+      this._phone = 0;
       this.gender = '';
       this._dob = '';
       this._parentsname = '';

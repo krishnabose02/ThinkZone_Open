@@ -1,0 +1,89 @@
+<ion-content class="bg-white">
+  <ion-card class="">
+    <div class="card-margin">
+      <ion-row class="heading">
+        <ion-col>
+            <!-- {{flag | titlecase}} Student Regn. -->
+            {{ 'REGISTER.student_register' | translate}}
+        </ion-col>
+      </ion-row>
+      
+      <!-- Student name -->
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          {{ 'REGISTER.student_name' | translate}}
+        </ion-label>
+        <ion-input value="{{_studentname}}" [(ngModel)]="studentname" color="secondary" type="text"></ion-input>
+      </ion-item>
+
+      <!-- Program -->
+      <ion-item class="radio-margin">
+        <ion-label>{{ 'REGISTER.program' | translate}}</ion-label>
+        <ion-select placeholder="Select One" value="{{_program}}" (ionChange)="select_program_onchange($event.detail.value)" class="select-width">
+          <ion-select-option value="ece">ECE</ion-select-option>
+          <ion-select-option value="pge">PGE</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Class -->
+      <ion-item class="radio-margin" [hidden]="hide_class_field">
+        <ion-label>{{ 'REGISTER.class' | translate}}</ion-label>
+        <ion-select placeholder="Select One" value="{{_class}}" (ionChange)="select_class_onchange($event.detail.value)" class="select-width">
+          <ion-select-option *ngFor="let cls of class_list" value="{{cls}}">{{ cls }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Phone -->
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          {{ 'REGISTER.phone' | translate}}
+        </ion-label>
+        <ion-input value="" min="5000000000" max="10000000000" [(ngModel)]="phone" color="secondary" type="number"></ion-input> <!--value="{{_phone}}"-->
+      </ion-item>
+
+      <!-- Gender -->
+      <ion-item class="radio-margin">
+        <ion-label>{{ 'REGISTER.gender' | translate}}</ion-label>
+        <ion-select value="{{_gender}}" placeholder="Select One" (ionChange)="gender_onchange($event.detail.value)" class="select-width">
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="male">Male</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- DOB -->
+      <ion-item class="radio-margin">
+        <ion-label>{{ 'REGISTER.dob' | translate}}</ion-label>
+        <ion-datetime value="{{_dob}}" display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="dob_onhange($event.detail.value)"></ion-datetime>
+      </ion-item>
+
+      <!-- Fathers name -->
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          {{ 'REGISTER.guardian' | translate}}
+        </ion-label>
+        <ion-input value="{{_parentsname}}" [(ngModel)]="parentsname" color="secondary" type="text"></ion-input>
+      </ion-item>
+      
+      <!-- Registration Date -->
+      <ion-item class="radio-margin">
+        <ion-label>{{ 'REGISTER.reg_date' | translate}}</ion-label>
+        <ion-datetime value="{{_registration_date}}" display-format="DD/MM/YYYY" picker-format="DD MM, YYYY" (ionChange)="regdate_onhange($event.detail.value)"></ion-datetime>
+      </ion-item>
+  
+      <div margin-top>
+        <ion-row>
+          <ion-col>
+              <ion-button color="light" (click)="closeModal()">
+                <ion-icon slot="start" name="close"></ion-icon>{{ 'REGISTER.btn_cancel' | translate}}
+              </ion-button>
+          </ion-col>
+          <ion-col>
+              <ion-button color="primary" (click)="register_button_click()">
+                <ion-icon name="log-in"></ion-icon>&nbsp;&nbsp;{{ 'REGISTER.btn_save' | translate}}&nbsp;&nbsp;&nbsp;
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
