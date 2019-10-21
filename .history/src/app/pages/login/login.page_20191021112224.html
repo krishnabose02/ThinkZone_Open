@@ -41,7 +41,7 @@
       <ion-card [ngClass]='(loginState==0)?"hidden":"card-4"'>
         <ion-card-header>
           <div>
-              <p style='text-align: center; color: gray; font-size: 20px; font-weight: bold;'>{{ 'LOGIN.title' | translate }}</p>
+              <p style='text-align: center; color: gray;'>LOGIN</p>
           </div>
         </ion-card-header>
         <ion-card-content>
@@ -49,13 +49,13 @@
           <form [formGroup]="signinFormGroup" class="list-form">
             <div class='input-item'>
                   <ion-item style="width: 100%">
-                    <ion-label position="stacked">{{ 'LOGIN.txt_email' | translate}}<span style='color: red'>*</span></ion-label>
+                    <ion-label position="stacked">Email<span style='color: red'>*</span></ion-label>
                     <ion-input (ionChange)='errormessage=""' formControlName="email" type='email'></ion-input>
                   </ion-item>
               </div>   
               <div class='input-item' style='margin-bottom: 30px'>
                   <ion-item style="width: 100%">
-                    <ion-label position="stacked">{{ 'LOGIN.txt_password' | translate}}<span style='color: red'>*</span></ion-label>
+                    <ion-label position="stacked">Password<span style='color: red'>*</span></ion-label>
                     <ion-input (ionChange)='errormessage=""' formControlName="password" type='password'></ion-input>
                   </ion-item>
               </div>    
@@ -66,7 +66,7 @@
       </ion-card>
 
       <div class='color-button' (click)='goToNextPage()'>
-        <p style='margin-top: 10px;margin-bottom: 10px; color: white;;'>{{ 'LOGIN.btn_login' | translate}}</p>
+        <p style='margin-top: 10px;margin-bottom: 10px; color: white;;'>LOGIN</p>
       </div>  
 
       <!-- <p style='text-align: center;font-size: 0.8rem;color: gray;margin-top: 15px'>FORGOT PASSWORD?</p> -->

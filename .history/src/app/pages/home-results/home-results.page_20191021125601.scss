@@ -1,0 +1,155 @@
+$ece-color: #4caf50;
+$pge-color: #f57c00;
+$student-color: #ef5350;
+$attence-color: #2196f3;
+
+.attendance-bg {
+    background: $attence-color;
+}
+
+.student-bg {
+    background: $student-color;
+}
+
+.ece-color{
+    color: $ece-color;
+}
+.ece-bg {
+    background: $ece-color;
+}
+
+.pge-bg {
+    background: $pge-color;
+}
+.pge-color {
+    color: $pge-color;
+}
+
+.home-card {
+    background: white;
+    width: 86%;
+    margin: 7%;
+    border-radius: 8px;
+    flex-flow: row;
+    display: flex;
+    align-items: center;
+}
+
+.card-left-block {
+    border-radius: 8px 0 0 8px;
+    height: 90px;
+    width: 25%;
+    color: white;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.student-level-name {
+    text-align: center;
+    width: 25%;
+    min-width: 25%;
+}
+
+.centered-text-for-card {
+    text-align: center;
+    width: 75%;
+}
+
+.vertical-bar {
+    width: 1px;
+    height: 120px;
+    border-right: 1px rgb(173, 173, 173) solid;
+}
+
+.vertical-bar-small {
+    width: 1px;
+    height: 60px;
+    border-right: 1px rgb(173, 173, 173) solid;
+}
+
+.button-section-inside-card {
+    width: 75%;
+    margin: 20px;
+    display: flex;
+    flex-flow: column;
+}
+
+.button {
+    text-align: center;
+    margin:10px;
+    border-radius: 8px;
+    width: 90%;
+}
+
+.ece-solid {
+    color: white;
+    background: $ece-color;
+    p{
+        color: white;
+    }
+}
+
+.ece-bordered {
+    background: white;
+    color: $ece-color;
+    border: 1px solid $ece-color;
+    p{
+        color: $ece-color;
+    }
+}
+
+.pge-solid {
+    color: white;
+    background: $pge-color;
+    p{
+        color: white;
+    }
+}
+
+.pge-bordered {
+    background: white;
+    color: $pge-color;
+    border: 1px solid $pge-color;
+    p{
+        color: $pge-color;
+    }
+}
+
+.decorative-side-panel {
+    height: 120px;
+    width: 5px;
+}
+
+.decorative-side-panel-small {
+    height: 50px;
+    width: 5px;
+}
+
+.solid-icon {
+    margin: 10px;
+    height: 60px;
+    width: 60px;
+    color: white;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cyan-bg {
+    background: #1de9b6;
+}
+
+.lemon-bg {
+    background: #d4e157;
+}
+
+.spread-evenly {
+    justify-content: space-evenly;
+}
+
+.white {
+    color: white;
+}

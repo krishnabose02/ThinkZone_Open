@@ -17,12 +17,12 @@
     "HOME": {
         "student_details": "ଛାତ୍ର ବିବରଣୀ",
         "attendance": "ଉପସ୍ଥାନ",
-        "activity_ece": "ଗତିବିଧି",
-        "assessment_ece": "ମୂଲ୍ୟାଙ୍କନ",
-        "activity_pge_math": "ଅଙ୍କ ଗତିବିଧି",
-        "activity_pge_eng": "ଇଂରାଜୀ ଗତିବିଧି",
-        "activity_pge_odia": "ଓଡିଆ ଗତିବିଧି",
-        "assessment_pge": "ମୂଲ୍ୟାଙ୍କନ",
+        "activity_ece": "ଗତିବିଧି(ECE)",
+        "assessment_ece": "ମୂଲ୍ୟାଙ୍କନ(ECE)",
+        "activity_pge_math": "ଅଙ୍କ ଗତିବିଧି(PGE)",
+        "activity_pge_eng": "ଇଂରାଜୀ ଗତିବିଧି(PGE)",
+        "activity_pge_odia": "ଓଡିଆ ଗତିବିଧି(PGE)",
+        "assessment_pge": "ମୂଲ୍ୟାଙ୍କନ(PGE)",
         "training": "ପ୍ରଶିକ୍ଷଣ",
         "payment": "ଦେୟ",
         "user_feedback": "ମତାମତ"

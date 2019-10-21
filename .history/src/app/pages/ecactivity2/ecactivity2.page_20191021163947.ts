@@ -72,7 +72,6 @@ export class Ecactivity2Page {
     public api: RestApiService,
     private loadingController: LoadingController,
     private route: ActivatedRoute,
-    private router: Router,
     private file: File,
     private fileOpener: FileOpener,
     private diagnostic: Diagnostic,
@@ -140,7 +139,7 @@ export class Ecactivity2Page {
         // add images to content\
         let image_str = '';
         this.image.forEach(img => {
-          image_str += '<br><img src="'+this.imageURL+''+img+'"><br>';
+          image_str = '<br>'+this.imageURL+''+img+'<br>';
         })
         this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content.concat(image_str));
         this.isVisited_content = true;
@@ -382,10 +381,6 @@ export class Ecactivity2Page {
     } else {
         this.toolbarshadow = false;
     }
-  }
-  async close_modal(){
-    //this.modalController.dismiss();
-    this.router.navigate(['ecactivity']);
   }
 }
 

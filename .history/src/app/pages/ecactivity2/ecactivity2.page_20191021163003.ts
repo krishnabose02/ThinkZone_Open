@@ -72,7 +72,6 @@ export class Ecactivity2Page {
     public api: RestApiService,
     private loadingController: LoadingController,
     private route: ActivatedRoute,
-    private router: Router,
     private file: File,
     private fileOpener: FileOpener,
     private diagnostic: Diagnostic,
@@ -129,7 +128,7 @@ export class Ecactivity2Page {
       console.log('@@@Master Activities: '+JSON.stringify(res));
       if (res.length > 0) {
         this.activityobj = res[0];
-        //this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content);
+        this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content);
         this.image =  this.activityobj.image;
         this.worksheet = this.activityobj.worksheet;
         this.video = this.activityobj.video;
@@ -137,12 +136,10 @@ export class Ecactivity2Page {
         this.fillSheetPathNames(this.activityobj.worksheet);
         // mark scrollable content as visited
 
-        // add images to content\
-        let image_str = '';
-        this.image.forEach(img => {
-          image_str += '<br><img src="'+this.imageURL+''+img+'"><br>';
+        // add images to content
+        this.image.forEach(i => {
+          console.log('-> '+JSON.stringify(i));
         })
-        this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content.concat(image_str));
         this.isVisited_content = true;
       }
       console.log('@@@content: ' + JSON.stringify(this.content));
@@ -382,10 +379,6 @@ export class Ecactivity2Page {
     } else {
         this.toolbarshadow = false;
     }
-  }
-  async close_modal(){
-    //this.modalController.dismiss();
-    this.router.navigate(['ecactivity']);
   }
 }
 

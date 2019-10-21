@@ -72,7 +72,6 @@ export class Ecactivity2Page {
     public api: RestApiService,
     private loadingController: LoadingController,
     private route: ActivatedRoute,
-    private router: Router,
     private file: File,
     private fileOpener: FileOpener,
     private diagnostic: Diagnostic,
@@ -382,10 +381,6 @@ export class Ecactivity2Page {
     } else {
         this.toolbarshadow = false;
     }
-  }
-  async close_modal(){
-    //this.modalController.dismiss();
-    this.router.navigate(['ecactivity']);
   }
 }
 

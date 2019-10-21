@@ -153,7 +153,6 @@ export class EcactivityPage {
     let preferedlanguage = localStorage.getItem("_language");
     await this.api.getmasteractivities(preferedlanguage, this.program, this.subject, this.selected_month, this.selected_week).subscribe(res => {
         // loading.dismiss();
-        console.log('>>>List of Activities: '+JSON.stringify(res));
         this.setActivityStatus(res);
       }, err => {
         console.log(err);

@@ -192,7 +192,7 @@ export class RestApiService {
       .pipe(map(this.extractData),catchError(this.handleError));
   }
 
-  // get teacher activity details
+  // get master activity by userid
   gettchactivitiydetails(userid, program, subject, month, week, activity): Observable<any> {
     return this.http.get(baseUrl+ 'gettchactivitiydetails/'+ userid+ '/'+ program+ '/'+ subject+ '/'+ month+ '/'+ week+ '/'+ activity, httpOptions)
       .pipe(map(this.extractData),catchError(this.handleError));
@@ -200,14 +200,27 @@ export class RestApiService {
 
   // get tch activity by userid
   gettchactivitybyuser(userid, program, subject, month, week): Observable<any> {
-    return this.http.get(baseUrl+ 'gettchactivitybyuser/'+ userid+ '/'+ program+ '/'+ subject+ '/'+ month+ '/'+ week, httpOptions)
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.http.get(
+        baseUrl
+        + 'gettchactivitybyuser/'
+        + userid
+        + '/'
+        + program
+        + '/'
+        + subject
+        + '/'
+        + month
+        + '/'
+        + week, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
   // save tch activity
   savetchactivity(data): Observable<any> {
-    return this.http.post(baseUrl + 'savetchactivity', data, httpOptions)
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.http.post(baseUrl + 'savetchactivity', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
   // get fcm token all

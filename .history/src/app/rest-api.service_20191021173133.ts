@@ -200,14 +200,27 @@ export class RestApiService {
 
   // get tch activity by userid
   gettchactivitybyuser(userid, program, subject, month, week): Observable<any> {
-    return this.http.get(baseUrl+ 'gettchactivitybyuser/'+ userid+ '/'+ program+ '/'+ subject+ '/'+ month+ '/'+ week, httpOptions)
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.http.get(
+        baseUrl
+        + 'gettchactivitybyuser/'
+        + userid
+        + '/'
+        + program
+        + '/'
+        + subject
+        + '/'
+        + month
+        + '/'
+        + week, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
   // save tch activity
   savetchactivity(data): Observable<any> {
-    return this.http.post(baseUrl + 'savetchactivity', data, httpOptions)
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.http.post(baseUrl + 'savetchactivity', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
   // get fcm token all

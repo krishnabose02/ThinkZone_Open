@@ -206,8 +206,9 @@ export class RestApiService {
 
   // save tch activity
   savetchactivity(data): Observable<any> {
-    return this.http.post(baseUrl + 'savetchactivity', data, httpOptions)
-      .pipe(map(this.extractData), catchError(this.handleError));
+    return this.http.post(baseUrl + 'savetchactivity', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
   // get fcm token all

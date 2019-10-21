@@ -4,8 +4,6 @@
         <ion-title class='page-title-absolute'>
           <p>{{ 'ECEACTIVITY.title' | translate}}</p>
         </ion-title>
-        <ion-button color="light" (click)="close_modal()">X</ion-button>
-        
         <ion-back-button></ion-back-button>
     </ion-row>
   </ion-toolbar>
@@ -13,7 +11,7 @@
      
 <ion-content scrollY='false' [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <div style="height: 100%;width: 100%;background: #616161;">
-    <div class='shadow' style="background: white;margin-right: 10%;margin-left: 5%;min-height: 70%;max-height: 70%;height: 70%;width: 90%; overflow-y: auto;;">
+    <div class='shadow' style="background: white;margin-right: 10%;margin-left: 10%;min-height: 70%;max-height: 70%;height: 70%;width: 80%">
       <!-- <ion-textarea disabled readonly value="{{ content }}" style="margin-top: 0px;padding: 5px;height: 100%"></ion-textarea> -->
       <div [innerHTML]="content" style="margin-top: 0px;padding: 5px;height: 100%"></div>
     </div>
@@ -29,8 +27,8 @@
           <p style='margin-top: 5px'>Worksheets</p>
         </div>
       </div>
-      <div (click)='(isEnabled_completeActivityButton)?complete_activity():""' [style.background]='(isEnabled_completeActivityButton)?"#2196f3":"#90A4AE"' style='overflow: auto;width: 90%;margin-right: 5%;margin-left: 5%;text-align: center;color: white;border-radius: 4px; height: 40px; font-size: 20px; padding-top: 8px;'>
-        Complete Activity
+      <div (click)='(isEnabled_completeActivityButton)?complete_activity():""' [style.background]='(isEnabled_completeActivityButton)?"#2196f3":"#90A4AE"' style='overflow: auto;width: 90%;margin-right: 5%;margin-left: 5%;text-align: center;color: white;border-radius: 4px'>
+        <p>Complete Activity</p>
       </div>
     </div>
   </div>

@@ -29,11 +29,9 @@ import { DataObject } from 'src/app/services/DataObject';
   encapsulation: ViewEncapsulation.None,
 })
 export class Ecactivity2Page {
-  imageURL: string = 'http://18.191.206.88:1234/thinkzone/getimage/';
   qryParams: any;
   activityobj: any = {};
   content: SafeHtml = '';
-  image: any = [];
   worksheet = '';
   video = '';
 
@@ -72,7 +70,6 @@ export class Ecactivity2Page {
     public api: RestApiService,
     private loadingController: LoadingController,
     private route: ActivatedRoute,
-    private router: Router,
     private file: File,
     private fileOpener: FileOpener,
     private diagnostic: Diagnostic,
@@ -107,7 +104,6 @@ export class Ecactivity2Page {
         this.selected_week = this.qryParams.week;
         this.selected_activity = this.qryParams.activity;
         this.getmasteractivitiydetails(
-          this.preferedlanguage,
           this.selected_program,
           this.selected_subject,
           this.selected_month,
@@ -122,40 +118,31 @@ export class Ecactivity2Page {
   }
 
   // getmasteractivitiydetails
-  async getmasteractivitiydetails(preferedlanguage, program, subject, month, week, activity) {
+  async getmasteractivitiydetails(program, subject, month, week, activity) {
     const loading = await this.loadingController.create({});
     await loading.present();
-    await this.api.getmasteractivitiydetails(preferedlanguage, program, subject, month, week, activity).subscribe(res => {
-      console.log('@@@Master Activities: '+JSON.stringify(res));
-      if (res.length > 0) {
-        this.activityobj = res[0];
-        //this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content);
-        this.image =  this.activityobj.image;
-        this.worksheet = this.activityobj.worksheet;
-        this.video = this.activityobj.video;
-        this.fillVideoPathNames(this.activityobj.video);
-        this.fillSheetPathNames(this.activityobj.worksheet);
-        // mark scrollable content as visited
+    await this.api.getmasteractivitiydetails(program, subject, month, week, activity).subscribe(res => {
+        if (res.length > 0) {
+          this.activityobj = res[0];
+          this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content);
+          this.worksheet = this.activityobj.worksheet;
+          this.video = this.activityobj.video;
+          this.fillVideoPathNames(this.activityobj.video);
+          this.fillSheetPathNames(this.activityobj.worksheet);
+          // mark scrollable content as visited
+          this.isVisited_content = true;
+        }
+        console.log('@@@content: ' + JSON.stringify(this.content));
+        console.log('@@@worksheet: ' + JSON.stringify(this.worksheet));
+        console.log('@@@video: ' + JSON.stringify(this.video));
+        loading.dismiss();
 
-        // add images to content\
-        let image_str = '';
-        this.image.forEach(img => {
-          image_str += '<br><img src="'+this.imageURL+''+img+'"><br>';
-        })
-        this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content.concat(image_str));
-        this.isVisited_content = true;
-      }
-      console.log('@@@content: ' + JSON.stringify(this.content));
-      console.log('@@@worksheet: ' + JSON.stringify(this.worksheet));
-      console.log('@@@video: ' + JSON.stringify(this.video));
-      loading.dismiss();
-
-      this.Enable_CompleteActivityButton();
-    }, err => {
-      console.log(err);
-      loading.dismiss();
-      this.isEnabled_completeActivityButton = false;
-    });
+        this.Enable_CompleteActivityButton();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+        this.isEnabled_completeActivityButton = false;
+      });
   }
 
   fillVideoPathNames(names: string[]) {
@@ -382,10 +369,6 @@ export class Ecactivity2Page {
     } else {
         this.toolbarshadow = false;
     }
-  }
-  async close_modal(){
-    //this.modalController.dismiss();
-    this.router.navigate(['ecactivity']);
   }
 }
 

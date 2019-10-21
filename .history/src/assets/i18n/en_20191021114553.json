@@ -7,7 +7,6 @@
     },
     "APP": {
         "home": "Home",
-        "profile": "Profile",
         "message": "Messages",
         "user_feedback": "Feedback",
         "about": "About",
@@ -17,12 +16,12 @@
     "HOME": {
         "student_details": "Student Details",
         "attendance": "Attendance",
-        "activity_ece": "Activity",
-        "assessment_ece": "Assessment",
-        "activity_pge_math": "Math Activity",
-        "activity_pge_eng": "Eng Activity",
-        "activity_pge_odia": "Odia Activity",
-        "assessment_pge": "Assessment",
+        "activity_ece": "Activity(ECE)",
+        "assessment_ece": "Assessment(ECE)",
+        "activity_pge_math": "Math Activity(PGE)",
+        "activity_pge_eng": "Eng Activity(PGE)",
+        "activity_pge_odia": "Odia Activity(PGE)",
+        "assessment_pge": "Assessment(PGE)",
         "training": "Training",
         "payment": "Payment",
         "user_feedback": "Feedback"
