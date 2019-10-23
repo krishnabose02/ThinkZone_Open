@@ -25,6 +25,9 @@
     background: #2196f3;
     min-width: 80px;
     min-height: 20px;
+    p {
+        color: white;
+    }
 }
 
 @keyframes blue-to-white {
@@ -46,9 +49,9 @@
     border: 1px #2196f3 solid;
     min-width: 80px;
     min-height: 20px;
-}
-.shadow{
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.014), 0 6px 6px rgba(0,0,0,0.21);
+    p {
+        color: #2196f3;
+    }
 }
 
 .hidden {
@@ -78,13 +81,6 @@
     border-radius: 4px;
     color: gray;
     padding: 30px
-}
-
-.card{
-    margin: 20px;
-    border-radius: 4px;
-    padding: 30px;
-    color: gray;
 }
 
 .animated ion-label {

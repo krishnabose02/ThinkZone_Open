@@ -20,3 +20,106 @@ ion-content {
   text-align: center;
   font-size: 20px;
 }
+
+$yes: #4caf50;
+$no: #f44336;
+.card-dark{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    background: gray;
+    color: white;
+}
+
+.card{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    color: gray;
+}
+
+.horizontal-flexbox{
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+@keyframes yes-to-selectedyes{
+    0%{
+        background: white;
+        color: $yes;
+    }
+    100%{
+        background: $yes;
+        color: white;
+    }
+}
+
+@keyframes selectedyes-to-yes{
+    100%{
+        background: white;
+        color: $yes;
+    }
+    0%{
+        background: $yes;
+        color: white;
+    }
+}
+
+.yes{
+    animation: selectedyes-to-yes 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 100px;
+    border: 1px $yes solid;
+    color: $yes;
+}
+
+.selected-yes{
+    animation: yes-to-selectedyes 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 100px;
+    background: $yes;
+    color: white;
+}
+@keyframes no-to-selectedno{
+    0%{
+        background: white;
+        color: $no;
+    }
+    100%{
+        background: $no;
+        color: white;
+    }
+}
+@keyframes selectedno-to-no{
+    100%{
+        background: white;
+        color: $no;
+    }
+    0%{
+        background: $no;
+        color: white;
+    }
+}
+.no{
+    animation: selectedno-to-no;
+    animation-fill-mode: forwards;
+    border-radius: 100px;
+    border: 1px $no solid;
+    color: $no;
+}
+
+.selected-no{
+    animation: no-to-selectedno 0.6s;
+    animation-fill-mode: forwards;
+    border-radius: 100px;
+    background: $no;
+    color: white;
+}
+
+.yes, .selected-yes, .no, .selected-no{
+    p{
+        margin: 10px 20px;
+    }
+}
