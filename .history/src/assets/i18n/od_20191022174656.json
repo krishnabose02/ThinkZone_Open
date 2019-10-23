@@ -93,18 +93,8 @@
     },
     "ECEACTIVITY":{
         "title": "ଗତିବିଧି(ECE)",
-        "title2": "ଗତିବିଧି ତଥ୍ୟ",
         "month": "ମାସ",
         "week": "ସପ୍ତାହ",
-        "content": "ତଥ୍ୟ",
-        "video": "ଭିଡିଓ",
-        "worksheet": "ୱାର୍କ ସିଟ",
-        "btn_save": "ସମ୍ପୂର୍ଣ କରନ୍ତୁ"
-    },
-    "PGEACTIVITY":{
-        "title_math": "ଗତିବିଧି(ଅଙ୍କ)",
-        "title_eng": "ଗତିବିଧି(ଇଂରାଜୀ)",
-        "title_odia": "ଗତିବିଧି(ଓଡିଆ)",
         "content": "ତଥ୍ୟ",
         "video": "ଭିଡିଓ",
         "worksheet": "ୱାର୍କ ସିଟ",

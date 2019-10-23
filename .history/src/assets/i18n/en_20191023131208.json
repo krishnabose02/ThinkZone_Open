@@ -93,7 +93,6 @@
     },
     "ECEACTIVITY":{
         "title": "Activity(ECE)",
-        "title2": "Activity Details",
         "month": "Month",
         "week": "Week",
         "content": "Content",
@@ -105,9 +104,6 @@
         "title_math": "Activity(Math)",
         "title_eng": "Activity(Eng)",
         "title_odia": "Activity(Odia)",
-        "content": "Content",
-        "video": "Video",
-        "worksheet": "Work Sheet",
-        "btn_save": "Complete Activity"
+
     }
 }

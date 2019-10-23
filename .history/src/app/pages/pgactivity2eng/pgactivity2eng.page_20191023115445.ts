@@ -53,7 +53,7 @@ export class Pgactivity2engPage {
   _username: string;
 
   preferedlanguage: string = localStorage.getItem("_language");
-
+  
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -107,7 +107,7 @@ export class Pgactivity2engPage {
   async getmasteractivitiydetails(program, subject, month, week, activity){
     const loading = await this.loadingController.create({});
     await loading.present();
-    await this.api.getmasteractivitiydetails(this.preferedlanguage, program, subject, month, week, activity).subscribe(res => {
+    await this.api.getmasteractivitiydetails(program, subject, month, week, activity).subscribe(res => {
         if (res.length > 0) {
           this.activityobj = res[0];
           this.content = this.activityobj.content;

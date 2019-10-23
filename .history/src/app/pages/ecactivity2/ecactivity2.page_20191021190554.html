@@ -2,9 +2,9 @@
   <ion-toolbar class='material-toolbar'>
     <ion-row>
         <ion-title class='page-title-absolute'>
-          <p>{{ 'ECEACTIVITY.title2' | translate}}</p>
+          <p>{{ 'ECEACTIVITY.title' | translate}}</p>
         </ion-title>
-        <!-- <ion-button color="light" (click)="close_modal()" class="close_btn">X</ion-button> -->
+        <ion-button color="light" (click)="close_modal()" class="close_btn">X</ion-button>
         
         <ion-back-button></ion-back-button>
     </ion-row>
@@ -22,15 +22,15 @@
       <div class='horizontal-flexbox' style='width: 100%;color: gray;text-align: center;justify-content: space-evenly'>
         <div (click)='play_video()'>
           <ion-icon style="color: #2196f3;font-size: 2rem;" name='play'></ion-icon>
-          <p style='margin-top: 5px'>{{ 'ECEACTIVITY.video' | translate}}</p>
+          <p style='margin-top: 5px'>Video Contents</p>
         </div>
         <div (click)='open_document()'>
           <ion-icon style="color: #2196f3;font-size: 2rem;" name='document'></ion-icon>
-          <p style='margin-top: 5px'>{{ 'ECEACTIVITY.worksheet' | translate}}</p>
+          <p style='margin-top: 5px'>Worksheets</p>
         </div>
       </div>
       <div (click)='(isEnabled_completeActivityButton)?complete_activity():""' [style.background]='(isEnabled_completeActivityButton)?"#2196f3":"#90A4AE"' style='overflow: auto;width: 90%;margin-right: 5%;margin-left: 5%;text-align: center;color: white;border-radius: 4px; height: 40px; font-size: 20px; padding-top: 8px;'>
-        {{ 'ECEACTIVITY.btn_save' | translate}}
+        Complete Activity
       </div>
     </div>
   </div>

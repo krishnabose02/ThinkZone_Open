@@ -11,11 +11,11 @@ import { Router, NavigationExtras } from '@angular/router';
 import { RestApiService } from './../../rest-api.service';
 
 @Component({
-  selector: 'app-pgactivityodia',
-  templateUrl: './pgactivityodia.page.html',
-  styleUrls: ['./pgactivityodia.page.scss']
+  selector: 'app-pgactivity',
+  templateUrl: './pgactivity.page.html',
+  styleUrls: ['./pgactivity.page.scss']
 })
-export class PgactivityodiaPage {
+export class PgactivityPage {
   program = 'pge';
   // subject: string = 'na';
   month_list: any = [];
@@ -23,7 +23,7 @@ export class PgactivityodiaPage {
   activity_list: any = [];
   selected_month = '';
   selected_week = '';
-  selected_subject = 'odia';
+  selected_subject = 'math';
   activity_heading = '';
 
   month_diff: number;
@@ -37,7 +37,7 @@ export class PgactivityodiaPage {
 
   toolbarshadow = true;
   activity_loaded = false;
-  
+
   preferedlanguage: string = localStorage.getItem("_language");
 
   constructor(
@@ -136,9 +136,10 @@ export class PgactivityodiaPage {
 
     // set activity heading
     if(this.selected_month.trim().length > 0 && this.selected_week.trim().length > 0 && this.selected_subject.trim().length > 0){
-      this.getactivitydetails(this.selected_month,this.selected_week);
+      this.getactivitydetails(this.selected_month,this.selected_week, this.selected_subject);
     }
   }*/
+
   async reloadActivityData(monthAndWeek: string) {
     const mnw = monthAndWeek.split(' ');
     this.getactivitydetails(mnw[0], mnw[1]);
@@ -165,11 +166,11 @@ export class PgactivityodiaPage {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.gettchactivitybyuser(
-          this._userid,
-          this.program,
-          this.selected_subject,
-          this.selected_month,
-          this.selected_week
+                this._userid,
+                this.program,
+                this.selected_subject,
+                this.selected_month,
+                this.selected_week
       ).subscribe(res => {
         this.activity_list = [];
         this.activity_loaded = true;
@@ -207,8 +208,8 @@ export class PgactivityodiaPage {
       }
   };
   // this.navController.navigateForward('/pgactivity2', navigationExtras);
-  // this.router.navigate(['pgactivity2odia'], navigationExtras);
-  this.router.navigate(['ecactivity2'], navigationExtras);
+  // this.router.navigate(['pgactivity2'], navigationExtras);
+  this.router.navigate(['pgactivity2'], navigationExtras);
   }
 
   // alert box

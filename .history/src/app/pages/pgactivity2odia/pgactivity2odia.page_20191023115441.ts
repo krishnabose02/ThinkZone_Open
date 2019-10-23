@@ -21,11 +21,11 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { VideoPlayer, VideoOptions } from '@ionic-native/video-player/ngx';
 
 @Component({
-  selector: 'app-pgactivity2eng',
-  templateUrl: './pgactivity2eng.page.html',
-  styleUrls: ['./pgactivity2eng.page.scss']
+  selector: 'app-pgactivity2odia',
+  templateUrl: './pgactivity2odia.page.html',
+  styleUrls: ['./pgactivity2odia.page.scss']
 })
-export class Pgactivity2engPage {
+export class Pgactivity2odiaPage {
   qryParams: any;
   activityobj: any = {};
   content: string = '';
@@ -51,7 +51,7 @@ export class Pgactivity2engPage {
   
   _userid: string;
   _username: string;
-
+  
   preferedlanguage: string = localStorage.getItem("_language");
 
   constructor(
@@ -107,7 +107,7 @@ export class Pgactivity2engPage {
   async getmasteractivitiydetails(program, subject, month, week, activity){
     const loading = await this.loadingController.create({});
     await loading.present();
-    await this.api.getmasteractivitiydetails(this.preferedlanguage, program, subject, month, week, activity).subscribe(res => {
+    await this.api.getmasteractivitiydetails(program, subject, month, week, activity).subscribe(res => {
         if (res.length > 0) {
           this.activityobj = res[0];
           this.content = this.activityobj.content;

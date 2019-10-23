@@ -17,7 +17,7 @@
     <!-- Scrollable content -->
     <ion-row>
       <ion-item class="full_width">
-        <ion-label>{{ 'PGEACTIVITY.content' | translate }}</ion-label>
+        <ion-label>Scrollable content</ion-label>
       </ion-item>
     </ion-row>
     <ion-row>
@@ -30,7 +30,7 @@
     <!-- Video content -->
     <ion-row>
       <ion-item class="full_width">
-        <ion-label>{{ 'PGEACTIVITY.video' | translate }}</ion-label>
+        <ion-label>Video content</ion-label>
       </ion-item>
     </ion-row>
     <ion-row class="right-align" *ngFor="let v of video; let i = index;">
@@ -42,7 +42,7 @@
     <!-- Work Sheets -->
     <ion-row>
       <ion-item class="full_width">
-        <ion-label>{{ 'PGEACTIVITY.worksheet' | translate }}</ion-label>
+        <ion-label>Work Sheets</ion-label>
       </ion-item>
     </ion-row>
     <ion-row class="right-align">
@@ -53,7 +53,7 @@
 
     <ion-row class="right-align">
       <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" [disabled]="!isEnabled_completeActivityButton"  float-right tappable class="explore-btn">
-        {{ 'PGEACTIVITY.btn_save' | translate }}
+        Complete Activity
       </ion-button>
     </ion-row>
 

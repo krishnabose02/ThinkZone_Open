@@ -11,11 +11,11 @@ import { Router, NavigationExtras } from '@angular/router';
 import { RestApiService } from './../../rest-api.service';
 
 @Component({
-  selector: 'app-pgactivityodia',
-  templateUrl: './pgactivityodia.page.html',
-  styleUrls: ['./pgactivityodia.page.scss']
+  selector: 'app-pgactivityeng',
+  templateUrl: './pgactivityeng.page.html',
+  styleUrls: ['./pgactivityeng.page.scss']
 })
-export class PgactivityodiaPage {
+export class PgactivityengPage {
   program = 'pge';
   // subject: string = 'na';
   month_list: any = [];
@@ -23,7 +23,7 @@ export class PgactivityodiaPage {
   activity_list: any = [];
   selected_month = '';
   selected_week = '';
-  selected_subject = 'odia';
+  selected_subject = 'english';
   activity_heading = '';
 
   month_diff: number;
@@ -139,6 +139,7 @@ export class PgactivityodiaPage {
       this.getactivitydetails(this.selected_month,this.selected_week);
     }
   }*/
+
   async reloadActivityData(monthAndWeek: string) {
     const mnw = monthAndWeek.split(' ');
     this.getactivitydetails(mnw[0], mnw[1]);
@@ -152,7 +153,7 @@ export class PgactivityodiaPage {
 
     const loading = await this.loadingController.create({});
     await loading.present();
-    await this.api.getmasteractivities(this.preferedlanguage, this.program, this.selected_subject, this.selected_month, this.selected_week).subscribe(res => {
+    await this.api.getmasteractivities(this.program, this.selected_subject, this.selected_month, this.selected_week).subscribe(res => {
         loading.dismiss();
         this.setActivityStatus(res);
       }, err => {
@@ -165,12 +166,11 @@ export class PgactivityodiaPage {
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.gettchactivitybyuser(
-          this._userid,
-          this.program,
-          this.selected_subject,
-          this.selected_month,
-          this.selected_week
-      ).subscribe(res => {
+            this._userid, this.program,
+            this.selected_subject,
+            this.selected_month,
+            this.selected_week
+          ).subscribe(res => {
         this.activity_list = [];
         this.activity_loaded = true;
         all_activities.forEach(element => {
@@ -207,7 +207,7 @@ export class PgactivityodiaPage {
       }
   };
   // this.navController.navigateForward('/pgactivity2', navigationExtras);
-  // this.router.navigate(['pgactivity2odia'], navigationExtras);
+  // this.router.navigate(['pgactivity2eng'], navigationExtras);
   this.router.navigate(['ecactivity2'], navigationExtras);
   }
 
