@@ -1,0 +1,103 @@
+{
+    "LOGIN": {
+        "title": "Login",
+        "txt_email": "Email ID",
+        "txt_password": "Password",
+        "btn_login": "Login"
+    },
+    "APP": {
+        "home": "Home",
+        "profile": "Profile",
+        "message": "Messages",
+        "user_feedback": "Feedback",
+        "about": "About",
+        "privacy_policy": "Privacy Policy",
+        "logout": "Logout"
+    },
+    "HOME": {
+        "student_details": "Student Details",
+        "attendance": "Attendance",
+        "activity_ece": "Activity",
+        "assessment_ece": "Assessment",
+        "activity_pge_math": "Math Activity",
+        "activity_pge_eng": "Eng Activity",
+        "activity_pge_odia": "Odia Activity",
+        "assessment_pge": "Assessment",
+        "training": "Training",
+        "payment": "Payment",
+        "user_feedback": "Feedback"
+    },
+    "STUDENT": {
+        "student_details": "Student Details",
+        "baseline": "Baseline",
+        "register": "Register",
+        "edit": "Edit",
+        "delete":"Delete"
+    },
+    "REGISTER": {
+        "student_register": "Student Regn.",
+        "student_name": "Name",
+        "program": "Program",
+        "class": "Class",
+        "phone": "Phone",
+        "gender": "Gender",
+        "dob": "DOB",
+        "guardian": "Guardian",
+        "reg_date": "Reg. Date",
+        "btn_cancel": "Cancel",
+        "btn_save": "Save"
+    },
+    "EXPLORE": {
+        "title": "Set Level",
+        "student_name": "Name",
+        "guardian": "Guardian",
+        "program": "Program",
+        "level_ece": "Level(ECE)",
+        "level_math": "Level(MATH)",
+        "level_eng": "Level(ENG)",
+        "level_odia": "Level(ODIA)"
+    },
+    "BASELINE":{
+        "title1": "Baseline Test",
+        "program": "Program",
+        "class": "Class",
+        "subject": "Subject",
+        "level": "Level",
+        "title2": "Answer All",
+        "btn_ok": "OK",
+        "btn_yes": "Yes",
+        "btn_no": "No",
+        "btn_cancel": "Cancel",
+        "btn_save": "Save"
+    },
+    "ATTENDANCE":{
+        "title": "Attendance",
+        "date": "Date",
+        "complete": "Attendance is taken !!!",
+        "btn_holiday": "Set Holiday",
+        "btn_attendance": "Attendance"
+    },
+    "HOLIDAY": {
+        "title": "Holiday",
+        "holiday_name": "Holiday Name",
+        "invalid": "Invalid",
+        "btn_cancel": "Cancel",
+        "btn_save": "Save"
+    },
+    "TAKEATTENDANCE":{
+        "title": "Attendance",
+        "absent": "Absent",
+        "present": "Present",
+        "btn_cancel": "Cancel",
+        "btn_save": "Save"
+    },
+    "ECEACTIVITY":{
+        "title": "Activity(ECE)",
+        "month": "Month",
+        "week": "Week",
+        "content": "Content",
+        "video": "Video",
+        "worksheet": "Work Sheet",
+        "btn_save": "Complete Activity"
+    }
+}

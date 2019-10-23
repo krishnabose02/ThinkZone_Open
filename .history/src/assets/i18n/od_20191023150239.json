@@ -1,0 +1,112 @@
+{
+    "LOGIN": {
+        "title": "ଲଗ ଇନ",
+        "txt_email": "ଇମେଲ ଆଇଡି",
+        "txt_password": "ପାସ ୱର୍ଡ",
+        "btn_login": "ଲଗ ଇନ"
+    },
+    "APP": {
+        "home": "ମୂଖ୍ୟ ସୂଚୀ",
+        "profile": "ପ୍ରୋଫାଇଲ",
+        "message": "ସୂଚନା",
+        "user_feedback": "ମତାମତ",
+        "about": "ବିବରଣୀ",
+        "privacy_policy": "ଗୋପନୀୟତା",
+        "logout": "ଲଗ ଆଉଟ"
+    },
+    "HOME": {
+        "student_details": "ଛାତ୍ର ବିବରଣୀ",
+        "attendance": "ଉପସ୍ଥାନ",
+        "activity_ece": "ଗତିବିଧି",
+        "assessment_ece": "ମୂଲ୍ୟାଙ୍କନ",
+        "activity_pge_math": "ଅଙ୍କ ଗତିବିଧି",
+        "activity_pge_eng": "ଇଂରାଜୀ ଗତିବିଧି",
+        "activity_pge_odia": "ଓଡିଆ ଗତିବିଧି",
+        "assessment_pge": "ମୂଲ୍ୟାଙ୍କନ",
+        "training": "ପ୍ରଶିକ୍ଷଣ",
+        "payment": "ଦେୟ",
+        "user_feedback": "ମତାମତ"
+    },
+    "STUDENT": {
+        "student_details": "ଛାତ୍ର ବିବରଣୀ",
+        "baseline": "ବେସଲାଇନ",
+        "register": "ପଞ୍ଜୀକରଣ",
+        "edit": "ସମ୍ପାଦନ",
+        "delete":"ହଟାନ୍ତୁ"
+    },
+    "REGISTER": {
+        "student_register": "ଛାତ୍ର ପଞ୍ଜୀକରଣ",
+        "student_name": "ଛାତ୍ର ନାମ",
+        "program": "ଯୋଜନା",
+        "class": "ଶ୍ରେଣୀ",
+        "phone": "ଫୋନ",
+        "gender": "ଲୀଙ୍ଗ",
+        "dob": "ଜନ୍ମ ତାରିଖ",
+        "guardian": "ଅଭିବାବକ",
+        "reg_date": "ପଞ୍ଜୀକରଣ ତାରିଖ",
+        "btn_cancel": "ବାତିଲ କରନ୍ତୁ",
+        "btn_save": "ସେବ କରନ୍ତୁ"
+    },
+    "EXPLORE": {
+        "title": "ସ୍ତର ନିର୍ଣୟ",
+        "student_name": "ଛାତ୍ର ନାମ",
+        "guardian": "ଅଭିବାବକ",
+        "program": "ଯୋଜନା",
+        "level_ece": "ସ୍ତର(ECE)",
+        "level_math": "ସ୍ତର(ଅଙ୍କ)",
+        "level_eng": "ସ୍ତର(ଇଂରାଜୀ)",
+        "level_odia": "ସ୍ତର(ଓଡିଆ)"
+    },
+    "BASELINE":{
+        "title1": "ବେସ ଲାଇନ ପରୀକ୍ଷା",
+        "program": "ଯୋଜନା",
+        "class": "ଶ୍ରେଣୀ",
+        "subject": "ବିଷୟ",
+        "level": "ସ୍ତର",
+        "title2": "ସମସ୍ତଙ୍କର ଉତ୍ତର ଦିଅ",
+        "btn_ok": "ଠିକ ଅଛି",
+        "btn_yes": "ହଁ",
+        "btn_no": "ନା",
+        "btn_cancel": "ବାତିଲ କରନ୍ତୁ",
+        "btn_save": "ସେବ କରନ୍ତୁ"
+    },
+    "ATTENDANCE":{
+        "title": "ଉପସ୍ଥାନ",
+        "date": "ତାରିଖ",
+        "complete": "ଉପସ୍ଥାନ ନିଆଯାଇଛି !!!",
+        "btn_holiday": "ଛୁଟିଦିନ ଧାର୍ଯ୍ୟ",
+        "btn_attendance": "ଉପସ୍ଥାନ ନିଅ"
+    },
+    "HOLIDAY": {
+        "title": "ଛୁଟିଦିନ",
+        "holiday_name": "ଛୁଟିଦିନ ନାମ",
+        "invalid": "ସଠିକ ନୁହେଁ",
+        "btn_cancel": "ବାତିଲ କରନ୍ତୁ",
+        "btn_save": "ସେବ କରନ୍ତୁ"
+    },
+    "TAKEATTENDANCE":{
+        "title": "ଉପସ୍ଥାନ",
+        "absent": "ଅନୁପସ୍ଥିତ",
+        "present": "ଉପସ୍ଥିତ",
+        "btn_cancel": "ବାତିଲ କରନ୍ତୁ",
+        "btn_save": "ସେବ କରନ୍ତୁ"
+    },
+    "ECEACTIVITY":{
+        "title": "ଗତିବିଧି(ECE)",
+        "month": "ମାସ",
+        "week": "ସପ୍ତାହ",
+        "content": "ତଥ୍ୟ",
+        "video": "ଭିଡିଓ",
+        "worksheet": "ୱାର୍କ ସିଟ",
+        "btn_save": "ସମ୍ପୂର୍ଣ କରନ୍ତୁ"
+    },
+    "PGEACTIVITY":{
+        "title_math": "ଗତିବିଧି(ଅଙ୍କ)",
+        "title_eng": "ଗତିବିଧି(ଇଂରାଜୀ)",
+        "title_odia": "ଗତିବିଧି(ଓଡିଆ)",
+        "content": "ତଥ୍ୟ",
+        "video": "ଭିଡିଓ",
+        "worksheet": "ୱାର୍କ ସିଟ",
+        "btn_save": "ସମ୍ପୂର୍ଣ କରନ୍ତୁ"
+    }
+}

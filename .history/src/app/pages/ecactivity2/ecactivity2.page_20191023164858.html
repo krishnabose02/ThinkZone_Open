@@ -1,0 +1,82 @@
+<ion-header  no-border [ngClass]="(toolbarshadow)?'shadow':'shadow'">
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'>
+          <!-- <p>{{ 'ECEACTIVITY.title' | translate}}</p> -->
+          
+        </ion-title>
+        <!-- <ion-button color="light" (click)="close_modal()" class="close_btn">X</ion-button> -->
+        
+        <ion-back-button></ion-back-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+     
+<ion-content scrollY='false' [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <div style="height: 100%;width: 100%;background: #616161;">
+    <div class='shadow' style="background: white;margin-right: 10%;margin-left: 5%;min-height: 70%;max-height: 70%;height: 70%;width: 90%; overflow-y: auto;;">
+      <!-- <ion-textarea disabled readonly value="{{ content }}" style="margin-top: 0px;padding: 5px;height: 100%"></ion-textarea> -->
+      <div [innerHTML]="content" style="margin-top: 0px;padding: 5px;height: 100%"></div>
+    </div>
+    <div class='vertical-flexbox' style="justify-content: center;overflow: auto;background: white;min-height: 30%;max-height: 30%;margin: 5% 5% 0 5%;border-radius: 8px 8px 0px 0px">
+  
+      <div class='horizontal-flexbox' style='width: 100%;color: gray;text-align: center;justify-content: space-evenly'>
+        <div (click)='play_video()'>
+          <ion-icon style="color: #2196f3;font-size: 2rem;" name='play'></ion-icon>
+          <p style='margin-top: 5px'>{{ 'ECEACTIVITY.video' | translate}}</p>
+        </div>
+        <div (click)='open_document()'>
+          <ion-icon style="color: #2196f3;font-size: 2rem;" name='document'></ion-icon>
+          <p style='margin-top: 5px'>{{ 'ECEACTIVITY.worksheet' | translate}}</p>
+        </div>
+      </div>
+      <div (click)='(isEnabled_completeActivityButton)?complete_activity():""' [style.background]='(isEnabled_completeActivityButton)?"#2196f3":"#90A4AE"' style='overflow: auto;width: 90%;margin-right: 5%;margin-left: 5%;text-align: center;color: white;border-radius: 4px; height: 40px; font-size: 20px; padding-top: 8px;'>
+        {{ 'ECEACTIVITY.btn_save' | translate}}
+      </div>
+    </div>
+  </div>
+
+  <!-- <ion-grid>
+
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Scrollable content</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-textarea disabled readonly value="{{ content }}" class="textarea"></ion-textarea>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Video content</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="right-align">
+      <ion-button shape="round" fill="outline" size="medium" color="primary" (click)="play_video()" tappable class="explore-btn">
+        Play Video
+      </ion-button>
+    </ion-row>
+
+    <ion-row>
+      <ion-item class="full_width">
+        <ion-label>Work Sheets</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row class="right-align">
+      <ion-button shape="round" fill="outline" size="medium" color="primary" (click)="open_document()" tappable class="explore-btn">
+        Open Document
+      </ion-button>
+    </ion-row>
+
+    <ion-row class="right-align">
+      <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" [disabled]="!isEnabled_completeActivityButton"  float-right tappable class="explore-btn">
+        Complete Activity
+      </ion-button>
+    </ion-row>
+
+  </ion-grid> -->
+</ion-content>
+  

@@ -1,7 +1,7 @@
 <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
   <ion-toolbar class='material-toolbar'>
     <ion-row>
-      <ion-title class='page-title-absolute'><p>Student Details</p></ion-title>
+      <ion-title class='page-title-absolute'><p>{{ 'STUDENT.student_details' | translate }}</p></ion-title>
       <ion-back-button></ion-back-button>
     </ion-row>
   </ion-toolbar>
@@ -23,7 +23,7 @@
             <p class='data-large'>{{student.studentname}}</p>
           </div>
           <p class='guardian'>{{ 'EXPLORE.guardian' | translate }}: {{student.parentsname}}</p>
-          <p class='program'>{{student.program=='ece'?'ECE Anganwadi': ( 'EXPLORE.program' | translate ) +": "+student.class}}</p>
+          <p class='program'>{{ (student.program=='ece') ? (('EXPLORE.program' | translate ) +": ECE Anganwadi") : ( ('EXPLORE.program' | translate ) +": "+student.program+" - "+student.class )}}</p>
         
         </div>
       </div>

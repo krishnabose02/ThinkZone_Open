@@ -1,0 +1,75 @@
+<ion-content fullscreen="full" class="animated fadeIn">
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+          <img src="/assets/img/bg0.jpg" alt="" class="bg" />
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  
+  <!-- Logo -->
+  <!-- <ion-grid>
+      <ion-row>
+        <ion-col><div class="logo-round"></div></ion-col>
+        <ion-col><div class="app-title"></div></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" class="login-button" color="warning" (click)="openModal()" no-margin>
+    <ion-icon name="log-in"></ion-icon>
+    Sign In
+  </ion-button>
+</ion-footer> -->
+
+<ion-content>
+
+  <!-- <div class='gradient-bg' style='display: flex;justify-content: center;height: 50%;width: 100%'>
+      
+  </div> -->
+  <div style='position: relative;height: 100%;width: 100%'>
+    <img style='position: absolute;height: 100%;width: 100%;opacity: 0.2' src='assets/img/bg0.jpg'>
+    <div style='position: absolute;display: flex;flex-flow: column;justify-content: center;align-items: center;height: 100%;width: 100%'>
+      
+      <div style="display: flex;flex-flow: column;align-items: center;justify-content: center">
+        <div [ngClass]='(loginState==0)?"":"diminish"' style="border-radius: 50%;height: 40vw;width: 40vw;background: white;">
+          <img style="height: 90%;width: 90%;margin: 5%" src='assets/img/logo-round.png'>
+        </div>
+      </div>
+
+      <ion-card [ngClass]='(loginState==0)?"hidden":"card-4"'>
+        <ion-card-header>
+          <div>
+              <p style='text-align: center; color: gray;'>{{ 'LOGIN.title' | translate }}</p>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <p style='margin-left: 10px;color: red'>{{_message}}</p>
+          <form [formGroup]="signinFormGroup" class="list-form">
+            <div class='input-item'>
+                  <ion-item style="width: 100%">
+                    <ion-label position="stacked">{{ 'LOGIN.txt_email' | translate}}<span style='color: red'>*</span></ion-label>
+                    <ion-input (ionChange)='errormessage=""' formControlName="email" type='email'></ion-input>
+                  </ion-item>
+              </div>   
+              <div class='input-item' style='margin-bottom: 30px'>
+                  <ion-item style="width: 100%">
+                    <ion-label position="stacked">{{ 'LOGIN.txt_password' | translate}}<span style='color: red'>*</span></ion-label>
+                    <ion-input (ionChange)='errormessage=""' formControlName="password" type='password'></ion-input>
+                  </ion-item>
+              </div>    
+          </form>
+            <!-- <div class='color-button'> -->
+              <!-- </div> -->
+        </ion-card-content>
+      </ion-card>
+
+      <div class='color-button' (click)='goToNextPage()'>
+        <p style='margin-top: 10px;margin-bottom: 10px; color: white;;'>{{ 'LOGIN.btn_login' | translate}}</p>
+      </div>  
+
+      <!-- <p style='text-align: center;font-size: 0.8rem;color: gray;margin-top: 15px'>FORGOT PASSWORD?</p> -->
+    </div>
+  </div>
+</ion-content>
