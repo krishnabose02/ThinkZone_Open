@@ -30,6 +30,18 @@
             </ion-list>
           </ion-list>
     
+
+          <div *ngFor='let baseline of baseline_q'>
+
+            <div class='card shadow' *ngFor='let q of baseline.questionset;let i=index'>
+              <p>{{i+1}}. {{q.question}}</p>
+              <div style='min-width: 100%;background: gray;height: 1px;'></div>
+              <div class='horizontal-flexbox'>
+                  <div (click)='select_answer_onchange("yes",q)' [ngClass]='(answerList[q.id]=="yes")?"selected-yes":"yes"'><p>Yes</p></div>
+                  <div (click)='select_answer_onchange("no",q)' [ngClass]='(answerList[q.id]=="no")?"selected-no":"no"'><p>No</p></div>
+              </div>
+            </div>
+          </div>
           <ion-grid>
             <ion-row>
               <ion-col>
@@ -44,12 +56,6 @@
               </ion-col>
             </ion-row>
           </ion-grid>
-
-
-
-
-
-
       </div>
     </ion-card-content>
   </ion-card>

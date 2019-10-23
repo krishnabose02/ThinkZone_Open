@@ -18,6 +18,9 @@
     min-width: 80px;
     min-height: 20px;
     margin: 10px;
+    p {
+        color: white;
+    }
 }
 
 @keyframes blue-to-white {
@@ -40,6 +43,9 @@
     min-width: 80px;
     min-height: 20px;
     margin: 10px;
+    p {
+        color: #2196f3;
+    }
 }
 
 .selected-chip p, .unselected-chip p{
@@ -68,4 +74,12 @@
 
 .orange{
     background: #ff9800;
+}
+
+.card {
+    padding: 30px;margin: 20px;color: gray;border-radius: 4px
+}
+
+.hbar {
+    min-height: 1px;background: gray;width: 100%
 }
