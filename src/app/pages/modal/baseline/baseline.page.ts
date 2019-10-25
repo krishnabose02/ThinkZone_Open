@@ -11,34 +11,36 @@ import { RestApiService } from './../../../rest-api.service';
 })
 export class BaselinePage implements OnInit {
   res: any;
-  _id: string = '';
-  userid: string = '';
-  username: string = '';
-  centerid: string = '';
-  centername: string = '';
-  studentid: string = '';
-  studentname: string = '';
-  program: string = '';
-  class: string = '';
-  phone: string = '';
-  gender: string = '';
-  dob: string = '';
-  parentsname: string = '';
-  level: string = '';
-  createdon: string = '';
+  _id = '';
+  userid = '';
+  username = '';
+  centerid = '';
+  centername = '';
+  studentid = '';
+  studentname = '';
+  program = '';
+  class = '';
+  phone = '';
+  gender = '';
+  dob = '';
+  parentsname = '';
+  level = '';
+  createdon = '';
 
   baseline_q: any = [];
-  subject: string = '';
-  lvl: string = '';
+  subject = '';
+  lvl = '';
 
   _maindata: any = [];
   _questionset: any = [];
-  score: number = 0;
-  totalmark: number = 0;
+  score = 0;
+  totalmark = 0;
 
-  preferedlanguage: string = localStorage.getItem("_language");
-  hide_info_div: boolean = true;
-  hide_cont_div: boolean = false;
+  preferedlanguage: string = localStorage.getItem('_language');
+  hide_info_div = true;
+  hide_cont_div = false;
+
+  answerList: any = {};
 
   @Input() value: any;
   constructor(
@@ -48,7 +50,7 @@ export class BaselinePage implements OnInit {
     public api: RestApiService,
     public navParams: NavParams
   ) {
-    //console.log('@@@Local Storage: '+JSON.stringify(localStorage));
+    // console.log('@@@Local Storage: '+JSON.stringify(localStorage));
     this.hide_info_div = true;
     this.hide_cont_div = true;
   }
@@ -61,9 +63,9 @@ export class BaselinePage implements OnInit {
 
     this.subject = this.navParams.data.subject;
     this.lvl = this.navParams.data.selected_level;
-    console.table('@#@#res: '+JSON.stringify(this.res));
-    console.table('@#@#subject: '+JSON.stringify(this.subject));
-    console.table('@#@#level: '+JSON.stringify(this.lvl));
+    console.table('@#@#res: ' + JSON.stringify(this.res));
+    console.table('@#@#subject: ' + JSON.stringify(this.subject));
+    console.table('@#@#level: ' + JSON.stringify(this.lvl));
     this.getData();
   }
 
@@ -78,19 +80,19 @@ export class BaselinePage implements OnInit {
       level: this.lvl,
       subject: this.subject
     };
-    console.log('@@@filtering data: '+JSON.stringify(data));
+    console.log('@@@filtering data: ' + JSON.stringify(data));
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.getbaselinetestquestionset(data)
       .subscribe(res => {
-        console.log('@@@Baseline from db: '+JSON.stringify(res));
+        console.log('@@@Baseline from db: ' + JSON.stringify(res));
         loading.dismiss();
         this.baseline_q = res;
 
-        if(this.baseline_q.length <= 0){
+        if (this.baseline_q.length <= 0) {
           this.hide_info_div = false;
           this.hide_cont_div = true;
-        }else{
+        } else {
           this.hide_info_div = true;
           this.hide_cont_div = false;
         }
@@ -101,10 +103,11 @@ export class BaselinePage implements OnInit {
       });
   }
 
-  select_answer_onchange(value, selected_question){
-    let qid = selected_question.id;
-    let question = selected_question.question;
-    let user_answer = value;
+  select_answer_onchange(value, selected_question) {
+    this.answerList[selected_question.id] = value;
+    const qid = selected_question.id;
+    const question = selected_question.question;
+    const user_answer = value;
 
     const qset = {
       qid : qid,
@@ -113,40 +116,36 @@ export class BaselinePage implements OnInit {
     };
 
     // if questionset array is empty
-    if(this._questionset.length <= 0){
+    if (this._questionset.length <= 0) {
       this._questionset.push(qset);
-    } 
-    // if questionset array is not empty
-    else {
+    } else {
       let i = 0;
       let existing_index = -1;
 
       // check that question is already exist or not
       this._questionset.forEach(element => {
-        console.log('###element: '+JSON.stringify(element));
-        if(element.qid == qid){
+        console.log('###element: ' + JSON.stringify(element));
+        if (element.qid === qid) {
           existing_index = i;
           return;
         }
         i++;
       });
       // if that question is exist
-      if(existing_index >= 0){
-        this._questionset.splice(existing_index,1,qset);
-      }
-      // if that question is not exist
-      else {
+      if (existing_index >= 0) {
+        this._questionset.splice(existing_index, 1, qset);
+      } else {
         this._questionset.push(qset);
-      } 
+      }
     }
-    console.log('###_questionset: '+JSON.stringify(this._questionset));
+    console.log('###_questionset: ' + JSON.stringify(this._questionset));
   }
 
-  calculate_totalscore(){
+  calculate_totalscore() {
     let i = 0;
     this._questionset.forEach(element => {
-      console.log('###useranswer: '+element.useranswer+'    answer: '+element.answer);
-      if(element.useranswer == element.answer){
+      console.log('###useranswer: ' + element.useranswer + '    answer: ' + element.answer);
+      if (element.useranswer === element.answer) {
         this.score += 1;
       } else {
         // this.score -= 1;
@@ -154,13 +153,13 @@ export class BaselinePage implements OnInit {
       i++;
     });
     this.totalmark = i;
-    console.log('###score: '+this.score+'    totalmark: '+this.totalmark);
+    console.log('###score: ' + this.score + '    totalmark: ' + this.totalmark);
   }
 
-  async setLevel(){
-    if(this._questionset.length <= 0){
-      this.showAlert('Info', '', 'Please enter all baseline tests.')
-    }else{
+  async setLevel() {
+    if (this._questionset.length <= 0) {
+      this.showAlert('Info', '', 'Please enter all baseline tests.');
+    } else {
       this.calculate_totalscore();
       const data = {
         detailsid: this._id,
@@ -172,10 +171,10 @@ export class BaselinePage implements OnInit {
       await loading.present();
       await this.api.setlevelbyid(data)
         .subscribe(res => {
-          console.log('@@@Baseline from db: '+JSON.stringify(res));
+          console.log('@@@Baseline from db: ' + JSON.stringify(res));
           this.updateLevelInStudentDetail();
           loading.dismiss();
-          this.showAlert('Set Level', '', 'Student level set '+res['status']+' !!!');
+          this.showAlert('Set Level', '', 'Student level set ' + res['status'] + ' !!!');
           this.modalController.dismiss({data: 'Ok'});
         }, err => {
           console.log(err);
@@ -184,24 +183,24 @@ export class BaselinePage implements OnInit {
     }
   }
 
-  async updateLevelInStudentDetail(){
+  async updateLevelInStudentDetail() {
     const id = this._id;
     let data: any;
-    if(this.subject == ''){
+    if (this.subject === '') {
       data = { ec_level : this.lvl };
-    } else if(this.subject == 'math'){
+    } else if (this.subject === 'math') {
       data = { math_level : this.lvl };
-    } else if(this.subject == 'english'){
+    } else if (this.subject === 'english') {
       data = { eng_level : this.lvl };
-    } else if(this.subject == 'odia'){
+    } else if (this.subject === 'odia') {
       data = { odia_level : this.lvl };
     }
-    console.log('@@@Subject: '+this.subject+'    data: '+JSON.stringify(data));
+    console.log('@@@Subject: ' + this.subject + '    data: ' + JSON.stringify(data));
     const loading = await this.loadingController.create({});
     await loading.present();
     await this.api.updatelevelbyid(id, data)
       .subscribe(res => {
-        console.log('@@@Update student details level: '+JSON.stringify(res));
+        console.log('@@@Update student details level: ' + JSON.stringify(res));
         loading.dismiss();
         // this.showAlert('Set Level', '', 'Student level set '+res['status']+' !!!');
       }, err => {

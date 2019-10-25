@@ -318,6 +318,11 @@ $text-color: gray;
   .gray {
     color: gray;
   }
+
+  .gray-bg {
+    background: gray;
+  }
+
   // Horizontal Flexbox justify contents: space evenly
   .hfse {
     display: flex;
@@ -385,4 +390,8 @@ $text-color: gray;
   }
   .padding10 {
     padding: 10px;
+  }
+
+  .m0 {
+    margin: 0px;
   }

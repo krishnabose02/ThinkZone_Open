@@ -1,22 +1,22 @@
 <div *ngIf='month!=null'>
-  <div style='padding: 30px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
-    <div style='margin: 10px'>
+  <div class='card shadow'>
+    <div class='m10'>
       
       <!--   Selector -->
-      <p style='font-size: 1.4rem'>{{ 'ECEACTIVITY.month' | translate}}</p>
+      <p class='data-large'>{{ 'ECEACTIVITY.month' | translate}}</p>
       <div style='flex-wrap: wrap' class='horizontal-flexbox'>
         <div (click)='month_onchange(m.value)' *ngFor='let m of active_month_list' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
-          <p>{{m.name}}</p>
+          <p class='data'>{{m.name}}</p>
         </div>
       </div>
   
       <div [ngClass]='(selected_month=="")?"hidden":"expanded"'>
-        <div style='min-width: 80%;background: rgb(199, 199, 199);min-height: 1px;'></div>
+        <div class='hbar'></div>
         <!-- Week Selector -->
-        <p style='font-size: 1.4rem'>{{ 'ECEACTIVITY.week' | translate}}</p>
+        <p class='data-large'>{{ 'ECEACTIVITY.week' | translate}}</p>
         <div style='flex-wrap: wrap' class='horizontal-flexbox'>
           <div (click)='week_onchange(m.value)' *ngFor='let m of week_list' [ngClass]='(m.value===selected_week)?"selected-chip":"unselected-chip"'>
-            <p>{{m.text}}</p>
+            <p class='data'>{{m.text}}</p>
           </div>
         </div>
       </div>

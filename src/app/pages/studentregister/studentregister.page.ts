@@ -94,7 +94,7 @@ export class StudentregisterPage {
       this._studentname = '';
       this.program = '';
       this._class = '';
-      //this._phone = 0;
+      // this._phone = 0;
       this.gender = '';
       this._dob = '';
       this._parentsname = '';

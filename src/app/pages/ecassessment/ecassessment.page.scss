@@ -18,6 +18,9 @@
     min-width: 80px;
     min-height: 20px;
     margin: 10px;
+    p {
+        color: white;
+    }
 }
 
 @keyframes blue-to-white {
@@ -40,6 +43,9 @@
     min-width: 80px;
     min-height: 20px;
     margin: 10px;
+    p {
+        color: #2196f3;
+    }
 }
 
 .selected-chip p, .unselected-chip p{
@@ -53,6 +59,9 @@
     color: gray;
 }
 
+.card {
+    padding: 30px;margin: 20px;color: gray;border-radius: 4px;
+}
 .marks-button{
     background: #4caf50;
     color: white;

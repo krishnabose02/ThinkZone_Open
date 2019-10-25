@@ -8,42 +8,43 @@
   </ion-header>
         
   <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-    <div style='padding: 30px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
-      <div style='margin: 10px'>
+    <div class='card shadow'>
+      <div class='m10'>
         
         <!--  Module Selector -->
-        <p style='font-size: 1.4rem'>Select Month:</p>
+        <p class='data-large'>Select Month:</p>
         <div style='flex-wrap: wrap' class='horizontal-flexbox'>
           <div (click)='month_onchange(q.value)' *ngFor='let q of month_list' [ngClass]='(selected_month==q.value)?"selected-chip":"unselected-chip"'>
-            <p>{{q.text}}</p>
+            <p class='data'>{{q.text}}</p>
           </div>
         </div>
       </div>
     </div>
 
     <div class='card shadow'>
-      <p style='font-size: 1.6rem'>Program: ECE</p>
-      <p>{{student_list.length}} students found.</p>
+      <p class='data-large'>Program: ECE</p>
+      <p class='data'>{{student_list.length}} students found.</p>
     </div>
 
     <div class='shadow card' *ngFor='let s of student_list'>
-      <p style='font-size: 1.4rem'>{{s.studentname}}</p>
-      <div style='min-height: 1px;background: gray;width: 100%'></div>
-      <div class='horizontal-flexbox' style='color: gray;justify-content: flex-start'>
-        <ion-icon style="margin-right: 10px;font-size: 1.6rem" name='paper'></ion-icon>
-        <p>Fill Marks</p>
+      <p class='data-large'>{{s.studentname}}</p>
+
+      <div class='hbar'></div>
+      <div class='hffs gray'>
+        <ion-icon class='m10 data-large' name='paper'></ion-icon>
+        <p class='data'>Fill Marks</p>
       </div>
-      <div class='horizontal-flexbox' style='justify-content: space-evenly'>
+      <div class='hfse'>
         <div (click)="pge_fillmarks_btnclick(s,'eng')" class='marks-button green shadow' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
           <div>
               <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
-              <p>English</p>
+              <p class='data white'>English</p>
           </div>
         </div>
         <div (click)="pge_fillmarks_btnclick(s,'math')" class='marks-button orange shadow' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
           <div>
               <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
-              <p>Math</p>
+              <p class='white data'>Math</p>
           </div>
         </div>
       </div>
