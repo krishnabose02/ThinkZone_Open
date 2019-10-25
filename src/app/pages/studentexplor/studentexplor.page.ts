@@ -322,6 +322,19 @@ export class StudentExplorPage {
   flipStudentDisplay(student) {
     if (student.hidden) {
       student.hidden = false;
+
+      this.student_list.forEach(element => {
+        if (element.studentname === student.studentname && element.parentsname === student.parentsname) {
+          return;
+        }
+        element.hidden = true;
+        element.english.val = student.eng_level;
+        element.english.hidden = true;
+        element.math.val = student.math_level;
+        element.math.hidden = true;
+        element.odia.val = student.odia_level;
+        element.odia.hidden = true;
+      });
       return;
     }
     student.hidden = true;
