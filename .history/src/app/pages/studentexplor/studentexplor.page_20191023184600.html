@@ -23,7 +23,7 @@
             <p class='data-large'>{{student.studentname}}</p>
           </div>
           <p class='guardian'>{{ 'EXPLORE.guardian' | translate }}: {{student.parentsname}}</p>
-          <p class='program'>{{ (student.program=='ece') ? (('EXPLORE.program' | translate ) +": ECE - Anganwadi") : ( ('EXPLORE.program' | translate ) +": "+(student.program | uppercase)+" - Class "+student.class )}}</p>
+          <p class='program'>{{ (student.program=='ece') ? (('EXPLORE.program' | translate ) +": ECE Anganwadi") : ( ('EXPLORE.program' | translate ) +": "+(student.program | uppercase)+" - "+student.class )}}</p>
         
         </div>
       </div>
