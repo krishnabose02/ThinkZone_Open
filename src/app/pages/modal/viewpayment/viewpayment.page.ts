@@ -21,7 +21,20 @@ import { RestApiService } from './../../../rest-api.service';
 export class ViewpaymentPage {
   res: any;
   records: any = [];
-  months: string[] = ['January','February','March','April','May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  months: string[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'];
+
   errormessage = '';
   constructor(
     public navController: NavController,

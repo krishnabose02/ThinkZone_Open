@@ -156,3 +156,10 @@ $primarycolor: #2196f3;
         margin: 8px;
     }
 }
+
+.vertical-flexbox{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: end;
+  }

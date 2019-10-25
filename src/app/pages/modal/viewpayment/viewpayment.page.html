@@ -1,22 +1,22 @@
 <ion-content> 
   <div *ngIf='records!=null && records.length>0'>
-    <div class='data-card shadow' style='margin-bottom: 20px;color:white; background: gray'>
-      <p style='font-size: 1.4rem'>Name: {{records[0].studentname}}</p>
-      <p style='margin-bottom: 0px'>Program: {{records[0].program}}</p>
-      <p style='margin: 0px'>Class: {{records[0].class}}</p>
-      <p style='margin-top: 0px'>Registration Date: {{getReadableDate(records[0].registration_date)}}</p>
+    <div class='data-card shadow gray-bg text-start'>
+      <p class='data-large white'>Name: {{records[0].studentname}}</p>
+      <p class='data white'>Program: {{records[0].program}}</p>
+      <p class='data white'>Class: {{records[0].class}}</p>
+      <p class='data white'>Registration Date: {{getReadableDate(records[0].registration_date)}}</p>
     </div>
     <div *ngFor='let r of records;let i=index' class='data-card shadow' style='color: gray'>
       Payment #{{i+1}}
-      <div style='width: 100%;background: #BDBDBD;margin-top: 5px;min-width: 100%;min-height: 1px'></div>
-      <p style='font-size: 1.6rem'><b>₹<span style='font-size: 2rem'>{{r.amount}}</span></b></p>
-      <p style='margin-bottom: 0px'>Payment date: {{r.displaydate}}</p>
-      <p style='margin-top: 0px'>Payment type: {{(r.payment_type==null)?'n/a':r.payment_type}}</p>
+      <div class='hbar'></div>
+      <p class='data-large'><b>₹<span class='data-large'>{{r.amount}}</span></b></p>
+      <p class='data'>Payment date: {{r.displaydate}}</p>
+      <p class='data'>Payment type: {{(r.payment_type==null)?'n/a':r.payment_type}}</p>
     </div>
   </div>
-  <p *ngIf='records!=null && records.length==0' style='text-align: center;color: #ef5350'>{{errormessage}}</p>
-  <div style='margin: 10px;overflow: auto;background: #2196f3;border-radius: 4px;color: white' class='shadow'>
-    <p (click)="closeModal()" style='text-align: center'>OKAY</p>
+  <p *ngIf='records!=null && records.length==0' class='text-center red'>{{errormessage}}</p>
+  <div (click)="closeModal()" class='close-button shadow'>
+    <p class='white data text-center'>OKAY</p>
   </div>
   <!-- <ion-card>
     <ion-card-header color="warning">

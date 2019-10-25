@@ -81,6 +81,9 @@ $disabledcolor: #9e9e9e;
     min-width: 80px;
     min-height: 20px;
     margin: 10px;
+    p {
+        color: white;
+    }
 }
 
 @keyframes blue-to-white {
@@ -103,6 +106,9 @@ $disabledcolor: #9e9e9e;
     min-width: 80px;
     min-height: 20px;
     margin: 10px;
+    p {
+        color: #2196f3;
+    }
 }
 
 .selected-chip p, .unselected-chip p{
@@ -127,4 +133,8 @@ $disabledcolor: #9e9e9e;
     min-width: 100%;
     background: #BDBDBD;
     margin-bottom: 20px;
+}
+
+.mtop30 {
+    margin-top: 30px;
 }

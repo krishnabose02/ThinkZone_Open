@@ -14,21 +14,21 @@
     </ion-fab-button>
   </ion-fab>
   
-  <div style='padding: 10px;margin: 20px;color: gray;border-radius: 4px' class='shadow'>
-    <div style='margin: 10px'>
+  <div class='card shadow'>
+    <div class='m10'>
       
       <!--  Module Selector -->
-      <p style='font-size: 1.4rem'>Select Module:</p>
+      <p class='data-large'>Select Module:</p>
       <div style='flex-wrap: wrap' class='horizontal-flexbox'>
         <div class='vertical-flexbox half-width'>
           <div (click)='module_select_onchange(m)' *ngFor='let m of allmodule_name' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
-            <p>{{m.modulename}}</p>
+            <p class='data'>{{m.modulename}}</p>
           </div>
         </div>
 
         <div class='half-width vertical-flexbox'>
           <div class='modules' *ngFor="let submodule of allsubmodule_list" (click)="submodule_click(submodule)">
-            <p>{{submodule.submodulename}}</p>
+            <p class='data'>{{submodule.submodulename}}</p>
           </div>
         </div>
       </div>

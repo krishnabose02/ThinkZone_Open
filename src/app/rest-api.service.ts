@@ -181,6 +181,7 @@ export class RestApiService {
 
   // get distinct activities
   getmasteractivities(preferedlanguage, program, subject, month, week): Observable<any> {
+    console.log(preferedlanguage);
     return this.http.get(baseUrl + 'getmasteractivities/' + preferedlanguage+'/'+program + '/' + subject + '/' + month + '/' + week, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));

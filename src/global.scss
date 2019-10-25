@@ -260,13 +260,12 @@ ion-item {
 $text-color: gray;
 
   p {
-    color: #000353; /*gray;*/
+    color: gray;
   }
   
   .data {
     color: $text-color;
     font-size: 1rem;
-    text-align: center;
   }
 
   .data-large {

@@ -151,6 +151,7 @@ export class EcactivityPage {
     this.loading = await this.loadingController.create({spinner: 'dots'});
     await this.loading.present();
     let preferedlanguage = localStorage.getItem("_language");
+    console.log(preferedlanguage);
     await this.api.getmasteractivities(preferedlanguage, this.program, this.subject, this.selected_month, this.selected_week).subscribe(res => {
         // loading.dismiss();
         console.log('>>>List of Activities: '+JSON.stringify(res));

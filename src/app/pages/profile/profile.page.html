@@ -9,49 +9,49 @@
 
   <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
     <div class='shadow card'>
-      <p style='color: #424242;font-size: 2rem;margin: 10px'>{{username}}</p>
-      <div style='margin: 10px 0px;min-width: 80%;background: #9e9e9e;min-height: 1px'></div>
-      <div class='chip solid' style='margin-bottom: 10px'>
-        <p>{{usertype}}</p>
+      <p class='data-large color gray m10'>{{username}}</p>
+      <div class='hbar'></div>
+      <div class='chip solid m10'>
+        <p class='data white'>{{usertype}}</p>
       </div>
     </div>
     <div class='shadow card'>
-      <p style='font-size: 1.4rem;margin: 5px'>Personal Details:</p>
-      <div style='margin: 10px 0px;min-width: 80%;background: #9e9e9e;min-height: 1px'></div>
-      <div class='horizontal-flex' style='margin-top: 10px;justify-content: space-evenly'>
-        <div class='horizontal-flexbox chip outline'>
-          <ion-icon [name]='gender' style='margin: 5px'></ion-icon>
-          <p>{{gender}}</p>
+      <p class='data-large m10'>Personal Details:</p>
+      <div class='hbar'></div>
+      <div class='hfse m10'>
+        <div class='m10 horizontal-flexbox chip outline'>
+          <ion-icon class='primary' [name]='gender' style='margin: 5px'></ion-icon>
+          <p class='data'>{{gender}}</p>
         </div>
-        <div style='margin: 0px 10px' class='horizontal-flexbox chip outline'>
-          <ion-icon name='snow' style='margin: 5px'></ion-icon>
-          <p>{{bdate}} {{bmonth}}, {{byear}}</p>
+        <div class='m10 horizontal-flexbox chip outline'>
+          <ion-icon class='primary' name='snow' style='margin: 5px'></ion-icon>
+          <p class='data'>{{bdate}} {{bmonth}}, {{byear}}</p>
         </div>
       </div>
-      <div class='horizontal-flexbox' style='font-size: 1.4rem'>
-        <ion-icon style="color: #4caf50;font-size: 1.6rem" name='call'></ion-icon>
-        <p>{{contactno}}</p>
+      <div class='horizontal-flexbox data-large'>
+        <ion-icon class='m10 data-large green' name='call'></ion-icon>
+        <p class='data'>{{contactno}}</p>
       </div>
-      <div class='horizontal-flexbox' style='margin-bottom: 15px;font-size: 1.4rem'>
-        <ion-icon style="color: #f44336;font-size: 1.6rem" name='pin'></ion-icon>
-        <p style='margin: 0px'>{{address}}</p>
+      <div class='horizontal-flexbox' style='margin-bottom: 15px;'>
+        <ion-icon class='m10 data-large red' name='pin'></ion-icon>
+        <p class='data'>{{address}}</p>
       </div>
     </div>
 
     <div class='shadow card'>
-        <p style='font-size: 1.4rem;margin: 5px'>Additional Details:</p>
-        <div style='margin: 10px 0px;min-width: 80%;background: #9e9e9e;min-height: 1px'></div>
-        <div class='horizontal-flexbox' style='font-size: 1.4rem'>
-          <ion-icon style="color: #f44336;font-size: 1.6rem" name='mail'></ion-icon>
-          <p>Email: {{emailid}}</p>
+        <p class='m10 data-large'>Additional Details:</p>
+        <div class='hbar'></div>
+        <div class='horizontal-flexbox data-large'>
+          <ion-icon class='m10 red data-large' name='mail'></ion-icon>
+          <p class='data'>Email: {{emailid}}</p>
         </div>
-        <div class='horizontal-flexbox' style='margin-bottom: 15px;font-size: 1.4rem'>
-          <ion-icon style="color: #2196f3;font-size: 1.6rem" name='person'></ion-icon>
-          <p style='margin: 0px'>Username: {{userid}}</p>
+        <div class='horizontal-flexbox'>
+          <ion-icon class='m10 blue data-large' name='person'></ion-icon>
+          <p class='data'>Username: {{userid}}</p>
         </div>
-        <div class='horizontal-flexbox' style='margin-bottom: 15px;font-size: 1.4rem'>
-          <ion-icon style="color: #ff9800;font-size: 1.6rem" name='calendar'></ion-icon>
-          <p style='margin: 0px'>Date of reg: {{rdate}} {{rmonth}},{{ryear}}</p>
+        <div class='horizontal-flexbox data-large'>
+          <ion-icon class='m10' style="color: #ff9800;" name='calendar'></ion-icon>
+          <p class='data'>Date of reg: {{rdate}} {{rmonth}},{{ryear}}</p>
         </div>
       </div>
     <!-- <div (click)='back()' class='card solid shadow'>

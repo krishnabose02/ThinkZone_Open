@@ -9,12 +9,15 @@ $colorprimary: #2196f3;
     display: flex;
     flex-flow: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .solid{
     background: $colorprimary;
     color: white;
+    p {
+        color: white;
+    }
 }
 
 .horizontal-flex{
@@ -23,17 +26,27 @@ $colorprimary: #2196f3;
     justify-content: center;
     align-items: center;
 }
+
+.primary {
+    color: $colorprimary;
+}
 .chip{
     width: fit-content;
     padding: 5px 10px;
     border-radius: 40px;
-    border: 1px solid $colorprimary
-}
-
-.chip p{
-    margin: 5px 10px;
+    border: 1px solid $colorprimary;
+    p {
+        margin: 5px 10px;
+    }
 }
 
 ion-icon{
     margin-right: 10px;
+}
+
+.hbar {
+    margin: 10px 0px;
+    min-width: 100%;
+    background: #9e9e9e;
+    min-height: 1px;
 }

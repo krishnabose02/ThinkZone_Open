@@ -8,16 +8,16 @@
 </ion-header>
         
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-  <p style='text-align: center;color: #ef5350;font-size: 1.3rem'>{{ errormessage }}</p>
-  <div *ngFor='let s of student_list' class='shadow horizontal-flexbox' style='margin: 10px;justify-content: space-between'>
-    <div style='text-align: left' class='vertical-flexbox student-details'>
-      <p style='font-size: 1.4rem'>Name: {{ s.studentname }}</p>
-      <p>Program: {{ s.program }}</p>
-      <p>Class: {{ s.class }}</p>
+  <p class='data-large text-center red'>{{ errormessage }}</p>
+  <div *ngFor='let s of student_list' class='shadow hfsb m10'>
+    <div class='vertical-flexbox student-details'>
+      <p class='data-large'>Name: {{ s.studentname }}</p>
+      <p class='data'>Program: {{ s.program }}</p>
+      <p class='data'>Class: {{ s.class }}</p>
     </div>
-    <div style='margin: 10px'>
-      <div (click)="viewpayment(s)" class='action-button'><p>View</p></div>
-      <div (click)="makepayment(s)" style='color: white' class='solid-action-button shadow'><p>Pay</p></div>
+    <div class='m10'>
+      <div (click)="viewpayment(s)" class='action-button'><p class='data blue'>View</p></div>
+      <div (click)="makepayment(s)" style='color: white' class='solid-action-button shadow'><p class='data white'>Pay</p></div>
     </div>
   </div>
   <!-- <div>

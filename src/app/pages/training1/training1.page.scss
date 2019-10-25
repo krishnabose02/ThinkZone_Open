@@ -18,6 +18,9 @@
     min-width: 100%;
     min-height: 20px;
     margin: 0;
+    p {
+        color: white;
+    }
 }
 
 @keyframes blue-to-white {
@@ -34,12 +37,13 @@
     animation: blue-to-white 0.6s;
     animation-fill-mode: forwards;
     border-radius: 4px;
-    // text-align: center;
     color: #2196f3;
-    // border: 1px #2196f3 solid;
     min-width: 100%;
     min-height: 20px;
     margin: 0;
+    p {
+        color: #2196f3;
+    }
 }
 
 .selected-chip p, .unselected-chip p{
@@ -95,7 +99,12 @@
     text-align: left;
     padding: 4px;
     margin: 5px 0;
+    min-width: 100%;
     p {
         margin: 10px;
     }
+}
+
+.card {
+    padding: 10px;margin: 20px;color: gray;border-radius: 4px;
 }
