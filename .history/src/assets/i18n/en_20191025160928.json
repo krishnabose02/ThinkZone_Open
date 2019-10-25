@@ -117,11 +117,6 @@
         "fill_marks": "Fill Marks",
         "btn_math": "Math",
         "btn_eng": "English",
-        "btn_odia": "Odia",
-        "level1": "Level 1",
-        "level2": "Level 2",
-        "level3": "Level 3",
-        "level4": "Level 4",
-        "level5": "Level 5"
+        "btn_odia": "Odia"
     }
 }

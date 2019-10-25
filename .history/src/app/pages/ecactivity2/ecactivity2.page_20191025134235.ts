@@ -23,9 +23,6 @@ import { DataService } from 'src/app/services/data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DataObject } from 'src/app/services/DataObject';
 import { environment } from 'src/environments/environment.prod';
-
-const imageURL= environment.imageURL;
-
 @Component({
   selector: 'app-ecactivity2',
   templateUrl: './ecactivity2.page.html',
@@ -33,6 +30,7 @@ const imageURL= environment.imageURL;
   encapsulation: ViewEncapsulation.None,
 })
 export class Ecactivity2Page {
+  const imageURL= environment.imageURL;
   qryParams: any;
   activityobj: any = {};
   content: SafeHtml = '';
@@ -143,7 +141,7 @@ export class Ecactivity2Page {
         // add images to content\
         let image_str = '';
         this.image.forEach(img => {
-          image_str += '<br><img src="'+imageURL+''+img+'"><br>';
+          image_str += '<br><img src="'+this.imageURL+''+img+'"><br>';
         })
         this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content.concat(image_str));
         this.isVisited_content = true;

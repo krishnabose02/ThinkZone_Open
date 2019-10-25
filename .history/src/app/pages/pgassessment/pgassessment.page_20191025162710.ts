@@ -30,33 +30,10 @@ export class PgassessmentPage {
   _username: string;
   _centerid: string;
   _centername: string;
-  toolbarshadow = true;
 
-  // added on 25-10-2019 to segregrate assessment view. i.e. Month -> Language(eng, math, odia) - > Level(1, 2, 3, 4, 5)
   preferedlanguage: string = localStorage.getItem("_language");
-
-  pge_eng_all: any = [];
-  pge_eng_l1: any = [];
-  pge_eng_l2: any = [];
-  pge_eng_l3: any = [];
-  pge_eng_l4: any = [];
-  pge_eng_l5: any = [];
   
-  pge_math_all: any = [];
-  pge_math_l1: any = [];
-  pge_math_l2: any = [];
-  pge_math_l3: any = [];
-  pge_math_l4: any = [];
-  pge_math_l5: any = [];
-
-  pge_odia_all: any = [];
-  pge_odia_l1: any = [];
-  pge_odia_l2: any = [];
-  pge_odia_l3: any = [];
-  pge_odia_l4: any = [];
-  pge_odia_l5: any = [];
-  
-
+  toolbarshadow = true;
 
   constructor(
     public navController: NavController,
@@ -89,69 +66,12 @@ export class PgassessmentPage {
             this.student_list.push(element);
           }
         });
-        this.format_student_list(res);
+
         loading.dismiss();
       }, err => {
         console.log(err);
         loading.dismiss();
       });
-  }
-
-  format_student_list(student_list){
-    student_list.forEach(element => {
-      if      (element.program === 'pge' && element.eng_level=='1')
-        this.pge_eng_l1.push(element);
-      else if (element.program === 'pge' && element.eng_level=='2')
-        this.pge_eng_l2.push(element);
-      else if (element.program === 'pge' && element.eng_level=='3')
-        this.pge_eng_l3.push(element);
-      else if (element.program === 'pge' && element.eng_level=='4')
-        this.pge_eng_l4.push(element);
-      else if (element.program === 'pge' && element.eng_level=='5')
-        this.pge_eng_l5.push(element);
-      
-      if      (element.program === 'pge' && element.math_level=='1')
-        this.pge_math_l1.push(element);
-      else if (element.program === 'pge' && element.math_level=='2')
-        this.pge_math_l2.push(element);
-      else if (element.program === 'pge' && element.math_level=='3')
-        this.pge_math_l3.push(element);
-      else if (element.program === 'pge' && element.math_level=='4')
-        this.pge_math_l4.push(element);
-      else if (element.program === 'pge' && element.math_level=='5')
-        this.pge_math_l5.push(element);
-      
-      if      (element.program === 'pge' && element.odia_level=='1')
-        this.pge_odia_l1.push(element);
-      else if (element.program === 'pge' && element.odia_level=='2')
-        this.pge_odia_l2.push(element);
-      else if (element.program === 'pge' && element.odia_level=='3')
-        this.pge_odia_l3.push(element);
-      else if (element.program === 'pge' && element.odia_level=='4')
-        this.pge_odia_l4.push(element);
-      else if (element.program === 'pge' && element.odia_level=='5')
-        this.pge_odia_l5.push(element);
-      
-    });
-    this.pge_eng_all.push(this.pge_eng_l1);
-    this.pge_eng_all.push(this.pge_eng_l2);
-    this.pge_eng_all.push(this.pge_eng_l3);
-    this.pge_eng_all.push(this.pge_eng_l4);
-    this.pge_eng_all.push(this.pge_eng_l5);
-    
-    this.pge_math_all.push(this.pge_math_l1);
-    this.pge_math_all.push(this.pge_math_l2);
-    this.pge_math_all.push(this.pge_math_l3);
-    this.pge_math_all.push(this.pge_math_l4);
-    this.pge_math_all.push(this.pge_math_l5);
-    
-    this.pge_odia_all.push(this.pge_odia_l1);
-    this.pge_odia_all.push(this.pge_odia_l2);
-    this.pge_odia_all.push(this.pge_odia_l3);
-    this.pge_odia_all.push(this.pge_odia_l4);
-    this.pge_odia_all.push(this.pge_odia_l5);
-
-    console.log('@@@pge_eng_all: '+JSON.stringify(this.pge_eng_all)+'    @@@pge_math_all: '+JSON.stringify(this.pge_math_all)+'    @@@pge_odia_all: '+JSON.stringify(this.pge_odia_all))
   }
 
   async getuserbyid(userid) {

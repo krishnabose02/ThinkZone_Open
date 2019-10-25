@@ -84,11 +84,11 @@ export class PgassessmentPage {
     await this.api.getallstudentsbyteacherid(this._userid)
       .subscribe(res => {
         console.log('@@@all student list: ' + JSON.stringify(res));
-        res.forEach(element => {
+        /*res.forEach(element => {
           if (element.program === 'pge') {
             this.student_list.push(element);
           }
-        });
+        });*/
         this.format_student_list(res);
         loading.dismiss();
       }, err => {
@@ -150,8 +150,6 @@ export class PgassessmentPage {
     this.pge_odia_all.push(this.pge_odia_l3);
     this.pge_odia_all.push(this.pge_odia_l4);
     this.pge_odia_all.push(this.pge_odia_l5);
-
-    console.log('@@@pge_eng_all: '+JSON.stringify(this.pge_eng_all)+'    @@@pge_math_all: '+JSON.stringify(this.pge_math_all)+'    @@@pge_odia_all: '+JSON.stringify(this.pge_odia_all))
   }
 
   async getuserbyid(userid) {

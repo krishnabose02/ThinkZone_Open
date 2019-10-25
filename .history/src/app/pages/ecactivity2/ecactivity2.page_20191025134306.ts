@@ -143,7 +143,7 @@ export class Ecactivity2Page {
         // add images to content\
         let image_str = '';
         this.image.forEach(img => {
-          image_str += '<br><img src="'+imageURL+''+img+'"><br>';
+          image_str += '<br><img src="'+this.imageURL+''+img+'"><br>';
         })
         this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content.concat(image_str));
         this.isVisited_content = true;

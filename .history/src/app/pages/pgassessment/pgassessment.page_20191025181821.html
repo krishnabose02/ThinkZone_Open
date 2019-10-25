@@ -28,7 +28,15 @@
             <p class='data white'>{{ 'PGEASSESSMENT.btn_eng' | translate }}</p>
         </div>
       </div>
+    </div>
 
+    <div class='card shadow'>
+      <div class='marks-button orange shadow' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
+        <div>
+            <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
+            <p class='white data'>{{ 'PGEASSESSMENT.btn_math' | translate }}</p>
+        </div>
+      </div>
       <div>
         <div>{{ 'PGEASSESSMENT.level1' | translate }}</div>
         <div *ngFor="let eng_l1 of pge_eng_l1;">
@@ -55,49 +63,7 @@
       </div>
       <div>
         <div>{{ 'PGEASSESSMENT.level5' | translate }}</div>
-        <div *ngFor="let eng_l5 of pge_eng_l5;">
-          <div>{{eng_l5.studentname | uppercase}}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class='card shadow'>
-      <div class='marks-button orange shadow' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
-        <div>
-            <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
-            <p class='white data'>{{ 'PGEASSESSMENT.btn_math' | translate }}</p>
-        </div>
-      </div>
-
-      <div>
-        <div>{{ 'PGEASSESSMENT.level1' | translate }}</div>
-        <div *ngFor="let math_l1 of pge_math_l1;">
-          <div>{{math_l1.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level2' | translate }}</div>
-        <div *ngFor="let math_l2 of pge_math_l2;">
-          <div>{{math_l2.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level3' | translate }}</div>
-        <div *ngFor="let math_l3 of pge_math_l3;">
-          <div>{{math_l3.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level4' | translate }}</div>
-        <div *ngFor="let math_l4 of pge_math_l4;">
-          <div>{{math_l4.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level5' | translate }}</div>
-        <div *ngFor="let math_l5 of pge_math_l5;">
-          <div>{{math_l5.studentname | uppercase}}</div>
-        </div>
+        <div *ngFor="let eng_l5 of pge_eng_l5;"><div>{{eng_l5.studentname | uppercase}}</div></div>
       </div>
     </div>
 
@@ -106,37 +72,6 @@
         <div>
             <!-- <ion-icon style="font-size: 1.8rem;margin: 0 10px" name='paper'></ion-icon> -->
             <p class='white data'>{{ 'PGEASSESSMENT.btn_odia' | translate }}</p>
-        </div>
-      </div>
-
-      <div>
-        <div>{{ 'PGEASSESSMENT.level1' | translate }}</div>
-        <div *ngFor="let odia_l1 of pge_odia_l1;">
-          <div>{{odia_l1.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level2' | translate }}</div>
-        <div *ngFor="let odia_l2 of pge_odia_l2;">
-          <div>{{odia_l2.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level3' | translate }}</div>
-        <div *ngFor="let odia_l3 of pge_odia_l3;">
-          <div>{{odia_l3.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level4' | translate }}</div>
-        <div *ngFor="let odia_l4 of pge_odia_l4;">
-          <div>{{odia_l4.studentname | uppercase}}</div>
-        </div>
-      </div>
-      <div>
-        <div>{{ 'PGEASSESSMENT.level5' | translate }}</div>
-        <div *ngFor="let odia_l5 of pge_odia_l5;">
-          <div>{{odia_l5.studentname | uppercase}}</div>
         </div>
       </div>
     </div>

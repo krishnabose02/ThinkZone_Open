@@ -5,6 +5,7 @@
           <p>{{ 'ECEACTIVITY.title2' | translate}}</p>
         </ion-title>
         <!-- <ion-button color="light" (click)="close_modal()" class="close_btn">X</ion-button> -->
+        
         <ion-back-button></ion-back-button>
     </ion-row>
   </ion-toolbar>
@@ -14,7 +15,7 @@
   <div style="height: 100%;width: 100%;background: #f2e6e6;">
     <div class='shadow' style="background: white;margin-right: 10%;margin-left: 5%;min-height: 70%;max-height: 70%;height: 70%;width: 90%; overflow-y: auto;;">
       <!-- <ion-textarea disabled readonly value="{{ content }}" style="margin-top: 0px;padding: 10px 25px;height: 100%"></ion-textarea> -->
-      <div [innerHTML]="content" style="margin-top: 0px;padding: 10px 25px;height: 100%"></div>
+      <div [innerHTML]="content" style="margin-top: 0px;padding: 5px;height: 100%"></div>
     </div>
     <div class='vertical-flexbox' style="justify-content: center;overflow: auto;background: white;min-height: 30%;max-height: 30%;margin: 5% 5% 0 5%;border-radius: 8px 8px 0px 0px">
   
