@@ -84,11 +84,11 @@ export class PgassessmentPage {
     await this.api.getallstudentsbyteacherid(this._userid)
       .subscribe(res => {
         console.log('@@@all student list: ' + JSON.stringify(res));
-        res.forEach(element => {
+        /*res.forEach(element => {
           if (element.program === 'pge') {
             this.student_list.push(element);
           }
-        });
+        });*/
         this.format_student_list(res);
         loading.dismiss();
       }, err => {

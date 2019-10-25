@@ -109,19 +109,5 @@
         "video": "वीडियो",
         "worksheet": "वर्क शीट",
         "btn_save": "सम्पूर्ण करें"
-    },
-    "PGEASSESSMENT":{
-        "title": "मूल्यांकन(PGE)",
-        "select_month": "महिना चुनें",
-        "program": "योजना: PGE",
-        "fill_marks": "मूल्य निर्धारण",
-        "btn_math": "गणित",
-        "btn_eng": "अंग्रेजी",
-        "btn_odia": "ओडिया",
-        "level1": "स्तर १",
-        "level2": "स्तर २",
-        "level3": "स्तर ३",
-        "level4": "स्तर ४",
-        "level5": "स्तर ५"
     }
 }

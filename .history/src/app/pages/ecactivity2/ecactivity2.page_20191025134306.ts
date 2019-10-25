@@ -109,7 +109,6 @@ export class Ecactivity2Page {
         this.selected_month = this.qryParams.month;
         this.selected_week = this.qryParams.week;
         this.selected_activity = this.qryParams.activity;
-        console.log(this.preferedlanguage);
         this.getmasteractivitiydetails(
           this.preferedlanguage,
           this.selected_program,
@@ -144,7 +143,7 @@ export class Ecactivity2Page {
         // add images to content\
         let image_str = '';
         this.image.forEach(img => {
-          image_str += '<br><img src="'+imageURL+''+img+'"><br>';
+          image_str += '<br><img src="'+this.imageURL+''+img+'"><br>';
         })
         this.content = this.domSanitizer.bypassSecurityTrustHtml(this.activityobj.content.concat(image_str));
         this.isVisited_content = true;

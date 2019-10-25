@@ -111,17 +111,12 @@
         "btn_save": "ସମ୍ପୂର୍ଣ କରନ୍ତୁ"
     },
     "PGEASSESSMENT":{
-        "title": "ମୂଲ୍ୟାଙ୍କନ(PGE)",
+        "title_math": "ମୂଲ୍ୟାଙ୍କନ(PGE)",
         "select_month": "ମାସ ବାଛନ୍ତୁ",
         "program": "ଯୋଜନା: PGE",
         "fill_marks": "ମୂଲ୍ୟ ନିର୍ଧାରଣ",
         "btn_math": "ଅଙ୍କ",
         "btn_eng": "ଇଂରାଜୀ",
-        "btn_odia": "ଓଡିଆ",
-        "level1": "ସ୍ତର ୧",
-        "level2": "ସ୍ତର ୨",
-        "level3": "ସ୍ତର ୩",
-        "level4": "ସ୍ତର ୪",
-        "level5": "ସ୍ତର ୫"
+        "btn_odia": "ଓଡିଆ"
     }
 }

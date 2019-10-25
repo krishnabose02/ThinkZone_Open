@@ -109,7 +109,6 @@ export class Ecactivity2Page {
         this.selected_month = this.qryParams.month;
         this.selected_week = this.qryParams.week;
         this.selected_activity = this.qryParams.activity;
-        console.log(this.preferedlanguage);
         this.getmasteractivitiydetails(
           this.preferedlanguage,
           this.selected_program,

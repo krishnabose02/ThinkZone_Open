@@ -10,7 +10,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)" class="bg-white">
   <div (click)="open_register_modal(null, 'new')" class='card shadow hfc blue-bg white'>
     <ion-icon name='person-add' class="data-xlarge white" style="margin: 10px"></ion-icon>
-    <p class='data-large white m0'>{{ 'STUDENT.register' | translate }}</p>
+    <p class='data white'>{{ 'STUDENT.register' | translate }}</p>
   </div> 
   <p *ngIf='errormessage!=""' class='red data-large text-center m10'>{{errormessage}}</p>
   <div *ngFor='let student of student_list'>
@@ -23,7 +23,7 @@
             <p class='data-large'>{{student.studentname}}</p>
           </div>
           <p class='guardian'>{{ 'EXPLORE.guardian' | translate }}: {{student.parentsname}}</p>
-          <p class='program'>{{ (student.program=='ece') ? (('EXPLORE.program' | translate ) +": ECE - Anganwadi") : ( ('EXPLORE.program' | translate ) +": "+(student.program | uppercase)+" - Class "+student.class )}}</p>
+          <p class='program'>{{ (student.program=='ece') ? (('EXPLORE.program' | translate ) +": ECE Anganwadi") : ( ('EXPLORE.program' | translate ) +": "+(student.program | uppercase)+" - "+student.class )}}</p>
         
         </div>
       </div>
@@ -47,7 +47,7 @@
             <p class='data-large'>{{ 'STUDENT.baseline' | translate }}</p>
   
             <!-- This is the English level display area -->
-            <div class='hfsb'>
+            <div class='horizontal-flexbox' style='justify-content: space-between'>
               <div class='horizontal-flexbox'>
                 <p class='data'>{{ 'EXPLORE.level_eng' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
@@ -73,7 +73,7 @@
           <div class='hdivider'></div>
   
             <!-- This is the Math level display area -->
-            <div class='hfsb'>
+            <div class='hfse'>
               <div class='horizontal-flexbox'>
                 <p class='data'>{{ 'EXPLORE.level_math' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
@@ -99,7 +99,7 @@
             <div class='hdivider'></div>
   
             <!-- This is the Odia level display area -->
-            <div class='hfsb'>
+            <div class='hfse'>
               <div class='horizontal-flexbox'>
                 <p class='data'>{{ 'EXPLORE.level_odia' | translate }}:</p>
                 <div class='selected-chip vertical-flexbox'>
