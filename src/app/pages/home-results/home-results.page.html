@@ -90,8 +90,32 @@
     </div>
   </div>
 
+  <!-- Payment details  -->
+  <div [routerLink]="'/tchpayment'"  class='shadow home-card'>
+    <div class='card-left-block cyan-bg'>
+      <ion-icon name='cash' style="font-size: 3rem"></ion-icon>
+    </div>
+    <div class='centered-text-for-card'>
+      <p class='data'>{{ 'HOME.payment' | translate }}</p>
+    </div>
+    <div class='decorative-side-panel-small cyan-bg'>
+    </div>
+  </div>
+
+  <!-- Training details  -->
+  <div [routerLink]="'/training1'"  class='shadow home-card'>
+    <div class='card-left-block lemon-bg'>
+      <ion-icon name='trending-up' style="font-size: 3rem"></ion-icon>
+    </div>
+    <div class='centered-text-for-card'>
+      <p class='data'>{{ 'HOME.training' | translate }}</p>
+    </div>
+    <div class='decorative-side-panel-small lemon-bg'>
+    </div>
+  </div>
+
   <!-- Payment + Training  -->
-  <div class='shadow home-card spread-evenly'>
+  <!-- <div class='shadow home-card spread-evenly'>
     <div [routerLink]="'/tchpayment'">
       <div class='solid-icon cyan-bg'>
         <ion-icon class="data-large white" name='cash'></ion-icon>
@@ -105,5 +129,5 @@
       </div>
       <p class='data'>{{ 'HOME.training' | translate }}</p>
     </div>
-  </div>
+  </div> -->
 </ion-content>

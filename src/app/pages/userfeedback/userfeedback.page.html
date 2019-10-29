@@ -8,31 +8,48 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-  <ion-content class="bg-white">
-    <ion-card class="">
-      <div class="card-margin">
-        <!-- Feedback or Issue -->
-        <ion-item class="radio-margin">
-          <ion-label>Feedback/ Issue</ion-label>
-          <ion-select placeholder="Select One" value="{{selected_feedback_or_issue}}" (ionChange)="select_feedback_onchange($event.detail.value)" class="select-width">
-            <ion-select-option value="feedback">Feedback</ion-select-option>
-            <ion-select-option value="issue">Issue</ion-select-option>
-          </ion-select>
-        </ion-item>
+  <div class="card shadow">
+    <div class="card-margin">
+      <ion-radio-group (ionChange)='select_feedback_onchange($event.detail.value)'>
+        <div class='hfse'>
+          <div class='hfc'>
+            <ion-radio class="m10" value='issue'></ion-radio>
+            <p>Issues</p>
+          </div>
 
-        <!-- Textarea with custom number of rows and cols -->
-        <ion-label class="descr">Description</ion-label>
-        <ion-item>
-          <ion-textarea rows="6" cols="20" placeholder="Enter feedback or issues description here..." [(ngModel)]="descrption" class="txt-area"></ion-textarea>
-        </ion-item>
-
-        <div margin-top>
-          <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveUserfeedback()" tappable>
-            <ion-icon name="log-in"></ion-icon>
-            Submit
-          </ion-button>
+          <div class='hfc'>
+            <ion-radio class="m10" value='feedback'></ion-radio>
+            <p>Feedback</p>
+          </div>
         </div>
+      </ion-radio-group>
+      <!-- Feedback or Issue -->
+      <!-- <ion-item class="radio-margin">
+        <ion-label>Feedback/ Issue</ion-label>
+        <ion-select placeholder="Select One" value="{{selected_feedback_or_issue}}" (ionChange)="select_feedback_onchange($event.detail.value)" class="select-width">
+          <ion-select-option value="feedback">Feedback</ion-select-option>
+          <ion-select-option value="issue">Issue</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+
+      <!-- Textarea with custom number of rows and cols -->
+      <!-- <ion-label class="descr">Description</ion-label> -->
+
+      <ion-textarea rows="6" cols="20" placeholder="Enter feedback or issues description here..." [(ngModel)]="descrption" class="txt-area"></ion-textarea>
+    <!-- 
+      <div margin-top>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="saveUserfeedback()" tappable>
+          <ion-icon name="log-in"></ion-icon>
+          Submit
+        </ion-button>
+      </div> -->
+      
+
+      <!-- Button submit -->
+      <div class='m10'></div>
+      <div (click)="saveUserfeedback()" class=' m0 shadow card blue-bg hfc'>
+        <p class='data white m0'>Submit</p>
       </div>
-    </ion-card>
-  </ion-content>
+    </div>
+  </div>
 </ion-content>

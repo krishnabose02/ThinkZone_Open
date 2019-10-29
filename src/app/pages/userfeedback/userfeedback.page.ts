@@ -44,11 +44,11 @@ export class UserfeedbackPage implements OnInit {
         if ( this.selected_feedback_or_issue === undefined
             || this.selected_feedback_or_issue == null
             || this.selected_feedback_or_issue === '') {
-            this.showAlert('Verify', '', 'Plese select any from Feedbak or Issues option !!!');
+            this.showAlert('Verify', '', 'Plese select any from Feedback or Issues option !!!');
         } else if ( this.descrption === undefined
             || this.descrption == null
             || this.descrption === '') {
-            this.showAlert('Verify', '', 'Plese enter description for Feedbak or Issues !!!');
+            this.showAlert('Verify', '', 'Plese enter description for Feedback or Issues !!!');
         } else {
             const body = {
                 userid: this._userid,

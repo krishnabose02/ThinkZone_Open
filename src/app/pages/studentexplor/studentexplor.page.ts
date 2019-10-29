@@ -53,7 +53,7 @@ export class StudentExplorPage {
   levels = [1, 2, 3, 4, 5];
   ece_levels = [1, 2, 3];
   errormessage = '';
-
+  displaystudent: any;
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -320,30 +320,62 @@ export class StudentExplorPage {
   }
 
   flipStudentDisplay(student) {
+    // this.displaystudent.english.hidden = true;
+    // this.displaystudent.english.hidden = true;
+    // this.displaystudent.english.hidden = true;
+    // this.displaystudent.english.hidden = true;
+    // if (this.displaystudent.studentname === student.studentname) {
+    //   this.displaystudent.hidden = true;
+    // } else {
+    //   this.displaystudent.hidden = true;
+    //   student.hidden = false;
+    //   this.displaystudent = student;
+    // }
+
     if (student.hidden) {
-      student.hidden = false;
 
       this.student_list.forEach(element => {
-        if (element.studentname === student.studentname && element.parentsname === student.parentsname) {
-          return;
-        }
         element.hidden = true;
-        element.english.val = student.eng_level;
-        element.english.hidden = true;
-        element.math.val = student.math_level;
-        element.math.hidden = true;
-        element.odia.val = student.odia_level;
-        element.odia.hidden = true;
+        if (element.program === 'pge') {
+          element.english.val = student.eng_level;
+          element.english.hidden = true;
+          element.math.val = student.math_level;
+          element.math.hidden = true;
+          element.odia.val = student.odia_level;
+          element.odia.hidden = true;
+        } else {
+          element.ece.val = student.ec_level;
+          element.ece.hidden = true;
+        }
       });
+
+      student.hidden = false;
+      if (student.program === 'pge') {
+        student.english.val = student.eng_level;
+        student.english.hidden = true;
+        student.math.val = student.math_level;
+        student.math.hidden = true;
+        student.odia.val = student.odia_level;
+        student.odia.hidden = true;
+      } else {
+        student.ece.val = student.ec_level;
+        student.ece.hidden = true;
+      }
+
       return;
     }
     student.hidden = true;
-    student.english.val = student.eng_level;
-    student.english.hidden = true;
-    student.math.val = student.math_level;
-    student.math.hidden = true;
-    student.odia.val = student.odia_level;
-    student.odia.hidden = true;
+    if (student.program === 'pge') {
+      student.english.val = student.eng_level;
+      student.english.hidden = true;
+      student.math.val = student.math_level;
+      student.math.hidden = true;
+      student.odia.val = student.odia_level;
+      student.odia.hidden = true;
+    } else {
+      student.ece.val = student.ec_level;
+      student.ece.hidden = true;
+    }
   }
 
   addNewStudent() {
