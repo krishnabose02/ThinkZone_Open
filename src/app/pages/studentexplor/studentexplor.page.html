@@ -63,7 +63,7 @@
   
             <!-- This is English level selector area -->
             <div [ngClass]='(student.english.hidden)?"hide-data":"show-data"'>
-              <div class='hfse'>
+              <div class='hfse wrap'>
                 <div (click)='student.english.val=l' *ngFor='let l of levels' class='vertical-flexbox' [ngClass]='(student.english.val == l)?"selected-chip":"unselected-chip"'>
                   <p>{{l}}</p>
                 </div>
@@ -89,7 +89,7 @@
   
             <!-- This is Maths level selector area -->
             <div [ngClass]='(student.math.hidden)?"hide-data":"show-data"'>
-              <div class='hfse'>
+              <div class='hfse wrap'>
                 <div (click)='student.math.val=l' *ngFor='let l of levels' class='vertical-flexbox' [ngClass]='(student.math.val == l)?"selected-chip":"unselected-chip"'>
                   <p>{{l}}</p>
                 </div>
@@ -115,7 +115,7 @@
   
             <!-- This is Odia level selector area -->
             <div [ngClass]='(student.odia.hidden)?"hide-data":"show-data"'>
-              <div class='hfse'>
+              <div class='hfse wrap'>
                 <div (click)='student.odia.val=l' *ngFor='let l of levels' class='vertical-flexbox' [ngClass]='(student.odia.val == l)?"selected-chip":"unselected-chip"'>
                   <p>{{l}}</p>
                 </div>
@@ -148,7 +148,7 @@
   
             <!-- This is ECE level selector area -->
             <div [ngClass]='(student.ece.hidden)?"hide-data":"show-data"'>
-              <div class='hfse'>
+              <div class='hfse wrap'>
                 <div (click)='student.ece.val=l' *ngFor='let l of ece_levels' class='vertical-flexbox' [ngClass]='(student.ece.val == l)?"selected-chip":"unselected-chip"'>
                   <p>{{l}}</p>
                 </div>

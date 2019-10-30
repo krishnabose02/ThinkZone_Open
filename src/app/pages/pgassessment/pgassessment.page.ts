@@ -41,7 +41,7 @@ export class PgassessmentPage {
   pge_eng_l3: any = [];
   pge_eng_l4: any = [];
   pge_eng_l5: any = [];
-  
+
   pge_math_all: any = [];
   pge_math_l1: any = [];
   pge_math_l2: any = [];
@@ -55,7 +55,7 @@ export class PgassessmentPage {
   pge_odia_l3: any = [];
   pge_odia_l4: any = [];
   pge_odia_l5: any = [];
-  
+
 
 
   constructor(
@@ -97,61 +97,64 @@ export class PgassessmentPage {
       });
   }
 
-  format_student_list(student_list){
+  format_student_list(student_list) {
     student_list.forEach(element => {
-      if      (element.program === 'pge' && element.eng_level=='1')
+      if      (element.program === 'pge' && element.eng_level ==='1') {
         this.pge_eng_l1.push(element);
-      else if (element.program === 'pge' && element.eng_level=='2')
+      } else if (element.program === 'pge' && element.eng_level=== '2') {
         this.pge_eng_l2.push(element);
-      else if (element.program === 'pge' && element.eng_level=='3')
+           } else if (element.program === 'pge' && element.eng_level === '3') {
         this.pge_eng_l3.push(element);
-      else if (element.program === 'pge' && element.eng_level=='4')
+           } else if (element.program === 'pge' && element.eng_level === '4') {
         this.pge_eng_l4.push(element);
-      else if (element.program === 'pge' && element.eng_level=='5')
+           } else if (element.program === 'pge' && element.eng_level === '5') {
         this.pge_eng_l5.push(element);
-      
-      if      (element.program === 'pge' && element.math_level=='1')
+           }
+
+      if      (element.program === 'pge' && element.math_level === '1') {
         this.pge_math_l1.push(element);
-      else if (element.program === 'pge' && element.math_level=='2')
+      } else if (element.program === 'pge' && element.math_level === '2') {
         this.pge_math_l2.push(element);
-      else if (element.program === 'pge' && element.math_level=='3')
+           } else if (element.program === 'pge' && element.math_level === '3') {
         this.pge_math_l3.push(element);
-      else if (element.program === 'pge' && element.math_level=='4')
+           } else if (element.program === 'pge' && element.math_level === '4') {
         this.pge_math_l4.push(element);
-      else if (element.program === 'pge' && element.math_level=='5')
+           } else if (element.program === 'pge' && element.math_level === '5') {
         this.pge_math_l5.push(element);
-      
-      if      (element.program === 'pge' && element.odia_level=='1')
+           }
+
+      if      (element.program === 'pge' && element.odia_level === '1') {
         this.pge_odia_l1.push(element);
-      else if (element.program === 'pge' && element.odia_level=='2')
+      } else if (element.program === 'pge' && element.odia_level === '2') {
         this.pge_odia_l2.push(element);
-      else if (element.program === 'pge' && element.odia_level=='3')
+           } else if (element.program === 'pge' && element.odia_level === '3') {
         this.pge_odia_l3.push(element);
-      else if (element.program === 'pge' && element.odia_level=='4')
+           } else if (element.program === 'pge' && element.odia_level === '4') {
         this.pge_odia_l4.push(element);
-      else if (element.program === 'pge' && element.odia_level=='5')
+           } else if (element.program === 'pge' && element.odia_level === '5') {
         this.pge_odia_l5.push(element);
-      
+           }
+
     });
     this.pge_eng_all.push(this.pge_eng_l1);
     this.pge_eng_all.push(this.pge_eng_l2);
     this.pge_eng_all.push(this.pge_eng_l3);
     this.pge_eng_all.push(this.pge_eng_l4);
     this.pge_eng_all.push(this.pge_eng_l5);
-    
+
     this.pge_math_all.push(this.pge_math_l1);
     this.pge_math_all.push(this.pge_math_l2);
     this.pge_math_all.push(this.pge_math_l3);
     this.pge_math_all.push(this.pge_math_l4);
     this.pge_math_all.push(this.pge_math_l5);
-    
+
     this.pge_odia_all.push(this.pge_odia_l1);
     this.pge_odia_all.push(this.pge_odia_l2);
     this.pge_odia_all.push(this.pge_odia_l3);
     this.pge_odia_all.push(this.pge_odia_l4);
     this.pge_odia_all.push(this.pge_odia_l5);
 
-    console.log('@@@pge_eng_all: '+JSON.stringify(this.pge_eng_all)+'    @@@pge_math_all: '+JSON.stringify(this.pge_math_all)+'    @@@pge_odia_all: '+JSON.stringify(this.pge_odia_all))
+    console.log('@@@pge_eng_all: ' + JSON.stringify(this.pge_eng_all) + '    @@@pge_math_all: ' + JSON.stringify(this.pge_math_all) + '    @@@pge_odia_all: ' + JSON.stringify(this.pge_odia_all));
   }
 
   async getuserbyid(userid) {
@@ -197,9 +200,9 @@ export class PgassessmentPage {
     }
     console.log('@@@month_list: ' + JSON.stringify(this.month_list));
 
-    let temp = [];
+    const temp = [];
     this.month_list.forEach(element => {
-      if(!element.disabled){
+      if (!element.disabled) {
         temp.push(element);
       }
     });
@@ -221,7 +224,7 @@ export class PgassessmentPage {
 
   // ece fillmarks button click
   async pge_fillmarks_btnclick(slist, subject) {
-    if(this.disable_fillmarks_button){
+    if (this.disable_fillmarks_button) {
       alert('please select a month first!');
       return;
     }

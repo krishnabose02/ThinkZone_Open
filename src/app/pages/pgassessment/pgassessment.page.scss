@@ -52,20 +52,23 @@
     margin: 10px;
 }
 
-.card{
+.card-np{
     margin: 20px;
-    padding: 20px;
     border-radius: 0px;
     color: gray;
+    overflow: auto;
+}
+
+.p20 {
+    padding: 20px;
 }
 
 .marks-button{
     color: white;
     border-radius: 0px;
-    margin: 10px;
     padding: 1px 20px;
     min-width: 100px;
-    text-align: center;
+    margin: 0 0 20px 0;
 }
 
 .green{
