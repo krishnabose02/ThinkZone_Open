@@ -25,6 +25,7 @@
     "@capacitor/android": "^1.0.0-beta.19",
     "@capacitor/cli": "^1.2.1",
     "@capacitor/core": "^1.0.0-beta.19",
+    "@ionic-native/app-version": "^5.16.0",
     "@ionic-native/camera": "^5.4.0",
     "@ionic-native/core": "5.0.0-beta.14",
     "@ionic-native/crop": "^5.4.0",

@@ -1,0 +1,169 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-content>
+        <p style='color: #0675f4;font-size: 1.3rem;margin: 16px'>ThinkZone
+          <br><span class="version">1.1.2</span>
+        </p>
+        <!-- New set of options as told -->
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item>
+            <ion-icon style="margin-right: 16px;color: #979797" name='map'></ion-icon>
+            <ion-label style="color: #979797">Language</ion-label>
+            <ion-select interface="action-sheet" mode="ios" placeholder="Select One" [(ngModel)]="selectedLanguage" (ionChange)="languageChanged($event.target.value)">
+                <ion-select-option value="en">English</ion-select-option>
+                <ion-select-option value="od">ଓଡିଆ</ion-select-option>
+                <!-- <ion-select-option value="hi">हिंदी</ion-select-option> -->
+            </ion-select>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/home-results'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='home'></ion-icon>
+            <ion-label style="color: #979797">{{ 'APP.home' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/profile'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='person'></ion-icon>
+            <ion-label style="color: #979797">{{ 'APP.profile' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/message'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='mail-unread'></ion-icon>
+            <ion-label style="color: #979797">{{ 'APP.message' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item [routerLink]="['/userfeedback']" direction="forward">
+            <ion-icon style="margin-right: 16px;color: #979797" name='chatboxes'></ion-icon>
+            <ion-label style="color: #979797">{{'APP.user_feedback' | translate}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/about'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='at'></ion-icon>
+            <ion-label style="color: #979797">{{ 'APP.about' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item onclick="window.open('https://thinkzone-teacherapp.flycricket.io/privacy.html', '_system', 'location=yes'); return false;">
+            <ion-icon style="margin-right: 16px;color: #979797" name='paper'></ion-icon>
+            <!-- <ion-label style="color: #979797">{{'APP.user_feedback' | translate}}</ion-label> -->
+            <ion-label>
+              <a class="ion-home color-primary item" href="#" > {{ 'APP.privacy_policy' | translate }}</a>
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item (click)='logout()'>
+            <ion-icon style="margin-right: 16px;color: red" name='log-out'></ion-icon>
+            <ion-label style="color: red">{{ 'APP.logout' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        <!-- <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/training1'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='school'></ion-icon>
+            <ion-label style="color: #979797">{{ 'HOME.training' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <p style='margin: 16px'>Students</p>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/student'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='person-add'></ion-icon>
+            <ion-label style="color: #979797">Register new Student</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/studentexplor'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='people'></ion-icon>
+            <ion-label style="color: #979797">{{ 'HOME.student_details' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/attendance'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='paper'></ion-icon>
+            <ion-label style="color: #979797">{{ 'HOME.attendance' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+          <p style='margin: 16px'>ECE</p>
+          <ion-menu-toggle auto-hide="false">
+            <div routerLink='/ecactivity' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+              <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+              <ion-label>{{ 'HOME.activity_ece' | translate }}</ion-label>
+            </div>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false">
+            <div routerLink='/ecassessment' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+              <ion-icon style="margin: 16px;font-size: 1.4rem" name='swap'></ion-icon>
+              <ion-label>{{ 'HOME.assessment_ece' | translate }}</ion-label>
+            </div>
+          </ion-menu-toggle>
+        <div style='width: 100%;height: 1px;background: #d3d3d3'></div>
+
+        <p style='margin: 16px'>PGE</p>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgactivity' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+            <ion-label>{{ 'HOME.activity_pge_math' | translate }}</ion-label>
+          </div>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgactivity' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+            <ion-label>{{ 'HOME.activity_pge_eng' | translate }}</ion-label>
+          </div>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgactivityodia' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='stats'></ion-icon>
+            <ion-label>{{ 'HOME.activity_pge_odia' | translate }}</ion-label>
+          </div>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <div routerLink='/pgassessment' style='display: flex;flex-flow: row;justify-content: flex-start;align-items:center;color: #979797'>
+            <ion-icon style="margin: 16px;font-size: 1.4rem" name='swap'></ion-icon>
+            <ion-label>{{ 'HOME.assessment_pge' | translate }}</ion-label>
+          </div>
+        </ion-menu-toggle>
+
+        <div style='width: 100%;height: 1px;background: #d3d3d3'></div>
+
+        <p style='margin: 16px'>Others</p>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink='/tchpayment'>
+            <ion-icon style="margin-right: 16px;color: #979797" name='cash'></ion-icon>
+            <ion-label style="color: #979797">{{ 'HOME.payment' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle> -->
+
+
+
+
+
+
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,93 @@
+<ion-content> 
+  <div *ngIf='baseline_q!=null && baseline_q.length>0'>
+      <div class='card gray-bg'>
+        <p class='data-large white text-center'>{{ 'BASELINE.title1' | translate }}</p>
+      </div>
+      <div class='card shadow compressed-data'>
+          <p>{{ 'BASELINE.program' | translate }}: <b> {{ baseline_q[0].program | uppercase }}</b></p>
+          <p> {{ 'BASELINE.subject' | translate }}: <b> {{ baseline_q[0].subject | uppercase }}</b></p> 
+          <p>{{ 'BASELINE.level' | translate }}: <b> {{ baseline_q[0].level }} </b></p>
+      </div>
+      <div *ngFor='let baseline of baseline_q'>
+        <div class='card shadow' *ngFor='let q of baseline.questionset;let i=index'>
+          <p>{{i+1}}. {{q.question}}</p>
+          <div style='min-width: 100%;background: gray;height: 1px;'></div>
+          <div class='horizontal-flexbox'>
+            <div (click)='select_answer_onchange("yes",q)' [ngClass]='(answerList[q.id]=="yes")?"selected-yes":"yes"'><p>Yes</p></div>
+            <div (click)='select_answer_onchange("no",q)' [ngClass]='(answerList[q.id]=="no")?"selected-no":"no"'><p>No</p></div>
+          </div>
+        </div>
+      </div>
+      <div class='m10 horizontal-flexbox'>
+        <div (click)="closeModal()" class='button outline'>
+          <p class='data'>{{ 'BASELINE.btn_cancel' | translate }}</p>
+        </div>
+        <div (click)="setLevel()" class='button shadow green-bg'>
+          <p class='data white'>{{ 'BASELINE.btn_save' | translate }}</p>
+        </div>
+      </div>
+  </div>
+  <div *ngIf='!hide_info_div'>
+    <p class='data-large red text-center'>No Baseline questions found !!!</p>
+    <div class='hfc'>
+      <div (click)="closeModal()" class='button shadow red-bg'>
+        <p class='data white'>{{ 'BASELINE.btn_cancel' | translate }}</p>
+      </div>
+    </div>
+  </div>
+  <!--
+    </ion-card-header>
+    <ion-card-content>
+      <div id="info_div" class="info_div" [hidden]="hide_info_div"> 
+        <img src="../../../../assets/img/info.png"><br />
+        No Baseline questions found !!! <br />
+        <ion-button icon-left color="primary" (click)="closeModal()" tappable> {{ 'BASELINE.btn_ok' | translate }} </ion-button>
+      </div>
+
+      <div id="cont_div" class="" [hidden]="hide_cont_div">
+          <ion-list *ngFor = "let baseline of baseline_q; let i=index;" class="item-text-wrap">
+            <ion-label> 
+              {{ 'BASELINE.program' | translate }}: <b> {{ baseline.program }} </b>
+              <p> {{ 'BASELINE.class' | translate }}: <b> {{ baseline.class }} </b> </p>
+              <p> {{ 'BASELINE.subject' | translate }}: <b> {{ baseline.subject }} </b> </p> 
+              {{ 'BASELINE.level' | translate }}: <b> {{ baseline.level }} </b>  
+            </ion-label>
+            <p><b><u>  {{ 'BASELINE.title2' | translate }} </u></b></p>
+            <ion-list *ngFor = "let quest of baseline.questionset; let i=index; ">
+              {{ i+1 }} .{{ quest.question }}
+              <ion-select interface="popover" mode="ios" placeholder="Select answer" (ionChange)="select_answer_onchange($event.detail.value, quest)" class="select-width">
+                <ion-select-option value="yes"> {{ 'BASELINE.btn_yes' | translate }}</ion-select-option>
+                <ion-select-option value="no"> {{ 'BASELINE.btn_no' | translate }}</ion-select-option>
+              </ion-select>
+            </ion-list>
+          </ion-list>
+
+          <div *ngFor='let baseline of baseline_q'>
+
+            <div class='card shadow' *ngFor='let q of baseline.questionset;let i=index'>
+              <p>{{i+1}}. {{q.question}}</p>
+              <div style='min-width: 100%;background: gray;height: 1px;'></div>
+              <div class='horizontal-flexbox'>
+                  <div (click)='select_answer_onchange("yes",q)' [ngClass]='(answerList[q.id]=="yes")?"selected-yes":"yes"'><p>Yes</p></div>
+                  <div (click)='select_answer_onchange("no",q)' [ngClass]='(answerList[q.id]=="no")?"selected-no":"no"'><p>No</p></div>
+              </div>
+            </div>
+          </div>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button color="medium" (click)="closeModal()">
+                  <ion-icon slot="start" name="close"></ion-icon>  {{ 'BASELINE.btn_cancel' | translate }}
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button icon-left color="success" (click)="setLevel()" tappable>
+                  <ion-icon name="checkmark"></ion-icon> {{ 'BASELINE.btn_save' | translate }}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>

@@ -1,0 +1,139 @@
+{
+    "LOGIN": {
+        "title": "लग इन",
+        "txt_email": "ईमेल आईडी",
+        "txt_password": "पास वर्ड",
+        "btn_login": "लग इन"
+    },
+    "APP": {
+        "home": "मुख्य सूची",
+        "profile": "प्रोफाइल",
+        "message": "सन्देस",
+        "user_feedback": "प्रतिपुष्टि",
+        "about": "बिबरन",
+        "privacy_policy": "गोपनियता",
+        "logout": "लग आउट"
+    },
+    "HOME": {
+        "student_details": "छात्र बिबरन",
+        "attendance": "उपस्थान",
+        "activity_ece": "गतिबिधी",
+        "assessment_ece": "मूल्यांकन",
+        "activity_pge_math": "गणित गतिबिधी",
+        "activity_pge_eng": "अँग्रेजी गतिबिधी",
+        "activity_pge_odia": "ओडिया गतिबिधी",
+        "assessment_pge": "मूल्यांकन",
+        "training": "प्रसीख्यन",
+        "payment": "भुगतान",
+        "user_feedback": "प्रतिपुष्टि"
+    },
+    "STUDENT": {
+        "student_details": "छात्र बिबरन",
+        "baseline": "बेसलाइन",
+        "register": "पंजीकरण",
+        "edit": "संपादित करें",
+        "delete":"हटाएँ"
+    },
+    "REGISTER": {
+        "student_register": "छात्र पंजीकरण",
+        "student_name": "छात्र नाम",
+        "program": "योजना",
+        "class": "कक्षा",
+        "phone": "फोन",
+        "gender": "लिंग",
+        "dob": "जन्म तिथि",
+        "guardian": "अभिबाबक",
+        "reg_date": "पंजीकरण तिथि",
+        "btn_cancel": "रद्द करिए",
+        "btn_save": "सेब करिए"
+    },
+    "EXPLORE": {
+        "title": "स्तर निर्णय",
+        "student_name": "छात्र नाम",
+        "guardian": "अभिबाबक",
+        "program": "योजना",
+        "level_ece": "स्तर(ECE)",
+        "level_math": "स्तर(गणित)",
+        "level_eng": "स्तर(अँग्रेजी)",
+        "level_odia": "स्तर(ओडिया)"
+    },
+    "BASELINE":{
+        "title1": "बेसलाइन परीक्षा",
+        "program": "योजना",
+        "class": "कक्षा",
+        "subject": "बिषय",
+        "level": "स्तर",
+        "title2": "सबका उत्तर दें",
+        "btn_ok": "ठीक हे",
+        "btn_yes": "हाँ",
+        "btn_no": "ना",
+        "btn_cancel": "रद्द करिए",
+        "btn_save": "सेब करिए"
+    },
+    "ATTENDANCE":{
+        "title": "उपस्थान",
+        "date": "तारीख",
+        "complete": "उपस्थान हो चुकाहे !!!",
+        "btn_holiday": "छूटी घोषणा",
+        "btn_attendance": "उपस्थान लीजिये"
+    },
+    "HOLIDAY": {
+        "title": "छूटी घोषणा",
+        "holiday_name": "छूटी का नाम",
+        "invalid": "ठीक नहीं हे",
+        "btn_cancel": "रद्द करिए",
+        "btn_save": "सेब करिए"
+    },
+    "TAKEATTENDANCE":{
+        "title": "उपस्थान",
+        "absent": "अनुपस्थित",
+        "present": "उपस्थित",
+        "btn_cancel": "रद्द करिए",
+        "btn_save": "सेब करिए"
+    },
+    "ECEACTIVITY":{
+        "title": "गतिबिधी(ECE)",
+        "title2": "गतिबिधी तथ्य",
+        "month": "महिना",
+        "week": "हप्ता",
+        "content": "तथ्य",
+        "video": "वीडियो",
+        "worksheet": "वर्क शीट",
+        "btn_save": "सम्पूर्ण करें"
+    },
+    "PGEACTIVITY":{
+        "title_math": "गतिबिधी(गणित)",
+        "title_eng": "गतिबिधी(अँग्रेजी)",
+        "title_odia": "गतिबिधी(ओडिया)",
+        "content": "तथ्य",
+        "video": "वीडियो",
+        "worksheet": "वर्क शीट",
+        "btn_save": "सम्पूर्ण करें"
+    },
+    "PGEASSESSMENT":{
+        "title": "मूल्यांकन(PGE)",
+        "select_month": "महिना चुनें",
+        "program": "योजना: PGE",
+        "fill_marks": "मूल्य निर्धारण",
+        "btn_math": "गणित",
+        "btn_eng": "अंग्रेजी",
+        "btn_odia": "ओडिया",
+        "level1": "स्तर १",
+        "level2": "स्तर २",
+        "level3": "स्तर ३",
+        "level4": "स्तर ४",
+        "level5": "स्तर ५"
+    },
+    "ASSESSMENT":{
+        "title": "मूल्यांकन",
+        "name": "नाम",
+        "program": "योजना",
+        "level": "स्तर",
+        "taken": "यह आकलन लिया जा चुका है !!!",
+        "btn_ok": "ठीक है",
+        "btn_yes": "हाँ",
+        "btn_no": "नहीं",
+        "btn_cancel": "रद्द करें",
+        "btn_save": "सेब करें"
+    }
+}

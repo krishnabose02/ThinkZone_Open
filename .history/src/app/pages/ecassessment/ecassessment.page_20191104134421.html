@@ -1,0 +1,65 @@
+<ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'><p>ECE Assessments</p></ion-title>
+        <ion-back-button></ion-back-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+      
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <div class='card shadow'>
+    <div class='m10'>
+      
+      <!--  Module Selector -->
+      <p class='data-large'>Select Quarter:</p>
+      <div style='flex-wrap: wrap' class='horizontal-flexbox'>
+        <div (click)='quarter_onchange(q.value)' *ngFor='let q of quarter_list' [ngClass]='(selected_quarter==q.value)?"selected-chip":"unselected-chip"'>
+          <p class='data'>{{q.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='card shadow'>
+    <p class='data-large'>Program: ECE</p>
+    <p class='data' >{{student_list.length}} students found.</p>
+  </div>
+
+  <div *ngFor='let s of student_list'>
+    <div *ngIf="s.ec_level > 0" class='shadow card' >
+        <p class='data-large'>{{s.studentname}}</p>
+        <p class='data-small'>Level: {{s.ec_level}}</p>
+        <div (click)="ece_fillmarks_btnclick(s)" class='marks-button' [style.opacity]="disable_fillmarks_button?'0.5':'1'">
+          <div class='horizontal-flexbox'>
+              <ion-icon class='data-xlarge m10 white' name='paper'></ion-icon>
+              <p class='data white'>Fill Marks</p>
+          </div>
+        </div>
+    </div>
+  </div>
+  
+  <!-- <ion-grid>
+    <ion-card class="">
+      <ion-list>
+        {{student_list.length}} students found in ECE program
+        <ion-item *ngFor="let slist of student_list;" class="ionitem">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label>{{ slist.studentname }} <p> {{ slist.program }}</p></ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row class="right-align">
+              <ion-button icon-left size="medium" color="warning" (click)="ece_fillmarks_btnclick(slist)" [disabled]="disable_fillmarks_button" float-right tappable class="explore-btn">
+                <ion-icon name="paper"></ion-icon>
+                Fill Mark
+              </ion-button>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </ion-grid> -->
+</ion-content>
+  
