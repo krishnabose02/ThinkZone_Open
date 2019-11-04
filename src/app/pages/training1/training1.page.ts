@@ -65,6 +65,7 @@ export class Training1Page {
           let count = true;
           this.allmodule_list.forEach(element => {
             element.selected = count;
+            element.progress = Math.random() * 100;
             count = false;
             this.allmodule_name.push(element);
           });
@@ -87,6 +88,10 @@ export class Training1Page {
       .subscribe(res => {
         console.log('@@@Module list: ' + JSON.stringify(res));
         this.allsubmodule_list = res;
+        this.allsubmodule_list.forEach(element => {
+          element.progress = Math.random() * 100; // change this to original value
+        });
+        console.log(this.allsubmodule_list);
         loading.dismiss();
       }, err => {
         console.log(err);

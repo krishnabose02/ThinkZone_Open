@@ -19,24 +19,41 @@
       
       <!--  Module Selector -->
       <p class='data-large'>Select Module:</p>
-      <div style='flex-wrap: wrap' class='horizontal-flexbox'>
-        <div class='vertical-flexbox half-width'>
-          <div (click)='module_select_onchange(m)' *ngFor='let m of allmodule_name' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
-            <p class='data'>{{m.modulename}}</p>
+      <div class='vertical-flexbox full-width'>
+        <div class='hfc full-width' *ngFor='let m of allmodule_name'>
+          <div class='half-width'>
+            <div (click)='module_select_onchange(m)' [ngClass]='(m.selected)?"selected-chip":"unselected-chip"'>
+              <p class='data'>{{m.modulename}}</p>
+            </div>
           </div>
-        </div>
-
-        <div class='half-width vertical-flexbox'>
-          <div class='modules' *ngFor="let submodule of allsubmodule_list" (click)="submodule_click(submodule)">
-            <p class='data'>{{submodule.submodulename}}</p>
+          <div class='progressbarborder hfc half-width'>
+            <div [style.flex-grow]='m.progress' style='height: 10px;background: #4caf50;flex-grow: 75'></div>
+            <div [style.flex-grow]='100 - m.progress' style='height: 10px;background: lightgray;flex-grow: 25'></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-
+  <div class='card shadow'>
+    <div class='m10'>
+      <!--  Module Selector -->
+      <p class='data-large'>Select Submodule:</p>
+      <div class='vertical-flexbox full-width'>
+        <div class='hfc full-width' *ngFor='let submodule of allsubmodule_list'>
+          <div class='progressbarborder half-width'>
+            <div class='hffs' (click)="submodule_click(submodule)">
+              <p class='data'>{{submodule.submodulename}}</p>
+            </div>
+          </div>
+          <div class='progressbarborder hfc half-width'>
+            <div [style.flex-grow]='submodule.progress' style='height: 10px;background: #4caf50;flex-grow: 75'></div>
+            <div [style.flex-grow]='100 - submodule.progress' style='height: 10px;background: lightgray;flex-grow: 25'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- <ion-card class="">
     <div class="card-margin">
