@@ -11,12 +11,12 @@
      
 <ion-content scrollY='false' [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <div *ngFor='let vid of doc_path_list;let i = index'
-        style='border-radius: 0px;margin: 20px; overflow: auto;justify-content: flex-start'
+        style='border-radius: 100px;margin: 20px; overflow: auto;justify-content: flex-start'
         class='shadow'
-        (click)='file_btn_click(vid)'>
+        (click)='play_video(vid)'>
           <div class='horizontal-flexbox' style='justify-content: space-between'>
             <div class='horizontal-flexbox' style='justify-content: flex-start'>
-              <div style='margin: 10px;height: 40px;width: 40px;border-radius: 50%;background: #64B5F6' class='horizontal-flexbox'>
+              <div style='margin: 10px;height: 40px;width: 40px;border-radius: 0;background: #64B5F6' class='horizontal-flexbox'>
                 <ion-icon [name]='icon' style="color: white"></ion-icon>
               </div>
               <p style='margin-left: 20px;color: gray'>{{type}} {{i+1}}</p>

@@ -17,12 +17,16 @@ import { RestApiService } from './../../rest-api.service';
 import { TranslateConfigService } from './../../translate-config.service';
 
 
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx'; 
+
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
   styleUrls: ['./home-results.page.scss']
 })
 export class HomeResultsPage {
+  fileTransferObj: FileTransferObject;  
 
   _username: string = localStorage.getItem('_username').toUpperCase();
   searchKey = '';
@@ -37,8 +41,6 @@ export class HomeResultsPage {
   toolbarshadow = true;
 
   dlprogress: string = '';
-  txt_url: string = '';
-  txt_ext: string = '';
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -47,7 +49,10 @@ export class HomeResultsPage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public loadingController: LoadingController,
-    public api: RestApiService
+    public api: RestApiService,
+    private translateConfigService: TranslateConfigService,
+    private fileTransfer: FileTransfer,
+    private file: File
   ) {
     this.centers = [];
     this.api.getcurrentdate()
@@ -190,4 +195,59 @@ export class HomeResultsPage {
       this.toolbarshadow = false;
     }
   }
+
+
+
+
+
+
+  public download(fileName, filePath) {   
+    console.log('--> Inside download()')
+    let url = encodeURI(filePath);  
+    this.fileTransferObj = this.fileTransfer.create();  
+
+    this.fileTransferObj.onProgress((progressEvent) => {
+        var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+        this.dlprogress = ''+perc;
+        console.log('--> '+this.dlprogress+' % downloaded');
+      });
+
+    /*this.fileTransferObj.download(url, this.file.externalDataDirectory + fileName, true).then((entry) => {  
+        alert('download completed: ' + entry.toURL());  
+      }, (error) => {  
+        console.log('download failed: ' + JSON.stringify(error));  
+        alert('download failed: ' + JSON.stringify(error));  
+      });
+    */
+    // new method
+		// --> Directory exists with same name
+    this.file.checkDir(this.file.externalRootDirectory, 'downloads')
+      .then(_ => this.file.checkFile(this.file.externalRootDirectory, 'downloads/' + name + '.geojson')
+			  .then(_ => {alert("A file with the same name already exists!")})
+			  .catch(err =>
+          this.fileTransferObj.download(url, this.file.externalRootDirectory + '/downloads/' + name + '.geojson')
+            .then((entry) => {
+			    	  alert('File saved in:  ' + entry.nativeURL);
+			      })
+			      .catch((err) =>{
+			    	  alert('Error saving file: ' + err.message);
+			      })
+			  ))
+		  .catch(err => this.file.createDir(this.file.externalRootDirectory, 'downloads', false)
+			  .then(response => {
+				  alert('New folder created:  ' + response.fullPath);
+          this.fileTransferObj.download(url, this.file.externalRootDirectory + '/downloads/' + name + '.geojson')
+            .then((entry) => {
+			    	  alert('File saved in : ' + entry.nativeURL);
+			      })
+			      .catch((err) =>{
+			    	  alert('Error saving file:  ' + err.message);
+			      });
+        })
+        .catch(err => {
+				  alert('It was not possible to create the dir "downloads". Err: ' + err.message);
+			  })			
+		  );	
+  }
+
 }

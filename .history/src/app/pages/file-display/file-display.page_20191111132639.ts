@@ -40,10 +40,10 @@ export class FileDisplayPage implements OnInit {
   page_title = 'Video Contents';
   icon = 'play';
   type = 'video';
-  doc_path_list: DataObject[] = [ 
-        {path: 'asd', played: false},
-        {path: 'asd', played: false}
-      ];
+  doc_path_list: DataObject[]
+   = [ {path: 'asd', played: false},
+          {path: 'asd', played: false}]
+          ;
 
 
   constructor(private videoPlayer: VideoPlayer,
@@ -63,65 +63,11 @@ export class FileDisplayPage implements OnInit {
                   this.icon = 'document';
                   this.type = 'sheet';
                 }
-                console.log('@@@ Type: '+this.dataService.getData('type'));
-                console.log('@@@ doc_path_list: '+JSON.stringify(this.doc_path_list));
+                console.log(this.dataService.getData('type'));
+                console.log(this.doc_path_list);
               }
 
-  ngOnInit() {}
-
-  async file_btn_click(file_obj){
-    let file_url = file_obj.path;
-    let url = encodeURI(file_url);
-    let fileName = /[^/]*$/.exec(file_url)[0];  
-    let local_directory = 'resources';
-    console.log('--> Inside file_btn_click()    url: '+url+'    filename: '+fileName+'    file_obj: '+JSON.stringify(file_obj));
-    
-    this.fileTransferObj = this.fileTransfer.create();  
-
-    // check if file is exist locally else download
-    this.file.checkDir(this.file.externalDataDirectory, local_directory)
-      .then(_ => this.file.checkFile(this.file.externalDataDirectory, local_directory+'/'+ fileName)
-			  .then(_ => {
-          //alert("A file with the same name already exists!");
-          this.open_file(this.file.externalDataDirectory + '/'+local_directory+'/' + fileName);
-        })
-        .catch(err => this.fileTransferProcess(url, this.file.externalDataDirectory + '/'+local_directory+'/' + fileName )))
-		  .catch(err => this.file.createDir(this.file.externalDataDirectory, local_directory, false)
-			  .then(response => {
-          //alert('New folder created:  ' + response.fullPath);
-          this.fileTransferProcess(url, this.file.externalDataDirectory + '/'+local_directory+'/' + fileName);
-        })
-        .catch(err => {
-				  alert('It was not possible to create Directory. Err: ' + JSON.stringify(err));
-			  })			
-		  );
-  }
-
-  async fileTransferProcess(_url, filePath){
-    let url = encodeURI(_url);  
-    this.fileTransferObj = this.fileTransfer.create(); 
-
-    this.fileTransferObj.onProgress((progressEvent) => {
-      var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-      //this.dlprogress = ''+perc;
-      this.dlprogress = progressEvent.loaded+'/'+progressEvent.total;
-      console.log('--> Downloaded '+progressEvent.loaded+' of Total '+progressEvent.total);
-    });
-
-    this.fileTransferObj.download(url, filePath)
-      .then((entry) => {
-        alert('File saved in:  ' + entry.nativeURL);
-      })
-      .catch((err) =>{
-        alert('Error saving file: ' + JSON.stringify(err));
-      })
-  }
-
-  async open_file(file_full_path){
-    if(this.type == 'video')
-      this.play_video({path: file_full_path, played: false});
-    else
-      this.open_document({path: file_full_path, played: false});
+  ngOnInit() {
   }
 
    // play video button click
@@ -139,22 +85,12 @@ export class FileDisplayPage implements OnInit {
         alert(JSON.stringify(e));
       });
   }
-  
-  // open document button click
+// open document button click
   async open_document(data: DataObject) {
 
     // data.path contains this.sdcard_filepath + '/THINKZONE/PGE/' + this.selected_subject.toLocaleUpperCase() + '/WORKSHEET'
     this.doc_filepath_full = data.path;
-
-    this.fileOpener.open(this.doc_filepath_full, 'application/pdf')
-        .then(() => {
-          console.log('File is opened');
-          data.played = true;
-          // this.isVisited_worksheet = true;
-          // this.Enable_CompleteActivityButton();
-        }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-
-    /* const filename_new = Date.now();
+    const filename_new = Date.now();
     // copy file and show
     this.file.copyFile( this.doc_filepath_full, data.file_name,
                         this.file.externalApplicationStorageDirectory + '/files',
@@ -166,7 +102,7 @@ export class FileDisplayPage implements OnInit {
           // this.isVisited_worksheet = true;
           // this.Enable_CompleteActivityButton();
         }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-    }).catch(e => alert('Error copying file' + JSON.stringify(e))); */
+    }).catch(e => alert('Error copying file' + JSON.stringify(e)));
   }
 
   logScrolling(event) {
@@ -176,5 +112,50 @@ export class FileDisplayPage implements OnInit {
     } else {
         this.toolbarshadow = false;
     }
+  }
+
+  async download() {   
+    let fileName = this.txt_ext;
+    let filePath = this.txt_url;
+    let url = encodeURI(filePath);  
+    console.log('--> Inside download()    url: '+url+'    filename: '+fileName);
+    this.fileTransferObj = this.fileTransfer.create();  
+    
+		// --> Directory exists with same name
+    this.file.checkDir(this.file.externalDataDirectory, 'downloads')
+      .then(_ => this.file.checkFile(this.file.externalDataDirectory, 'downloads/' + fileName)
+			  .then(_ => {alert("A file with the same name already exists!")})
+        .catch(err => this.fileTransferProcess()))
+		  .catch(err => this.file.createDir(this.file.externalDataDirectory, 'downloads', false)
+			  .then(response => {
+          alert('New folder created:  ' + response.fullPath);
+          this.fileTransferProcess();
+        })
+        .catch(err => {
+				  alert('It was not possible to create the dir "downloads". Err: ' + JSON.stringify(err));
+			  })			
+		  );	
+  }
+
+  async fileTransferProcess(){
+    let fileName = this.txt_ext;
+    let filePath = this.txt_url;
+    let url = encodeURI(filePath);  
+    this.fileTransferObj = this.fileTransfer.create(); 
+
+    this.fileTransferObj.onProgress((progressEvent) => {
+      var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+      //this.dlprogress = ''+perc;
+      this.dlprogress = progressEvent.loaded+'/'+progressEvent.total;
+      console.log('--> Downloaded '+progressEvent.loaded+' of Total '+progressEvent.total);
+    });
+
+    this.fileTransferObj.download(url, this.file.externalDataDirectory + '/downloads/' + fileName)
+      .then((entry) => {
+        alert('File saved in:  ' + entry.nativeURL);
+      })
+      .catch((err) =>{
+        alert('Error saving file: ' + JSON.stringify(err));
+      })
   }
 }

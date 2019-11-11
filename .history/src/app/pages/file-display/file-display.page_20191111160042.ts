@@ -40,10 +40,10 @@ export class FileDisplayPage implements OnInit {
   page_title = 'Video Contents';
   icon = 'play';
   type = 'video';
-  doc_path_list: DataObject[] = [ 
-        {path: 'asd', played: false},
-        {path: 'asd', played: false}
-      ];
+  doc_path_list: DataObject[]
+   = [ {path: 'asd', played: false},
+          {path: 'asd', played: false}]
+          ;
 
 
   constructor(private videoPlayer: VideoPlayer,
@@ -63,8 +63,8 @@ export class FileDisplayPage implements OnInit {
                   this.icon = 'document';
                   this.type = 'sheet';
                 }
-                console.log('@@@ Type: '+this.dataService.getData('type'));
-                console.log('@@@ doc_path_list: '+JSON.stringify(this.doc_path_list));
+                console.log(this.dataService.getData('type'));
+                console.log(this.doc_path_list);
               }
 
   ngOnInit() {}
@@ -73,8 +73,8 @@ export class FileDisplayPage implements OnInit {
     let file_url = file_obj.path;
     let url = encodeURI(file_url);
     let fileName = /[^/]*$/.exec(file_url)[0];  
-    let local_directory = 'resources';
-    console.log('--> Inside file_btn_click()    url: '+url+'    filename: '+fileName+'    file_obj: '+JSON.stringify(file_obj));
+    let local_directory = 'downloads';
+    console.log('--> Inside download()    url: '+url+'    filename: '+fileName);
     
     this.fileTransferObj = this.fileTransfer.create();  
 
@@ -83,7 +83,7 @@ export class FileDisplayPage implements OnInit {
       .then(_ => this.file.checkFile(this.file.externalDataDirectory, local_directory+'/'+ fileName)
 			  .then(_ => {
           //alert("A file with the same name already exists!");
-          this.open_file(this.file.externalDataDirectory + '/'+local_directory+'/' + fileName);
+          this.open_file(local_directory+'/'+ fileName);
         })
         .catch(err => this.fileTransferProcess(url, this.file.externalDataDirectory + '/'+local_directory+'/' + fileName )))
 		  .catch(err => this.file.createDir(this.file.externalDataDirectory, local_directory, false)
@@ -117,11 +117,8 @@ export class FileDisplayPage implements OnInit {
       })
   }
 
-  async open_file(file_full_path){
-    if(this.type == 'video')
-      this.play_video({path: file_full_path, played: false});
-    else
-      this.open_document({path: file_full_path, played: false});
+  async open_file(file_path){
+
   }
 
    // play video button click
@@ -145,16 +142,7 @@ export class FileDisplayPage implements OnInit {
 
     // data.path contains this.sdcard_filepath + '/THINKZONE/PGE/' + this.selected_subject.toLocaleUpperCase() + '/WORKSHEET'
     this.doc_filepath_full = data.path;
-
-    this.fileOpener.open(this.doc_filepath_full, 'application/pdf')
-        .then(() => {
-          console.log('File is opened');
-          data.played = true;
-          // this.isVisited_worksheet = true;
-          // this.Enable_CompleteActivityButton();
-        }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-
-    /* const filename_new = Date.now();
+    const filename_new = Date.now();
     // copy file and show
     this.file.copyFile( this.doc_filepath_full, data.file_name,
                         this.file.externalApplicationStorageDirectory + '/files',
@@ -166,7 +154,7 @@ export class FileDisplayPage implements OnInit {
           // this.isVisited_worksheet = true;
           // this.Enable_CompleteActivityButton();
         }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-    }).catch(e => alert('Error copying file' + JSON.stringify(e))); */
+    }).catch(e => alert('Error copying file' + JSON.stringify(e)));
   }
 
   logScrolling(event) {

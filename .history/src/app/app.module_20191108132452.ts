@@ -62,6 +62,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from './translate-config.service';
 
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
  
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -117,7 +118,8 @@ export function LanguageLoader(http: HttpClient) {
     VideoPlayer,
     FCM,
     ScreenOrientation,
-    FileTransfer, FileTransferObject
+    FileTransfer, FileTransferObject,
+    GooglePlus
   ],
   bootstrap: [AppComponent]
 })

@@ -145,16 +145,7 @@ export class FileDisplayPage implements OnInit {
 
     // data.path contains this.sdcard_filepath + '/THINKZONE/PGE/' + this.selected_subject.toLocaleUpperCase() + '/WORKSHEET'
     this.doc_filepath_full = data.path;
-
-    this.fileOpener.open(this.doc_filepath_full, 'application/pdf')
-        .then(() => {
-          console.log('File is opened');
-          data.played = true;
-          // this.isVisited_worksheet = true;
-          // this.Enable_CompleteActivityButton();
-        }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-
-    /* const filename_new = Date.now();
+    const filename_new = Date.now();
     // copy file and show
     this.file.copyFile( this.doc_filepath_full, data.file_name,
                         this.file.externalApplicationStorageDirectory + '/files',
@@ -166,7 +157,7 @@ export class FileDisplayPage implements OnInit {
           // this.isVisited_worksheet = true;
           // this.Enable_CompleteActivityButton();
         }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-    }).catch(e => alert('Error copying file' + JSON.stringify(e))); */
+    }).catch(e => alert('Error copying file' + JSON.stringify(e)));
   }
 
   logScrolling(event) {

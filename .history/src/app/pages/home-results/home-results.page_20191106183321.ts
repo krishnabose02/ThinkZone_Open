@@ -17,12 +17,16 @@ import { RestApiService } from './../../rest-api.service';
 import { TranslateConfigService } from './../../translate-config.service';
 
 
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx'; 
+
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
   styleUrls: ['./home-results.page.scss']
 })
 export class HomeResultsPage {
+  fileTransferObj: FileTransferObject;  
 
   _username: string = localStorage.getItem('_username').toUpperCase();
   searchKey = '';
@@ -35,10 +39,6 @@ export class HomeResultsPage {
   month: string;
   months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   toolbarshadow = true;
-
-  dlprogress: string = '';
-  txt_url: string = '';
-  txt_ext: string = '';
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -47,7 +47,10 @@ export class HomeResultsPage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public loadingController: LoadingController,
-    public api: RestApiService
+    public api: RestApiService,
+    private translateConfigService: TranslateConfigService,
+    private fileTransfer: FileTransfer,
+    private file: File
   ) {
     this.centers = [];
     this.api.getcurrentdate()
@@ -190,4 +193,18 @@ export class HomeResultsPage {
       this.toolbarshadow = false;
     }
   }
+
+
+
+
+
+
+  public download(fileName, filePath) {   
+    let url = encodeURI(filePath);  
+    this.fileTransferObj = this.fileTransfer.create();  
+    this.fileTransferObj.download(url, this.file.externalRootDirectory + fileName, true).then((entry) => {  
+        alert('download completed: ' + entry.toURL());  
+    }, (error) => {  
+      alert('download failed: ' + error);  
+    });
 }

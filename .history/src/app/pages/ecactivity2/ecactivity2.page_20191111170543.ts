@@ -166,7 +166,7 @@ export class Ecactivity2Page {
     this.full_video_path_list = [];
     for (let i = 1; i <= names.length; i++) {
       this.full_video_path_list.push({
-        path: names[i-1]/*this.sdcard_filepath
+        path: names[i]/*this.sdcard_filepath
               + '/THINKZONE/'
               + this.selected_program.toUpperCase()
               + ((this.selected_program.toUpperCase() !== 'ECE') ? this.selected_subject.toLocaleUpperCase() : '')
@@ -195,7 +195,7 @@ export class Ecactivity2Page {
     for (let i = 1; i <= names.length; i++) {
       this.full_sheet_path_list.push(
         {
-          path: names[i-1],//p,
+          path: names[i],//p,
           file_name: 'M' + this.selected_month + '_W' + this.selected_week + '_A' + this.selected_activity + '.pdf',
           played: false
     });
