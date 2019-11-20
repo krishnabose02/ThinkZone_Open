@@ -1,20 +1,15 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-        <ion-text color="light">
-          <ion-text color="light" class="fw700">
-            TRAINING CONTENT
-          </ion-text>
-        </ion-text>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
+    <ion-toolbar class='material-toolbar'>
+      <ion-row>
+          <ion-title class='page-title-absolute'><p>TRAINING CONTENT</p></ion-title>
+          
+          <ion-icon name='arrow-back' (click)='goBack()' class='padding10 data-large'></ion-icon>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="bg-white">
-  <!-- Session already saved tag -->
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  
   <ion-item class="full_width" [hidden]="hideSessionSavedTag">
     <div class="notify_div">
         <ion-row>
@@ -26,7 +21,6 @@
 
 
   <ion-grid>
-    <!-- Scrollable content -->
     <ion-row>
       <ion-item class="full_width">
         <ion-label>Scrollable content</ion-label>
@@ -34,15 +28,12 @@
     </ion-row>
     <ion-row>
       <ion-item class="full_width">
-        <!-- <ion-label position="stacked">Scrollable content</ion-label> -->
         <ion-textarea disabled readonly value="{{ content }}" class="textarea"></ion-textarea>
       </ion-item>
     </ion-row>
 
-     <!-- Images  -->
     <ion-img *ngFor="let img of image;"  src="{{baseUrl}}{{img}}"></ion-img>
 
-    <!-- Video content -->
     <ion-row>
       <ion-item class="full_width">
         <ion-label>Video content</ion-label>
@@ -54,7 +45,6 @@
       </ion-button>
     </ion-row>
 
-    <!-- Work Sheets -->
     <ion-row>
       <ion-item class="full_width">
         <ion-label>Work Sheets</ion-label>
@@ -66,7 +56,6 @@
       </ion-button>
     </ion-row>
 
-    <!-- Quiz  -->
     <ion-text>Quizes</ion-text>
     <ion-list>
       <ion-radio-group *ngFor="let qz of quiz; let i =index" (ionSelect) = "quiz_option_div_clicked($event, qz)">
@@ -102,12 +91,48 @@
 
 
     <ion-row class="right-align">
-      <!-- <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" [disabled]="!isEnabled_completeActivityButton"  float-right tappable class="explore-btn"> -->
-      <ion-button icon-left size="medium" color="primary" (click)="complete_activity()" float-right tappable class="explore-btn">
+<ion-button icon-left size="medium" color="primary" (click)="complete_activity()" float-right tappable class="explore-btn">
           Complete Activity
       </ion-button>
     </ion-row>
 
   </ion-grid>
+</ion-content> -->
+  
+<ion-header  no-border [ngClass]="(toolbarshadow)?'shadow':'shadow'">
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'>
+          <p>Training Content</p>
+        </ion-title>
+        <ion-back-button></ion-back-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+     
+<ion-content scrollY='false' [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <div style="height: 100%;width: 100%;background: #f2e6e6;">
+    <div class='shadow' style="background: white;margin-right: 10%;margin-left: 5%;min-height: 70%;max-height: 70%;height: 70%;width: 90%; overflow-y: auto;;">
+      <div [innerHTML]="content" style="margin-top: 0px;padding: 10px 25px;height: 100%"></div>
+    </div>
+    <div class='vertical-flexbox' style="justify-content: center;overflow: auto;background: white;min-height: 30%;max-height: 30%;margin: 5% 5% 0 5%;border-radius: 8px 8px 0px 0px">
+  
+      <div class='horizontal-flexbox' style='width: 100%;color: gray;text-align: center;justify-content: space-evenly'>
+        <div (click)='play_video()'>
+          <ion-icon style="color: #2196f3;font-size: 2rem;" name='play'></ion-icon>
+          <p style='margin-top: 5px'>Video</p>
+        </div>
+        <div (click)='open_quiz()'>
+          <ion-icon style="color: #2196f3;font-size: 2rem;" name='document'></ion-icon>
+          <p style='margin-top: 5px'>Quiz</p>
+        </div>
+      </div>
+      <div (click)='(isEnabled_completeActivityButton)?complete_activity():""' [style.background]='(isEnabled_completeActivityButton)?"#2196f3":"#90A4AE"' style='overflow: auto;width: 90%;margin-right: 5%;margin-left: 5%;text-align: center;color: white;border-radius: 4px; height: 40px; font-size: 20px; padding-top: 8px;'>
+        Finish Activity
+      </div>
+    </div>
+  </div>
+
+  
 </ion-content>
   

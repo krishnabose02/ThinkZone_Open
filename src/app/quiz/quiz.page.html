@@ -1,0 +1,46 @@
+<ion-header  no-border [ngClass]="(toolbarshadow)?'shadow':'shadow'">
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'>
+          <p>Training Content</p>
+        </ion-title>
+        <ion-icon name='close' class='red data-large padding10' (click)='closeQuiz()'></ion-icon>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scrollY='false' [scrollEvents]="true">
+  <ion-slides #slides class='m10'>
+    <ion-slide *ngFor='let q of quiz'>
+      <div class='full-width'>
+        <p class='data-large'>{{q.question}}</p>
+        <div class='hbar'></div>
+        <ion-radio-group [(ngModel)]='q.selectedOption' (ionChange)='logData(q)'>
+          <ion-item>
+            <ion-label class='data'>{{q.A}}</ion-label>
+            <ion-radio value="A"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label class='data'>{{q.B}}</ion-label>
+            <ion-radio value="B"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label class='data'>{{q.C}}</ion-label>
+            <ion-radio value="C"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label class='data'>{{q.D}}</ion-label>
+            <ion-radio value="D"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <div class='hbar gray-bg'></div>
+  <div class='hfsb'>
+      <ion-icon [style.opacity]='(qno == 1)?"0.0":"1.0"' class='padding10 data-xlarge' name="ios-arrow-back" (click)='move(-1)'></ion-icon>
+      <p class='data-large'>{{qno}}/{{quiz.length}}</p>
+      <ion-icon [style.opacity]='(qno == quiz.length)?"0.0":"1.0"'  class='padding10 data-xlarge' name="ios-arrow-forward" (click)='move(1)'></ion-icon>
+  </div>
+  <ion-button (click)='finishQuiz()' *ngIf='submitButton' expand='block'>{{submitButtonText}}</ion-button>
+</ion-content>

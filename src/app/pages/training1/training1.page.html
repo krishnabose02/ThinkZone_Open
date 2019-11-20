@@ -1,23 +1,43 @@
 <ion-header  no-border [ngClass]="(toolbarshadow)?'':'shadow'">
-    <ion-toolbar class='material-toolbar'>
-      <ion-row>
-          <ion-title class='page-title-absolute'><p>My Profile</p></ion-title>
-          <ion-back-button></ion-back-button>
-      </ion-row>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar class='material-toolbar'>
+    <ion-row>
+        <ion-title class='page-title-absolute'><p>My Profile</p></ion-title>
+        <ion-back-button></ion-back-button>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="explor()">
       <ion-icon name="person"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   
-  <div class='card shadow'>
+  <ion-slides [options]='options'>
+    <ion-slide class='full-width' (click)='module_select_onchange(m)' *ngFor='let m of allmodule_name'>
+      <div class='full-width card-height card padding0 shadow'>
+        <div class='hfc h100p'>
+          <div class='h100p w40p blue-bg vfse'>
+              <p class='data white'>{{m.modulename}}</p>
+          </div>
+
+          <div class='h100p w60p vfse'>
+            <p>{{m.progress}}% completed</p>
+            
+            <div class='progressbarborder hfc full-width'>
+              <div [style.flex-grow]='m.progress' style='height: 10px;background: #4caf50;flex-grow: 75'></div>
+              <div [style.flex-grow]='100 - m.progress' style='height: 10px;background: lightgray;flex-grow: 25'></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <!-- <div class='card shadow'>
     <div class='m10'>
       
-      <!--  Module Selector -->
       <p class='data-large'>Select Module:</p>
       <div class='vertical-flexbox full-width'>
         <div class='hfc full-width' *ngFor='let m of allmodule_name'>
@@ -37,7 +57,6 @@
 
   <div class='card shadow'>
     <div class='m10'>
-      <!--  Module Selector -->
       <p class='data-large'>Select Submodule:</p>
       <div class='vertical-flexbox full-width'>
         <div class='hfc full-width' *ngFor='let submodule of allsubmodule_list'>
@@ -53,7 +72,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- <ion-card class="">
     <div class="card-margin">

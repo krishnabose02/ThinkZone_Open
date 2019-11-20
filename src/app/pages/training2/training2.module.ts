@@ -24,7 +24,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    Training2Page
+    Training2Page,
     //, PopmenuComponent
   ]
 })

@@ -39,6 +39,8 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'studentregister', loadChildren: './pages/studentregister/studentregister.module#StudentregisterPageModule' },
   { path: 'userfeedback', loadChildren: './pages/userfeedback/userfeedback.module#UserfeedbackPageModule' },
+  { path: 'trainingsubs', loadChildren: './trainingsubs/trainingsubs.module#TrainingsubsPageModule' },
+  { path: 'quiz', loadChildren: './quiz/quiz.module#QuizPageModule' },
 ];
 
 @NgModule({

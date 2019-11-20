@@ -6,9 +6,10 @@ import {
   ToastController,
   PopoverController,
   LoadingController,
-  ModalController } from '@ionic/angular';
+  ModalController} from '@ionic/angular';
 import { RestApiService } from './../../rest-api.service';
 import { Training2Page } from '../training2/training2.page';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -31,6 +32,11 @@ export class Training1Page {
 
   hide_class_field = false;
 
+  options = {
+    slidesPerView: 1.2,
+    centeredSlides: true
+  };
+
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -39,7 +45,8 @@ export class Training1Page {
     public modalController: ModalController,
     public toastCtrl: ToastController,
     public api: RestApiService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    public dataService: DataService
   ) {
     this._userid = localStorage.getItem('_userid');
     this._username = localStorage.getItem('_username');
@@ -60,12 +67,10 @@ export class Training1Page {
         // load on page load time
         this.allmodule_name = [];
         if (this.allmodule_list.length > 0) {
-          this.init_module = this.allmodule_list[0].moduleid;
-          this.getAllSubmodules(this.init_module);
           let count = true;
           this.allmodule_list.forEach(element => {
             element.selected = count;
-            element.progress = Math.random() * 100;
+            element.progress = Math.round(Math.random() * 100);
             count = false;
             this.allmodule_name.push(element);
           });
@@ -89,15 +94,22 @@ export class Training1Page {
         console.log('@@@Module list: ' + JSON.stringify(res));
         this.allsubmodule_list = res;
         this.allsubmodule_list.forEach(element => {
-          element.progress = Math.random() * 100; // change this to original value
+          element.progress = Math.round(Math.random() * 100); // change this to original value
         });
         console.log(this.allsubmodule_list);
+
+        this.createSubmodulesModal();
         loading.dismiss();
       }, err => {
         console.log(err);
         loading.dismiss();
         this.showAlert('Teacher training', '', 'Unable to fetch modules at this time !!!');
       });
+  }
+
+  async createSubmodulesModal() {
+    this.dataService.setData('submodules', this.allsubmodule_list);
+    this.navController.navigateForward('trainingsubs');
   }
 
   module_select_onchange(value) {
@@ -162,6 +174,7 @@ export class Training1Page {
     });
     await alert.present();
   }
+
 
   logScrolling(event) {
     // console.log(event);

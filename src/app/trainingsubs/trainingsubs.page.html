@@ -1,0 +1,18 @@
+<ion-header  no-border>
+    <ion-toolbar class='material-toolbar'>
+      <ion-row>
+          <ion-title class='page-title-absolute'><p>{{list[0].modulename}}</p></ion-title>
+          <ion-back-button></ion-back-button>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+
+  <div (click)='submodule_click(m)' *ngFor='let m of list' class='card shadow'>
+    <div class='hfsb'>
+      <p>{{m.submodulename}}</p>
+      <ion-icon name='ios-arrow-forward' class='data-large'></ion-icon>
+    </div>
+  </div>
+</ion-content>

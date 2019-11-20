@@ -1,27 +1,4 @@
-:host {
-    ion-content {
-        --background: var(--ion-color-light);
-    }
 
-    ion-item {
-        border-radius: 0;
-        border-bottom: 1px dotted var(--ion-color-medium);
-    }
-
-    ion-card {
-        &.no-radius {
-            border-radius: 0;
-        }
-    }
-    .card-content-md {
-        padding-left: 0px; 
-        padding-right: 0px; 
-        padding-top: 0px; 
-        padding-bottom: 0px; 
-        font-size: 0px; 
-        line-height: 0; 
-    }
-}
 .textarea{
     background-color: white;
     font-weight: bold;

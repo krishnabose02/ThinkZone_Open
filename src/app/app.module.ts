@@ -60,7 +60,8 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from './translate-config.service';
- 
+import { QuizPageModule } from './quiz/quiz.module';
+
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -92,6 +93,7 @@ export function LanguageLoader(http: HttpClient) {
     PgeengassessmentmodalPageModule,
     PgemathassessmentmodalPageModule,
     Training2PageModule,
+    QuizPageModule,
     StudentregisterPageModule,
     TranslateModule.forRoot({
       loader: {
