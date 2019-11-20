@@ -17,12 +17,18 @@ import { RestApiService } from './../../rest-api.service';
 import { TranslateConfigService } from './../../translate-config.service';
 
 
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx'; 
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
   styleUrls: ['./home-results.page.scss']
 })
 export class HomeResultsPage {
+  fileTransferObj: FileTransferObject;  
 
   _username: string = localStorage.getItem('_username').toUpperCase();
   searchKey = '';
@@ -47,7 +53,12 @@ export class HomeResultsPage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public loadingController: LoadingController,
-    public api: RestApiService
+    public api: RestApiService,
+    private translateConfigService: TranslateConfigService,
+    private fileTransfer: FileTransfer,
+    private file: File,
+    private http: HttpClient,
+    private googlePlus: GooglePlus
   ) {
     this.centers = [];
     this.api.getcurrentdate()
@@ -189,5 +200,94 @@ export class HomeResultsPage {
     } else {
       this.toolbarshadow = false;
     }
+  }
+
+
+
+
+
+
+  public download() {   
+    console.log('--> Inside download()    url: '+this.txt_url+'    ext: '+this.txt_ext);
+    let fileName = this.txt_ext;
+    let filePath = this.txt_url;
+    let url = encodeURI(filePath);  
+    this.fileTransferObj = this.fileTransfer.create();  
+
+    this.fileTransferObj.onProgress((progressEvent) => {
+        var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+        this.dlprogress = ''+perc;
+        console.log('--> '+this.dlprogress+' % downloaded');
+      });
+
+    /*this.fileTransferObj.download(url, this.file.externalDataDirectory + fileName, true).then((entry) => {  
+        alert('download completed: ' + entry.toURL());  
+      }, (error) => {  
+        console.log('download failed: ' + JSON.stringify(error));  
+        alert('download failed: ' + JSON.stringify(error));  
+      });
+    */
+    // new method
+		// --> Directory exists with same name
+    this.file.checkDir(this.file.externalRootDirectory, 'downloads')
+      .then(_ => this.file.checkFile(this.file.externalRootDirectory, 'downloads/' + fileName)
+			  .then(_ => {alert("A file with the same name already exists!")})
+			  .catch(err =>
+          this.fileTransferObj.download(url, this.file.externalRootDirectory + '/downloads/' + fileName)
+            .then((entry) => {
+			    	  alert('File saved in:  ' + entry.nativeURL);
+			      })
+			      .catch((err) =>{
+			    	  alert('Error saving file: ' + JSON.stringify(err));
+			      })
+			  ))
+		  .catch(err => this.file.createDir(this.file.externalRootDirectory, 'downloads', false)
+			  .then(response => {
+				  alert('New folder created:  ' + response.fullPath);
+          this.fileTransferObj.download(url, this.file.externalRootDirectory + '/downloads/' + fileName)
+            .then((entry) => {
+			    	  alert('File saved in : ' + entry.nativeURL);
+			      })
+			      .catch((err) =>{
+			    	  alert('Error saving file:  ' + JSON.stringify(err));
+			      });
+        })
+        .catch(err => {
+				  alert('It was not possible to create the dir "downloads". Err: ' + JSON.stringify(err));
+			  })			
+		  );	
+  }
+
+  public download1(){
+    this.http.get('https://www.googleapis.com/drive/v3/files', {
+       headers: new HttpHeaders().set('Authorization', 'Bearer ' + accessToken)
+    }).subscribe((data) => {
+      console.log('data inside getFileIdFromDrive: ', data);
+      data['files'].forEach((value, index) => {
+        if (value.name == 'filName') {
+            this.driveFileId = value.id;
+            return;
+        } else {
+           if (data['files'].length == index + 1) {
+              this.driveFileId = null;
+           }
+        }
+      });
+    })
+  }
+  googlelogin() {
+    this.googlePlus.login({})
+      .then(res => {
+        console.log(res);
+        this.displayName = res.displayName;
+        this.email = res.email;
+        this.familyName = res.familyName;
+        this.givenName = res.givenName;
+        this.userId = res.userId;
+        this.imageUrl = res.imageUrl;
+
+        this.isLoggedIn = true;
+      })
+      .catch(err => console.error(err));
   }
 }

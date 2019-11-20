@@ -11,8 +11,6 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 // Video Player
 import { VideoOptions, VideoPlayer } from '@ionic-native/video-player/ngx';
-// NgZone is imported to show increasing download progress ref: https://forum.ionicframework.com/t/when-the-file-is-downloaded-i-want-to-show-progress-bar/124244/14
-import {NgZone} from '@angular/core';
 
 
 @Component({
@@ -23,7 +21,6 @@ import {NgZone} from '@angular/core';
 export class FileDisplayPage implements OnInit {
   fileTransferObj: FileTransferObject; 
   dlprogress: string = '';
-  file_index: number = 0;
 
   sdcard_path = '';
   sdcard_filepath = '';
@@ -43,18 +40,17 @@ export class FileDisplayPage implements OnInit {
   page_title = 'Video Contents';
   icon = 'play';
   type = 'video';
-  doc_path_list: DataObject[] = [ 
-        {path: 'asd', played: false},
-        {path: 'asd', played: false}
-      ];
+  doc_path_list: DataObject[]
+   = [ {path: 'asd', played: false},
+          {path: 'asd', played: false}]
+          ;
 
 
   constructor(private videoPlayer: VideoPlayer,
               private dataService: DataService,
               private file: File,
               private fileOpener: FileOpener,
-              private fileTransfer: FileTransfer,
-              public _zone: NgZone
+              private fileTransfer: FileTransfer
             ) {
                 this.doc_path_list = dataService.getDocumentData();
                 if (this.dataService.getData('page_title') != null) {
@@ -67,21 +63,18 @@ export class FileDisplayPage implements OnInit {
                   this.icon = 'document';
                   this.type = 'sheet';
                 }
-                console.log('@@@ Type: '+this.dataService.getData('type'));
-                console.log('@@@ doc_path_list: '+JSON.stringify(this.doc_path_list));
+                console.log(this.dataService.getData('type'));
+                console.log(this.doc_path_list);
               }
 
   ngOnInit() {}
 
-  async file_btn_click(file_obj, file_index){
-    this.file_index = file_index;
-    this.dlprogress = '';
-
+  async file_btn_click(file_obj){
     let file_url = file_obj.path;
     let url = encodeURI(file_url);
     let fileName = /[^/]*$/.exec(file_url)[0];  
-    let local_directory = 'resources';
-    console.log('--> Inside file_btn_click()    url: '+url+'    filename: '+fileName+'    file_obj: '+JSON.stringify(file_obj));
+    let local_directory = 'downloads';
+    console.log('--> Inside download()    url: '+url+'    filename: '+fileName);
     
     this.fileTransferObj = this.fileTransfer.create();  
 
@@ -90,7 +83,7 @@ export class FileDisplayPage implements OnInit {
       .then(_ => this.file.checkFile(this.file.externalDataDirectory, local_directory+'/'+ fileName)
 			  .then(_ => {
           //alert("A file with the same name already exists!");
-          this.open_file(this.file.externalDataDirectory + '/'+local_directory+'/' + fileName);
+          this.open_file(local_directory+'/'+ fileName);
         })
         .catch(err => this.fileTransferProcess(url, this.file.externalDataDirectory + '/'+local_directory+'/' + fileName )))
 		  .catch(err => this.file.createDir(this.file.externalDataDirectory, local_directory, false)
@@ -109,53 +102,39 @@ export class FileDisplayPage implements OnInit {
     this.fileTransferObj = this.fileTransfer.create(); 
 
     this.fileTransferObj.onProgress((progressEvent) => {
-      this._zone.run(() =>{
-        var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-        this.dlprogress = perc+' %';
-        //this.dlprogress = progressEvent.loaded+'/'+progressEvent.total;
-        console.log('--> Downloaded '+progressEvent.loaded+' of Total '+progressEvent.total);
-      });
+      var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+      //this.dlprogress = ''+perc;
+      this.dlprogress = progressEvent.loaded+'/'+progressEvent.total;
+      console.log('--> Downloaded '+progressEvent.loaded+' of Total '+progressEvent.total);
     });
 
     this.fileTransferObj.download(url, filePath)
       .then((entry) => {
-        //alert('File saved in:  ' + entry.nativeURL);
-        this.dlprogress ='Download complete'
+        alert('File saved in:  ' + entry.nativeURL);
       })
       .catch((err) =>{
         alert('Error saving file: ' + JSON.stringify(err));
       })
   }
 
-  async open_file(file_full_path){
-    if(this.type == 'video')
-      this.play_video({path: file_full_path, played: false});
-    else
-      this.open_document({path: file_full_path, played: false});
+  async open_file(file_path){
+
   }
 
    // play video button click
    async play_video(data: {path: string, played: boolean}) {
     this.vid_filepath_full =  data.path;
 
-    // ===== For playing video in Ionic Native Video Player =====
-    /*
     const voption: VideoOptions = {
       volume: 0.5,
       scalingMode: 0.5
     };
     this.videoPlayer.play(this.vid_filepath_full, voption).then(() => {
-      data.played = true;
-      // this.Enable_CompleteActivityButton();
-    }).catch(e => {
-      alert(JSON.stringify(e));
-    });*/
-
-    // ===== For playing video in System Default Video Player =====
-    this.fileOpener.open(this.vid_filepath_full, 'video/mp4').then(() => {
-      console.log('File is opened');
-      data.played = true;
-    }).catch(e => alert('Error opening file' + JSON.stringify(e)));
+        data.played = true;
+        // this.Enable_CompleteActivityButton();
+      }).catch(e => {
+        alert(JSON.stringify(e));
+      });
   }
   
   // open document button click
@@ -163,16 +142,7 @@ export class FileDisplayPage implements OnInit {
 
     // data.path contains this.sdcard_filepath + '/THINKZONE/PGE/' + this.selected_subject.toLocaleUpperCase() + '/WORKSHEET'
     this.doc_filepath_full = data.path;
-
-    this.fileOpener.open(this.doc_filepath_full, 'application/pdf')
-        .then(() => {
-          console.log('File is opened');
-          data.played = true;
-          // this.isVisited_worksheet = true;
-          // this.Enable_CompleteActivityButton();
-        }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-
-    /* const filename_new = Date.now();
+    const filename_new = Date.now();
     // copy file and show
     this.file.copyFile( this.doc_filepath_full, data.file_name,
                         this.file.externalApplicationStorageDirectory + '/files',
@@ -184,7 +154,7 @@ export class FileDisplayPage implements OnInit {
           // this.isVisited_worksheet = true;
           // this.Enable_CompleteActivityButton();
         }).catch(e => alert('Error opening file' + JSON.stringify(e)));
-    }).catch(e => alert('Error copying file' + JSON.stringify(e))); */
+    }).catch(e => alert('Error copying file' + JSON.stringify(e)));
   }
 
   logScrolling(event) {

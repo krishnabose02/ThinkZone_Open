@@ -11,7 +11,6 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 // Video Player
 import { VideoOptions, VideoPlayer } from '@ionic-native/video-player/ngx';
-// NgZone is imported to show increasing download progress ref: https://forum.ionicframework.com/t/when-the-file-is-downloaded-i-want-to-show-progress-bar/124244/14
 import {NgZone} from '@angular/core';
 
 
@@ -23,7 +22,6 @@ import {NgZone} from '@angular/core';
 export class FileDisplayPage implements OnInit {
   fileTransferObj: FileTransferObject; 
   dlprogress: string = '';
-  file_index: number = 0;
 
   sdcard_path = '';
   sdcard_filepath = '';
@@ -73,10 +71,7 @@ export class FileDisplayPage implements OnInit {
 
   ngOnInit() {}
 
-  async file_btn_click(file_obj, file_index){
-    this.file_index = file_index;
-    this.dlprogress = '';
-
+  async file_btn_click(file_obj){
     let file_url = file_obj.path;
     let url = encodeURI(file_url);
     let fileName = /[^/]*$/.exec(file_url)[0];  
@@ -138,24 +133,16 @@ export class FileDisplayPage implements OnInit {
    async play_video(data: {path: string, played: boolean}) {
     this.vid_filepath_full =  data.path;
 
-    // ===== For playing video in Ionic Native Video Player =====
-    /*
     const voption: VideoOptions = {
       volume: 0.5,
       scalingMode: 0.5
     };
     this.videoPlayer.play(this.vid_filepath_full, voption).then(() => {
-      data.played = true;
-      // this.Enable_CompleteActivityButton();
-    }).catch(e => {
-      alert(JSON.stringify(e));
-    });*/
-
-    // ===== For playing video in System Default Video Player =====
-    this.fileOpener.open(this.vid_filepath_full, 'video/mp4').then(() => {
-      console.log('File is opened');
-      data.played = true;
-    }).catch(e => alert('Error opening file' + JSON.stringify(e)));
+        data.played = true;
+        // this.Enable_CompleteActivityButton();
+      }).catch(e => {
+        alert(JSON.stringify(e));
+      });
   }
   
   // open document button click

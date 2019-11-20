@@ -75,7 +75,6 @@ export class FileDisplayPage implements OnInit {
 
   async file_btn_click(file_obj, file_index){
     this.file_index = file_index;
-    this.dlprogress = '';
 
     let file_url = file_obj.path;
     let url = encodeURI(file_url);
@@ -138,24 +137,16 @@ export class FileDisplayPage implements OnInit {
    async play_video(data: {path: string, played: boolean}) {
     this.vid_filepath_full =  data.path;
 
-    // ===== For playing video in Ionic Native Video Player =====
-    /*
     const voption: VideoOptions = {
       volume: 0.5,
       scalingMode: 0.5
     };
     this.videoPlayer.play(this.vid_filepath_full, voption).then(() => {
-      data.played = true;
-      // this.Enable_CompleteActivityButton();
-    }).catch(e => {
-      alert(JSON.stringify(e));
-    });*/
-
-    // ===== For playing video in System Default Video Player =====
-    this.fileOpener.open(this.vid_filepath_full, 'video/mp4').then(() => {
-      console.log('File is opened');
-      data.played = true;
-    }).catch(e => alert('Error opening file' + JSON.stringify(e)));
+        data.played = true;
+        // this.Enable_CompleteActivityButton();
+      }).catch(e => {
+        alert(JSON.stringify(e));
+      });
   }
   
   // open document button click

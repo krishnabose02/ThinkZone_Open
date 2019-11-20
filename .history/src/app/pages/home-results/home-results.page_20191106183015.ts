@@ -17,13 +17,16 @@ import { RestApiService } from './../../rest-api.service';
 import { TranslateConfigService } from './../../translate-config.service';
 
 
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx'; 
+fileTransferObj: FileTransferObject;  
+
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
   styleUrls: ['./home-results.page.scss']
 })
 export class HomeResultsPage {
-
   _username: string = localStorage.getItem('_username').toUpperCase();
   searchKey = '';
   yourLocation = '123 Test Street';
@@ -35,10 +38,6 @@ export class HomeResultsPage {
   month: string;
   months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   toolbarshadow = true;
-
-  dlprogress: string = '';
-  txt_url: string = '';
-  txt_ext: string = '';
   constructor(
     public navController: NavController,
     public menuCtrl: MenuController,
@@ -47,7 +46,10 @@ export class HomeResultsPage {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public loadingController: LoadingController,
-    public api: RestApiService
+    public api: RestApiService,
+    private translateConfigService: TranslateConfigService,
+    private fileTransfer: FileTransfer,
+    private file: File
   ) {
     this.centers = [];
     this.api.getcurrentdate()
@@ -190,4 +192,23 @@ export class HomeResultsPage {
       this.toolbarshadow = false;
     }
   }
+
+
+
+
+
+
+  public download(fileName, filePath) {  
+    //here encoding path as encodeURI() format.  
+    let url = encodeURI(filePath);  
+    //here initializing object.  
+    this.fileTransfer = this.transfer.create();  
+    // here iam mentioned this line this.file.externalRootDirectory is a native pre-defined file path storage. You can change a file path whatever pre-defined method.  
+    fileTransfer.download(url, this.file.externalRootDirectory + fileName, true).then((entry) => {  
+        //here logging our success downloaded file path in mobile.  
+        console.log('download completed: ' + entry.toURL());  
+    }, (error) => {  
+        //here logging our error its easier to find out what type of error occured.  
+        console.log('download failed: ' + error);  
+    });
 }
