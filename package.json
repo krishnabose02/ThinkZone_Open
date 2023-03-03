@@ -63,7 +63,7 @@
     "cordova-plugin-telerik-imagepicker": "2.3.2",
     "cordova-plugin-video-player": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
     "cordova-sqlite-storage": "3.2.0",
-    "cordova.plugins.diagnostic": "^5.0.0",
+    "cordova.plugins.diagnostic": "^7.1.1",
     "core-js": "^2.5.4",
     "dropbox": "^4.0.30",
     "es6-promise-plugin": "^4.2.2",
@@ -100,7 +100,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.4.0",
+    "protractor": "~5.4.4",
     "ts-node": "~8.0.0",
     "tslint": "~5.12.0",
     "typescript": "~3.1.6"
